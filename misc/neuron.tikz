@@ -1,0 +1,34 @@
+\begin{tikzpicture}[
+    node distance=1cm,
+    line width=1pt,
+    >={Stealth[length=3mm]},
+    neuron/.style={circle, draw, minimum size=1cm},
+    act_func/.style={rectangle, draw, minimum height=1cm, minimum width=1.5cm},
+    layer/.style={circle, draw, minimum height=1cm, minimum width=1.5cm,},
+    annot/.style={text width=4cm, align=center, anchor=north}
+]
+% Nodes
+\node[neuron]                   (input1) {$x_1$};
+\node[neuron, below=of input1]  (input2) {$\ldots$};
+\node[neuron, below=of input2]  (input3) {$x_n$};
+% Summation
+\node[layer, right=2cm of input2] (sum) {$\Sigma$};
+\node[neuron, above=of sum] (bias) {$b$};
+% Activation function
+\node[act_func, right=2cm of sum] (f) {$f$};
+\node[neuron, right=2cm of f] (y) {$y$};
+% Connections input -> sum
+\draw[->] (input1) -- (sum) node [midway, above, sloped] (TextNode) {$w_1$};
+\draw[->] (input2) -- (sum) node [midway, above, sloped] (TextNode) {$w_j$ };
+\draw[->] (input3) -- (sum) node [midway, above, sloped] (TextNode) {$w_n$};
+% sum -> activation
+\draw[->] (bias) -- (sum);
+\draw[->] (sum) -- (f);
+\draw[->] (f) -- (y);
+\draw[->] (sum) -- (f) node [midway, above, sloped] (TextNode) {$(z)$};
+% Annotations
+\node[annot, above=of input1]  (input)  {Inputs};
+\node[annot, right=-1 of input] (summation)  {Summation};
+\node[annot,  right=-0.8 of summation]  (act_func){Activation function};
+\node[annot,  right=-0.90 of act_func]  {Output};
+\end{tikzpicture}
