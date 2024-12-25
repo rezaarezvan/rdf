@@ -1,7 +1,6 @@
 import io
 import re
 import matplotlib.pyplot as plt
-import numpy as np
 
 from typing import Callable, Dict
 from dataclasses import dataclass
@@ -15,7 +14,7 @@ class ColorTheme:
     base_colors: Dict[str, str]
 
 
-class ThemeablePlot:
+class RDP:
     """Wrapper for creating plots with light/dark theme support"""
 
     def __init__(self):
@@ -57,10 +56,14 @@ class ThemeablePlot:
                 /* Light mode colors */
                 :root {
                     %(light_theme)s
+                    --legend-bg: rgba(255, 255, 255, 0.8);
+                    --legend-border: rgba(0, 0, 0, 0.1);
                 }
                 /* Dark mode colors */
                 .dark {
                     %(dark_theme)s
+                    --legend-bg: rgba(26, 26, 26, 0.8);
+                    --legend-border: rgba(255, 255, 255, 0.1);
                 }
                 /* Color classes */
                 %(color_classes)s
@@ -74,6 +77,11 @@ class ThemeablePlot:
                     stroke: currentColor !important;
                 }
                 /* Special handling for legend */
+                g.legend > g:first-child > path:first-child {
+                    fill: var(--legend-bg) !important;
+                    stroke: var(--legend-border) !important;
+                    stroke-width: 1px !important;
+                }
                 .legend text {
                     fill: currentColor !important;
                 }
@@ -101,15 +109,23 @@ class ThemeablePlot:
             for i, name in enumerate(self.color_theme.light_theme.keys())
         )
 
+        color_classes = "\n".join([
+            f"""
+            .c{i+1} {{
+                fill: var(--{name}-color) !important;
+                stroke: var(--{name}-color) !important;
+            }}
+            """
+            for i, name in enumerate(self.color_theme.light_theme.keys())
+        ])
+
         return f"<defs>{self.style_template % {
             'light_theme': light_theme_vars,
             'dark_theme': dark_theme_vars,
             'color_classes': color_classes
         }}</defs>"
 
-    def create_themed_plot(self, plot_func: Callable[..., None],
-                           fig_size: tuple = (8, 6),
-                           **plot_kwargs) -> str:
+    def create_themed_plot(self, plot_func: Callable[..., None], **plot_kwargs) -> str:
         """
         Create a plot with theme support
 
@@ -121,7 +137,7 @@ class ThemeablePlot:
         Returns:
             SVG string with theme support
         """
-        fig = plt.figure(figsize=fig_size, facecolor='none')
+        fig = plt.figure(facecolor='none')
         ax = plt.gca()
         ax.set_facecolor('none')
 
@@ -181,98 +197,3 @@ class ThemeablePlot:
                     pattern, 'stroke="currentColor"', svg_content)
 
         return svg_content
-
-
-if __name__ == "__main__":
-    from sklearn import datasets
-
-    def create_line_plot(ax=None, color_map=None):
-        x = np.linspace(0, 10, 100)
-        colors = list(color_map.values())
-
-        ax.plot(x, np.sin(x), color=colors[0], label='sin(x)')
-        ax.plot(x, np.cos(x), color=colors[1], label='cos(x)')
-        ax.plot(x, -np.sin(x), color=colors[2], label='-sin(x)')
-
-        ax.set_title('Trigonometric Functions')
-        ax.set_xlabel('x')
-        ax.set_ylabel('y')
-        ax.legend()
-
-    def create_scatter_plot(ax=None, color_map=None):
-        # Generate sample data
-        np.random.seed(42)
-        n_points = 50
-
-        # Create three clusters
-        colors = list(color_map.values())
-
-        for i, (mx, my, color) in enumerate(zip(
-            [0, 2, -2],  # x means
-            [0, 2, -2],  # y means
-            colors[:3]   # first three colors
-        )):
-            x = np.random.normal(mx, 0.3, n_points)
-            y = np.random.normal(my, 0.3, n_points)
-            ax.scatter(x, y, color=color, alpha=0.6, label=f'Cluster {i+1}')
-
-        ax.set_title('Scatter Plot Example')
-        ax.set_xlabel('X axis')
-        ax.set_ylabel('Y axis')
-        ax.legend()
-
-    def create_bar_plot(ax=None, color_map=None):
-        categories = ['A', 'B', 'C', 'D']
-        values1 = [4, 3, 2, 1]
-        values2 = [1, 2, 3, 4]
-
-        colors = list(color_map.values())
-        x = np.arange(len(categories))
-        width = 0.35
-
-        ax.bar(x - width/2, values1, width, color=colors[0], label='Group 1')
-        ax.bar(x + width/2, values2, width, color=colors[1], label='Group 2')
-
-        ax.set_title('Bar Plot Example')
-        ax.set_xlabel('Categories')
-        ax.set_ylabel('Values')
-        ax.set_xticks(x)
-        ax.set_xticklabels(categories)
-        ax.legend()
-
-    def create_iris_plot(ax=None, color_map=None):
-        iris = datasets.load_iris()
-        X = iris.data[:, 2]  # Petal length
-        y = iris.target
-
-        colors = list(color_map.values())[:3]
-        for i, color in enumerate(colors):
-            mask = y == i
-            ax.hist(X[mask], alpha=0.5, color=color,
-                    label=iris.target_names[i])
-
-        ax.set_title('Histogram of Petal Length')
-        ax.set_xlabel('Petal Length (cm)')
-        ax.set_ylabel('Frequency')
-        ax.legend()
-
-    # Create themed plot
-    plotter = ThemeablePlot()
-    svg_content = plotter.create_themed_plot(create_iris_plot)
-
-    # Save the SVG
-    with open('themed_iris_plot.svg', 'w') as f:
-        f.write(svg_content)
-
-    # Create all plot types
-    plots = {
-        'line': create_line_plot,
-        'scatter': create_scatter_plot,
-        'bar': create_bar_plot
-    }
-
-    # Generate each plot
-    for name, plot_func in plots.items():
-        svg_content = plotter.create_themed_plot(plot_func)
-        with open(f'themed_{name}_plot.svg', 'w') as f:
-            f.write(svg_content)
