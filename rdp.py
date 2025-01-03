@@ -119,11 +119,7 @@ class RDP:
             for i, name in enumerate(self.color_theme.light_theme.keys())
         ])
 
-        return f"<defs>{self.style_template % {
-            'light_theme': light_theme_vars,
-            'dark_theme': dark_theme_vars,
-            'color_classes': color_classes
-        }}</defs>"
+        return f"< defs > {self.style_template % {'light_theme': light_theme_vars, 'dark_theme': dark_theme_vars, 'color_classes': color_classes}} < /defs >"
 
     def create_themed_plot(self, plot_func: Callable[..., None], **plot_kwargs) -> str:
         """
