@@ -1,24 +1,61 @@
-# iris.py - Different figures and plots to illustrate the Iris dataset
+import numpy as np
+from sklearn.datasets import load_iris
 
-import sklearn.datasets as datasets
-import matplotlib.pyplot as plt
 
-# Matplot settings for beautiful and blog-friendly/paper-ready plots
-plt.style.use('ggplot')
+def plot_iris_histogram(ax=None, color_map=None):
+    """
+    Args:
+        ax: Matplotlib axis object to plot on
+        color_map: Dictionary of colors for consistent styling
+    """
+    # Load the Iris dataset
+    iris = load_iris()
+    X = iris.data
+    y = iris.target
 
-# Load the Iris dataset
-X, y = datasets.load_iris(return_X_y=True)
+    # Get petal length (feature index 2)
+    petal_length = X[:, 2]
 
-# Plot feature histogram over all classes, use petal length as example, color coded by class
-# x-axis: petal length, y-axis: frequency
-plt.hist(X[y == 0, 2], color='r', alpha=0.5, label='setosa')
-plt.hist(X[y == 1, 2], color='g', alpha=0.5, label='versicolor')
-plt.hist(X[y == 2, 2], color='b', alpha=0.5, label='virginica')
+    # Calculate optimal number of bins using Freedman-Diaconis rule
+    n_samples = len(petal_length)
+    iqr = np.percentile(petal_length, 75) - np.percentile(petal_length, 25)
+    bin_width = 2 * iqr / (n_samples ** (1/3))
+    n_bins = int(
+        np.ceil((petal_length.max() - petal_length.min()) / bin_width))
 
-plt.title('Histogram of petal length')
-plt.xlabel('Petal length (cm)')
-plt.ylabel('Frequency')
-plt.legend()
+    # Create histograms for each species
+    for i, species in enumerate(iris.target_names):
+        mask = y == i
+        ax.hist(petal_length[mask], bins=n_bins, color=color_map[f'c{i+1}'],
+                alpha=0.7, label=species, edgecolor='none')
 
-# Save pictures as SVG and other misc. settings to make it look good
-plt.savefig('iris_histogram.svg', bbox_inches='tight')
+    # Customize plot appearance
+    ax.set_title('Histogram of Petal Length', fontsize=12, pad=15)
+    ax.set_xlabel('Petal Length (cm)', fontsize=10)
+    ax.set_ylabel('Frequency', fontsize=10)
+
+    # Clean legend
+    ax.legend(frameon=True, framealpha=0.9, loc='upper right', fontsize=9)
+
+    # Subtle grid
+    ax.grid(True, alpha=0.15, linestyle='-')
+
+    # Remove top and right spines
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+
+    # Set consistent limits
+    ax.set_xlim(0, max(petal_length) + 0.5)
+    max_freq = max([len(petal_length[y == i]) for i in range(3)])
+    ax.set_ylim(0, max_freq * 1.1)
+
+
+if __name__ == "__main__":
+    from rdp import RDP
+
+    # Create and save the plot
+    plotter = RDP()
+    svg_content = plotter.create_themed_plot(plot_iris_histogram)
+
+    with open('iris_histogram.svg', 'w') as f:
+        f.write(svg_content)

@@ -1,60 +1,105 @@
 import numpy as np
-import sklearn.datasets as datasets
+from sklearn.datasets import load_iris
 import matplotlib.pyplot as plt
 from scipy.stats import gaussian_kde
 
 
 def plot_probabilities(ax=None, color_map=None):
-    """Plot p(y), p(x|y), and p(y|x) for Iris dataset petal length"""
-    fig, (ax1, ax2) = plt.subplots(1, 2)
+    """
+    Create clean, blog-friendly plots of class conditionals and posteriors for Iris dataset.
+    Shows p(x|y) (class conditionals) and p(y|x) (posterior probabilities) for petal length.
 
-    X, y = datasets.load_iris(return_X_y=True)
+    Args:
+        ax: Matplotlib axis object (unused, following RDP convention)
+        color_map: Dictionary of colors for consistent styling
+    """
+    # Create figure with two subplots
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 4))
+
+    # Load and prepare data
+    iris = load_iris()
+    X = iris.data
+    y = iris.target
     petal_length = X[:, 2]
-    colors = list(color_map.values())[:3]
-    classes = datasets.load_iris().target_names
+    classes = iris.target_names
 
-    # # Plot 1: p(y) - Prior probabilities
+    # Calculate priors
     class_counts = np.bincount(y)
     priors = class_counts / len(y)
-    # ax1.bar(range(3), priors, color=colors)
-    # ax1.set_xticks(range(3))
-    # ax1.set_xticklabels(classes, rotation=45)
-    # ax1.set_title('p(y) - Class Priors')
-    # ax1.set_ylabel('Probability')
 
-    # Plot 2: p(x|y) - Class conditionals
-    x_range = np.linspace(petal_length.min(), petal_length.max(), 200)
-    for i, color in enumerate(colors):
+    # Create smooth x-range for plotting
+    x_range = np.linspace(petal_length.min() - 0.5,
+                          petal_length.max() + 0.5, 200)
+
+    # Plot 1: Class Conditionals p(x|y)
+    for i, (species, color) in enumerate(zip(classes,
+                                             [color_map[f'c{j+1}'] for j in range(3)])):
+        # Fit KDE
         mask = y == i
-        kde = gaussian_kde(petal_length[mask])
-        ax1.plot(x_range, kde(x_range), color=color, label=classes[i])
-        ax1.fill_between(x_range, kde(x_range), alpha=0.2, color=color)
+        kde = gaussian_kde(petal_length[mask], bw_method='silverman')
 
-    ax1.set_title('p(x|y) - Class Conditionals')
-    ax1.set_xlabel('Petal Length (cm)')
-    ax1.set_ylabel('Density')
-    ax1.legend()
+        # Plot density curve
+        density = kde(x_range)
+        ax1.plot(x_range, density, color=color, linewidth=2,
+                 label=species, zorder=3)
+        ax1.fill_between(x_range, density, color=color, alpha=0.2, zorder=2)
 
-    # Plot 3: p(y|x) - Posteriors
-    kdes = [gaussian_kde(petal_length[y == i]) for i in range(3)]
+    # Style first subplot
+    ax1.set_title('p(x|y) - Class Conditionals',
+                  fontsize=12, pad=15)
+    ax1.set_xlabel('Petal Length (cm)', fontsize=10)
+    ax1.set_ylabel('Density', fontsize=10)
+
+    # Plot 2: Posteriors p(y|x)
+    # Fit KDE for each class
+    kdes = [gaussian_kde(petal_length[y == i], bw_method='silverman')
+            for i in range(3)]
+
+    # Calculate posteriors
     posteriors = np.zeros((len(x_range), 3))
-
     for i in range(3):
         likelihood = kdes[i](x_range)
         posteriors[:, i] = likelihood * priors[i]
 
+    # Normalize posteriors
     posteriors /= posteriors.sum(axis=1, keepdims=True)
 
-    for i, color in enumerate(colors):
-        ax2.plot(x_range, posteriors[:, i], color=color, label=classes[i])
-        ax2.fill_between(x_range, posteriors[:, i], alpha=0.2, color=color)
+    # Plot posterior probabilities
+    for i, (species, color) in enumerate(zip(classes,
+                                             [color_map[f'c{j+1}'] for j in range(3)])):
+        ax2.plot(x_range, posteriors[:, i], color=color,
+                 linewidth=2, label=species, zorder=3)
+        ax2.fill_between(x_range, posteriors[:, i],
+                         color=color, alpha=0.2, zorder=2)
 
-    ax2.set_title('p(y|x) - Posterior Probabilities')
-    ax2.set_xlabel('Petal Length (cm)')
-    ax2.set_ylabel('Probability')
-    ax2.legend()
+    # Style second subplot
+    ax2.set_title('p(y|x) - Posterior Probabilities',
+                  fontsize=12, pad=15)
+    ax2.set_xlabel('Petal Length (cm)', fontsize=10)
+    ax2.set_ylabel('Probability', fontsize=10)
 
-    plt.tight_layout()
+    # Common styling for both subplots
+    for ax in [ax1, ax2]:
+        # Clean legend
+        ax.legend(frameon=True, framealpha=0.9, loc='upper right',
+                  fontsize=9)
+
+        # Subtle grid
+        ax.grid(True, alpha=0.15, linestyle='-', zorder=1)
+
+        # Remove top and right spines
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+
+        # Set y-axis limits
+        ax.set_ylim(0, ax.get_ylim()[1] * 1.1)
+
+        # Set x-axis limits
+        ax.set_xlim(petal_length.min() - 0.5, petal_length.max() + 0.5)
+
+    # Adjust layout with more compact spacing
+    plt.tight_layout(pad=1.2, w_pad=2)
+    return fig
 
 
 if __name__ == "__main__":
