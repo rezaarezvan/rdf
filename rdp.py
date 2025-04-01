@@ -52,44 +52,6 @@ class RDP:
         )
 
         self.style_template = """
-            <style>
-                /* Light mode colors */
-                :root {
-                    %(light_theme)s
-                    --legend-bg: rgba(255, 255, 255, 0.8);
-                    --legend-border: rgba(0, 0, 0, 0.1);
-                }
-                /* Dark mode colors */
-                .dark {
-                    %(dark_theme)s
-                    --legend-bg: rgba(26, 26, 26, 0.8);
-                    --legend-border: rgba(255, 255, 255, 0.1);
-                }
-                /* Color classes */
-                %(color_classes)s
-                /* Make all text inherit color */
-                text, .text {
-                    fill: currentColor !important;
-                    stroke: none !important;
-                }
-                /* Make all lines inherit color */
-                .axis line, .axis path {
-                    stroke: currentColor !important;
-                }
-                /* Special handling for legend */
-                g.legend > g:first-child > path:first-child {
-                    fill: var(--legend-bg) !important;
-                    stroke: var(--legend-border) !important;
-                    stroke-width: 1px !important;
-                }
-                .legend text {
-                    fill: currentColor !important;
-                }
-                /* Make all default black strokes use currentColor */
-                [stroke="#000000"] {
-                    stroke: currentColor !important;
-                }
-            </style>
         """
 
     def _get_style_defs(self) -> str:
@@ -119,7 +81,7 @@ class RDP:
             for i, name in enumerate(self.color_theme.light_theme.keys())
         ])
 
-        return f"< defs > {self.style_template % {'light_theme': light_theme_vars, 'dark_theme': dark_theme_vars, 'color_classes': color_classes}} < /defs >"
+        return f"<defs> {self.style_template % {'light_theme': light_theme_vars, 'dark_theme': dark_theme_vars, 'color_classes': color_classes}} </defs>"
 
     def create_themed_plot(self, plot_func: Callable[..., None], **plot_kwargs) -> str:
         """
