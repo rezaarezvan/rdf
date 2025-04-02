@@ -120,7 +120,5 @@ if __name__ == "__main__":
     from rdp import RDP
 
     plotter = RDP()
-    svg_content = plotter.create_themed_plot(plot_soft_margin)
-
-    with open('soft_margin_principle.svg', 'w') as f:
-        f.write(svg_content)
+    svg_content = plotter.create_themed_plot(
+        save_name='soft_margin_principle', plot_func=plot_soft_margin)

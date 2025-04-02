@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.path import Path
 import matplotlib.patches as patches
+
+from matplotlib.path import Path
 
 
 def plot_convex_sets(ax=None, color_map=None):
@@ -77,9 +78,6 @@ def plot_convex_sets(ax=None, color_map=None):
 if __name__ == "__main__":
     from rdp import RDP
 
-    # Create and save the plot
     plotter = RDP()
-    svg_content = plotter.create_themed_plot(plot_convex_sets)
-
-    with open('convex_sets.svg', 'w') as f:
-        f.write(svg_content)
+    svg_content = plotter.create_themed_plot(
+        save_name='convex_sets', plot_func=plot_convex_sets)

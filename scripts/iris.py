@@ -55,7 +55,5 @@ if __name__ == "__main__":
 
     # Create and save the plot
     plotter = RDP()
-    svg_content = plotter.create_themed_plot(plot_iris_histogram)
-
-    with open('iris_histogram.svg', 'w') as f:
-        f.write(svg_content)
+    svg_content = plotter.create_themed_plot(
+        save_name='iris_histogram', plot_func=plot_iris_histogram)

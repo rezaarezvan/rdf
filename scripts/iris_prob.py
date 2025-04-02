@@ -106,6 +106,5 @@ if __name__ == "__main__":
     from rdp import RDP
     plotter = RDP()
 
-    svg_content = plotter.create_themed_plot(plot_probabilities)
-    with open('iris_probabilities.svg', 'w') as f:
-        f.write(svg_content)
+    svg_content = plotter.create_themed_plot(
+        save_name='iris_probabilities', plot_func=plot_probabilities)

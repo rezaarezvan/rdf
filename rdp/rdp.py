@@ -150,12 +150,12 @@ class RDP:
         return self.style_template % replacements
 
     # def create_themed_plot(self, plot_func: Callable[..., None], **plot_kwargs) -> str:
-    def create_themed_plot(self, save_name: str, plot_func: Callable[..., None], **plot_kwargs) -> str:
+    def create_themed_plot(self, name: str, plot_func: Callable[..., None], **plot_kwargs) -> str:
         """
         Create a plot with theme support
 
         Args:
-            save_name: Name of the plot to be saved
+            name: Name for the saved SVG file
             plot_func: Function that creates the matplotlib plot
             fig_size: Figure size tuple (width, height)
             **plot_kwargs: Additional arguments passed to the plot function
@@ -193,7 +193,7 @@ class RDP:
         svg_content = re.sub(
             r'(<svg[^>]*>)', rf'\1{self._get_style_defs()}', svg_content)
 
-        for i, (_, color) in enumerate(self.color_theme.base_colors.items(), 1):
+        for i, (name, color) in enumerate(self.color_theme.base_colors.items(), 1):
             pattern = rf'style="fill: ?{color}[^"]*"|fill="{color}"'
             svg_content = re.sub(pattern, f'class="c{i}"', svg_content)
 
@@ -231,8 +231,8 @@ class RDP:
                 svg_content = re.sub(
                     pattern, 'stroke="currentColor"', svg_content)
 
-        with open(f'{self.save_path}/{save_name}.svg', 'w') as f:
+        with open(f'{self.save_path}/{name}.svg', 'w') as f:
             f.write(svg_content)
 
-        print(f"SVG saved to {self.save_path}/{save_name}.svg")
+        print(f"SVG saved to {self.save_path}/{name}.svg")
         return svg_content

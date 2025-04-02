@@ -52,7 +52,5 @@ if __name__ == "__main__":
     from rdp import RDP
 
     plotter = RDP()
-    svg_content = plotter.create_themed_plot(plot_sigmoid)
-
-    with open('sigmoid.svg', 'w') as f:
-        f.write(svg_content)
+    svg_content = plotter.create_themed_plot(
+        save_name='sigmoid', plot_func=plot_sigmoid)

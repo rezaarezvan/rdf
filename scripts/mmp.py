@@ -102,6 +102,5 @@ def plot_margin_principle(ax=None, color_map=None):
 if __name__ == "__main__":
     from rdp import RDP
     plotter = RDP()
-    svg_content = plotter.create_themed_plot(plot_margin_principle)
-    with open('margin_principle.svg', 'w') as f:
-        f.write(svg_content)
+    svg_content = plotter.create_themed_plot(
+        save_name='margin_principle', plot_func=plot_margin_principle)

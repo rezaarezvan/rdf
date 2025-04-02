@@ -402,34 +402,23 @@ if __name__ == "__main__":
     from rdp import RDP
 
     plotter = RDP()
-    # svg_content = plotter.create_themed_plot(plot_SDE_only_drift)
-    #
-    # with open('SDE_only_drift.svg', 'w') as f:
-    #     f.write(svg_content)
+    svg_content = plotter.create_themed_plot(
+        save_name='SDE_only_drift', plot_func=plot_SDE_only_drift)
 
-    # svg_content = plotter.create_themed_plot(plot_SDE_only_diffusion)
-    #
-    # with open('SDE_only_diffusion.svg', 'w') as f:
-    #     f.write(svg_content)
+    svg_content = plotter.create_themed_plot(
+        save_name='SDE_only_diffusion', plot_func=plot_SDE_only_diffusion)
 
-    # svg_content = plotter.create_themed_plot(plot_SDE_example)
-    #
-    # with open('SDE_example.svg', 'w') as f:
-    #     f.write(svg_content)
+    svg_content = plotter.create_themed_plot(
+        save_name='SDE_example', plot_func=plot_SDE_example)
 
-    # svg_content = plotter.create_themed_plot(plot_dynamic_SDE_example)
-    #
-    # with open('dynamic_SDE_example.svg', 'w') as f:
-    #     f.write(svg_content)
+    svg_content = plotter.create_themed_plot(
+        save_name='dynamic_SDE_example', plot_func=plot_dynamic_SDE_example)
 
-    # svg_content = plotter.create_themed_plot(plot_Riemann_sum)
-    # with open('Riemann_sum.svg', 'w') as f:
-    #     f.write(svg_content)
+    svg_content = plotter.create_themed_plot(
+        save_name='Riemann_sum', plot_func=plot_Riemann_sum)
 
-    # svg_content = plotter.create_themed_plot(plot_random_diff)
-    # with open('random_diff.svg', 'w') as f:
-    #     f.write(svg_content)
+    svg_content = plotter.create_themed_plot(
+        save_name='random_diff', plot_func=plot_random_diff)
 
-    svg_content = plotter.create_themed_plot(plot_random_riemann)
-    with open('random_riemann.svg', 'w') as f:
-        f.write(svg_content)
+    svg_content = plotter.create_themed_plot(
+        save_name='random_riemann', plot_func=plot_random_riemann)
