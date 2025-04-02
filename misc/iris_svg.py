@@ -12,10 +12,10 @@ def create_dynamic_plot():
     print("✓ Loaded Iris dataset")
 
     # Use unique, recognizable colors as placeholders
-    SETOSA_COLOR = '#FF0001'      # Unique red
-    VERSICOLOR_COLOR = '#00FF02'  # Unique green
-    VIRGINICA_COLOR = '#0000FF'   # Unique blue
-    TEXT_COLOR = '#000000'        # Black for initial text/lines
+    SETOSA_COLOR = "#FF0001"  # Unique red
+    VERSICOLOR_COLOR = "#00FF02"  # Unique green
+    VIRGINICA_COLOR = "#0000FF"  # Unique blue
+    TEXT_COLOR = "#000000"  # Black for initial text/lines
 
     print("\nPlaceholder Colors:")
     print(f"Setosa:     {SETOSA_COLOR}")
@@ -24,19 +24,18 @@ def create_dynamic_plot():
     print(f"Text:       {TEXT_COLOR}")
 
     # Create figure with transparent background
-    fig = plt.figure(facecolor='none')
+    fig = plt.figure(facecolor="none")
     ax = plt.gca()
-    ax.set_facecolor('none')
+    ax.set_facecolor("none")
 
     # Create histograms with placeholder colors
-    plt.hist(X[y == 0, 2], color=SETOSA_COLOR, alpha=0.5, label='setosa')
-    plt.hist(X[y == 1, 2], color=VERSICOLOR_COLOR,
-             alpha=0.5, label='versicolor')
-    plt.hist(X[y == 2, 2], color=VIRGINICA_COLOR, alpha=0.5, label='virginica')
+    plt.hist(X[y == 0, 2], color=SETOSA_COLOR, alpha=0.5, label="setosa")
+    plt.hist(X[y == 1, 2], color=VERSICOLOR_COLOR, alpha=0.5, label="versicolor")
+    plt.hist(X[y == 2, 2], color=VIRGINICA_COLOR, alpha=0.5, label="virginica")
 
-    plt.title('Histogram of Petal Length', color=TEXT_COLOR)
-    plt.xlabel('Petal Length (cm)', color=TEXT_COLOR)
-    plt.ylabel('Frequency', color=TEXT_COLOR)
+    plt.title("Histogram of Petal Length", color=TEXT_COLOR)
+    plt.xlabel("Petal Length (cm)", color=TEXT_COLOR)
+    plt.ylabel("Frequency", color=TEXT_COLOR)
 
     # Style the legend and other elements
     leg = plt.legend()
@@ -52,7 +51,7 @@ def create_dynamic_plot():
 
     # Save to SVG string
     output = io.StringIO()
-    plt.savefig(output, format='svg', bbox_inches='tight', transparent=True)
+    plt.savefig(output, format="svg", bbox_inches="tight", transparent=True)
     plt.close()
 
     svg_content = output.getvalue()
@@ -119,16 +118,13 @@ def create_dynamic_plot():
     print("\nStarting SVG modifications:")
 
     # Insert style definitions
-    svg_content = re.sub(r'(<svg[^>]*>)', rf'\1{style_defs}', svg_content)
+    svg_content = re.sub(r"(<svg[^>]*>)", rf"\1{style_defs}", svg_content)
     print("✓ Inserted style definitions")
 
     # Replace histogram colors with classes
     def replace_color_with_class(content, color, class_name):
         # Handle both style="fill: color" and fill="color" formats
-        patterns = [
-            rf'style="fill: {color}[^"]*"',
-            rf'fill="{color}"'
-        ]
+        patterns = [rf'style="fill: {color}[^"]*"', rf'fill="{color}"']
         count = 0
         for pattern in patterns:
             count += len(re.findall(pattern, content))
@@ -137,15 +133,18 @@ def create_dynamic_plot():
 
     # Process colors
     svg_content, setosa_count = replace_color_with_class(
-        svg_content, SETOSA_COLOR.lower(), "setosa")
+        svg_content, SETOSA_COLOR.lower(), "setosa"
+    )
     print(f"✓ Replaced {setosa_count} setosa color instances")
 
     svg_content, versi_count = replace_color_with_class(
-        svg_content, VERSICOLOR_COLOR.lower(), "versicolor")
+        svg_content, VERSICOLOR_COLOR.lower(), "versicolor"
+    )
     print(f"✓ Replaced {versi_count} versicolor color instances")
 
     svg_content, virg_count = replace_color_with_class(
-        svg_content, VIRGINICA_COLOR.lower(), "virginica")
+        svg_content, VIRGINICA_COLOR.lower(), "virginica"
+    )
     print(f"✓ Replaced {virg_count} virginica color instances")
 
     print("\nProcessing text and line elements:")
@@ -154,35 +153,34 @@ def create_dynamic_plot():
     text_patterns = [
         (r'<g id="([^"]*text[^"]*)"', r'<g id="\1" class="text"'),
         (r'<g id="matplotlib\.axis[^"]*"', r'<g class="axis"'),
-        (r'<g id="legend[^"]*"', r'<g class="legend"')
+        (r'<g id="legend[^"]*"', r'<g class="legend"'),
     ]
 
     for pattern, replacement in text_patterns:
         count = len(re.findall(pattern, svg_content))
         if count > 0:
             svg_content = re.sub(pattern, replacement, svg_content)
-            print(f"✓ Added class to {count} {
-                  replacement.split('class=')[1]} elements")
+            print(f"✓ Added class to {count} {replacement.split('class=')[1]} elements")
 
     # Replace stroke colors - handle both style attribute and direct stroke attribute
     stroke_patterns = [
-        r'stroke="#000000"',                           # Direct stroke attribute
+        r'stroke="#000000"',  # Direct stroke attribute
         # Style attribute with stroke
         r'style="[^"]*stroke: ?#000000[^"]*"',
         # Style attribute without space
-        r'style="[^"]*stroke:#000000[^"]*"'
+        r'style="[^"]*stroke:#000000[^"]*"',
     ]
 
     total_stroke_count = 0
     for pattern in stroke_patterns:
         count = len(re.findall(pattern, svg_content))
         total_stroke_count += count
-        if 'style=' in pattern:
+        if "style=" in pattern:
             # For style attributes, preserve other styles
             svg_content = re.sub(
                 r'(style="[^"]*?)stroke: ?#000000([^"]*")',
-                r'\1stroke: currentColor\2',
-                svg_content
+                r"\1stroke: currentColor\2",
+                svg_content,
             )
         else:
             # For direct stroke attributes
@@ -201,5 +199,5 @@ def create_dynamic_plot():
 
 if __name__ == "__main__":
     svg_content = create_dynamic_plot()
-    with open('dynamic_iris_plot.svg', 'w') as f:
+    with open("dynamic_iris_plot.svg", "w") as f:
         f.write(svg_content)

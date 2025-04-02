@@ -34,10 +34,17 @@ def plot_linear_separation(ax=None, color_map=None):
     # Plot the two classes with larger, more visible points
     for i, species in enumerate(iris.target_names[:2]):
         mask = y == i
-        ax.scatter(petal_length[mask], petal_width[mask],
-                   c=color_map[f'c{i+1}'], s=70, alpha=0.7,
-                   label=species, edgecolor='white', linewidth=0.5,
-                   zorder=3)
+        ax.scatter(
+            petal_length[mask],
+            petal_width[mask],
+            c=color_map[f"c{i + 1}"],
+            s=70,
+            alpha=0.7,
+            label=species,
+            edgecolor="white",
+            linewidth=0.5,
+            zorder=3,
+        )
 
     # Draw separating line with better positioning
     margin = 0.2
@@ -45,22 +52,36 @@ def plot_linear_separation(ax=None, color_map=None):
     y_line = -0.42 * x_line - 0.35  # Adjusted for better separation
 
     # Plot decision boundary
-    ax.plot(y_line, y_line, '--', color='black',
-            linewidth=2, label='Decision Boundary',
-            zorder=2)
+    ax.plot(
+        y_line,
+        y_line,
+        "--",
+        color="black",
+        linewidth=2,
+        label="Decision Boundary",
+        zorder=2,
+    )
 
     # Customize plot appearance
-    ax.set_title('Linear Separation of Iris Classes\nusing Petal Measurements',
-                 fontsize=12, pad=15)
-    ax.set_xlabel('Petal Length (cm)', fontsize=10)
-    ax.set_ylabel('Petal Width (cm)', fontsize=10)
+    ax.set_title(
+        "Linear Separation of Iris Classes\nusing Petal Measurements",
+        fontsize=12,
+        pad=15,
+    )
+    ax.set_xlabel("Petal Length (cm)", fontsize=10)
+    ax.set_ylabel("Petal Width (cm)", fontsize=10)
 
     # Clean legend with better positioning
-    ax.legend(frameon=True, framealpha=0.9, loc='upper left',
-              fontsize=9, bbox_to_anchor=(0.02, 0.98))
+    ax.legend(
+        frameon=True,
+        framealpha=0.9,
+        loc="upper left",
+        fontsize=9,
+        bbox_to_anchor=(0.02, 0.98),
+    )
 
     # Subtle grid
-    ax.grid(True, alpha=0.15, linestyle='-', zorder=1)
+    ax.grid(True, alpha=0.15, linestyle="-", zorder=1)
 
     # Set consistent limits with padding
     x_margin = (x_max - x_min) * padding
@@ -69,11 +90,11 @@ def plot_linear_separation(ax=None, color_map=None):
     ax.set_ylim(y_min - y_margin, y_max + y_margin)
 
     # Remove top and right spines
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
 
     # Add subtle ticks
-    ax.tick_params(axis='both', which='major', labelsize=9)
+    ax.tick_params(axis="both", which="major", labelsize=9)
 
 
 if __name__ == "__main__":
@@ -81,4 +102,5 @@ if __name__ == "__main__":
 
     plotter = RDP()
     svg_content = plotter.create_themed_plot(
-        save_name='iris_linear_separation', plot_func=plot_linear_separation)
+        save_name="iris_linear_separation", plot_func=plot_linear_separation
+    )

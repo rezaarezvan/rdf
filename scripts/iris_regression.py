@@ -30,9 +30,9 @@ def plot_probabilities(ax=None, color_map=None):
         ax1.plot(x_range, kde(x_range), color=color, label=classes[i])
         ax1.fill_between(x_range, kde(x_range), alpha=0.2, color=color)
 
-    ax1.set_title('p(x|y) - Class Conditionals')
-    ax1.set_xlabel('Petal Length (cm)')
-    ax1.set_ylabel('Density')
+    ax1.set_title("p(x|y) - Class Conditionals")
+    ax1.set_xlabel("Petal Length (cm)")
+    ax1.set_ylabel("Density")
     ax1.legend()
 
     # Plot 3: p(y|x) - Posteriors
@@ -49,9 +49,9 @@ def plot_probabilities(ax=None, color_map=None):
         ax2.plot(x_range, posteriors[:, i], color=color, label=classes[i])
         ax2.fill_between(x_range, posteriors[:, i], alpha=0.2, color=color)
 
-    ax2.set_title('p(y|x) - Posterior Probabilities')
-    ax2.set_xlabel('Petal Length (cm)')
-    ax2.set_ylabel('Probability')
+    ax2.set_title("p(y|x) - Posterior Probabilities")
+    ax2.set_xlabel("Petal Length (cm)")
+    ax2.set_ylabel("Probability")
     ax2.legend()
 
     plt.tight_layout()
@@ -80,18 +80,26 @@ def plot_linear_halfspace_example(ax=None, color_map=None):
     x1 = np.linspace(-10, 10, 100)
     x2 = (-w[0] * x1 - b) / w[1]
 
-    ax.plot(x1, x2, label='f(x) = 0')
-    ax.fill_between(x1, x2, -10, alpha=0.2, color='blue', label='f(x) < 0')
-    ax.fill_between(x1, x2, 10, alpha=0.2, color='red', label='f(x) > 0')
+    ax.plot(x1, x2, label="f(x) = 0")
+    ax.fill_between(x1, x2, -10, alpha=0.2, color="blue", label="f(x) < 0")
+    ax.fill_between(x1, x2, 10, alpha=0.2, color="red", label="f(x) > 0")
 
-    ax.scatter(np.random.uniform(-10, 10, 10),
-               np.random.uniform(-10, 10, 10), color='blue', label='class -1')
-    ax.scatter(np.random.uniform(-10, 10, 10),
-               np.random.uniform(-10, 10, 10), color='red', label='class 1')
+    ax.scatter(
+        np.random.uniform(-10, 10, 10),
+        np.random.uniform(-10, 10, 10),
+        color="blue",
+        label="class -1",
+    )
+    ax.scatter(
+        np.random.uniform(-10, 10, 10),
+        np.random.uniform(-10, 10, 10),
+        color="red",
+        label="class 1",
+    )
 
-    ax.set_title('Linear Halfspace Example')
-    ax.set_xlabel('x1')
-    ax.set_ylabel('x2')
+    ax.set_title("Linear Halfspace Example")
+    ax.set_xlabel("x1")
+    ax.set_ylabel("x2")
     ax.legend()
 
     plt.tight_layout()
@@ -106,26 +114,31 @@ def plot_sigmoid(ax=None, color_map=None):
     x = np.linspace(-10, 10, 100)
     y = 1 / (1 + np.exp(-x))
 
-    ax.plot(x, y, label='sigmoid')
+    ax.plot(x, y, label="sigmoid")
 
-    ax.set_title('Sigmoid Function')
-    ax.set_xlabel('f(x)')
-    ax.set_ylabel(r'$\sigma(f(x))$')
+    ax.set_title("Sigmoid Function")
+    ax.set_xlabel("f(x)")
+    ax.set_ylabel(r"$\sigma(f(x))$")
     ax.legend()
 
     plt.tight_layout()
+
 
 # def plot_
 
 
 if __name__ == "__main__":
     from rdp import RDP
+
     plotter = RDP()
     svg_content = plotter.create_themed_plot(
-        save_name='iris_probabilities', plot_func=plot_probabilities)
+        save_name="iris_probabilities", plot_func=plot_probabilities
+    )
 
     svg_content = plotter.create_themed_plot(
-        save_name='linear_halfspace', plot_func=plot_linear_halfspace_example)
+        save_name="linear_halfspace", plot_func=plot_linear_halfspace_example
+    )
 
     svg_content = plotter.create_themed_plot(
-        save_name='sigmoid', plot_func=plot_sigmoid)
+        save_name="sigmoid", plot_func=plot_sigmoid
+    )
