@@ -37,11 +37,15 @@ def process_tikz_to_svg(tikz_code: str, output_file: str):
                 "-interaction=nonstopmode",
                 "-shell-escape",  # Allow external commands
                 "-halt-on-error",  # Stop on first error
-                "\\synctex=1",    # Enable better positioning
-                "\\pdfcompresslevel=0",  # No compression for better quality
-                "\\pdfobjcompresslevel=0",
                 "temp.tex"
             ],
+            env={**os.environ,
+                 "TEXINPUTS": os.getcwd() + ":",  # Current directory for TikZ libraries
+                 "max_print_line": "1000",  # Increase max print line
+                 "synctex": "1",
+                 "pdfcompresslevel": "0",  # No compression
+                 "pdfobjcompresslevel": "0",  # No compression
+                 },
             capture_output=True,
             text=True,
         )
