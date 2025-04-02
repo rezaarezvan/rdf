@@ -192,7 +192,8 @@ class RDP:
         ax.tick_params(colors="#000000")
 
         output = io.StringIO()
-        plt.savefig(output, format="svg", bbox_inches="tight", transparent=True)
+        plt.savefig(output, format="svg",
+                    bbox_inches="tight", transparent=True)
         plt.close()
 
         svg_content = output.getvalue()
@@ -239,7 +240,8 @@ class RDP:
                     svg_content,
                 )
             else:
-                svg_content = re.sub(pattern, 'stroke="currentColor"', svg_content)
+                svg_content = re.sub(
+                    pattern, 'stroke="currentColor"', svg_content)
 
         with open(f"{self.save_path}/{save_name}.svg", "w") as f:
             f.write(svg_content)
