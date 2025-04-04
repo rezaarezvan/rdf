@@ -114,8 +114,7 @@ def plot_SDE_example(ax=None, color_map=None):
     x = np.zeros_like(t)
     x[0] = np.random.normal(0, 1)  # Initial condition
     for i in range(1, len(t)):
-        x[i] = x[i - 1] + 0.5 * x[i - 1] * \
-            dt + np.random.normal(0, np.sqrt(dt))
+        x[i] = x[i - 1] + 0.5 * x[i - 1] * dt + np.random.normal(0, np.sqrt(dt))
 
     y_min, y_max = np.min(x) + padding, np.max(x) - padding
 
@@ -182,15 +181,13 @@ def plot_dynamic_SDE_example(ax=None, color_map=None):
     time = np.linspace(x_min - padding, x_max + padding, len(x))
     # Plot the SDE
     ax.plot(time, y, color=color_map["c8"], linewidth=2, label="$v(t)$")
-    ax.plot(time, x, color=color_map["c7"],
-            linewidth=2, label="$x(t)$", linestyle="--")
+    ax.plot(time, x, color=color_map["c7"], linewidth=2, label="$x(t)$", linestyle="--")
 
     # Add subtle grid
     ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
 
     # Customize plot appearance
-    ax.set_title("Constant Velocity Model with $x(0) = v(0) = 0$",
-                 fontsize=12, pad=15)
+    ax.set_title("Constant Velocity Model with $x(0) = v(0) = 0$", fontsize=12, pad=15)
     ax.set_xlabel(r"$t$", fontsize=10)
     ax.set_ylabel(r"$x(t), v(t)$", fontsize=10)
 
@@ -256,8 +253,7 @@ def plot_Riemann_sum(ax=None, color_map=None):
     # Add subtle grid
     ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
     # Customize plot appearance
-    ax.set_title(f"Riemann Sum, $n = 10$, and error = ${
-                 error}$", fontsize=12, pad=15)
+    ax.set_title(f"Riemann Sum, $n = 10$, and error = ${error}$", fontsize=12, pad=15)
     ax.set_xlabel(r"$x$", fontsize=10)
     ax.set_ylabel(r"$f(x)$", fontsize=10)
     # Set axis limits with padding
@@ -300,8 +296,7 @@ def plot_random_diff(ax=None, color_map=None):
     # Plot the original function
     ax.plot(x, y, color=color_map["c8"], linewidth=2)
     # Plot the tangent line
-    ax.plot(x, tangent_line,
-            color=color_map["c7"], linewidth=2, linestyle="--")
+    ax.plot(x, tangent_line, color=color_map["c7"], linewidth=2, linestyle="--")
     # Add a point at x(1) and text that says \dot{x}(1) = y_diff(1)
     ax.scatter(x_tangent, y_tangent, color=color_map["c7"], s=50)
     ax.text(
@@ -343,7 +338,6 @@ def plot_brownian_VS_sin(ax=None, color_map=None):
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 6), sharex=True)
     # Set up the plot bounds with padding
     x_min, x_max = 0, 2 * np.pi
-    y_min, y_max = -2, 2
     padding = 0.2  # Add padding for better appearance
     # Create the x values
     x = np.linspace(x_min, x_max, 100)
@@ -358,6 +352,7 @@ def plot_brownian_VS_sin(ax=None, color_map=None):
     B[0] = 0
     for i in range(1, len(t)):
         B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
+    y_min, y_max = min(np.min(B), x_min) - padding, max(np.max(B), x_max) + padding
     # Plot the sine function
     ax1.plot(x, y, color=color_map["c8"], linewidth=2)
     # Plot the Brownian motion
@@ -389,14 +384,14 @@ def plot_brownian_VS_sin(ax=None, color_map=None):
 
 
 def plot_left_reimann_brownian(ax=None, color_map=None):
-    '''
+    """
     Plot a clean, blog-friendly visualization of a left Riemann sum for a Brownian motion.
 
     Consider the Riemann sum sum_{i = 0}^{n - 1} f(t^{star}_i)(\beta(t_{i + 1}) - \beta(t_i)),
     where f(t) = t and \beta(t) is a Brownian motion.
 
     We also show the difference between the Right and Left Riemann sum.
-    '''
+    """
     # Set up the plot bounds with padding
     x_min, x_max = 0, 2
     padding = 0.2  # Add padding for better appearance
@@ -409,8 +404,7 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     B[0] = 0
     for i in range(1, len(t)):
         B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
-    y_min, y_max = min(np.min(B), x_min) - \
-        padding, max(np.max(B), x_max) + padding
+    y_min, y_max = min(np.min(B), x_min) - padding, max(np.max(B), x_max) + padding
     # Create the Left Riemann sum
     n = 10
     dx = (x_max - x_min) / n
@@ -441,17 +435,16 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     ax.tick_params(axis="both", which="major", labelsize=9)
     # Add red points on the Brownian motion at the left Riemann sum points
     for i in range(n):
-        ax.scatter(x_riemann[i], B[int(x_riemann[i] / dt)],
-                   color=color_map["c7"], s=50)
+        ax.scatter(x_riemann[i], B[int(x_riemann[i] / dt)], color=color_map["c7"], s=50)
 
 
 def plot_left_reimann_brownian(ax=None, color_map=None):
-    '''
+    """
     Plot a clean, blog-friendly visualization of a left Riemann sum for a Brownian motion.
 
     Consider the Riemann sum sum_{i = 0}^{n - 1} \beta(t) (\beta(t_{i + 1}) - \beta(t_i)),
     where \beta(t) is a Brownian motion.
-    '''
+    """
     # Set up the plot bounds with padding
     x_min, x_max = 0, 2
     padding = 0.2  # Add padding for better appearance
@@ -464,8 +457,7 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     B[0] = 0
     for i in range(1, len(t)):
         B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
-    y_min, y_max = min(np.min(B), x_min) - \
-        padding, max(np.max(B), x_max) + padding
+    y_min, y_max = min(np.min(B), x_min) - padding, max(np.max(B), x_max) + padding
     # Create the Left Riemann sum
     n = 10
     dx = (x_max - x_min) / n
@@ -495,65 +487,52 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
 
 
 def plot_second_order(ax=None, color_map=None):
-    '''
-    Plot a clean, blog-friendly visualization of a Brownian motion and it's second order sum.
-    '''
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 6), sharex=True)
-    # Set up the plot bounds with padding
-    x_min, x_max = 0, 2
-    padding = 0.2  # Add padding for better appearance
-    # Create the x values
-    x = np.linspace(x_min, x_max, 100)
-    # Create the y values (Brownian motion, Euler-Maruyama)
-    n = 10
+    """
+    Plot a clean, blog-friendly visualization of the second-order sum of Brownian motion.
+    Consider the second-order sum of Brownian motion:
+    sum_{t_i < t}(Delta \beta)^2
+    where Delta \beta = \beta(t_{i + 1}) - \beta(t_i)
+    """
+    n = 5
     dt = 0.01
-    t = np.arange(x_min, x_max, dt)
-    B = np.zeros_like(t)
-    B[0] = 0
-    for i in range(1, len(t)):
-        B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
-    y_min, y_max = min(np.min(B), x_min) - \
-        padding, max(np.max(B), x_max) + padding
-    # Create the second order sum, sum_{i = 0}^{n - 1} (\beta(t_{i + 1}) - \beta(t_i))^2
-    B2 = np.zeros_like(t)
-    n = 10
-    # Get indices of the partition points
-    for i in points:
-        B2[i] = np.sum((B[i + 1] - B[i])**2)
-    # Plot the Brownian motion
-    ax1.plot(t, B, color=color_map["c7"], linewidth=2)
-    # Plot partiton points on the Brownian motion
-    for i in range(n):
-        ax1.scatter(t[i], B[i], color=color_map["c7"], s=50)
-    # Plot the second order sum
-    ax2.plot(t, B2, color=color_map["c8"], linewidth=2)
-    # Add subtle grid
-    ax1.grid(True, alpha=0.1, linestyle="-", zorder=0)
-    ax2.grid(True, alpha=0.1, linestyle="-", zorder=0)
-    # Customize plot appearance
-    ax1.set_title(f"Brownian motion with $n = {n}$", fontsize=12, pad=15)
-    ax1.set_ylabel(r"$\beta(t)$", fontsize=10)
-    ax2.set_xlabel(r"$t$", fontsize=10)
-    ax2.set_ylabel(r"$\sum_{t_i < t} (\Delta \beta(t_i))^2$", fontsize=10)
-    # Set axis limits with padding
-    ax1.set_xlim(x_min - padding, x_max + padding)
-    ax1.set_ylim(y_min - padding, y_max + padding)
-    ax2.set_xlim(x_min - padding, x_max + padding)
-    ax2.set_ylim(y_min - padding, y_max + padding)
-    # Remove top and right spines
-    ax1.spines["top"].set_visible(False)
-    ax1.spines["right"].set_visible(False)
-    ax2.spines["top"].set_visible(False)
-    ax2.spines["right"].set_visible(False)
-    # Set aspect ratio to be equal for proper visualization
-    ax1.set_aspect("equal")
-    ax2.set_aspect("equal")
-    # Add subtle ticks
-    ax1.tick_params(axis="both", which="major", labelsize=9)
-    ax2.tick_params(axis="both", which="major", labelsize=9)
+    T = 2
+    color_brownian = color_map["c8"]
+    color_points = color_map["c1"]
+    color_sum = color_map["c8"]
 
-    plt.show()
-    exit()
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 6), sharex=True)
+
+    # Create the Brownian motion
+    t = np.arange(0, T + dt, dt)
+    B = np.cumsum(np.sqrt(dt) * np.random.randn(len(t)))
+
+    # Define partition points evenly
+    points = np.linspace(0, len(t) - 1, n + 1, dtype=int)
+
+    # Second-order sum computation
+    B2 = np.zeros_like(t)
+    for i in range(len(points) - 1):
+        idx_start, idx_end = points[i], points[i + 1]
+        increment = (B[idx_end] - B[idx_start]) ** 2
+        B2[idx_end:] += increment
+
+    # Plot Brownian motion
+    ax1.plot(t, B, color=color_brownian, linewidth=1)
+    ax1.scatter(t[points], B[points], color=color_points, zorder=5)
+
+    # Plot second-order sum
+    ax2.step(t, B2, where="post", color=color_sum)
+
+    # Customization
+    ax1.set_title(f"Brownian motion with n={n}")
+    ax1.set_ylabel(r"$\beta(t)$", fontsize=12)
+    ax2.set_xlabel("t", fontsize=12)
+    ax2.set_ylabel(r"$\sum_{t_i < t}(\Delta \beta)^2$", fontsize=12)
+
+    for ax in (ax1, ax2):
+        ax.grid(True, linestyle="-", linewidth=0.5, alpha=0.3)
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
 
 
 if __name__ == "__main__":
@@ -587,10 +566,10 @@ if __name__ == "__main__":
     # svg_content = plotter.create_themed_plot(
     #     save_name="random_riemann", plot_func=plot_random_riemann
     # )
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="brownian_VS_sin", plot_func=plot_brownian_VS_sin)
+    svg_content = plotter.create_themed_plot(
+        save_name="brownian_VS_sin", plot_func=plot_brownian_VS_sin
+    )
     # svg_content = plotter.create_themed_plot(
     #     save_name="left_riemann_brownian", plot_func=plot_left_reimann_brownian)
-
-    svg_content = plotter.create_themed_plot(
-        save_name="second_order", plot_func=plot_second_order)
+    # svg_content = plotter.create_themed_plot(
+    #     save_name="second_order", plot_func=plot_second_order)

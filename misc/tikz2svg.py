@@ -37,15 +37,16 @@ def process_tikz_to_svg(tikz_code: str, output_file: str):
                 "-interaction=nonstopmode",
                 "-shell-escape",  # Allow external commands
                 "-halt-on-error",  # Stop on first error
-                "temp.tex"
+                "temp.tex",
             ],
-            env={**os.environ,
-                 "TEXINPUTS": os.getcwd() + ":",  # Current directory for TikZ libraries
-                 "max_print_line": "1000",  # Increase max print line
-                 "synctex": "1",
-                 "pdfcompresslevel": "0",  # No compression
-                 "pdfobjcompresslevel": "0",  # No compression
-                 },
+            env={
+                **os.environ,
+                "TEXINPUTS": os.getcwd() + ":",  # Current directory for TikZ libraries
+                "max_print_line": "1000",  # Increase max print line
+                "synctex": "1",
+                "pdfcompresslevel": "0",  # No compression
+                "pdfobjcompresslevel": "0",  # No compression
+            },
             capture_output=True,
             text=True,
         )
@@ -141,16 +142,15 @@ def process_tikz_to_svg(tikz_code: str, output_file: str):
         svg_content = svg_content.replace("<svg", '<svg class="math"')
 
         # Then insert the style tag after the opening svg tag and all its attributes
-        svg_pattern = r'(<svg[^>]*>)'
-        svg_content = re.sub(svg_pattern, r'\1' + style_tag, svg_content)
+        svg_pattern = r"(<svg[^>]*>)"
+        svg_content = re.sub(svg_pattern, r"\1" + style_tag, svg_content)
 
         # Add unique prefixes to prevent ID conflicts when multiple SVGs are on the same page
         filename = os.path.basename(output_file)
-        prefix = filename.replace(".svg", "").replace(
-            ".", "_").replace("-", "_")
+        prefix = filename.replace(".svg", "").replace(".", "_").replace("-", "_")
         svg_content = svg_content.replace('id="', f'id="{prefix}_')
         svg_content = svg_content.replace('href="#', f'href="#{prefix}_')
-        svg_content = svg_content.replace('url(#', f'url(#{prefix}_')
+        svg_content = svg_content.replace("url(#", f"url(#{prefix}_")
 
         # Replace colors with currentColor for dark mode support
         replacements = [
@@ -174,8 +174,7 @@ def process_tikz_to_svg(tikz_code: str, output_file: str):
             print(f"Successfully wrote SVG to {output_file}")
 
         # Cleanup temporary files
-        cleanup_files = ["temp.tex", "temp.pdf",
-                         "temp.svg", "temp.log", "temp.aux"]
+        cleanup_files = ["temp.tex", "temp.pdf", "temp.svg", "temp.log", "temp.aux"]
         for file in cleanup_files:
             if os.path.exists(file):
                 os.remove(file)
