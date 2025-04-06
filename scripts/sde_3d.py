@@ -305,9 +305,9 @@ def plot_second_order(ax=None, color_map=None):
 
 
 if __name__ == "__main__":
-    from rdp import RDP
+    from rdf import RDF
 
-    plotter = RDP()
+    plotter = RDF()
     svg_content = plotter.create_themed_plot(
         save_name="3d_sde", plot_func=plot_3D_brownian_motion, is_3d=True
     )

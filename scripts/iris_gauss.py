@@ -93,10 +93,9 @@ def plot_gaussian_conditionals(ax=None, color_map=None):
 
 
 if __name__ == "__main__":
-    from rdp import RDP
+    from rdf import RDF
 
-    # Create and save the plot
-    plotter = RDP()
+    plotter = RDF()
     svg_content = plotter.create_themed_plot(
         save_name="iris_gaussian", plot_func=plot_gaussian_conditionals
     )

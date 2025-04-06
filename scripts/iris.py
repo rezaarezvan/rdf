@@ -56,10 +56,9 @@ def plot_iris_histogram(ax=None, color_map=None):
 
 
 if __name__ == "__main__":
-    from rdp import RDP
+    from rdf import RDF
 
-    # Create and save the plot
-    plotter = RDP()
+    plotter = RDF()
     svg_content = plotter.create_themed_plot(
         save_name="iris_histogram", plot_func=plot_iris_histogram
     )

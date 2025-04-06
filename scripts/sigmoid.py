@@ -48,9 +48,9 @@ def plot_sigmoid(ax=None, color_map=None):
 
 
 if __name__ == "__main__":
-    from rdp import RDP
+    from rdf import RDF
 
-    plotter = RDP()
+    plotter = RDF()
     svg_content = plotter.create_themed_plot(
         save_name="sigmoid", plot_func=plot_sigmoid
     )

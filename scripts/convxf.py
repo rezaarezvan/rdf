@@ -88,9 +88,9 @@ def plot_convex_functions(ax=None, color_map=None):
 
 
 if __name__ == "__main__":
-    from rdp import RDP
+    from rdf import RDF
 
-    plotter = RDP()
+    plotter = RDF()
     svg_content = plotter.create_themed_plot(
         save_name="convex_functions", plot_func=plot_convex_functions
     )

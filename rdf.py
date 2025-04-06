@@ -19,7 +19,7 @@ class ColorTheme:
     base_colors: Dict[str, str]
 
 
-class RDP:
+class RDF:
     """Wrapper for creating plots with light/dark theme support"""
 
     def __init__(self):

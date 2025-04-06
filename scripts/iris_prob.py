@@ -99,10 +99,9 @@ def plot_probabilities(ax=None, color_map=None):
 
 
 if __name__ == "__main__":
-    from rdp import RDP
+    from rdf import RDF
 
-    plotter = RDP()
-
+    plotter = RDF()
     svg_content = plotter.create_themed_plot(
         save_name="iris_probabilities", plot_func=plot_probabilities
     )
