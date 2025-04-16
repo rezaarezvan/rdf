@@ -58,114 +58,124 @@ class RDF:
         )
 
         self.style_template = """
-        <style>
-            /* Light mode (default) */
-            %(color_classes)s
+            <style>
+                /* Light mode (default) */
+                %(color_classes)s
 
-            /* Text and graphic elements */
-            text, .text {
-                fill: #000000 !important;
-                stroke: none !important;
-            }
+                :root {
+                    --axis-color: #000000;
+                }
 
-            .axis line, .axis path, .tick line, .tick path, path.domain, line.grid {
-                stroke: #000000 !important;
-            }
+                @media (prefers-color-scheme: dark) {
+                    :root {
+                        --axis-color: #FFFFFF;
+                    }
+                }
 
-            .legend text {
-                fill: #000000 !important;
-            }
-
-            g.legend > g:first-child > path:first-child {
-                fill: rgba(255, 255, 255, 0.8) !important;
-                stroke: rgba(0, 0, 0, 0.1) !important;
-            }
-
-            /* 3D specific styles - light mode */
-            .plot3d path {
-                stroke: rgba(0, 0, 0, 0.3) !important;
-            }
-
-            .plot3d polygon {
-                stroke: rgba(0, 0, 0, 0.2) !important;
-            }
-
-            /* 3D grid lines */
-            .plot3d-grid line {
-                stroke: rgba(0, 0, 0, 0.2) !important;
-            }
-
-            /* Preserve mesh colors */
-            .plot3d-surface path[style*="fill:"] {
-                fill-opacity: 0.9 !important;
-            }
-
-            [stroke="#000000"], [stroke="black"] {
-                stroke: #000000 !important;
-            }
-
-            /* Dark mode via media query */
-            @media (prefers-color-scheme: dark) {
-                /* Dark theme colors */
-                .c1 { fill: %(primary-color-dark)s !important; stroke: %(primary-color-dark)s !important; }
-                .c2 { fill: %(secondary-color-dark)s !important; stroke: %(secondary-color-dark)s !important; }
-                .c3 { fill: %(tertiary-color-dark)s !important; stroke: %(tertiary-color-dark)s !important; }
-                .c4 { fill: %(quaternary-color-dark)s !important; stroke: %(quaternary-color-dark)s !important; }
-                .c5 { fill: %(quinary-color-dark)s !important; stroke: %(quinary-color-dark)s !important; }
-                .c6 { fill: %(senary-color-dark)s !important; stroke: %(senary-color-dark)s !important; }
-                .c7 { fill: %(septenary-color-dark)s !important; stroke: %(septenary-color-dark)s !important; }
-                .c8 { fill: %(octonary-color-dark)s !important; stroke: %(octonary-color-dark)s !important; }
-
-                /* Dark theme text and graphics */
+                /* Text and graphic elements */
                 text, .text {
-                    fill: #FFFFFF !important;
+                    fill: var(--axis-color) !important;
                     stroke: none !important;
                 }
 
                 .axis line, .axis path, .tick line, .tick path, path.domain, line.grid {
-                    stroke: #FFFFFF !important;
-                }
-
-                .grid line {
-                    stroke: rgba(255, 255, 255, 0.2) !important;
+                    stroke: var(--axis-color) !important;
                 }
 
                 .legend text {
-                    fill: #FFFFFF !important;
+                    fill: var(--axis-color) !important;
+                }
+
+                .patch path[style*="stroke: currentColor"] {
+                  stroke: var(--axis-color) !important;
                 }
 
                 g.legend > g:first-child > path:first-child {
-                    fill: rgba(26, 26, 26, 0.8) !important;
-                    stroke: rgba(255, 255, 255, 0.1) !important;
+                    fill: rgba(255, 255, 255, 0.8) !important;
+                    stroke: rgba(0, 0, 0, 0.1) !important;
                 }
 
-
-                /* 3D specific styles - dark mode */
+                /* 3D specific styles - light mode */
                 .plot3d path {
-                    stroke: rgba(255, 255, 255, 0.3) !important;
+                    stroke: rgba(0, 0, 0, 0.3) !important;
                 }
 
                 .plot3d polygon {
-                    stroke: rgba(255, 255, 255, 0.2) !important;
+                    stroke: rgba(0, 0, 0, 0.2) !important;
                 }
 
                 /* 3D grid lines */
                 .plot3d-grid line {
-                    stroke: rgba(255, 255, 255, 0.2) !important;
+                    stroke: rgba(0, 0, 0, 0.2) !important;
                 }
 
-                /* Preserve mesh colors in dark mode */
+                /* Preserve mesh colors */
                 .plot3d-surface path[style*="fill:"] {
-                    fill-opacity: 0.95 !important;
-                    filter: saturate(1.2) !important; /* Boost colors in dark mode */
+                    fill-opacity: 0.9 !important;
                 }
 
-                [stroke="#000000"], [stroke="black"] {
-                    stroke: #FFFFFF !important;
+                /* Dark mode via media query */
+                @media (prefers-color-scheme: dark) {
+                    /* Dark theme colors */
+                    .c1 { fill: %(primary-color-dark)s !important; stroke: %(primary-color-dark)s !important; }
+                    .c2 { fill: %(secondary-color-dark)s !important; stroke: %(secondary-color-dark)s !important; }
+                    .c3 { fill: %(tertiary-color-dark)s !important; stroke: %(tertiary-color-dark)s !important; }
+                    .c4 { fill: %(quaternary-color-dark)s !important; stroke: %(quaternary-color-dark)s !important; }
+                    .c5 { fill: %(quinary-color-dark)s !important; stroke: %(quinary-color-dark)s !important; }
+                    .c6 { fill: %(senary-color-dark)s !important; stroke: %(senary-color-dark)s !important; }
+                    .c7 { fill: %(septenary-color-dark)s !important; stroke: %(septenary-color-dark)s !important; }
+                    .c8 { fill: %(octonary-color-dark)s !important; stroke: %(octonary-color-dark)s !important; }
+
+                    /* Dark theme text and graphics */
+                    text, .text {
+                        fill: #FFFFFF !important;
+                        stroke: none !important;
+                    }
+
+                    .axis line, .axis path, .tick line, .tick path, path.domain, line.grid {
+                        stroke: #FFFFFF !important;
+                    }
+
+                    .grid line {
+                        stroke: rgba(255, 255, 255, 0.2) !important;
+                    }
+
+                    .legend text {
+                        fill: #FFFFFF !important;
+                    }
+
+                    /* Explicitly handle patch paths and current color in dark mode */
+                    .patch path, [stroke="currentColor"] {
+                        stroke: #FFFFFF !important;
+                    }
+
+                    g.legend > g:first-child > path:first-child {
+                        fill: rgba(26, 26, 26, 0.8) !important;
+                        stroke: rgba(255, 255, 255, 0.1) !important;
+                    }
+
+                    /* 3D specific styles - dark mode */
+                    .plot3d path {
+                        stroke: rgba(255, 255, 255, 0.3) !important;
+                    }
+
+                    .plot3d polygon {
+                        stroke: rgba(255, 255, 255, 0.2) !important;
+                    }
+
+                    /* 3D grid lines */
+                    .plot3d-grid line {
+                        stroke: rgba(255, 255, 255, 0.2) !important;
+                    }
+
+                    /* Preserve mesh colors in dark mode */
+                    .plot3d-surface path[style*="fill:"] {
+                        fill-opacity: 0.95 !important;
+                        filter: saturate(1.2) !important; /* Boost colors in dark mode */
+                    }
                 }
-            }
-        </style>
-        """
+            </style>
+            """
 
     def _get_style_defs(self) -> str:
         """Generate CSS style definitions with media query support for dark mode"""
@@ -344,6 +354,12 @@ class RDF:
             else:
                 svg_content = re.sub(
                     pattern, 'stroke="currentColor"', svg_content)
+
+        svg_content = re.sub(
+            r'stroke="currentColor"',
+            r'stroke="currentColor" class="current-color-path"',
+            svg_content
+        )
 
         # Save the final SVG
         with open(f"{self.save_path}/{save_name}.svg", "w") as f:

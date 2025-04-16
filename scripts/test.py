@@ -122,7 +122,7 @@ if __name__ == "__main__":
     plotter.create_animated_plot(
         save_name="scatter_fade",
         plot_func=animate_scatter,
-        animation_type="fade",
+        animation_type="draw",
         animation_duration=2.0,
         loop=True
     )
@@ -130,7 +130,7 @@ if __name__ == "__main__":
     plotter.create_animated_plot(
         save_name="bar_chart_fade",
         plot_func=animate_bar_chart,
-        animation_type="fade",
+        animation_type="draw",
         animation_duration=2.5,
         loop=True
     )
@@ -139,7 +139,7 @@ if __name__ == "__main__":
     plotter.create_animated_plot(
         save_name="shapes_pulse",
         plot_func=animate_shapes,
-        animation_type="pulse",
+        animation_type="draw",
         animation_duration=2.0,
         loop=True
     )
