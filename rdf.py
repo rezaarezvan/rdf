@@ -266,7 +266,8 @@ class RDF:
 
         # Save the figure
         output = io.StringIO()
-        plt.savefig(output, format="svg", bbox_inches="tight", transparent=True)
+        plt.savefig(output, format="svg",
+                    bbox_inches="tight", transparent=True)
         plt.close()
 
         svg_content = output.getvalue()
@@ -341,11 +342,186 @@ class RDF:
                     svg_content,
                 )
             else:
-                svg_content = re.sub(pattern, 'stroke="currentColor"', svg_content)
+                svg_content = re.sub(
+                    pattern, 'stroke="currentColor"', svg_content)
 
         # Save the final SVG
         with open(f"{self.save_path}/{save_name}.svg", "w") as f:
             f.write(svg_content)
 
         print(f"SVG saved to {self.save_path}/{save_name}.svg")
+        return svg_content
+
+    def create_animated_plot(
+        self,
+        save_name: str,
+        plot_func: Callable[..., None],
+        animation_type: str = "draw",
+        animation_duration: float = 2.0,
+        animation_delay: float = 0.0,
+        loop: bool = True,
+        is_3d: bool = False,
+        **plot_kwargs,
+    ) -> str:
+        """
+        Create a plot with animation support.
+
+        Args:
+            save_name: Name for saved file
+            plot_func: Function to generate the plot
+            animation_type: Type of animation ('draw', 'fade', 'pulse')
+            animation_duration: Duration of animation in seconds
+            animation_delay: Delay before animation starts
+            loop: Whether animation should loop infinitely
+            is_3d: Whether this is a 3D plot
+            **plot_kwargs: Additional arguments for plot_func
+        """
+        # Create the normal SVG
+        svg_content = self.create_themed_plot(
+            save_name=f"{save_name}_static",
+            plot_func=plot_func,
+            is_3d=is_3d,
+            **plot_kwargs
+        )
+
+        # Process SVG to add animation
+        animated_svg = self._add_animation(
+            svg_content,
+            animation_type,
+            animation_duration,
+            animation_delay,
+            loop
+        )
+
+        # Save the animated version
+        with open(f"{self.save_path}/{save_name}.svg", "w") as f:
+            f.write(animated_svg)
+
+        return animated_svg
+
+    def _add_animation(
+        self,
+        svg_content: str,
+        animation_type: str,
+        duration: float,
+        delay: float,
+        loop: bool
+    ) -> str:
+        # Add animation iteration count based on loop setting
+        iteration = "infinite" if loop else "1"
+
+        # Add necessary CSS animation definitions
+        animation_css = """
+        <style>
+            @keyframes drawLine {{
+                from {{ stroke-dashoffset: var(--length); }}
+                to {{ stroke-dashoffset: 0; }}
+            }}
+
+            @keyframes fadeIn {{
+                from {{ opacity: 0; }}
+                to {{ opacity: 1; }}
+            }}
+
+            @keyframes pulse {{
+                0% {{ opacity: 0.7; }}
+                50% {{ opacity: 1; }}
+                100% {{ opacity: 0.7; }}
+            }}
+
+            .animated-path {{
+                --length: 1000;
+                stroke-dasharray: var(--length);
+                stroke-dashoffset: var(--length);
+                animation: drawLine {duration}s ease-in-out {iteration};
+                animation-delay: {delay}s;
+            }}
+
+            .animated-fade {{
+                opacity: 0;
+                animation: fadeIn {duration}s ease-in-out {iteration};
+                animation-delay: {delay}s;
+            }}
+
+            .animated-pulse {{
+                animation: pulse {duration}s ease-in-out infinite;
+                animation-delay: {delay}s;
+            }}
+        </style>
+        """.format(duration=duration, delay=delay, iteration=iteration)
+
+        # Insert animation CSS after SVG opening tag
+        svg_content = re.sub(
+            r"(<svg[^>]*>)", r"\1" + animation_css, svg_content)
+
+        # Process paths based on animation type
+        if animation_type == "draw":
+            # Find all path elements
+            path_pattern = r'<path[^>]*d="([^"]*)"[^>]*>'
+
+            def process_path(match):
+                path_element = match.group(0)
+
+                # Add animated-path class
+                if 'class="' in path_element:
+                    path_element = path_element.replace(
+                        'class="', 'class="animated-path ')
+                else:
+                    path_element = path_element.replace(
+                        '<path', '<path class="animated-path"')
+
+                return path_element
+
+            svg_content = re.sub(path_pattern, process_path, svg_content)
+
+        elif animation_type == "fade":
+            # Add fade animation to all elements
+            element_pattern = r'<(g|path|circle|rect|text)[^>]*>'
+
+            def add_fade_class(match):
+                element = match.group(0)
+                if 'class="' in element:
+                    element = element.replace(
+                        'class="', 'class="animated-fade ')
+                else:
+                    element = element.replace(
+                        '<' + match.group(1), '<' + match.group(1) + ' class="animated-fade"')
+                return element
+
+            svg_content = re.sub(element_pattern, add_fade_class, svg_content)
+
+        elif animation_type == "pulse":
+            # Add pulse animation to specific elements
+            path_pattern = r'<path[^>]*d="([^"]*)"[^>]*>'
+
+            def add_pulse_class(match):
+                path_element = match.group(0)
+                if 'class="' in path_element:
+                    path_element = path_element.replace(
+                        'class="', 'class="animated-pulse ')
+                else:
+                    path_element = path_element.replace(
+                        '<path', '<path class="animated-pulse"')
+                return path_element
+
+            svg_content = re.sub(path_pattern, add_pulse_class, svg_content)
+
+        # Add JavaScript to calculate actual path lengths
+        svg_content = svg_content.replace('</svg>', '''
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function() {
+                const paths = document.querySelectorAll('.animated-path');
+                paths.forEach(path => {
+                    if (path.getTotalLength) {
+                        const length = path.getTotalLength();
+                        path.style.setProperty('--length', length);
+                        path.setAttribute('stroke-dasharray', length);
+                        path.setAttribute('stroke-dashoffset', length);
+                    }
+                });
+            });
+        </script>
+        </svg>
+        ''')
+
         return svg_content
