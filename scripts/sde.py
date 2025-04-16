@@ -535,6 +535,168 @@ def plot_second_order(ax=None, color_map=None):
         ax.spines["right"].set_visible(False)
 
 
+def plot_beta_beta_squared(ax=None, color_map=None):
+    """
+    Plot a clean, blog-friendly visualization of a Brownian motion and its squared version.
+    Starting from the SDE (x(t) = B(t)),
+    dx(t) = dB(t)
+    we can derive an SDE for phi(t) = B^2(t),
+    d(B^2(t)) = 2B(t)dB(t) + dt
+    """
+    # Set up the plot bounds with padding
+    x_min, x_max = 0, 2
+    padding = 0.2  # Add padding for better appearance
+    # Create the y values (Brownian motion, Euler-Maruyama)
+    dt = 0.01
+    t = np.arange(0, 2, dt)
+    B = np.zeros_like(t)
+    B[0] = 0
+    for i in range(1, len(t)):
+        B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
+    # Create the squared Brownian motion
+    B_squared = B**2
+    y_min, y_max = (
+        min(np.min(B), np.min(B_squared)) - padding,
+        max(np.max(B), np.max(B_squared)) + padding,
+    )
+    x_max = y_max + padding
+    # Plot the original function
+    ax.plot(t, B, color=color_map["c8"], linewidth=2)
+    # Plot the squared Brownian motion
+    ax.plot(t, B_squared, color=color_map["c7"], linewidth=2)
+    # Add subtle grid
+    ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
+    # Customize plot appearance
+    ax.set_title(f"Brownian motion and its squared version", fontsize=12, pad=15)
+    ax.set_xlabel(r"$t$", fontsize=10)
+    ax.set_ylabel(r"$\beta(t), \beta^2(t)$", fontsize=10)
+    # Set axis limits with padding
+    ax.set_xlim(x_min - padding, x_max + padding)
+    ax.set_ylim(y_min - padding, y_max + padding)
+    # Remove top and right spines
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    # Set aspect ratio to be equal for proper visualization
+    ax.set_aspect("equal")
+    # Add subtle ticks
+    ax.tick_params(axis="both", which="major", labelsize=9)
+    # Legend
+    ax.legend(
+        ["$\\beta(t)$", "$\\beta^2(t)$"],
+        frameon=True,
+        framealpha=0.9,
+        loc="upper right",
+        fontsize=9,
+        bbox_to_anchor=(0.98, 0.98),
+    )
+
+
+def plot_beta_squared_second_order_taylor(ax=None, color_map=None):
+    """
+    Plot a clean, blog-friendly visualization of a squared Brownian motion as a function of B(t),
+    with it's second-order Taylor expansion, 2B_i(B(t) - B_i) + B_i^2.
+    For some i, B_i is the value of Brownian motion at t_i.
+
+    x-axis is B(t), y-axis is B^2(t).
+    """
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 6), sharex=True)
+    # Set seed for reproducibility
+    np.random.seed(42078)
+    # Create the y values (Brownian motion, Euler-Maruyama)
+    dt = 0.01
+    t = np.arange(0, 2, dt)
+    B = np.zeros_like(t)
+    B[0] = 0
+    for i in range(1, len(t)):
+        B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
+    # Create the squared Brownian motion
+    B_squared = B**2
+    # Create the second-order Taylor expansion
+    index_i = len(t) // 2
+    B_i = B[index_i]
+    B_i_squared = B_i**2
+    taylor_expansion1 = 2 * B_i * (B - B_i) + B_i_squared
+    taylor_expansion2 = 2 * B_i * (B - B_i)
+
+    x_range = np.max(B) - np.min(B)
+    y_range = np.max(B_squared) - np.min(B_squared)
+    padding_x = 0.1 * x_range
+    padding_y = 0.1 * y_range
+
+    # Determine axis limits
+    x_min, x_max = np.min(B) - padding_x, np.max(B) + padding_x
+    y_min = min(0, np.min(taylor_expansion2)) - padding_y  # Ensure 0 is included
+    y_max = max(np.max(B_squared), np.max(taylor_expansion1)) + padding_y
+
+    # Plot squared Brownian motion
+    ax1.plot(B, B_squared, color=color_map["c8"], linewidth=2, label="$\\beta^2(t)$")
+    ax2.plot(B, B_squared, color=color_map["c8"], linewidth=2, label="$\\beta^2(t)$")
+    # Plot second-order Taylor expansion
+    ax1.plot(
+        B,
+        taylor_expansion1,
+        color=color_map["c7"],
+        linewidth=2,
+        label="$2\\beta_i(\\beta(t) - \\beta_i) + \\beta_i^2$",
+        linestyle="--",
+    )
+    ax2.plot(
+        B,
+        taylor_expansion2,
+        color=color_map["c7"],
+        linewidth=2,
+        label="$2\\beta_i(\\beta(t) - \\beta_i) + \\beta_i^2$",
+        linestyle="--",
+    )
+    # Add red point at tangent point (B_i, B_i_squared)
+    ax1.scatter(B_i, B_i_squared, color=color_map["c1"], s=30, alpha=0.8)
+    ax2.scatter(B_i, B_i_squared, color=color_map["c1"], s=30, alpha=0.8)
+    # Add subtle grid
+    ax1.grid(True, alpha=0.1, linestyle="-", zorder=0)
+    ax2.grid(True, alpha=0.1, linestyle="-", zorder=0)
+    # Customize plot appearance
+    fig.suptitle(
+        "Squared Brownian motion and its second-order Taylor expansion",
+        fontsize=12,
+    )
+    ax1.set_xlabel(r"$\beta(t)$", fontsize=10)
+    ax1.set_ylabel(r"$\beta^2(t)$", fontsize=10)
+    ax2.set_xlabel(r"$\beta(t)$", fontsize=10)
+    ax2.set_ylabel(r"$\beta^2(t)$", fontsize=10)
+    # Set axis limits with padding
+    ax1.set_xlim(x_min, x_max)
+    ax1.set_ylim(y_min, y_max)
+    ax2.set_xlim(x_min, x_max)
+    ax2.set_ylim(y_min, y_max)
+    # Remove top and right spines
+    ax1.spines["top"].set_visible(False)
+    ax1.spines["right"].set_visible(False)
+    ax2.spines["top"].set_visible(False)
+    ax2.spines["right"].set_visible(False)
+    # Set aspect ratio to be equal for proper visualization
+    ax1.set_aspect("equal")
+    ax2.set_aspect("equal")
+    # Add subtle ticks
+    ax1.tick_params(axis="both", which="major", labelsize=9)
+    ax2.tick_params(axis="both", which="major", labelsize=9)
+    # Legend
+    ax1.legend(
+        frameon=True,
+        framealpha=0.9,
+        loc="upper right",
+        fontsize=9,
+        bbox_to_anchor=(0.98, 0.98),
+    )
+
+    ax2.legend(
+        frameon=True,
+        framealpha=0.9,
+        loc="upper right",
+        fontsize=9,
+        bbox_to_anchor=(0.98, 0.98),
+    )
+
+
 if __name__ == "__main__":
     from rdf import RDF
 
@@ -566,10 +728,17 @@ if __name__ == "__main__":
     # svg_content = plotter.create_themed_plot(
     #     save_name="random_riemann", plot_func=plot_random_riemann
     # )
-    svg_content = plotter.create_themed_plot(
-        save_name="brownian_VS_sin", plot_func=plot_brownian_VS_sin
-    )
+    # svg_content = plotter.create_themed_plot(
+    #     save_name="brownian_VS_sin", plot_func=plot_brownian_VS_sin
+    # )
     # svg_content = plotter.create_themed_plot(
     #     save_name="left_riemann_brownian", plot_func=plot_left_reimann_brownian)
     # svg_content = plotter.create_themed_plot(
     #     save_name="second_order", plot_func=plot_second_order)
+    svg_content = plotter.create_themed_plot(
+        save_name="beta_beta_squared", plot_func=plot_beta_beta_squared
+    )
+    # svg_content = plotter.create_themed_plot(
+    #     save_name="beta_squared_second_order_taylor",
+    #     plot_func=plot_beta_squared_second_order_taylor,
+    # )
