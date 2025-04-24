@@ -97,7 +97,8 @@ def animate_3d_surface(ax=None, color_map=None):
     X, Y = np.meshgrid(x, y)
     Z = np.sin(np.sqrt(X**2 + Y**2))
 
-    surf = ax.plot_surface(X, Y, Z, cmap="viridis", linewidth=0, antialiased=True)
+    surf = ax.plot_surface(X, Y, Z, cmap="viridis",
+                           linewidth=0, antialiased=True)
 
     ax.set_title("3D Surface Plot", fontsize=12)
     ax.set_xlabel("X", fontsize=10)
@@ -106,6 +107,63 @@ def animate_3d_surface(ax=None, color_map=None):
     ax.view_init(30, 45)
 
     return surf
+
+
+def plot_beta_beta_squared(ax=None, color_map=None):
+    """
+    Plot a clean, blog-friendly visualization of a Brownian motion and its squared version.
+    Starting from the SDE (x(t) = B(t)),
+    dx(t) = dB(t)
+    we can derive an SDE for phi(t) = B^2(t),
+    d(B^2(t)) = 2B(t)dB(t) + dt
+    """
+    # Set up the plot bounds with padding
+    x_min, x_max = 0, 2
+    padding = 0.2  # Add padding for better appearance
+    # Create the y values (Brownian motion, Euler-Maruyama)
+    dt = 0.01
+    t = np.arange(0, 1, dt)
+    B = np.zeros_like(t)
+    B[0] = 0
+    for i in range(1, len(t)):
+        B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
+    # Create the squared Brownian motion
+    B_squared = B**2
+    y_min, y_max = (
+        min(np.min(B), np.min(B_squared)) - padding,
+        max(np.max(B), np.max(B_squared)) + padding,
+    )
+    x_max = y_max + padding
+    # Plot the original function
+    ax.plot(t, B, color=color_map["c8"], linewidth=2)
+    # Plot the squared Brownian motion
+    ax.plot(t, B_squared, color=color_map["c7"], linewidth=2)
+    # Add subtle grid
+    ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
+    # Customize plot appearance
+    ax.set_title(f"Brownian motion and its squared version",
+                 fontsize=12, pad=15)
+    ax.set_xlabel(r"$t$", fontsize=10)
+    ax.set_ylabel(r"$\beta(t), \beta^2(t)$", fontsize=10)
+    # Set axis limits with padding
+    ax.set_xlim(x_min - padding, x_max + padding)
+    ax.set_ylim(y_min - padding, y_max + padding)
+    # Remove top and right spines
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    # Set aspect ratio to be equal for proper visualization
+    ax.set_aspect("equal")
+    # Add subtle ticks
+    ax.tick_params(axis="both", which="major", labelsize=9)
+    # Legend
+    ax.legend(
+        ["$\\beta(t)$", "$\\beta^2(t)$"],
+        frameon=True,
+        framealpha=0.9,
+        loc="upper right",
+        fontsize=9,
+        bbox_to_anchor=(0.98, 0.98),
+    )
 
 
 if __name__ == "__main__":
@@ -162,4 +220,13 @@ if __name__ == "__main__":
         animation_duration=5.0,
         loop=True,
         is_3d=True,
+    )
+
+    # Beta and beta squared plot
+    plotter.create_animated_plot(
+        save_name="beta_beta_squared",
+        plot_func=plot_beta_beta_squared,
+        animation_type="draw",
+        animation_duration=2.0,
+        loop=True,
     )

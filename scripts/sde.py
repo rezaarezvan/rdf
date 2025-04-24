@@ -114,7 +114,8 @@ def plot_SDE_example(ax=None, color_map=None):
     x = np.zeros_like(t)
     x[0] = np.random.normal(0, 1)  # Initial condition
     for i in range(1, len(t)):
-        x[i] = x[i - 1] + 0.5 * x[i - 1] * dt + np.random.normal(0, np.sqrt(dt))
+        x[i] = x[i - 1] + 0.5 * x[i - 1] * \
+            dt + np.random.normal(0, np.sqrt(dt))
 
     y_min, y_max = np.min(x) + padding, np.max(x) - padding
 
@@ -181,13 +182,15 @@ def plot_dynamic_SDE_example(ax=None, color_map=None):
     time = np.linspace(x_min - padding, x_max + padding, len(x))
     # Plot the SDE
     ax.plot(time, y, color=color_map["c8"], linewidth=2, label="$v(t)$")
-    ax.plot(time, x, color=color_map["c7"], linewidth=2, label="$x(t)$", linestyle="--")
+    ax.plot(time, x, color=color_map["c7"],
+            linewidth=2, label="$x(t)$", linestyle="--")
 
     # Add subtle grid
     ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
 
     # Customize plot appearance
-    ax.set_title("Constant Velocity Model with $x(0) = v(0) = 0$", fontsize=12, pad=15)
+    ax.set_title("Constant Velocity Model with $x(0) = v(0) = 0$",
+                 fontsize=12, pad=15)
     ax.set_xlabel(r"$t$", fontsize=10)
     ax.set_ylabel(r"$x(t), v(t)$", fontsize=10)
 
@@ -253,7 +256,8 @@ def plot_Riemann_sum(ax=None, color_map=None):
     # Add subtle grid
     ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
     # Customize plot appearance
-    ax.set_title(f"Riemann Sum, $n = 10$, and error = ${error}$", fontsize=12, pad=15)
+    ax.set_title(f"Riemann Sum, $n = 10$, and error = ${
+                 error}$", fontsize=12, pad=15)
     ax.set_xlabel(r"$x$", fontsize=10)
     ax.set_ylabel(r"$f(x)$", fontsize=10)
     # Set axis limits with padding
@@ -296,7 +300,8 @@ def plot_random_diff(ax=None, color_map=None):
     # Plot the original function
     ax.plot(x, y, color=color_map["c8"], linewidth=2)
     # Plot the tangent line
-    ax.plot(x, tangent_line, color=color_map["c7"], linewidth=2, linestyle="--")
+    ax.plot(x, tangent_line,
+            color=color_map["c7"], linewidth=2, linestyle="--")
     # Add a point at x(1) and text that says \dot{x}(1) = y_diff(1)
     ax.scatter(x_tangent, y_tangent, color=color_map["c7"], s=50)
     ax.text(
@@ -352,7 +357,8 @@ def plot_brownian_VS_sin(ax=None, color_map=None):
     B[0] = 0
     for i in range(1, len(t)):
         B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
-    y_min, y_max = min(np.min(B), x_min) - padding, max(np.max(B), x_max) + padding
+    y_min, y_max = min(np.min(B), x_min) - \
+        padding, max(np.max(B), x_max) + padding
     # Plot the sine function
     ax1.plot(x, y, color=color_map["c8"], linewidth=2)
     # Plot the Brownian motion
@@ -404,7 +410,8 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     B[0] = 0
     for i in range(1, len(t)):
         B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
-    y_min, y_max = min(np.min(B), x_min) - padding, max(np.max(B), x_max) + padding
+    y_min, y_max = min(np.min(B), x_min) - \
+        padding, max(np.max(B), x_max) + padding
     # Create the Left Riemann sum
     n = 10
     dx = (x_max - x_min) / n
@@ -435,7 +442,8 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     ax.tick_params(axis="both", which="major", labelsize=9)
     # Add red points on the Brownian motion at the left Riemann sum points
     for i in range(n):
-        ax.scatter(x_riemann[i], B[int(x_riemann[i] / dt)], color=color_map["c7"], s=50)
+        ax.scatter(x_riemann[i], B[int(x_riemann[i] / dt)],
+                   color=color_map["c7"], s=50)
 
 
 def plot_left_reimann_brownian(ax=None, color_map=None):
@@ -457,7 +465,8 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     B[0] = 0
     for i in range(1, len(t)):
         B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
-    y_min, y_max = min(np.min(B), x_min) - padding, max(np.max(B), x_max) + padding
+    y_min, y_max = min(np.min(B), x_min) - \
+        padding, max(np.max(B), x_max) + padding
     # Create the Left Riemann sum
     n = 10
     dx = (x_max - x_min) / n
@@ -567,7 +576,8 @@ def plot_beta_beta_squared(ax=None, color_map=None):
     # Add subtle grid
     ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
     # Customize plot appearance
-    ax.set_title(f"Brownian motion and its squared version", fontsize=12, pad=15)
+    ax.set_title(f"Brownian motion and its squared version",
+                 fontsize=12, pad=15)
     ax.set_xlabel(r"$t$", fontsize=10)
     ax.set_ylabel(r"$\beta(t), \beta^2(t)$", fontsize=10)
     # Set axis limits with padding
@@ -625,12 +635,15 @@ def plot_beta_squared_second_order_taylor(ax=None, color_map=None):
 
     # Determine axis limits
     x_min, x_max = np.min(B) - padding_x, np.max(B) + padding_x
-    y_min = min(0, np.min(taylor_expansion2)) - padding_y  # Ensure 0 is included
+    y_min = min(0, np.min(taylor_expansion2)) - \
+        padding_y  # Ensure 0 is included
     y_max = max(np.max(B_squared), np.max(taylor_expansion1)) + padding_y
 
     # Plot squared Brownian motion
-    ax1.plot(B, B_squared, color=color_map["c8"], linewidth=2, label="$\\beta^2(t)$")
-    ax2.plot(B, B_squared, color=color_map["c8"], linewidth=2, label="$\\beta^2(t)$")
+    ax1.plot(B, B_squared, color=color_map["c8"],
+             linewidth=2, label="$\\beta^2(t)$")
+    ax2.plot(B, B_squared, color=color_map["c8"],
+             linewidth=2, label="$\\beta^2(t)$")
     # Plot second-order Taylor expansion
     ax1.plot(
         B,
@@ -697,6 +710,260 @@ def plot_beta_squared_second_order_taylor(ax=None, color_map=None):
     )
 
 
+def plot_ornstein_uhlenbeck(ax=None, color_map=None):
+    """
+    Plot a clean, blog-friendly visualization of the Ornstein-Uhlenbeck process.
+
+    The Ornstein-Uhlenbeck process is characterized by:
+    dx(t) = -theta x(t) dt + sigma dB(t)
+
+    This function plots multiple sample paths along with the mean (dotted line)
+    and variance envelope (shaded region representing ±1 standard deviation).
+    """
+    theta = 0.7    # Mean reversion speed
+    mu = 0.0       # Long-term mean
+    sigma = 0.5    # Volatility
+    T = 5.0        # Total time
+    dt = 0.01      # Time step
+
+    n_steps = int(T / dt)
+    t = np.linspace(0, T, n_steps)
+
+    # Analytical mean and variance of the OU process
+    mean = mu * np.ones_like(t)
+    variance = (sigma**2 / (2 * theta)) * (1 - np.exp(-2 * theta * t))
+    std_dev = np.sqrt(variance)
+
+    # Generate multiple sample paths
+    n_paths = 10
+    paths = np.zeros((n_paths, n_steps))
+
+    # Colormap for the sample paths
+    colors = list(color_map.values())[:n_paths]
+
+    # Initialize all paths at x(0) = 0
+    paths[:, 0] = 0.0
+
+    # Simulate sample paths using Euler-Maruyama method
+    for i in range(n_paths):
+        np.random.seed(42 + i)  # Different seed for each path
+        for j in range(1, n_steps):
+            drift = theta * (mu - paths[i, j-1]) * dt
+            diffusion = sigma * np.random.normal(0, np.sqrt(dt))
+            paths[i, j] = paths[i, j-1] + drift + diffusion
+
+    # Plot the shaded variance envelope (±1 standard deviation)
+    ax.fill_between(t, mean - std_dev, mean + std_dev, color='gray', alpha=0.2)
+
+    # Plot all sample paths
+    for i in range(n_paths):
+        ax.plot(t, paths[i], color=colors[i %
+                len(colors)], linewidth=1, alpha=0.8)
+
+    # Plot the mean as a dashed line
+    ax.plot(t, mean, color='black', linestyle='--',
+            linewidth=1.5, label='Mean')
+
+    # Add a line at the boundary of the standard deviation envelope
+    ax.plot(t, mean + std_dev, color='black', linestyle=':',
+            linewidth=0.8, alpha=0.5, label='±1 std dev')
+    ax.plot(t, mean - std_dev, color='black',
+            linestyle=':', linewidth=0.8, alpha=0.5)
+
+    # Customize plot appearance
+    ax.set_title(
+        "Ornstein-Uhlenbeck Process: Sample Paths and Variance Envelope", fontsize=12, pad=15)
+    ax.set_xlabel("Time $t$", fontsize=10)
+    ax.set_ylabel("$X(t)$", fontsize=10)
+
+    # Clean legend
+    ax.legend(
+        frameon=True,
+        framealpha=0.9,
+        loc="upper right",
+        fontsize=9,
+        bbox_to_anchor=(0.98, 0.98),
+    )
+
+    # Add subtle grid
+    ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
+
+    # Remove top and right spines
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    # Add subtle ticks
+    ax.tick_params(axis="both", which="major", labelsize=9)
+
+
+def plot_reverse_ornstein_uhlenbeck(ax=None, color_map=None):
+    """
+    Plot a clean, blog-friendly visualization of the Reverse-Time Ornstein-Uhlenbeck process.
+
+    In the reverse-time OU process, the time is reversed, resulting in:
+    dx(t) = theta x(t) dt + sigma dB(t)   (note the positive theta)
+
+    This visualizes the process going backwards in time, showing
+    multiple sample paths with a legend.
+    """
+    # Process parameters
+    # Mean reversion parameter (now acting as divergence parameter in reverse time)
+    theta = 0.7
+    mu = 0.0       # Long-term mean
+    sigma = 0.5    # Volatility
+    T = 5.0        # Total time
+    dt = 0.01      # Time step
+    n_steps = int(T / dt)
+    t = np.linspace(0, T, n_steps)
+
+    # Generate multiple sample paths
+    n_paths = 10
+    paths = np.zeros((n_paths, n_steps))
+
+    # Colormap for the sample paths
+    colors = list(color_map.values())[:n_paths]
+
+    # Initialize all paths at x(0) = 0
+    paths[:, 0] = 0.0
+
+    # Simulate sample paths using Score-based reverse-time Euler-Maruyama method
+    # In reverse time, we have dx(t) = theta x(t) dt + sigma dB(t)
+    for i in range(n_paths):
+        np.random.seed(42 + i)  # Different seed for each path
+        for j in range(1, n_steps):
+            # Note the plus sign here (reverse-time effect)
+            drift = theta * paths[i, j-1] * dt
+            diffusion = sigma * np.random.normal(0, np.sqrt(dt))
+            paths[i, j] = paths[i, j-1] + drift + diffusion
+
+    # Plot all sample paths
+    for i in range(n_paths):
+        ax.plot(t, paths[i], color=colors[i % len(colors)], linewidth=1.2,
+                label=f'Path {i+1}')
+
+    # Customize plot appearance
+    ax.set_title("Reverse-Time Ornstein-Uhlenbeck Process (Score-Based Euler-Maruyama)",
+                 fontsize=12, pad=15)
+    ax.set_xlabel("Time t (reversed)", fontsize=10)
+    ax.set_ylabel("x(t)", fontsize=10)
+
+    # Clean legend with better positioning
+    ax.legend(
+        frameon=True,
+        framealpha=0.9,
+        loc="upper right",
+        fontsize=8,
+        ncol=2,  # Arrange legend in two columns
+        bbox_to_anchor=(0.98, 0.98),
+    )
+
+    # Add subtle grid
+    ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
+
+    # Remove top and right spines
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    # Add subtle ticks
+    ax.tick_params(axis="both", which="major", labelsize=9)
+
+    # Set y-limits to match the example
+    ax.set_ylim(-2.5, 2.5)
+
+
+def plot_denoising_diffusion(ax=None, color_map=None):
+    """
+    Plot a clean, blog-friendly visualization of a denoising diffusion probabilistic model
+    represented as a stochastic differential equation (SDE):
+
+    dx = -x/(1 - t) dt + sqrt(2t/(1 - t)) dB(t)
+
+    This simulation shows multiple paths starting from different initial points,
+    with a cleaner legend implementation.
+    """
+    # Process parameters
+    T = 1.0        # Total time (from 0 to 1)
+    dt = 0.001     # Time step (smaller for accuracy near t=1)
+    n_steps = int(T / dt)
+    # Create non-uniform time grid with more points near t=1
+    # where the SDE becomes more challenging to simulate
+    t = np.linspace(0, 0.95, n_steps//2)  # First half: 0 to 0.95
+    # Second half: 0.95 to 0.999
+    t = np.append(t, np.linspace(0.95, 0.999, n_steps//2))
+
+    # Select specific initial points to track
+    # Reduced number for cleaner legend
+    initial_points = [-2, -1, 0, 1, 2]
+    n_paths = len(initial_points)
+    paths = np.zeros((n_paths, len(t)))
+
+    # Set colors from the color map
+    colors = [color_map[f"c{i+1}"] for i in range(n_paths)]
+
+    # Initialize paths with their respective starting points
+    for i, x0 in enumerate(initial_points):
+        paths[i, 0] = x0
+
+    # Simulate the SDE: dx = -x/(1-t) dt + sqrt(2t/(1-t)) dB(t)
+    for i in range(n_paths):
+        np.random.seed(42 + i)  # Different seed for each path for diversity
+        for j in range(1, len(t)):
+            current_t = t[j-1]
+            next_t = t[j]
+            dt_actual = next_t - current_t
+
+            # Avoid numerical issues near t=1
+            if current_t > 0.998:
+                drift_coef = -100  # Large negative value as approximation
+                diffusion_coef = 100  # Large value as approximation
+            else:
+                drift_coef = -1.0 / (1.0 - current_t)
+                diffusion_coef = np.sqrt(2.0 * current_t / (1.0 - current_t))
+
+            # Euler-Maruyama step
+            drift = drift_coef * paths[i, j-1] * dt_actual
+            diffusion = diffusion_coef * \
+                np.random.normal(0, np.sqrt(dt_actual))
+            paths[i, j] = paths[i, j-1] + drift + diffusion
+
+    # Plot the paths
+    for i, x0 in enumerate(initial_points):
+        ax.plot(t, paths[i], color=colors[i], linewidth=1.2,
+                label=f'$x_0={x0}$')
+
+    # Customize plot appearance
+    ax.set_title("Simulation of SDE: $dx = -x/(1 - t)\\, dt + \\sqrt{2t/(1 - t)}\\, dB(t)$",
+                 fontsize=12, pad=15)
+    ax.set_xlabel("Time $t$", fontsize=10)
+    ax.set_ylabel("$x(t)$", fontsize=10)
+
+    # Add clean legend
+    ax.legend(
+        frameon=True,
+        framealpha=0.9,
+        loc="upper left",  # Place legend in upper left to avoid crowded paths
+        fontsize=9,
+        title="Initial $x_0$",
+        title_fontsize=9,
+    )
+
+    # Add subtle grid
+    ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
+
+    # Remove top and right spines
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    # Add subtle ticks
+    ax.tick_params(axis="both", which="major", labelsize=9)
+
+    # Set y-limits similar to the example
+    ax.set_ylim(-3, 3)
+
+    # Set x-limits
+    ax.set_xlim(0, 1)
+
+
 if __name__ == "__main__":
     from rdf import RDF
 
@@ -735,10 +1002,19 @@ if __name__ == "__main__":
     #     save_name="left_riemann_brownian", plot_func=plot_left_reimann_brownian)
     # svg_content = plotter.create_themed_plot(
     #     save_name="second_order", plot_func=plot_second_order)
-    svg_content = plotter.create_themed_plot(
-        save_name="beta_beta_squared", plot_func=plot_beta_beta_squared
-    )
+    # svg_content = plotter.create_themed_plot(
+    #     save_name="beta_beta_squared", plot_func=plot_beta_beta_squared
+    # )
     # svg_content = plotter.create_themed_plot(
     #     save_name="beta_squared_second_order_taylor",
     #     plot_func=plot_beta_squared_second_order_taylor,
     # )
+    svg_content = plotter.create_themed_plot(
+        save_name="ornstein_uhlenbeck", plot_func=plot_ornstein_uhlenbeck
+    )
+    svg_content = plotter.create_themed_plot(
+        save_name="reverse_ornstein_uhlenbeck", plot_func=plot_reverse_ornstein_uhlenbeck
+    )
+    svg_content = plotter.create_themed_plot(
+        save_name="denoising_diffusion", plot_func=plot_denoising_diffusion
+    )
