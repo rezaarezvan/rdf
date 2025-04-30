@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from scipy.stats import norm
+
 """
 SDE.py
 
@@ -964,6 +966,394 @@ def plot_denoising_diffusion(ax=None, color_map=None):
     ax.set_xlim(0, 1)
 
 
+def plot_brownian_to_point(ax=None, color_map=None):
+    """
+    Plot a clean, blog-friendly visualization of a Brownian motion
+    converging to a point/line $v$ at time $T$,
+
+    dx(t) = (v - x(t)) / (T - t) dt + dB(t)
+    x(T) = v
+    """
+    # Set up the plot bounds with padding
+    x_min, x_max = 0, 2
+    padding = 0.2  # Add padding for better appearance
+    # Create the y values (Brownian motion, Euler-Maruyama)
+    dt = 0.01
+    t = np.arange(0, 2, dt)
+    B = np.zeros_like(t)
+    B[0] = 0
+    for i in range(1, len(t)):
+        B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
+    y_min, y_max = min(np.min(B), x_min) - \
+        padding, max(np.max(B), x_max) + padding
+    # Create the target point/line
+    v = 1
+    T = 2
+    # Plot the Brownian motion
+    ax.plot(t, B, color=color_map["c7"], linewidth=2)
+    # Plot the target point/line
+    ax.plot([T], [v], "ro", markersize=8)
+    ax.axhline(y=v, color=color_map["c8"], linestyle="--")
+    # Add subtle grid
+    ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
+    # Customize plot appearance
+    ax.set_title(f"Brownian motion converging to a point at time T",
+                 fontsize=12, pad=15)
+    ax.set_xlabel(r"$t$", fontsize=10)
+    ax.set_ylabel(r"$\beta(t)$", fontsize=10)
+    # Set axis limits with padding
+    ax.set_xlim(x_min - padding, x_max + padding)
+    ax.set_ylim(y_min - padding, y_max + padding)
+    # Remove top and right spines
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    # Set aspect ratio to be equal for proper visualization
+    ax.set_aspect("equal")
+    # Add subtle ticks
+    ax.tick_params(axis="both", which="major", labelsize=9)
+
+
+def plot_brownian_bridge(ax=None, color_map=None):
+    """
+    Plot a clean, blog-friendly visualization of a Brownian motion
+    going from t_0 to t_1 and then from t_1 to t_2.
+
+    t_0, t_1 and t_2 should be clear dotted lines.
+    """
+    # Set up the plot bounds with padding
+    t_min, t_max = 0, 2
+    padding = 0.2  # Add padding for better appearance
+
+    # Define key time points
+    t0 = 0.0
+    t1 = 1.0
+    t2 = 2.0
+
+    # Simulation parameters
+    dt = 0.01  # Time step
+    n_steps = int((t_max - t_min) / dt)
+    t = np.linspace(t_min, t_max, n_steps)
+
+    # Generate a standard Brownian motion first
+    dB = np.random.normal(0, np.sqrt(dt), n_steps)
+    B = np.cumsum(dB)
+    B = np.insert(B, 0, 0)  # Start at 0
+    t = np.insert(t, 0, 0)  # Add t=0
+
+    # Calculate y-axis limits
+    y_min, y_max = np.min(B) - padding, np.max(B) + padding
+
+    # Plot the Brownian motion
+    ax.plot(t, B, color=color_map["c1"], linewidth=2, label="Brownian Motion")
+
+    # Add vertical dotted lines at key time points
+    ax.axvline(x=t0, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
+    ax.axvline(x=t1, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
+    ax.axvline(x=t2, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
+
+    # Add labels for the time points at the bottom of the graph
+    ax.text(t0, y_min + 0.2, "$t_0$", ha='center', va='top', fontsize=12)
+    ax.text(t1, y_min + 0.2, "$t_1$", ha='center', va='top', fontsize=12)
+    ax.text(t2, y_min + 0.2, "$t_2$", ha='center', va='top', fontsize=12)
+
+    # Add subtle grid
+    ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
+
+    # Customize plot appearance
+    ax.set_title("Brownian Motion Path", fontsize=12, pad=15)
+    ax.set_xlabel("$t$", fontsize=10)
+    ax.set_ylabel("Value", fontsize=10)
+
+    # Set axis limits with padding
+    ax.set_xlim(t_min - padding, t_max + padding)
+    ax.set_ylim(y_min, y_max)
+
+    # Remove top and right spines
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    # Add subtle ticks
+    ax.tick_params(axis="both", which="major", labelsize=9)
+
+
+def plot_brownian_transition_density(ax=None, color_map=None):
+    """
+    Plot a clean, blog-friendly visualization of the transition density of a Brownian motion.
+    P(beta(t) | beta(s))
+
+    Show brownian to time s and the point beta(s) then the density (on the side) and possible paths to it (time s to t)
+
+    Use KDE for the density on the side.
+    """
+    # Set up parameters
+    s = 0.6        # Start time for transition
+    t = 1.2        # End time for transition
+    n_samples = 10  # Number of sample paths to show after time s
+
+    # Create time grid
+    dt = 0.01
+    time_points = np.arange(0, t + dt, dt)  # Only go up to time t
+    n_points = len(time_points)
+
+    # Generate a Brownian motion path up to time s
+    np.random.seed(42)  # For reproducibility
+    dB = np.random.normal(0, np.sqrt(dt), n_points)
+    B = np.zeros(n_points)
+
+    for i in range(1, n_points):
+        B[i] = B[i-1] + dB[i-1]
+
+    # Find index for time s
+    s_idx = np.abs(time_points - s).argmin()
+    t_idx = len(time_points) - 1  # Last index corresponds to time t
+
+    # Get value at time s
+    value_at_s = B[s_idx]
+
+    # Generate sample paths from s to t
+    future_paths = np.zeros((n_samples, t_idx - s_idx + 1))
+    future_paths[:, 0] = value_at_s  # All paths start at value_at_s
+
+    # Different seeds for different paths
+    for i in range(n_samples):
+        np.random.seed(100 + i)
+        for j in range(1, t_idx - s_idx + 1):
+            future_paths[i, j] = future_paths[i, j-1] + \
+                np.random.normal(0, np.sqrt(dt))
+
+    # Calculate transition density parameters
+    mean_at_t = value_at_s  # For Brownian motion, mean stays the same
+    std_at_t = np.sqrt(t - s)  # Variance grows linearly with time
+
+    # Calculate y-limits for the plot
+    path_min = min(np.min(B[:s_idx+1]), np.min(future_paths))
+    path_max = max(np.max(B[:s_idx+1]), np.max(future_paths))
+    y_padding = 0.5 * (path_max - path_min)
+    y_min = path_min - y_padding
+    y_max = path_max + y_padding
+
+    # Create density range for time t
+    y_density = np.linspace(y_min, y_max, 100)
+    density_at_t = norm.pdf(y_density, loc=mean_at_t, scale=std_at_t)
+
+    # Normalize density for plotting
+    max_density = np.max(density_at_t)
+    density_at_t_normalized = density_at_t / \
+        max_density * 0.3  # Scale for visual appeal
+
+    # Plot realized path up to time s
+    ax.plot(time_points[:s_idx+1], B[:s_idx+1], color=color_map["c1"],
+            linewidth=2.5, label="Realized Path")
+
+    # Mark position at time s
+    ax.scatter(s, value_at_s, s=80, color=color_map["c1"], zorder=5,
+               edgecolor='white', linewidth=1)
+
+    # Plot future sample paths with fading transparency
+    for i in range(n_samples):
+        alpha = 0.3 if i < n_samples - 5 else 0.6  # Make a few paths more visible
+        ax.plot(time_points[s_idx:t_idx+1], future_paths[i], color=color_map["c2"],
+                linewidth=1, alpha=alpha, zorder=2)
+
+    # Plot vertical lines at s and t
+    ax.axvline(x=s, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
+    ax.axvline(x=t, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
+
+    # Add labels for s and t
+    ax.text(s, y_min - 0.4, "$s$", ha='center', va='top', fontsize=12)
+    ax.text(t, y_min - 0.4, "$t$", ha='center', va='top', fontsize=12)
+
+    # Plot the Gaussian density at time t
+    # First as filled area
+    t_width = 0.15
+    ax.fill_betweenx(y_density,
+                     t * np.ones_like(y_density),
+                     t + density_at_t_normalized,
+                     color=color_map["c3"], alpha=0.3)
+
+    # Then as a line
+    ax.plot(t + density_at_t_normalized, y_density, color=color_map["c3"],
+            linewidth=2, label="Density at $t$")
+
+    # Add grid
+    ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
+
+    # Customize plot appearance
+    ax.set_title("Brownian Motion Transition Density", fontsize=12, pad=15)
+    ax.set_xlabel("Time", fontsize=10)
+    ax.set_ylabel("Value", fontsize=10)
+
+    # Set axis limits - only up to time t plus density width
+    ax.set_xlim(0, t + t_width + 0.2)  # Added small padding
+    ax.set_ylim(y_min, y_max)
+
+    # Remove top and right spines
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    # Add subtle ticks
+    ax.tick_params(axis="both", which="major", labelsize=9)
+
+    # Add legend
+    ax.legend(frameon=True, framealpha=0.9, loc="upper left", fontsize=9)
+
+
+def plot_brownian_bridge_density(ax=None, color_map=None):
+    """
+    Plot a clean, blog-friendly visualization of a Brownian bridge with transition density
+    at an intermediate time.
+
+    We visualize p(beta(t) | beta(s), beta(T)=v) where s < t < T.
+
+    Args:
+        ax: Matplotlib axis object to plot on
+        color_map: Dictionary of colors for consistent styling
+    """
+    # Define time points
+    s = 0.5    # Starting time
+    t = 1.5    # Intermediate time for density
+    T = 2.5    # Terminal time
+
+    # Define values at endpoints
+    beta_s = 0.0    # Value at time s
+    beta_T = 2.0    # Target value v at time T
+
+    # Number of sample paths to show
+    n_samples = 12
+
+    # Create time grid
+    dt = 0.01
+    time_points = np.arange(s, T + dt, dt)
+    n_points = len(time_points)
+
+    # Calculate Brownian bridge parameters for time t
+    # For a bridge from x at time s to y at time T:
+    # Mean at time t: x + (t-s)/(T-s) * (y-x)
+    # Variance at time t: (t-s)(T-t)/(T-s)
+    mean_at_t = beta_s + (t-s)/(T-s) * (beta_T - beta_s)
+    std_at_t = np.sqrt((t-s)*(T-t)/(T-s))
+
+    # Generate sample paths of the Brownian bridge
+    bridges = np.zeros((n_samples, n_points))
+
+    # Function to generate a Brownian bridge from (s,x) to (T,y)
+    def generate_bridge(x, y, times):
+        n = len(times)
+        bridge = np.zeros(n)
+        bridge[0] = x  # Start point
+
+        # Generate a standard Brownian motion
+        dW = np.random.normal(0, np.sqrt(np.diff(times)))
+        W = np.zeros(n)
+        W[1:] = np.cumsum(dW)
+
+        # Transform to a Brownian bridge
+        for i in range(1, n):
+            t_i = times[i]
+            # Linear interpolation term
+            mu = x + (t_i - s)/(T - s) * (y - x)
+            # Brownian fluctuation term with proper scaling
+            if i < n - 1:  # All but the last point
+                sigma = np.sqrt((t_i - s) * (T - t_i) / (T - s))
+                bridge[i] = mu + sigma * (W[i] - (t_i - s)/(T - s) * W[-1])
+            else:  # Last point is fixed
+                bridge[i] = y
+
+        return bridge
+
+    # Generate multiple bridge sample paths
+    for i in range(n_samples):
+        np.random.seed(42 + i)  # For reproducibility but different paths
+        bridges[i] = generate_bridge(beta_s, beta_T, time_points)
+
+    # Calculate y-limits for the plot
+    y_padding = 1.0
+    y_min = min(np.min(bridges), beta_s, beta_T) - y_padding
+    y_max = max(np.max(bridges), beta_s, beta_T) + y_padding
+
+    # Create density range for time t
+    y_density = np.linspace(y_min, y_max, 100)
+    density_at_t = norm.pdf(y_density, loc=mean_at_t, scale=std_at_t)
+
+    # Normalize density for plotting
+    max_density = np.max(density_at_t)
+    density_at_t_normalized = density_at_t / \
+        max_density * 0.3  # Scale for visual appeal
+
+    # Find index for time t in the time array
+    t_idx = np.abs(time_points - t).argmin()
+
+    # Plot sample paths
+    for i in range(n_samples):
+        alpha = 0.3 if i < n_samples - 3 else 0.6  # Make a few paths more visible
+        ax.plot(time_points, bridges[i], color=color_map["c1"],
+                linewidth=1, alpha=alpha, zorder=2)
+
+    # Plot vertical lines at s, t, and T
+    ax.axvline(x=s, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
+    ax.axvline(x=t, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
+    ax.axvline(x=T, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
+
+    # Add labels for s, t, and T
+    ax.text(s, y_min - 0.4, "$s$", ha='center', va='top', fontsize=12)
+    ax.text(t, y_min - 0.5, "$t$", ha='center', va='top', fontsize=12)
+    ax.text(T, y_min - 0.4, "$T$", ha='center', va='top', fontsize=12)
+
+    # Mark positions at time s and T
+    ax.scatter(s, beta_s, s=80, color=color_map["c1"], zorder=5,
+               edgecolor='white', linewidth=1, label=f"β(s)={beta_s}")
+    ax.scatter(T, beta_T, s=80, color=color_map["c2"], zorder=5,
+               edgecolor='white', linewidth=1, label=f"β(T)=v={beta_T}")
+
+    # Plot the Gaussian density at time t
+    # First as filled area
+    t_width = 0.3
+    ax.fill_betweenx(y_density,
+                     t * np.ones_like(y_density),
+                     t + density_at_t_normalized,
+                     color=color_map["c3"], alpha=0.3)
+
+    # Then as a line
+    ax.plot(t + density_at_t_normalized, y_density, color=color_map["c3"],
+            linewidth=2, label="p(β(t)|β(s),β(T)=v)")
+
+    # Add annotation for density
+    ax.annotate(r"$p(\beta(t)|\beta(s),\beta(T)=v)$",
+                xy=(t + 0.2, mean_at_t + 1.2*std_at_t),
+                xytext=(t + 0.5, mean_at_t + 2*std_at_t),
+                arrowprops=dict(arrowstyle="->",
+                                connectionstyle="arc3", color="black"),
+                fontsize=10, ha='center', va='center')
+
+    # Add annotation for beta(s)
+    ax.annotate(r"$\beta(s)$",
+                xy=(s, beta_s),
+                xytext=(s - 0.3, beta_s - 0.5),
+                arrowprops=dict(arrowstyle="->",
+                                connectionstyle="arc3", color="black"),
+                fontsize=10, ha='right', va='center')
+
+    # Add grid
+    ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
+
+    # Customize plot appearance
+    ax.set_title("Brownian Bridge with Transition Density",
+                 fontsize=12, pad=15)
+    ax.set_xlabel("Time", fontsize=10)
+    ax.set_ylabel("Value", fontsize=10)
+
+    # Set axis limits with padding
+    ax.set_xlim(s - 0.2, T + t_width)
+    ax.set_ylim(y_min, y_max)
+
+    # Remove top and right spines
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    # Add subtle ticks
+    ax.tick_params(axis="both", which="major", labelsize=9)
+
+
 if __name__ == "__main__":
     from rdf import RDF
 
@@ -1009,12 +1399,26 @@ if __name__ == "__main__":
     #     save_name="beta_squared_second_order_taylor",
     #     plot_func=plot_beta_squared_second_order_taylor,
     # )
+    # svg_content = plotter.create_themed_plot(
+    #     save_name="ornstein_uhlenbeck", plot_func=plot_ornstein_uhlenbeck
+    # )
+    # svg_content = plotter.create_themed_plot(
+    #     save_name="reverse_ornstein_uhlenbeck", plot_func=plot_reverse_ornstein_uhlenbeck
+    # )
+    # svg_content = plotter.create_themed_plot(
+    #     save_name="denoising_diffusion", plot_func=plot_denoising_diffusion
+    # )
+    # svg_content = plotter.create_themed_plot(
+    #     save_name="brownian_to_point", plot_func=plot_brownian_to_point
+    # )
+    # svg_content = plotter.create_themed_plot(
+    #     save_name="brownian_bridge", plot_func=plot_brownian_bridge
+    # )
+    # svg_content = plotter.create_themed_plot(
+    #     save_name="brownian_transition_density",
+    #     plot_func=plot_brownian_transition_density,
+    # )
     svg_content = plotter.create_themed_plot(
-        save_name="ornstein_uhlenbeck", plot_func=plot_ornstein_uhlenbeck
-    )
-    svg_content = plotter.create_themed_plot(
-        save_name="reverse_ornstein_uhlenbeck", plot_func=plot_reverse_ornstein_uhlenbeck
-    )
-    svg_content = plotter.create_themed_plot(
-        save_name="denoising_diffusion", plot_func=plot_denoising_diffusion
+        save_name="brownian_bridge_density",
+        plot_func=plot_brownian_bridge_density,
     )
