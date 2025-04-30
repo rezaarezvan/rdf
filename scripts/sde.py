@@ -1354,6 +1354,203 @@ def plot_brownian_bridge_density(ax=None, color_map=None):
     ax.tick_params(axis="both", which="major", labelsize=9)
 
 
+def plot_schoenmakers_score_matching(ax=None, color_map=None):
+    """
+    Plot a clean, blog-friendly visualization of the Schoenmakers et al. (2013) score matching approach.
+
+    Left subplot: Shows both standard Brownian motion and the learned score-matched process
+    that guides it toward the target distribution π (shown as dotted curve).
+
+    Right subplot: Shows the reverse process from π back to the standard normal.
+    """
+    # Create figure with two subplots side by side
+    # fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+    fig = ax.figure
+    ax.remove()
+    gs = fig.add_gridspec(1, 2, width_ratios=[1, 1], wspace=0.3)
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax2 = fig.add_subplot(gs[0, 1])
+
+    # Simulation parameters
+    dt = 0.01  # Time step
+    T = 1.0    # Terminal time
+    t = np.linspace(0, T, int(T/dt) + 1)  # Time grid from 0 to T
+    # Reversed time grid from T to 0
+    t_reverse = np.linspace(T, 0, int(T/dt) + 1)
+    n_paths = 10  # Number of sample paths to display
+
+    # Target distribution parameters (for π)
+    # Using a mixture of two Gaussians to make it visually distinct from normal
+    mix_means = [-1.0, 1.0]
+    mix_stds = [0.5, 0.5]
+    mix_weights = [0.5, 0.5]
+
+    # Function to sample from target distribution π
+    def sample_target_dist(n_samples):
+        components = np.random.choice([0, 1], size=n_samples, p=mix_weights)
+        samples = np.zeros(n_samples)
+        for i in range(n_samples):
+            samples[i] = np.random.normal(
+                mix_means[components[i]], mix_stds[components[i]])
+        return samples
+
+    # Function to evaluate target density (with safety checks)
+    def target_density(x):
+        density = (mix_weights[0] * norm.pdf(x, mix_means[0], mix_stds[0]) +
+                   mix_weights[1] * norm.pdf(x, mix_means[1], mix_stds[1]))
+        return np.maximum(density, 1e-10)  # Ensure non-zero
+
+    # Function to compute score (gradient of log density) safely
+    def compute_score(x):
+        p_x = target_density(x)
+        grad_p = (mix_weights[0] * norm.pdf(x, mix_means[0], mix_stds[0]) * ((mix_means[0] - x)/mix_stds[0]**2) +
+                  mix_weights[1] * norm.pdf(x, mix_means[1], mix_stds[1]) * ((mix_means[1] - x)/mix_stds[1]**2))
+        return grad_p / p_x
+
+    # Generate standard Brownian motion paths
+    brownian_paths = np.zeros((n_paths, len(t)))
+
+    for i in range(n_paths):
+        dW = np.random.normal(0, np.sqrt(dt), len(t)-1)
+        brownian_paths[i, 0] = 0.0  # Start at origin
+        for j in range(1, len(t)):
+            brownian_paths[i, j] = brownian_paths[i, j-1] + dW[j-1]
+
+    # Generate score-guided forward paths
+    guided_paths = np.zeros((n_paths, len(t)))
+
+    for i in range(n_paths):
+        guided_paths[i, 0] = 0.0  # Start at origin
+
+        # Use the same noise sequence for direct comparison
+        dW = np.random.normal(0, np.sqrt(dt), len(t)-1)
+
+        for j in range(1, len(t)):
+            # In the forward process, we add a drift term to guide toward target
+            current_t = t[j-1]
+            x = guided_paths[i, j-1]
+
+            # Simple time-dependent interpolation between Brownian and target distributions
+            # At t=0, we're at standard normal; at t=T, we want to reach target
+            if current_t < T-dt:  # Avoid numerical issues right at t=T
+                # Interpolate between initial and target distribution
+                weight_target = current_t / T
+
+                # Mix score of standard normal and target
+                standard_score = -x  # Score of standard normal is -x
+                target_score = compute_score(x)
+                effective_score = (1-weight_target) * \
+                    standard_score + weight_target * target_score
+
+                # Forward SDE with score guidance
+                drift = effective_score * dt
+                guided_paths[i, j] = guided_paths[i, j-1] + drift + dW[j-1]
+            else:
+                # At the end, just add noise
+                guided_paths[i, j] = guided_paths[i, j-1] + dW[j-1]
+
+    # Generate reverse paths (starting from target distribution)
+    reverse_paths = np.zeros((n_paths, len(t_reverse)))
+    end_points = sample_target_dist(n_paths)
+
+    for i in range(n_paths):
+        reverse_paths[i, 0] = end_points[i]  # Start at sampled end point
+
+        for j in range(1, len(t_reverse)):
+            current_t = T - (j-1) * dt  # Current time in reverse process
+            x = reverse_paths[i, j-1]
+
+            # Compute score
+            score = compute_score(x)
+
+            # Reverse-time SDE: dy = [f(y,t) - g(y,t)²∇ylog(p(y,t))]dt + g(y,t)dW
+            drift = -score * dt
+            diffusion = np.random.normal(0, np.sqrt(dt))
+            reverse_paths[i, j] = reverse_paths[i, j-1] + drift + diffusion
+
+    # Calculate limits for consistent plotting
+    all_paths = np.concatenate([brownian_paths, guided_paths, reverse_paths])
+    y_min = np.min(all_paths) - 0.5
+    y_max = np.max(all_paths) + 0.5
+
+    # Density visualization parameters
+    density_x = np.linspace(y_min, y_max, 200)
+    standard_normal_density = norm.pdf(density_x, 0, np.sqrt(T))
+    target_density_values = np.array([target_density(x) for x in density_x])
+
+    # Normalize densities for visualization
+    density_scale = 0.2
+    standard_normal_density = standard_normal_density / \
+        np.max(standard_normal_density) * density_scale
+    target_density_values = target_density_values / \
+        np.max(target_density_values) * density_scale
+
+    # Plot standard Brownian paths on left subplot
+    for i in range(1, n_paths):
+        ax1.plot(t, brownian_paths[i], color=color_map["c1"],
+                 linewidth=1.2, alpha=0.7)
+
+    # Add x(t) = \beta(t) to legend
+    ax1.plot(t, brownian_paths[0], color=color_map["c1"],
+             linewidth=1.2, alpha=0.7, label=r"$x(t) = \beta(t)$")
+
+    # Plot guided paths on left subplot
+    for i in range(1, n_paths):
+        ax1.plot(t, guided_paths[i], color=color_map["c2"],
+                 linewidth=1.2, alpha=0.7)
+
+    # Add \mathcal{y}(t) to legend
+    ax1.plot(t, guided_paths[0], color=color_map["c2"],
+             linewidth=1.2, alpha=0.7, label=r"$\mathcal{y}(t)$")
+
+    # Add standard normal density at T=1 to left subplot
+    ax1.fill_betweenx(density_x, T, T + standard_normal_density,
+                      color=color_map["c1"], alpha=0.3)
+    ax1.plot(T + standard_normal_density, density_x,
+             color=color_map["c1"], linewidth=2, label=r"$\mathcal{N}(0,T)$")
+
+    # Add target density at T=1 to left subplot (dotted to show approximation)
+    ax1.plot(T + target_density_values, density_x,
+             color=color_map["c8"], linewidth=2, linestyle='--', label=r"$\pi$")
+
+    # Plot reverse paths on right subplot
+    for i in range(1, n_paths):
+        ax2.plot(t_reverse, reverse_paths[i], color=color_map["c7"],
+                 linewidth=1.2, alpha=0.7)
+
+    # Add x(t)= y(t) to legend
+    ax2.plot(t_reverse, reverse_paths[0], color=color_map["c7"],
+             linewidth=1.2, alpha=0.7, label=r"$x(t) = y(t)$")
+
+    # Add target density at t=T to right subplot
+    ax2.fill_betweenx(density_x, T, T + target_density_values,
+                      color=color_map["c8"], alpha=0.3)
+    ax2.plot(T + target_density_values, density_x,
+             color=color_map["c8"], linewidth=2, label=r"$\pi$")
+
+    # Customize left subplot appearance
+    ax1.set_title("Forward Process (Brownian Motion)", fontsize=12, pad=15)
+    ax1.set_xlabel(r"$t$", fontsize=10)
+    ax1.set_ylabel("Value", fontsize=10)
+    ax1.set_xlim(0, T + density_scale + 0.1)
+    ax1.set_ylim(y_min, y_max)
+    ax1.grid(True, alpha=0.15, linestyle="-", zorder=0)
+    ax1.spines["top"].set_visible(False)
+    ax1.spines["right"].set_visible(False)
+    ax1.legend(loc="upper left", fontsize=9, frameon=True, framealpha=0.9)
+
+    # Customize right subplot appearance
+    ax2.set_title("Reverse Process (Score Matching)", fontsize=12, pad=15)
+    ax2.set_xlabel(r"$t$", fontsize=10)
+    ax2.set_ylabel("Value", fontsize=10)
+    ax2.set_xlim(0, T + density_scale + 0.1)
+    ax2.set_ylim(y_min, y_max)
+    ax2.grid(True, alpha=0.15, linestyle="-", zorder=0)
+    ax2.spines["top"].set_visible(False)
+    ax2.spines["right"].set_visible(False)
+    ax2.legend(loc="upper left", fontsize=9, frameon=True, framealpha=0.9)
+
+
 if __name__ == "__main__":
     from rdf import RDF
 
@@ -1418,7 +1615,11 @@ if __name__ == "__main__":
     #     save_name="brownian_transition_density",
     #     plot_func=plot_brownian_transition_density,
     # )
+    # svg_content = plotter.create_themed_plot(
+    #     save_name="brownian_bridge_density",
+    #     plot_func=plot_brownian_bridge_density,
+    # )
     svg_content = plotter.create_themed_plot(
-        save_name="brownian_bridge_density",
-        plot_func=plot_brownian_bridge_density,
+        save_name="schoenmakers_score_matching",
+        plot_func=plot_schoenmakers_score_matching,
     )
