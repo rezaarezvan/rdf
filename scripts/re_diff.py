@@ -339,10 +339,12 @@ def plot_deterministic_ODE(ax=None, color_map=None):
     Shows multiple solutions from different initial conditions and how they
     evolve deterministically without intersecting.
     """
-    # fig, (ax1, ax2) = plt.subplots(
-    #     1, 2, figsize=(12, 5.5), constrained_layout=True)
-    ax1 = plt.subplot(1, 2, 1)
-    ax2 = plt.subplot(1, 2, 2)
+    fig = ax.figure
+    fig.set_size_inches(12, 5.5)
+    ax.remove()
+    gs = fig.add_gridspec(1, 2, width_ratios=[1, 1], wspace=0.3)
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax2 = fig.add_subplot(gs[0, 1])
 
     # Time vector
     t = np.linspace(0, 5, 100)
@@ -363,17 +365,6 @@ def plot_deterministic_ODE(ax=None, color_map=None):
             xytext=(t[mid_idx], x[mid_idx]),
             arrowprops=dict(arrowstyle="->", lw=2, color=colors[i]),
         )
-
-    # Add equation
-    ax1.text(
-        4.0,
-        3.2,
-        r"$\frac{dx}{dt} = -x$",
-        fontsize=12,
-        bbox=dict(
-            facecolor="white", edgecolor="gray", alpha=0.9, boxstyle="round,pad=0.3"
-        ),
-    )
 
     ax1.set_title("1D ODE: Exponential Decay", fontsize=12)
     ax1.set_xlabel("Time ($t$)")
@@ -439,10 +430,6 @@ def plot_deterministic_ODE(ax=None, color_map=None):
         )
         ax2.add_patch(arrow)
 
-    # Add equation
-    eq_text = r"$\frac{dx}{dt} = -0.5x + y, \quad \frac{dy}{dt} = -x - 0.5y$"
-    ax2.text(0.8, 2.5, eq_text, fontsize=8, bbox=dict(facecolor="white", alpha=0.9))
-
     # Add colorbar to show relationship between color and initial distance
     sm = ScalarMappable(cmap=colormap, norm=norm)
     sm.set_array([])
@@ -456,11 +443,6 @@ def plot_deterministic_ODE(ax=None, color_map=None):
     ax2.set_ylim(-3, 3)
     ax2.grid(True, alpha=0.3)
     ax2.set_aspect("equal")
-
-    for ax in (ax1, ax2):
-        ax.grid(True, linestyle="-", linewidth=0.5, alpha=0.3)
-        ax.spines["top"].set_visible(False)
-        ax.spines["right"].set_visible(False)
 
 
 def euler_maruyama(drift_func, diffusion_func, x0, t_span, dt, seed=None):
