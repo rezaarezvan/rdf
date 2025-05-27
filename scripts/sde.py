@@ -116,8 +116,7 @@ def plot_SDE_example(ax=None, color_map=None):
     x = np.zeros_like(t)
     x[0] = np.random.normal(0, 1)  # Initial condition
     for i in range(1, len(t)):
-        x[i] = x[i - 1] + 0.5 * x[i - 1] * \
-            dt + np.random.normal(0, np.sqrt(dt))
+        x[i] = x[i - 1] + 0.5 * x[i - 1] * dt + np.random.normal(0, np.sqrt(dt))
 
     y_min, y_max = np.min(x) + padding, np.max(x) - padding
 
@@ -184,15 +183,13 @@ def plot_dynamic_SDE_example(ax=None, color_map=None):
     time = np.linspace(x_min - padding, x_max + padding, len(x))
     # Plot the SDE
     ax.plot(time, y, color=color_map["c8"], linewidth=2, label="$v(t)$")
-    ax.plot(time, x, color=color_map["c7"],
-            linewidth=2, label="$x(t)$", linestyle="--")
+    ax.plot(time, x, color=color_map["c7"], linewidth=2, label="$x(t)$", linestyle="--")
 
     # Add subtle grid
     ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
 
     # Customize plot appearance
-    ax.set_title("Constant Velocity Model with $x(0) = v(0) = 0$",
-                 fontsize=12, pad=15)
+    ax.set_title("Constant Velocity Model with $x(0) = v(0) = 0$", fontsize=12, pad=15)
     ax.set_xlabel(r"$t$", fontsize=10)
     ax.set_ylabel(r"$x(t), v(t)$", fontsize=10)
 
@@ -258,8 +255,7 @@ def plot_Riemann_sum(ax=None, color_map=None):
     # Add subtle grid
     ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
     # Customize plot appearance
-    ax.set_title(f"Riemann Sum, $n = 10$, and error = ${
-                 error}$", fontsize=12, pad=15)
+    ax.set_title(f"Riemann Sum, $n = 10$, and error = ${error}$", fontsize=12, pad=15)
     ax.set_xlabel(r"$x$", fontsize=10)
     ax.set_ylabel(r"$f(x)$", fontsize=10)
     # Set axis limits with padding
@@ -302,8 +298,7 @@ def plot_random_diff(ax=None, color_map=None):
     # Plot the original function
     ax.plot(x, y, color=color_map["c8"], linewidth=2)
     # Plot the tangent line
-    ax.plot(x, tangent_line,
-            color=color_map["c7"], linewidth=2, linestyle="--")
+    ax.plot(x, tangent_line, color=color_map["c7"], linewidth=2, linestyle="--")
     # Add a point at x(1) and text that says \dot{x}(1) = y_diff(1)
     ax.scatter(x_tangent, y_tangent, color=color_map["c7"], s=50)
     ax.text(
@@ -359,8 +354,7 @@ def plot_brownian_VS_sin(ax=None, color_map=None):
     B[0] = 0
     for i in range(1, len(t)):
         B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
-    y_min, y_max = min(np.min(B), x_min) - \
-        padding, max(np.max(B), x_max) + padding
+    y_min, y_max = min(np.min(B), x_min) - padding, max(np.max(B), x_max) + padding
     # Plot the sine function
     ax1.plot(x, y, color=color_map["c8"], linewidth=2)
     # Plot the Brownian motion
@@ -412,8 +406,7 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     B[0] = 0
     for i in range(1, len(t)):
         B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
-    y_min, y_max = min(np.min(B), x_min) - \
-        padding, max(np.max(B), x_max) + padding
+    y_min, y_max = min(np.min(B), x_min) - padding, max(np.max(B), x_max) + padding
     # Create the Left Riemann sum
     n = 10
     dx = (x_max - x_min) / n
@@ -444,8 +437,7 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     ax.tick_params(axis="both", which="major", labelsize=9)
     # Add red points on the Brownian motion at the left Riemann sum points
     for i in range(n):
-        ax.scatter(x_riemann[i], B[int(x_riemann[i] / dt)],
-                   color=color_map["c7"], s=50)
+        ax.scatter(x_riemann[i], B[int(x_riemann[i] / dt)], color=color_map["c7"], s=50)
 
 
 def plot_left_reimann_brownian(ax=None, color_map=None):
@@ -467,8 +459,7 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     B[0] = 0
     for i in range(1, len(t)):
         B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
-    y_min, y_max = min(np.min(B), x_min) - \
-        padding, max(np.max(B), x_max) + padding
+    y_min, y_max = min(np.min(B), x_min) - padding, max(np.max(B), x_max) + padding
     # Create the Left Riemann sum
     n = 10
     dx = (x_max - x_min) / n
@@ -578,8 +569,7 @@ def plot_beta_beta_squared(ax=None, color_map=None):
     # Add subtle grid
     ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
     # Customize plot appearance
-    ax.set_title(f"Brownian motion and its squared version",
-                 fontsize=12, pad=15)
+    ax.set_title(f"Brownian motion and its squared version", fontsize=12, pad=15)
     ax.set_xlabel(r"$t$", fontsize=10)
     ax.set_ylabel(r"$\beta(t), \beta^2(t)$", fontsize=10)
     # Set axis limits with padding
@@ -637,15 +627,12 @@ def plot_beta_squared_second_order_taylor(ax=None, color_map=None):
 
     # Determine axis limits
     x_min, x_max = np.min(B) - padding_x, np.max(B) + padding_x
-    y_min = min(0, np.min(taylor_expansion2)) - \
-        padding_y  # Ensure 0 is included
+    y_min = min(0, np.min(taylor_expansion2)) - padding_y  # Ensure 0 is included
     y_max = max(np.max(B_squared), np.max(taylor_expansion1)) + padding_y
 
     # Plot squared Brownian motion
-    ax1.plot(B, B_squared, color=color_map["c8"],
-             linewidth=2, label="$\\beta^2(t)$")
-    ax2.plot(B, B_squared, color=color_map["c8"],
-             linewidth=2, label="$\\beta^2(t)$")
+    ax1.plot(B, B_squared, color=color_map["c8"], linewidth=2, label="$\\beta^2(t)$")
+    ax2.plot(B, B_squared, color=color_map["c8"], linewidth=2, label="$\\beta^2(t)$")
     # Plot second-order Taylor expansion
     ax1.plot(
         B,
@@ -722,11 +709,11 @@ def plot_ornstein_uhlenbeck(ax=None, color_map=None):
     This function plots multiple sample paths along with the mean (dotted line)
     and variance envelope (shaded region representing ±1 standard deviation).
     """
-    theta = 0.7    # Mean reversion speed
-    mu = 0.0       # Long-term mean
-    sigma = 0.5    # Volatility
-    T = 5.0        # Total time
-    dt = 0.01      # Time step
+    theta = 0.7  # Mean reversion speed
+    mu = 0.0  # Long-term mean
+    sigma = 0.5  # Volatility
+    T = 5.0  # Total time
+    dt = 0.01  # Time step
 
     n_steps = int(T / dt)
     t = np.linspace(0, T, n_steps)
@@ -750,31 +737,38 @@ def plot_ornstein_uhlenbeck(ax=None, color_map=None):
     for i in range(n_paths):
         np.random.seed(42 + i)  # Different seed for each path
         for j in range(1, n_steps):
-            drift = theta * (mu - paths[i, j-1]) * dt
+            drift = theta * (mu - paths[i, j - 1]) * dt
             diffusion = sigma * np.random.normal(0, np.sqrt(dt))
-            paths[i, j] = paths[i, j-1] + drift + diffusion
+            paths[i, j] = paths[i, j - 1] + drift + diffusion
 
     # Plot the shaded variance envelope (±1 standard deviation)
-    ax.fill_between(t, mean - std_dev, mean + std_dev, color='gray', alpha=0.2)
+    ax.fill_between(t, mean - std_dev, mean + std_dev, color="gray", alpha=0.2)
 
     # Plot all sample paths
     for i in range(n_paths):
-        ax.plot(t, paths[i], color=colors[i %
-                len(colors)], linewidth=1, alpha=0.8)
+        ax.plot(t, paths[i], color=colors[i % len(colors)], linewidth=1, alpha=0.8)
 
     # Plot the mean as a dashed line
-    ax.plot(t, mean, color='black', linestyle='--',
-            linewidth=1.5, label='Mean')
+    ax.plot(t, mean, color="black", linestyle="--", linewidth=1.5, label="Mean")
 
     # Add a line at the boundary of the standard deviation envelope
-    ax.plot(t, mean + std_dev, color='black', linestyle=':',
-            linewidth=0.8, alpha=0.5, label='±1 std dev')
-    ax.plot(t, mean - std_dev, color='black',
-            linestyle=':', linewidth=0.8, alpha=0.5)
+    ax.plot(
+        t,
+        mean + std_dev,
+        color="black",
+        linestyle=":",
+        linewidth=0.8,
+        alpha=0.5,
+        label="±1 std dev",
+    )
+    ax.plot(t, mean - std_dev, color="black", linestyle=":", linewidth=0.8, alpha=0.5)
 
     # Customize plot appearance
     ax.set_title(
-        "Ornstein-Uhlenbeck Process: Sample Paths and Variance Envelope", fontsize=12, pad=15)
+        "Ornstein-Uhlenbeck Process: Sample Paths and Variance Envelope",
+        fontsize=12,
+        pad=15,
+    )
     ax.set_xlabel("Time $t$", fontsize=10)
     ax.set_ylabel("$X(t)$", fontsize=10)
 
@@ -811,10 +805,10 @@ def plot_reverse_ornstein_uhlenbeck(ax=None, color_map=None):
     # Process parameters
     # Mean reversion parameter (now acting as divergence parameter in reverse time)
     theta = 0.7
-    mu = 0.0       # Long-term mean
-    sigma = 0.5    # Volatility
-    T = 5.0        # Total time
-    dt = 0.01      # Time step
+    mu = 0.0  # Long-term mean
+    sigma = 0.5  # Volatility
+    T = 5.0  # Total time
+    dt = 0.01  # Time step
     n_steps = int(T / dt)
     t = np.linspace(0, T, n_steps)
 
@@ -834,18 +828,26 @@ def plot_reverse_ornstein_uhlenbeck(ax=None, color_map=None):
         np.random.seed(42 + i)  # Different seed for each path
         for j in range(1, n_steps):
             # Note the plus sign here (reverse-time effect)
-            drift = theta * paths[i, j-1] * dt
+            drift = theta * paths[i, j - 1] * dt
             diffusion = sigma * np.random.normal(0, np.sqrt(dt))
-            paths[i, j] = paths[i, j-1] + drift + diffusion
+            paths[i, j] = paths[i, j - 1] + drift + diffusion
 
     # Plot all sample paths
     for i in range(n_paths):
-        ax.plot(t, paths[i], color=colors[i % len(colors)], linewidth=1.2,
-                label=f'Path {i+1}')
+        ax.plot(
+            t,
+            paths[i],
+            color=colors[i % len(colors)],
+            linewidth=1.2,
+            label=f"Path {i + 1}",
+        )
 
     # Customize plot appearance
-    ax.set_title("Reverse-Time Ornstein-Uhlenbeck Process (Score-Based Euler-Maruyama)",
-                 fontsize=12, pad=15)
+    ax.set_title(
+        "Reverse-Time Ornstein-Uhlenbeck Process (Score-Based Euler-Maruyama)",
+        fontsize=12,
+        pad=15,
+    )
     ax.set_xlabel("Time t (reversed)", fontsize=10)
     ax.set_ylabel("x(t)", fontsize=10)
 
@@ -884,14 +886,14 @@ def plot_denoising_diffusion(ax=None, color_map=None):
     with a cleaner legend implementation.
     """
     # Process parameters
-    T = 1.0        # Total time (from 0 to 1)
-    dt = 0.001     # Time step (smaller for accuracy near t=1)
+    T = 1.0  # Total time (from 0 to 1)
+    dt = 0.001  # Time step (smaller for accuracy near t=1)
     n_steps = int(T / dt)
     # Create non-uniform time grid with more points near t=1
     # where the SDE becomes more challenging to simulate
-    t = np.linspace(0, 0.95, n_steps//2)  # First half: 0 to 0.95
+    t = np.linspace(0, 0.95, n_steps // 2)  # First half: 0 to 0.95
     # Second half: 0.95 to 0.999
-    t = np.append(t, np.linspace(0.95, 0.999, n_steps//2))
+    t = np.append(t, np.linspace(0.95, 0.999, n_steps // 2))
 
     # Select specific initial points to track
     # Reduced number for cleaner legend
@@ -900,7 +902,7 @@ def plot_denoising_diffusion(ax=None, color_map=None):
     paths = np.zeros((n_paths, len(t)))
 
     # Set colors from the color map
-    colors = [color_map[f"c{i+1}"] for i in range(n_paths)]
+    colors = [color_map[f"c{i + 1}"] for i in range(n_paths)]
 
     # Initialize paths with their respective starting points
     for i, x0 in enumerate(initial_points):
@@ -910,7 +912,7 @@ def plot_denoising_diffusion(ax=None, color_map=None):
     for i in range(n_paths):
         np.random.seed(42 + i)  # Different seed for each path for diversity
         for j in range(1, len(t)):
-            current_t = t[j-1]
+            current_t = t[j - 1]
             next_t = t[j]
             dt_actual = next_t - current_t
 
@@ -923,19 +925,20 @@ def plot_denoising_diffusion(ax=None, color_map=None):
                 diffusion_coef = np.sqrt(2.0 * current_t / (1.0 - current_t))
 
             # Euler-Maruyama step
-            drift = drift_coef * paths[i, j-1] * dt_actual
-            diffusion = diffusion_coef * \
-                np.random.normal(0, np.sqrt(dt_actual))
-            paths[i, j] = paths[i, j-1] + drift + diffusion
+            drift = drift_coef * paths[i, j - 1] * dt_actual
+            diffusion = diffusion_coef * np.random.normal(0, np.sqrt(dt_actual))
+            paths[i, j] = paths[i, j - 1] + drift + diffusion
 
     # Plot the paths
     for i, x0 in enumerate(initial_points):
-        ax.plot(t, paths[i], color=colors[i], linewidth=1.2,
-                label=f'$x_0={x0}$')
+        ax.plot(t, paths[i], color=colors[i], linewidth=1.2, label=f"$x_0={x0}$")
 
     # Customize plot appearance
-    ax.set_title("Simulation of SDE: $dx = -x/(1 - t)\\, dt + \\sqrt{2t/(1 - t)}\\, dB(t)$",
-                 fontsize=12, pad=15)
+    ax.set_title(
+        "Simulation of SDE: $dx = -x/(1 - t)\\, dt + \\sqrt{2t/(1 - t)}\\, dB(t)$",
+        fontsize=12,
+        pad=15,
+    )
     ax.set_xlabel("Time $t$", fontsize=10)
     ax.set_ylabel("$x(t)$", fontsize=10)
 
@@ -984,8 +987,7 @@ def plot_brownian_to_point(ax=None, color_map=None):
     B[0] = 0
     for i in range(1, len(t)):
         B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
-    y_min, y_max = min(np.min(B), x_min) - \
-        padding, max(np.max(B), x_max) + padding
+    y_min, y_max = min(np.min(B), x_min) - padding, max(np.max(B), x_max) + padding
     # Create the target point/line
     v = 1
     T = 2
@@ -997,8 +999,9 @@ def plot_brownian_to_point(ax=None, color_map=None):
     # Add subtle grid
     ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
     # Customize plot appearance
-    ax.set_title(f"Brownian motion converging to a point at time T",
-                 fontsize=12, pad=15)
+    ax.set_title(
+        f"Brownian motion converging to a point at time T", fontsize=12, pad=15
+    )
     ax.set_xlabel(r"$t$", fontsize=10)
     ax.set_ylabel(r"$\beta(t)$", fontsize=10)
     # Set axis limits with padding
@@ -1047,14 +1050,14 @@ def plot_brownian_bridge(ax=None, color_map=None):
     ax.plot(t, B, color=color_map["c1"], linewidth=2, label="Brownian Motion")
 
     # Add vertical dotted lines at key time points
-    ax.axvline(x=t0, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
-    ax.axvline(x=t1, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
-    ax.axvline(x=t2, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
+    ax.axvline(x=t0, color="gray", linestyle="--", linewidth=1.5, alpha=0.7)
+    ax.axvline(x=t1, color="gray", linestyle="--", linewidth=1.5, alpha=0.7)
+    ax.axvline(x=t2, color="gray", linestyle="--", linewidth=1.5, alpha=0.7)
 
     # Add labels for the time points at the bottom of the graph
-    ax.text(t0, y_min + 0.2, "$t_0$", ha='center', va='top', fontsize=12)
-    ax.text(t1, y_min + 0.2, "$t_1$", ha='center', va='top', fontsize=12)
-    ax.text(t2, y_min + 0.2, "$t_2$", ha='center', va='top', fontsize=12)
+    ax.text(t0, y_min + 0.2, "$t_0$", ha="center", va="top", fontsize=12)
+    ax.text(t1, y_min + 0.2, "$t_1$", ha="center", va="top", fontsize=12)
+    ax.text(t2, y_min + 0.2, "$t_2$", ha="center", va="top", fontsize=12)
 
     # Add subtle grid
     ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
@@ -1086,8 +1089,8 @@ def plot_brownian_transition_density(ax=None, color_map=None):
     Use KDE for the density on the side.
     """
     # Set up parameters
-    s = 0.6        # Start time for transition
-    t = 1.2        # End time for transition
+    s = 0.6  # Start time for transition
+    t = 1.2  # End time for transition
     n_samples = 10  # Number of sample paths to show after time s
 
     # Create time grid
@@ -1101,7 +1104,7 @@ def plot_brownian_transition_density(ax=None, color_map=None):
     B = np.zeros(n_points)
 
     for i in range(1, n_points):
-        B[i] = B[i-1] + dB[i-1]
+        B[i] = B[i - 1] + dB[i - 1]
 
     # Find index for time s
     s_idx = np.abs(time_points - s).argmin()
@@ -1118,16 +1121,17 @@ def plot_brownian_transition_density(ax=None, color_map=None):
     for i in range(n_samples):
         np.random.seed(100 + i)
         for j in range(1, t_idx - s_idx + 1):
-            future_paths[i, j] = future_paths[i, j-1] + \
-                np.random.normal(0, np.sqrt(dt))
+            future_paths[i, j] = future_paths[i, j - 1] + np.random.normal(
+                0, np.sqrt(dt)
+            )
 
     # Calculate transition density parameters
     mean_at_t = value_at_s  # For Brownian motion, mean stays the same
     std_at_t = np.sqrt(t - s)  # Variance grows linearly with time
 
     # Calculate y-limits for the plot
-    path_min = min(np.min(B[:s_idx+1]), np.min(future_paths))
-    path_max = max(np.max(B[:s_idx+1]), np.max(future_paths))
+    path_min = min(np.min(B[: s_idx + 1]), np.min(future_paths))
+    path_max = max(np.max(B[: s_idx + 1]), np.max(future_paths))
     y_padding = 0.5 * (path_max - path_min)
     y_min = path_min - y_padding
     y_max = path_max + y_padding
@@ -1138,42 +1142,69 @@ def plot_brownian_transition_density(ax=None, color_map=None):
 
     # Normalize density for plotting
     max_density = np.max(density_at_t)
-    density_at_t_normalized = density_at_t / \
-        max_density * 0.3  # Scale for visual appeal
+    density_at_t_normalized = (
+        density_at_t / max_density * 0.3
+    )  # Scale for visual appeal
 
     # Plot realized path up to time s
-    ax.plot(time_points[:s_idx+1], B[:s_idx+1], color=color_map["c1"],
-            linewidth=2.5, label="Realized Path")
+    ax.plot(
+        time_points[: s_idx + 1],
+        B[: s_idx + 1],
+        color=color_map["c1"],
+        linewidth=2.5,
+        label="Realized Path",
+    )
 
     # Mark position at time s
-    ax.scatter(s, value_at_s, s=80, color=color_map["c1"], zorder=5,
-               edgecolor='white', linewidth=1)
+    ax.scatter(
+        s,
+        value_at_s,
+        s=80,
+        color=color_map["c1"],
+        zorder=5,
+        edgecolor="white",
+        linewidth=1,
+    )
 
     # Plot future sample paths with fading transparency
     for i in range(n_samples):
         alpha = 0.3 if i < n_samples - 5 else 0.6  # Make a few paths more visible
-        ax.plot(time_points[s_idx:t_idx+1], future_paths[i], color=color_map["c2"],
-                linewidth=1, alpha=alpha, zorder=2)
+        ax.plot(
+            time_points[s_idx : t_idx + 1],
+            future_paths[i],
+            color=color_map["c2"],
+            linewidth=1,
+            alpha=alpha,
+            zorder=2,
+        )
 
     # Plot vertical lines at s and t
-    ax.axvline(x=s, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
-    ax.axvline(x=t, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
+    ax.axvline(x=s, color="gray", linestyle="--", linewidth=1.5, alpha=0.7)
+    ax.axvline(x=t, color="gray", linestyle="--", linewidth=1.5, alpha=0.7)
 
     # Add labels for s and t
-    ax.text(s, y_min - 0.4, "$s$", ha='center', va='top', fontsize=12)
-    ax.text(t, y_min - 0.4, "$t$", ha='center', va='top', fontsize=12)
+    ax.text(s, y_min - 0.4, "$s$", ha="center", va="top", fontsize=12)
+    ax.text(t, y_min - 0.4, "$t$", ha="center", va="top", fontsize=12)
 
     # Plot the Gaussian density at time t
     # First as filled area
     t_width = 0.15
-    ax.fill_betweenx(y_density,
-                     t * np.ones_like(y_density),
-                     t + density_at_t_normalized,
-                     color=color_map["c3"], alpha=0.3)
+    ax.fill_betweenx(
+        y_density,
+        t * np.ones_like(y_density),
+        t + density_at_t_normalized,
+        color=color_map["c3"],
+        alpha=0.3,
+    )
 
     # Then as a line
-    ax.plot(t + density_at_t_normalized, y_density, color=color_map["c3"],
-            linewidth=2, label="Density at $t$")
+    ax.plot(
+        t + density_at_t_normalized,
+        y_density,
+        color=color_map["c3"],
+        linewidth=2,
+        label="Density at $t$",
+    )
 
     # Add grid
     ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
@@ -1210,13 +1241,13 @@ def plot_brownian_bridge_density(ax=None, color_map=None):
         color_map: Dictionary of colors for consistent styling
     """
     # Define time points
-    s = 0.5    # Starting time
-    t = 1.5    # Intermediate time for density
-    T = 2.5    # Terminal time
+    s = 0.5  # Starting time
+    t = 1.5  # Intermediate time for density
+    T = 2.5  # Terminal time
 
     # Define values at endpoints
-    beta_s = 0.0    # Value at time s
-    beta_T = 2.0    # Target value v at time T
+    beta_s = 0.0  # Value at time s
+    beta_T = 2.0  # Target value v at time T
 
     # Number of sample paths to show
     n_samples = 12
@@ -1230,8 +1261,8 @@ def plot_brownian_bridge_density(ax=None, color_map=None):
     # For a bridge from x at time s to y at time T:
     # Mean at time t: x + (t-s)/(T-s) * (y-x)
     # Variance at time t: (t-s)(T-t)/(T-s)
-    mean_at_t = beta_s + (t-s)/(T-s) * (beta_T - beta_s)
-    std_at_t = np.sqrt((t-s)*(T-t)/(T-s))
+    mean_at_t = beta_s + (t - s) / (T - s) * (beta_T - beta_s)
+    std_at_t = np.sqrt((t - s) * (T - t) / (T - s))
 
     # Generate sample paths of the Brownian bridge
     bridges = np.zeros((n_samples, n_points))
@@ -1251,11 +1282,11 @@ def plot_brownian_bridge_density(ax=None, color_map=None):
         for i in range(1, n):
             t_i = times[i]
             # Linear interpolation term
-            mu = x + (t_i - s)/(T - s) * (y - x)
+            mu = x + (t_i - s) / (T - s) * (y - x)
             # Brownian fluctuation term with proper scaling
             if i < n - 1:  # All but the last point
                 sigma = np.sqrt((t_i - s) * (T - t_i) / (T - s))
-                bridge[i] = mu + sigma * (W[i] - (t_i - s)/(T - s) * W[-1])
+                bridge[i] = mu + sigma * (W[i] - (t_i - s) / (T - s) * W[-1])
             else:  # Last point is fixed
                 bridge[i] = y
 
@@ -1277,8 +1308,9 @@ def plot_brownian_bridge_density(ax=None, color_map=None):
 
     # Normalize density for plotting
     max_density = np.max(density_at_t)
-    density_at_t_normalized = density_at_t / \
-        max_density * 0.3  # Scale for visual appeal
+    density_at_t_normalized = (
+        density_at_t / max_density * 0.3
+    )  # Scale for visual appeal
 
     # Find index for time t in the time array
     t_idx = np.abs(time_points - t).argmin()
@@ -1286,59 +1318,94 @@ def plot_brownian_bridge_density(ax=None, color_map=None):
     # Plot sample paths
     for i in range(n_samples):
         alpha = 0.3 if i < n_samples - 3 else 0.6  # Make a few paths more visible
-        ax.plot(time_points, bridges[i], color=color_map["c1"],
-                linewidth=1, alpha=alpha, zorder=2)
+        ax.plot(
+            time_points,
+            bridges[i],
+            color=color_map["c1"],
+            linewidth=1,
+            alpha=alpha,
+            zorder=2,
+        )
 
     # Plot vertical lines at s, t, and T
-    ax.axvline(x=s, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
-    ax.axvline(x=t, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
-    ax.axvline(x=T, color='gray', linestyle='--', linewidth=1.5, alpha=0.7)
+    ax.axvline(x=s, color="gray", linestyle="--", linewidth=1.5, alpha=0.7)
+    ax.axvline(x=t, color="gray", linestyle="--", linewidth=1.5, alpha=0.7)
+    ax.axvline(x=T, color="gray", linestyle="--", linewidth=1.5, alpha=0.7)
 
     # Add labels for s, t, and T
-    ax.text(s, y_min - 0.4, "$s$", ha='center', va='top', fontsize=12)
-    ax.text(t, y_min - 0.5, "$t$", ha='center', va='top', fontsize=12)
-    ax.text(T, y_min - 0.4, "$T$", ha='center', va='top', fontsize=12)
+    ax.text(s, y_min - 0.4, "$s$", ha="center", va="top", fontsize=12)
+    ax.text(t, y_min - 0.5, "$t$", ha="center", va="top", fontsize=12)
+    ax.text(T, y_min - 0.4, "$T$", ha="center", va="top", fontsize=12)
 
     # Mark positions at time s and T
-    ax.scatter(s, beta_s, s=80, color=color_map["c1"], zorder=5,
-               edgecolor='white', linewidth=1, label=f"β(s)={beta_s}")
-    ax.scatter(T, beta_T, s=80, color=color_map["c2"], zorder=5,
-               edgecolor='white', linewidth=1, label=f"β(T)=v={beta_T}")
+    ax.scatter(
+        s,
+        beta_s,
+        s=80,
+        color=color_map["c1"],
+        zorder=5,
+        edgecolor="white",
+        linewidth=1,
+        label=f"β(s)={beta_s}",
+    )
+    ax.scatter(
+        T,
+        beta_T,
+        s=80,
+        color=color_map["c2"],
+        zorder=5,
+        edgecolor="white",
+        linewidth=1,
+        label=f"β(T)=v={beta_T}",
+    )
 
     # Plot the Gaussian density at time t
     # First as filled area
     t_width = 0.3
-    ax.fill_betweenx(y_density,
-                     t * np.ones_like(y_density),
-                     t + density_at_t_normalized,
-                     color=color_map["c3"], alpha=0.3)
+    ax.fill_betweenx(
+        y_density,
+        t * np.ones_like(y_density),
+        t + density_at_t_normalized,
+        color=color_map["c3"],
+        alpha=0.3,
+    )
 
     # Then as a line
-    ax.plot(t + density_at_t_normalized, y_density, color=color_map["c3"],
-            linewidth=2, label="p(β(t)|β(s),β(T)=v)")
+    ax.plot(
+        t + density_at_t_normalized,
+        y_density,
+        color=color_map["c3"],
+        linewidth=2,
+        label="p(β(t)|β(s),β(T)=v)",
+    )
 
     # Add annotation for density
-    ax.annotate(r"$p(\beta(t)|\beta(s),\beta(T)=v)$",
-                xy=(t + 0.2, mean_at_t + 1.2*std_at_t),
-                xytext=(t + 0.5, mean_at_t + 2*std_at_t),
-                arrowprops=dict(arrowstyle="->",
-                                connectionstyle="arc3", color="black"),
-                fontsize=10, ha='center', va='center')
+    ax.annotate(
+        r"$p(\beta(t)|\beta(s),\beta(T)=v)$",
+        xy=(t + 0.2, mean_at_t + 1.2 * std_at_t),
+        xytext=(t + 0.5, mean_at_t + 2 * std_at_t),
+        arrowprops=dict(arrowstyle="->", connectionstyle="arc3", color="black"),
+        fontsize=10,
+        ha="center",
+        va="center",
+    )
 
     # Add annotation for beta(s)
-    ax.annotate(r"$\beta(s)$",
-                xy=(s, beta_s),
-                xytext=(s - 0.3, beta_s - 0.5),
-                arrowprops=dict(arrowstyle="->",
-                                connectionstyle="arc3", color="black"),
-                fontsize=10, ha='right', va='center')
+    ax.annotate(
+        r"$\beta(s)$",
+        xy=(s, beta_s),
+        xytext=(s - 0.3, beta_s - 0.5),
+        arrowprops=dict(arrowstyle="->", connectionstyle="arc3", color="black"),
+        fontsize=10,
+        ha="right",
+        va="center",
+    )
 
     # Add grid
     ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
 
     # Customize plot appearance
-    ax.set_title("Brownian Bridge with Transition Density",
-                 fontsize=12, pad=15)
+    ax.set_title("Brownian Bridge with Transition Density", fontsize=12, pad=15)
     ax.set_xlabel("Time", fontsize=10)
     ax.set_ylabel("Value", fontsize=10)
 
@@ -1373,10 +1440,10 @@ def plot_schoenmakers_score_matching(ax=None, color_map=None):
 
     # Simulation parameters
     dt = 0.01  # Time step
-    T = 1.0    # Terminal time
-    t = np.linspace(0, T, int(T/dt) + 1)  # Time grid from 0 to T
+    T = 1.0  # Terminal time
+    t = np.linspace(0, T, int(T / dt) + 1)  # Time grid from 0 to T
     # Reversed time grid from T to 0
-    t_reverse = np.linspace(T, 0, int(T/dt) + 1)
+    t_reverse = np.linspace(T, 0, int(T / dt) + 1)
     n_paths = 10  # Number of sample paths to display
 
     # Target distribution parameters (for π)
@@ -1391,30 +1458,35 @@ def plot_schoenmakers_score_matching(ax=None, color_map=None):
         samples = np.zeros(n_samples)
         for i in range(n_samples):
             samples[i] = np.random.normal(
-                mix_means[components[i]], mix_stds[components[i]])
+                mix_means[components[i]], mix_stds[components[i]]
+            )
         return samples
 
     # Function to evaluate target density (with safety checks)
     def target_density(x):
-        density = (mix_weights[0] * norm.pdf(x, mix_means[0], mix_stds[0]) +
-                   mix_weights[1] * norm.pdf(x, mix_means[1], mix_stds[1]))
+        density = mix_weights[0] * norm.pdf(x, mix_means[0], mix_stds[0]) + mix_weights[
+            1
+        ] * norm.pdf(x, mix_means[1], mix_stds[1])
         return np.maximum(density, 1e-10)  # Ensure non-zero
 
     # Function to compute score (gradient of log density) safely
     def compute_score(x):
         p_x = target_density(x)
-        grad_p = (mix_weights[0] * norm.pdf(x, mix_means[0], mix_stds[0]) * ((mix_means[0] - x)/mix_stds[0]**2) +
-                  mix_weights[1] * norm.pdf(x, mix_means[1], mix_stds[1]) * ((mix_means[1] - x)/mix_stds[1]**2))
+        grad_p = mix_weights[0] * norm.pdf(x, mix_means[0], mix_stds[0]) * (
+            (mix_means[0] - x) / mix_stds[0] ** 2
+        ) + mix_weights[1] * norm.pdf(x, mix_means[1], mix_stds[1]) * (
+            (mix_means[1] - x) / mix_stds[1] ** 2
+        )
         return grad_p / p_x
 
     # Generate standard Brownian motion paths
     brownian_paths = np.zeros((n_paths, len(t)))
 
     for i in range(n_paths):
-        dW = np.random.normal(0, np.sqrt(dt), len(t)-1)
+        dW = np.random.normal(0, np.sqrt(dt), len(t) - 1)
         brownian_paths[i, 0] = 0.0  # Start at origin
         for j in range(1, len(t)):
-            brownian_paths[i, j] = brownian_paths[i, j-1] + dW[j-1]
+            brownian_paths[i, j] = brownian_paths[i, j - 1] + dW[j - 1]
 
     # Generate score-guided forward paths
     guided_paths = np.zeros((n_paths, len(t)))
@@ -1423,31 +1495,32 @@ def plot_schoenmakers_score_matching(ax=None, color_map=None):
         guided_paths[i, 0] = 0.0  # Start at origin
 
         # Use the same noise sequence for direct comparison
-        dW = np.random.normal(0, np.sqrt(dt), len(t)-1)
+        dW = np.random.normal(0, np.sqrt(dt), len(t) - 1)
 
         for j in range(1, len(t)):
             # In the forward process, we add a drift term to guide toward target
-            current_t = t[j-1]
-            x = guided_paths[i, j-1]
+            current_t = t[j - 1]
+            x = guided_paths[i, j - 1]
 
             # Simple time-dependent interpolation between Brownian and target distributions
             # At t=0, we're at standard normal; at t=T, we want to reach target
-            if current_t < T-dt:  # Avoid numerical issues right at t=T
+            if current_t < T - dt:  # Avoid numerical issues right at t=T
                 # Interpolate between initial and target distribution
                 weight_target = current_t / T
 
                 # Mix score of standard normal and target
                 standard_score = -x  # Score of standard normal is -x
                 target_score = compute_score(x)
-                effective_score = (1-weight_target) * \
-                    standard_score + weight_target * target_score
+                effective_score = (
+                    1 - weight_target
+                ) * standard_score + weight_target * target_score
 
                 # Forward SDE with score guidance
                 drift = effective_score * dt
-                guided_paths[i, j] = guided_paths[i, j-1] + drift + dW[j-1]
+                guided_paths[i, j] = guided_paths[i, j - 1] + drift + dW[j - 1]
             else:
                 # At the end, just add noise
-                guided_paths[i, j] = guided_paths[i, j-1] + dW[j-1]
+                guided_paths[i, j] = guided_paths[i, j - 1] + dW[j - 1]
 
     # Generate reverse paths (starting from target distribution)
     reverse_paths = np.zeros((n_paths, len(t_reverse)))
@@ -1457,8 +1530,8 @@ def plot_schoenmakers_score_matching(ax=None, color_map=None):
         reverse_paths[i, 0] = end_points[i]  # Start at sampled end point
 
         for j in range(1, len(t_reverse)):
-            current_t = T - (j-1) * dt  # Current time in reverse process
-            x = reverse_paths[i, j-1]
+            current_t = T - (j - 1) * dt  # Current time in reverse process
+            x = reverse_paths[i, j - 1]
 
             # Compute score
             score = compute_score(x)
@@ -1466,7 +1539,7 @@ def plot_schoenmakers_score_matching(ax=None, color_map=None):
             # Reverse-time SDE: dy = [f(y,t) - g(y,t)²∇ylog(p(y,t))]dt + g(y,t)dW
             drift = -score * dt
             diffusion = np.random.normal(0, np.sqrt(dt))
-            reverse_paths[i, j] = reverse_paths[i, j-1] + drift + diffusion
+            reverse_paths[i, j] = reverse_paths[i, j - 1] + drift + diffusion
 
     # Calculate limits for consistent plotting
     all_paths = np.concatenate([brownian_paths, guided_paths, reverse_paths])
@@ -1480,53 +1553,90 @@ def plot_schoenmakers_score_matching(ax=None, color_map=None):
 
     # Normalize densities for visualization
     density_scale = 0.2
-    standard_normal_density = standard_normal_density / \
-        np.max(standard_normal_density) * density_scale
-    target_density_values = target_density_values / \
-        np.max(target_density_values) * density_scale
+    standard_normal_density = (
+        standard_normal_density / np.max(standard_normal_density) * density_scale
+    )
+    target_density_values = (
+        target_density_values / np.max(target_density_values) * density_scale
+    )
 
     # Plot standard Brownian paths on left subplot
     for i in range(1, n_paths):
-        ax1.plot(t, brownian_paths[i], color=color_map["c1"],
-                 linewidth=1.2, alpha=0.7)
+        ax1.plot(t, brownian_paths[i], color=color_map["c1"], linewidth=1.2, alpha=0.7)
 
     # Add x(t) = \beta(t) to legend
-    ax1.plot(t, brownian_paths[0], color=color_map["c1"],
-             linewidth=1.2, alpha=0.7, label=r"$x(t) = \beta(t)$")
+    ax1.plot(
+        t,
+        brownian_paths[0],
+        color=color_map["c1"],
+        linewidth=1.2,
+        alpha=0.7,
+        label=r"$x(t) = \beta(t)$",
+    )
 
     # Plot guided paths on left subplot
     for i in range(1, n_paths):
-        ax1.plot(t, guided_paths[i], color=color_map["c2"],
-                 linewidth=1.2, alpha=0.7)
+        ax1.plot(t, guided_paths[i], color=color_map["c2"], linewidth=1.2, alpha=0.7)
 
     # Add \mathcal{y}(t) to legend
-    ax1.plot(t, guided_paths[0], color=color_map["c2"],
-             linewidth=1.2, alpha=0.7, label=r"$\mathcal{y}(t)$")
+    ax1.plot(
+        t,
+        guided_paths[0],
+        color=color_map["c2"],
+        linewidth=1.2,
+        alpha=0.7,
+        label=r"$\mathcal{y}(t)$",
+    )
 
     # Add standard normal density at T=1 to left subplot
-    ax1.fill_betweenx(density_x, T, T + standard_normal_density,
-                      color=color_map["c1"], alpha=0.3)
-    ax1.plot(T + standard_normal_density, density_x,
-             color=color_map["c1"], linewidth=2, label=r"$\mathcal{N}(0,T)$")
+    ax1.fill_betweenx(
+        density_x, T, T + standard_normal_density, color=color_map["c1"], alpha=0.3
+    )
+    ax1.plot(
+        T + standard_normal_density,
+        density_x,
+        color=color_map["c1"],
+        linewidth=2,
+        label=r"$\mathcal{N}(0,T)$",
+    )
 
     # Add target density at T=1 to left subplot (dotted to show approximation)
-    ax1.plot(T + target_density_values, density_x,
-             color=color_map["c8"], linewidth=2, linestyle='--', label=r"$\pi$")
+    ax1.plot(
+        T + target_density_values,
+        density_x,
+        color=color_map["c8"],
+        linewidth=2,
+        linestyle="--",
+        label=r"$\pi$",
+    )
 
     # Plot reverse paths on right subplot
     for i in range(1, n_paths):
-        ax2.plot(t_reverse, reverse_paths[i], color=color_map["c7"],
-                 linewidth=1.2, alpha=0.7)
+        ax2.plot(
+            t_reverse, reverse_paths[i], color=color_map["c7"], linewidth=1.2, alpha=0.7
+        )
 
     # Add x(t)= y(t) to legend
-    ax2.plot(t_reverse, reverse_paths[0], color=color_map["c7"],
-             linewidth=1.2, alpha=0.7, label=r"$x(t) = y(t)$")
+    ax2.plot(
+        t_reverse,
+        reverse_paths[0],
+        color=color_map["c7"],
+        linewidth=1.2,
+        alpha=0.7,
+        label=r"$x(t) = y(t)$",
+    )
 
     # Add target density at t=T to right subplot
-    ax2.fill_betweenx(density_x, T, T + target_density_values,
-                      color=color_map["c8"], alpha=0.3)
-    ax2.plot(T + target_density_values, density_x,
-             color=color_map["c8"], linewidth=2, label=r"$\pi$")
+    ax2.fill_betweenx(
+        density_x, T, T + target_density_values, color=color_map["c8"], alpha=0.3
+    )
+    ax2.plot(
+        T + target_density_values,
+        density_x,
+        color=color_map["c8"],
+        linewidth=2,
+        label=r"$\pi$",
+    )
 
     # Customize left subplot appearance
     ax1.set_title("Forward Process (Brownian Motion)", fontsize=12, pad=15)

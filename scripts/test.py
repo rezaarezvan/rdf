@@ -97,8 +97,7 @@ def animate_3d_surface(ax=None, color_map=None):
     X, Y = np.meshgrid(x, y)
     Z = np.sin(np.sqrt(X**2 + Y**2))
 
-    surf = ax.plot_surface(X, Y, Z, cmap="viridis",
-                           linewidth=0, antialiased=True)
+    surf = ax.plot_surface(X, Y, Z, cmap="viridis", linewidth=0, antialiased=True)
 
     ax.set_title("3D Surface Plot", fontsize=12)
     ax.set_xlabel("X", fontsize=10)
@@ -141,8 +140,7 @@ def plot_beta_beta_squared(ax=None, color_map=None):
     # Add subtle grid
     ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
     # Customize plot appearance
-    ax.set_title(f"Brownian motion and its squared version",
-                 fontsize=12, pad=15)
+    ax.set_title(f"Brownian motion and its squared version", fontsize=12, pad=15)
     ax.set_xlabel(r"$t$", fontsize=10)
     ax.set_ylabel(r"$\beta(t), \beta^2(t)$", fontsize=10)
     # Set axis limits with padding
@@ -164,6 +162,26 @@ def plot_beta_beta_squared(ax=None, color_map=None):
         fontsize=9,
         bbox_to_anchor=(0.98, 0.98),
     )
+
+
+def plot_subfig_example(ax=None, color_map=None):
+    """
+    Example of a subfigure with multiple plots.
+    """
+    # Create a grid of subplots
+    # RDF will make fig so do not create fig here
+    ax1 = plt.subplot(2, 2, 1)
+    ax2 = plt.subplot(2, 2, 2)
+    ax3 = plt.subplot(2, 2, 3)
+    ax4 = plt.subplot(2, 2, 4)
+
+    # Plotting in each subplot
+    animate_sine_wave(ax1, color_map)
+    animate_multiple_functions(ax2, color_map)
+    animate_scatter(ax3, color_map)
+    animate_bar_chart(ax4, color_map)
+
+    plt.tight_layout()
 
 
 if __name__ == "__main__":
@@ -228,5 +246,14 @@ if __name__ == "__main__":
         plot_func=plot_beta_beta_squared,
         animation_type="draw",
         animation_duration=2.0,
+        loop=True,
+    )
+
+    # Example of subfigures
+    plotter.create_animated_plot(
+        save_name="subfig_example",
+        plot_func=plot_subfig_example,
+        animation_type="draw",
+        animation_duration=3.0,
         loop=True,
     )

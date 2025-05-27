@@ -1,0 +1,95 @@
+
+# Figure properties
+figure.figsize: 8, 6
+figure.dpi: 300
+figure.facecolor: white
+figure.edgecolor: white
+
+# Font properties
+font.family: serif
+font.serif: Computer Modern Roman, DejaVu Serif, Times New Roman
+font.size: 12
+font.weight: normal
+mathtext.fontset: cm
+
+# Axes properties
+axes.facecolor: white
+axes.edgecolor: black
+axes.linewidth: 1.0
+axes.grid: True
+axes.titlesize: 14
+axes.titleweight: bold
+axes.labelsize: 12
+axes.labelweight: normal
+axes.spines.top: True
+axes.spines.right: True
+axes.spines.left: True
+axes.spines.bottom: True
+axes.formatter.use_mathtext: True
+axes.autolimit_mode: round_numbers
+axes.xmargin: 0
+axes.ymargin: 0
+
+# Grid properties
+grid.color: lightgray
+grid.linestyle: --
+grid.linewidth: 0.5
+grid.alpha: 0.5
+
+# Line properties
+lines.linewidth: 2.0
+lines.markersize: 8
+lines.markeredgewidth: 1.5
+
+# Patch properties
+patch.linewidth: 1.0
+patch.edgecolor: black
+patch.force_edgecolor: True
+
+# Legend properties
+legend.frameon: True
+legend.framealpha: 0.9
+legend.fancybox: True
+legend.fontsize: 10
+legend.title_fontsize: 12
+legend.edgecolor: 0.8
+legend.borderpad: 0.4
+legend.columnspacing: 1.0
+legend.handlelength: 2.0
+
+# Scatter properties
+scatter.marker: o
+scatter.edgecolors: face
+
+# Color maps and cycles
+image.cmap: viridis
+axes.prop_cycle: cycler('color', ['1f77b4', 'ff7f0e', '2ca02c', 'd62728', '9467bd', '8c564b', 'e377c2', '7f7f7f', 'bcbd22', '17becf'])
+
+# Ticks
+xtick.major.size: 6
+xtick.major.width: 1.0
+xtick.minor.size: 3
+xtick.minor.width: 0.8
+xtick.labelsize: 10
+xtick.direction: in
+xtick.minor.visible: True
+xtick.top: True
+
+ytick.major.size: 6
+ytick.major.width: 1.0
+ytick.minor.size: 3
+ytick.minor.width: 0.8
+ytick.labelsize: 10
+ytick.direction: in
+ytick.minor.visible: True
+ytick.right: True
+
+# Savefig
+savefig.dpi: 300
+savefig.format: pdf
+savefig.bbox: tight
+savefig.pad_inches: 0.1
+savefig.transparent: False
+
+# Errorbar
+errorbar.capsize: 3
