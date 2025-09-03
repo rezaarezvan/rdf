@@ -137,15 +137,15 @@ def plot_diffusion_causality(ax=None, color_map=None):
 
         for i in range(len(t_eval) - 1):
             ax2.plot(
-                sol_base.y[0, i : i + 2],
-                sol_base.y[1, i : i + 2],
+                sol_base.y[0, i: i + 2],
+                sol_base.y[1, i: i + 2],
                 color=colors_base[i],
                 alpha=0.7,
                 linewidth=1.5,
             )
             ax2.plot(
-                sol_perturbed.y[0, i : i + 2],
-                sol_perturbed.y[1, i : i + 2],
+                sol_perturbed.y[0, i: i + 2],
+                sol_perturbed.y[1, i: i + 2],
                 color=colors_perturbed[i],
                 alpha=0.7,
                 linewidth=1.5,
@@ -222,7 +222,8 @@ def plot_diffusion_causality(ax=None, color_map=None):
         perturbed_features[i, 1] = perturbed_trajectories[i][1, -1]
 
         # Color feature (determined by interaction of x and y)
-        base_features[i, 2] = base_trajectories[i][0, -1] * base_trajectories[i][1, -1]
+        base_features[i, 2] = base_trajectories[i][0, -1] * \
+            base_trajectories[i][1, -1]
         perturbed_features[i, 2] = (
             perturbed_trajectories[i][0, -1] * perturbed_trajectories[i][1, -1]
         )
@@ -230,7 +231,8 @@ def plot_diffusion_causality(ax=None, color_map=None):
     # Normalize features for visualization
     feature_min = min(np.min(base_features), np.min(perturbed_features))
     feature_max = max(np.max(base_features), np.max(perturbed_features))
-    base_features_norm = (base_features - feature_min) / (feature_max - feature_min)
+    base_features_norm = (base_features - feature_min) / \
+        (feature_max - feature_min)
     perturbed_features_norm = (perturbed_features - feature_min) / (
         feature_max - feature_min
     )
@@ -500,11 +502,14 @@ def plot_stochastic_SDE(ax=None, color_map=None):
     Creates a visualization demonstrating stochastic SDE trajectories compared to deterministic ODE solutions.
     Shows the effect of noise (diffusion term) in creating variance around the deterministic paths.
     """
-    fig, axes = plt.subplots(1, 2, figsize=(14, 5.5), constrained_layout=True)
+    fig = ax.figure
+    fig.set_size_inches(12, 5.5)
+    ax.remove()
+    gs = fig.add_gridspec(1, 2, width_ratios=[1, 1], wspace=0.3)
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax2 = fig.add_subplot(gs[0, 1])
 
     # 1. Simple 1D SDE in the first subplot: dx = -x dt + σ dW
-    ax1 = axes[0]
-
     # Parameters
     t_span = (0, 5)
     dt = 0.01
@@ -522,7 +527,8 @@ def plot_stochastic_SDE(ax=None, color_map=None):
     # Plot deterministic solution as reference
     t_det = np.linspace(t_span[0], t_span[1], 500)
     x_det = x0 * np.exp(-t_det)
-    ax1.plot(t_det, x_det, "k-", linewidth=2.5, label="Deterministic (ODE)", zorder=10)
+    ax1.plot(t_det, x_det, "k-", linewidth=2.5,
+             label="Deterministic (ODE)", zorder=10)
 
     # Generate and plot stochastic trajectories for each diffusion strength
     for i, sigma in enumerate(diffusion_strengths):
@@ -560,18 +566,6 @@ def plot_stochastic_SDE(ax=None, color_map=None):
             alpha=0.2,
         )
 
-    # Add equation
-    equation_text = r"$dx = -x \, dt + \sigma \, dW_t$"
-    ax1.text(
-        3.9,
-        2.0,
-        equation_text,
-        fontsize=10,
-        bbox=dict(
-            facecolor="white", edgecolor="gray", alpha=0.9, boxstyle="round,pad=0.3"
-        ),
-    )
-
     ax1.set_title("1D SDE: Exponential Decay with Noise", fontsize=12)
     ax1.set_xlabel("Time ($t$)")
     ax1.set_ylabel("State ($x(t)$)")
@@ -580,8 +574,6 @@ def plot_stochastic_SDE(ax=None, color_map=None):
     ax1.legend(loc="upper right", fontsize=8)
 
     # 2. 2D SDE system in the second subplot
-    ax2 = axes[1]
-
     # Parameters for 2D system
     t_span_2d = (0, 4)
     dt_2d = 0.01
@@ -597,13 +589,15 @@ def plot_stochastic_SDE(ax=None, color_map=None):
     n_initial = 6
     radius = 2.0
     theta = np.linspace(0, 2 * np.pi, n_initial, endpoint=False)
-    initial_states = [(radius * np.cos(th), radius * np.sin(th)) for th in theta]
+    initial_states = [(radius * np.cos(th), radius * np.sin(th))
+                      for th in theta]
 
     colors_2d = plt.cm.hsv(np.linspace(0, 1, n_initial))
 
     det_trajectories = []
     for x0 in initial_states:
-        t, x = euler_maruyama(drift_2d, lambda x, t: [0, 0], x0, t_span_2d, dt_2d)
+        t, x = euler_maruyama(drift_2d, lambda x, t: [
+                              0, 0], x0, t_span_2d, dt_2d)
         det_trajectories.append(x)
         ax2.plot(x[0], x[1], "--", color="gray", linewidth=1, alpha=0.5)
 
@@ -627,9 +621,6 @@ def plot_stochastic_SDE(ax=None, color_map=None):
 
             if j == 0:
                 ax2.scatter(x0[0], x0[1], color=colors_2d[i], s=30, zorder=10)
-
-    eq_text = r"$dx = (-0.5x + y) \, dt + \sigma \, d\beta(t)_1, \quad dy = (-x - 0.5y) \, dt + \sigma \, d\beta(t)_2$"
-    ax2.text(-0.9, 2.6, eq_text, fontsize=8, bbox=dict(facecolor="white", alpha=0.9))
 
     ax2.set_title("2D SDE System: Stochastic Phase Portrait", fontsize=12)
     ax2.set_xlabel("$x$")
@@ -699,12 +690,14 @@ def plot_diffusion_models(ax=None, color_map=None):
 
         # Left eye
         left_eye_x = center - radius / 3
-        left_eye_mask = (x - left_eye_x) ** 2 + (y - eye_y) ** 2 <= eye_radius**2
+        left_eye_mask = (x - left_eye_x) ** 2 + \
+            (y - eye_y) ** 2 <= eye_radius**2
         smiley[left_eye_mask] = 0
 
         # Right eye
         right_eye_x = center + radius / 3
-        right_eye_mask = (x - right_eye_x) ** 2 + (y - eye_y) ** 2 <= eye_radius**2
+        right_eye_mask = (x - right_eye_x) ** 2 + \
+            (y - eye_y) ** 2 <= eye_radius**2
         smiley[right_eye_mask] = 0
 
         # Create smile (arc in lower half of face)
@@ -994,12 +987,14 @@ def plot_flow_matching(ax=None, color_map=None):
             # Interpolate covariances
             covs_t = []
             for i in range(len(target_covs)):
-                cov_t = (1 - t) * np.array(initial_cov) + t * np.array(target_covs[i])
+                cov_t = (1 - t) * np.array(initial_cov) + \
+                    t * np.array(target_covs[i])
                 # Ensure covariance matrix is positive definite
                 covs_t.append(cov_t)
 
             # Calculate intermediate distribution as mixture
-            density_t = mixture_distribution(X, Y, means_t, covs_t, target_weights)
+            density_t = mixture_distribution(
+                X, Y, means_t, covs_t, target_weights)
             all_densities.append(density_t)
 
     # Define velocity field for visualization
@@ -1071,7 +1066,8 @@ def plot_flow_matching(ax=None, color_map=None):
             )
             velocity_fields.append((vx, vy))
         else:
-            velocity_fields.append((np.zeros_like(X_sparse), np.zeros_like(Y_sparse)))
+            velocity_fields.append(
+                (np.zeros_like(X_sparse), np.zeros_like(Y_sparse)))
 
     # Create a custom colormap for density visualization
     density_cmap = LinearSegmentedColormap.from_list(
@@ -1472,7 +1468,8 @@ def plot_linear_nonlinear_transformations(ax=None, color_map=None):
     # Create a sparser grid for cleaner visualization
     grid_points = 8
     grid_z1, grid_z2 = np.meshgrid(
-        np.linspace(-2.5, 2.5, grid_points), np.linspace(-2.5, 2.5, grid_points)
+        np.linspace(-2.5, 2.5, grid_points), np.linspace(-2.5,
+                                                         2.5, grid_points)
     )
     grid_x1, grid_x2 = nonlinear_transform(grid_z1, grid_z2)
 
@@ -1670,11 +1667,11 @@ if __name__ == "__main__":
     plotter = RDF()
     # svg_content = plotter.create_themed_plot(
     #     save_name="diffusion_causality", plot_func=plot_diffusion_causality, is_3d=False)
-    svg_content = plotter.create_themed_plot(
-        save_name="deterministic_ODE", plot_func=plot_deterministic_ODE
-    )
     # svg_content = plotter.create_themed_plot(
-    #     save_name="stochastic_SDE", plot_func=plot_stochastic_SDE, is_3d=False)
+    #     save_name="deterministic_ODE", plot_func=plot_deterministic_ODE
+    # )
+    svg_content = plotter.create_themed_plot(
+        save_name="stochastic_SDE", plot_func=plot_stochastic_SDE)
     # svg_content = plotter.create_themed_plot(
     #     save_name="diffusion_models", plot_func=plot_diffusion_models, is_3d=False)
     # svg_content = plotter.create_themed_plot(
