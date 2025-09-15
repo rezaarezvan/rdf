@@ -32,7 +32,7 @@ class RDF:
         fig = plt.figure(facecolor="none")
         ax = fig.add_subplot(111, projection="3d" if is_3d else None)
         ax.set_facecolor("none")
-        plot_kwargs.setdefault("color_map", self.theme.base)
+        plot_kwargs.setdefault("color_map", {**self.theme.base, **self.theme.light})
         plot_func(ax=ax, **plot_kwargs)
         ax.tick_params(colors="#000")
         ax.xaxis.label.set_color("#000")

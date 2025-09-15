@@ -31,6 +31,10 @@ class ColorTheme:
                 "senary": "#e377c2",
                 "septenary": "#7f7f7f",
                 "octonary": "#bcbd22",
+                "black": "#000000",
+                "gray": "#7f7f7f",
+                "grey": "#7f7f7f",
+                "white": "#ffffff",
             },
             dark={
                 "primary": "#FF4A98",
@@ -41,6 +45,10 @@ class ColorTheme:
                 "senary": "#FF79C6",
                 "septenary": "#CCCCCC",
                 "octonary": "#E6DB74",
+                "black": "#FFFFFF",  # Black becomes white in dark mode
+                "gray": "#CCCCCC",  # Gray becomes lighter in dark mode
+                "grey": "#CCCCCC",
+                "white": "#000000",  # White becomes black in dark mode
             },
             base={
                 "c1": "#FF0001",

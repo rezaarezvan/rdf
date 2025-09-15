@@ -5,10 +5,45 @@ from .themes import ColorTheme
 
 
 def _apply_colour_classes(svg: str, theme: ColorTheme) -> str:
-    """Replace literal hex colours with `.c1 … .c8` classes."""
+    """Replace literal hex colours with CSS classes."""
+    # Handle base colors (c1-c8)
     for i, (_, col) in enumerate(theme.base.items(), 1):
-        pattern = rf'(style="[^"]*fill: ?{col}[^"]*"|fill="{col}")'
-        svg = re.sub(pattern, f'class="c{i}"', svg)
+        # Handle both fill and stroke, with and without style attributes
+        svg = re.sub(rf'fill="{re.escape(col)}"', f'class="c{i}"', svg)
+        svg = re.sub(rf'stroke="{re.escape(col)}"', f'class="c{i}"', svg)
+        svg = re.sub(
+            rf'(style="[^"]*?)fill: ?{re.escape(col)}([^"]*")',
+            rf"\1fill: var(--c{i})\2",
+            svg,
+        )
+        svg = re.sub(
+            rf'(style="[^"]*?)stroke: ?{re.escape(col)}([^"]*")',
+            rf"\1stroke: var(--c{i})\2",
+            svg,
+        )
+
+    # Handle theme-specific colors (black, gray, white, etc.)
+    for color_name, hex_color in theme.light.items():
+        if color_name not in theme.base:  # Skip base colors (already handled)
+            escaped_hex = re.escape(hex_color.upper())
+            # Handle both upper and lower case hex
+            for hex_variant in [hex_color, hex_color.upper(), hex_color.lower()]:
+                escaped = re.escape(hex_variant)
+                # Direct attribute replacements
+                svg = re.sub(rf'fill="{escaped}"', f'class="{color_name}"', svg)
+                svg = re.sub(rf'stroke="{escaped}"', f'class="{color_name}"', svg)
+                # Style attribute replacements
+                svg = re.sub(
+                    rf'(style="[^"]*?)fill: ?{escaped}([^"]*")',
+                    rf"\1fill: var(--{color_name})\2",
+                    svg,
+                )
+                svg = re.sub(
+                    rf'(style="[^"]*?)stroke: ?{escaped}([^"]*")',
+                    rf"\1stroke: var(--{color_name})\2",
+                    svg,
+                )
+
     return svg
 
 
@@ -28,21 +63,8 @@ _TAG_PATTERNS: list[tuple[str, str]] = [
 def _apply_element_tags(svg: str) -> str:
     for pat, rep in _TAG_PATTERNS:
         svg = re.sub(pat, rep, svg)
-
     # generic grid handler
     svg = re.sub(r'<g id="(grid_[^"]*)"', r'<g id="\1" class="grid"', svg)
-
-    # stroke="#000" → stroke="currentColor"
-    svg = re.sub(r'stroke="#000000"', 'stroke="currentColor"', svg)
-    svg = re.sub(
-        r'(style="[^"]*?)stroke: ?#000000([^\"]*")', r"\1stroke: currentColor\2", svg
-    )
-
-    # after stroke → currentColor lines
-    svg = re.sub(r'fill="#000000"', 'fill="currentColor"', svg)
-    svg = re.sub(
-        r'(style="[^"]*?)fill: ?#000000([^"]*")', r"\\1fill: currentColor\\2", svg
-    )
     return svg
 
 

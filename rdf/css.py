@@ -78,7 +78,11 @@ _AXIS_AND_MISC = textwrap.dedent(
 
 
 def _cls_lines(pal: Mapping[str, str]) -> str:
-    return "".join(f".{k} {{ fill:{v}; stroke:{v}; }}" for k, v in sorted(pal.items()))
+    lines = []
+    for k, v in sorted(pal.items()):
+        lines.append(f".{k} {{ fill:{v}; stroke:{v}; }}")
+        lines.append(f":root {{ --{k}: {v}; }}")
+    return "".join(lines)
 
 
 def build_style(theme: ColorTheme) -> str:

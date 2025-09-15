@@ -116,8 +116,7 @@ def plot_SDE_example(ax=None, color_map=None):
     x = np.zeros_like(t)
     x[0] = np.random.normal(0, 1)  # Initial condition
     for i in range(1, len(t)):
-        x[i] = x[i - 1] + 0.5 * x[i - 1] * \
-            dt + np.random.normal(0, np.sqrt(dt))
+        x[i] = x[i - 1] + 0.5 * x[i - 1] * dt + np.random.normal(0, np.sqrt(dt))
 
     y_min, y_max = np.min(x) + padding, np.max(x) - padding
 
@@ -184,15 +183,13 @@ def plot_dynamic_SDE_example(ax=None, color_map=None):
     time = np.linspace(x_min - padding, x_max + padding, len(x))
     # Plot the SDE
     ax.plot(time, y, color=color_map["c8"], linewidth=2, label="$v(t)$")
-    ax.plot(time, x, color=color_map["c7"],
-            linewidth=2, label="$x(t)$", linestyle="--")
+    ax.plot(time, x, color=color_map["c7"], linewidth=2, label="$x(t)$", linestyle="--")
 
     # Add subtle grid
     ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
 
     # Customize plot appearance
-    ax.set_title("Constant Velocity Model with $x(0) = v(0) = 0$",
-                 fontsize=12, pad=15)
+    ax.set_title("Constant Velocity Model with $x(0) = v(0) = 0$", fontsize=12, pad=15)
     ax.set_xlabel(r"$t$", fontsize=10)
     ax.set_ylabel(r"$x(t), v(t)$", fontsize=10)
 
@@ -258,8 +255,7 @@ def plot_Riemann_sum(ax=None, color_map=None):
     # Add subtle grid
     ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
     # Customize plot appearance
-    ax.set_title(f"Riemann Sum, $n = 10$, and error = ${
-                 error}$", fontsize=12, pad=15)
+    ax.set_title(f"Riemann Sum, $n = 10$, and error = ${error}$", fontsize=12, pad=15)
     ax.set_xlabel(r"$x$", fontsize=10)
     ax.set_ylabel(r"$f(x)$", fontsize=10)
     # Set axis limits with padding
@@ -302,8 +298,7 @@ def plot_random_diff(ax=None, color_map=None):
     # Plot the original function
     ax.plot(x, y, color=color_map["c8"], linewidth=2)
     # Plot the tangent line
-    ax.plot(x, tangent_line,
-            color=color_map["c7"], linewidth=2, linestyle="--")
+    ax.plot(x, tangent_line, color=color_map["c7"], linewidth=2, linestyle="--")
     # Add a point at x(1) and text that says \dot{x}(1) = y_diff(1)
     ax.scatter(x_tangent, y_tangent, color=color_map["c7"], s=50)
     ax.text(
@@ -364,8 +359,7 @@ def plot_brownian_VS_sin(ax=None, color_map=None):
     B[0] = 0
     for i in range(1, len(t)):
         B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
-    y_min, y_max = min(np.min(B), x_min) - \
-        padding, max(np.max(B), x_max) + padding
+    y_min, y_max = min(np.min(B), x_min) - padding, max(np.max(B), x_max) + padding
     # Plot the sine function
     ax1.plot(x, y, color=color_map["c8"], linewidth=2)
     # Plot the Brownian motion
@@ -417,8 +411,7 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     B[0] = 0
     for i in range(1, len(t)):
         B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
-    y_min, y_max = min(np.min(B), x_min) - \
-        padding, max(np.max(B), x_max) + padding
+    y_min, y_max = min(np.min(B), x_min) - padding, max(np.max(B), x_max) + padding
     # Create the Left Riemann sum
     n = 10
     dx = (x_max - x_min) / n
@@ -449,8 +442,7 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     ax.tick_params(axis="both", which="major", labelsize=9)
     # Add red points on the Brownian motion at the left Riemann sum points
     for i in range(n):
-        ax.scatter(x_riemann[i], B[int(x_riemann[i] / dt)],
-                   color=color_map["c7"], s=50)
+        ax.scatter(x_riemann[i], B[int(x_riemann[i] / dt)], color=color_map["c7"], s=50)
 
 
 def plot_left_reimann_brownian(ax=None, color_map=None):
@@ -472,8 +464,7 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     B[0] = 0
     for i in range(1, len(t)):
         B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
-    y_min, y_max = min(np.min(B), x_min) - \
-        padding, max(np.max(B), x_max) + padding
+    y_min, y_max = min(np.min(B), x_min) - padding, max(np.max(B), x_max) + padding
     # Create the Left Riemann sum
     n = 10
     dx = (x_max - x_min) / n
@@ -583,8 +574,7 @@ def plot_beta_beta_squared(ax=None, color_map=None):
     # Add subtle grid
     ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
     # Customize plot appearance
-    ax.set_title(f"Brownian motion and its squared version",
-                 fontsize=12, pad=15)
+    ax.set_title(f"Brownian motion and its squared version", fontsize=12, pad=15)
     ax.set_xlabel(r"$t$", fontsize=10)
     ax.set_ylabel(r"$\beta(t), \beta^2(t)$", fontsize=10)
     # Set axis limits with padding
@@ -642,15 +632,12 @@ def plot_beta_squared_second_order_taylor(ax=None, color_map=None):
 
     # Determine axis limits
     x_min, x_max = np.min(B) - padding_x, np.max(B) + padding_x
-    y_min = min(0, np.min(taylor_expansion2)) - \
-        padding_y  # Ensure 0 is included
+    y_min = min(0, np.min(taylor_expansion2)) - padding_y  # Ensure 0 is included
     y_max = max(np.max(B_squared), np.max(taylor_expansion1)) + padding_y
 
     # Plot squared Brownian motion
-    ax1.plot(B, B_squared, color=color_map["c8"],
-             linewidth=2, label="$\\beta^2(t)$")
-    ax2.plot(B, B_squared, color=color_map["c8"],
-             linewidth=2, label="$\\beta^2(t)$")
+    ax1.plot(B, B_squared, color=color_map["c8"], linewidth=2, label="$\\beta^2(t)$")
+    ax2.plot(B, B_squared, color=color_map["c8"], linewidth=2, label="$\\beta^2(t)$")
     # Plot second-order Taylor expansion
     ax1.plot(
         B,
@@ -764,12 +751,10 @@ def plot_ornstein_uhlenbeck(ax=None, color_map=None):
 
     # Plot all sample paths
     for i in range(n_paths):
-        ax.plot(t, paths[i], color=colors[i %
-                len(colors)], linewidth=1, alpha=0.8)
+        ax.plot(t, paths[i], color=colors[i % len(colors)], linewidth=1, alpha=0.8)
 
     # Plot the mean as a dashed line
-    ax.plot(t, mean, color="black", linestyle="--",
-            linewidth=1.5, label="Mean")
+    ax.plot(t, mean, color="black", linestyle="--", linewidth=1.5, label="Mean")
 
     # Add a line at the boundary of the standard deviation envelope
     ax.plot(
@@ -781,8 +766,7 @@ def plot_ornstein_uhlenbeck(ax=None, color_map=None):
         alpha=0.5,
         label="±1 std dev",
     )
-    ax.plot(t, mean - std_dev, color="black",
-            linestyle=":", linewidth=0.8, alpha=0.5)
+    ax.plot(t, mean - std_dev, color="black", linestyle=":", linewidth=0.8, alpha=0.5)
 
     # Customize plot appearance
     ax.set_title(
@@ -947,14 +931,12 @@ def plot_denoising_diffusion(ax=None, color_map=None):
 
             # Euler-Maruyama step
             drift = drift_coef * paths[i, j - 1] * dt_actual
-            diffusion = diffusion_coef * \
-                np.random.normal(0, np.sqrt(dt_actual))
+            diffusion = diffusion_coef * np.random.normal(0, np.sqrt(dt_actual))
             paths[i, j] = paths[i, j - 1] + drift + diffusion
 
     # Plot the paths
     for i, x0 in enumerate(initial_points):
-        ax.plot(t, paths[i], color=colors[i],
-                linewidth=1.2, label=f"$x_0={x0}$")
+        ax.plot(t, paths[i], color=colors[i], linewidth=1.2, label=f"$x_0={x0}$")
 
     # Customize plot appearance
     ax.set_title(
@@ -1010,8 +992,7 @@ def plot_brownian_to_point(ax=None, color_map=None):
     B[0] = 0
     for i in range(1, len(t)):
         B[i] = B[i - 1] + np.random.normal(0, np.sqrt(dt))
-    y_min, y_max = min(np.min(B), x_min) - \
-        padding, max(np.max(B), x_max) + padding
+    y_min, y_max = min(np.min(B), x_min) - padding, max(np.max(B), x_max) + padding
     # Create the target point/line
     v = 1
     T = 2
@@ -1194,7 +1175,7 @@ def plot_brownian_transition_density(ax=None, color_map=None):
     for i in range(n_samples):
         alpha = 0.3 if i < n_samples - 5 else 0.6  # Make a few paths more visible
         ax.plot(
-            time_points[s_idx: t_idx + 1],
+            time_points[s_idx : t_idx + 1],
             future_paths[i],
             color=color_map["c2"],
             linewidth=1,
@@ -1408,8 +1389,7 @@ def plot_brownian_bridge_density(ax=None, color_map=None):
         r"$p(\beta(t)|\beta(s),\beta(T)=v)$",
         xy=(t + 0.2, mean_at_t + 1.2 * std_at_t),
         xytext=(t + 0.5, mean_at_t + 2 * std_at_t),
-        arrowprops=dict(arrowstyle="->",
-                        connectionstyle="arc3", color="black"),
+        arrowprops=dict(arrowstyle="->", connectionstyle="arc3", color="black"),
         fontsize=10,
         ha="center",
         va="center",
@@ -1420,8 +1400,7 @@ def plot_brownian_bridge_density(ax=None, color_map=None):
         r"$\beta(s)$",
         xy=(s, beta_s),
         xytext=(s - 0.3, beta_s - 0.5),
-        arrowprops=dict(arrowstyle="->",
-                        connectionstyle="arc3", color="black"),
+        arrowprops=dict(arrowstyle="->", connectionstyle="arc3", color="black"),
         fontsize=10,
         ha="right",
         va="center",
@@ -1431,8 +1410,7 @@ def plot_brownian_bridge_density(ax=None, color_map=None):
     ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
 
     # Customize plot appearance
-    ax.set_title("Brownian Bridge with Transition Density",
-                 fontsize=12, pad=15)
+    ax.set_title("Brownian Bridge with Transition Density", fontsize=12, pad=15)
     ax.set_xlabel("Time", fontsize=10)
     ax.set_ylabel("Value", fontsize=10)
 
@@ -1581,8 +1559,7 @@ def plot_schoenmakers_score_matching(ax=None, color_map=None):
     # Normalize densities for visualization
     density_scale = 0.2
     standard_normal_density = (
-        standard_normal_density /
-        np.max(standard_normal_density) * density_scale
+        standard_normal_density / np.max(standard_normal_density) * density_scale
     )
     target_density_values = (
         target_density_values / np.max(target_density_values) * density_scale
@@ -1590,8 +1567,7 @@ def plot_schoenmakers_score_matching(ax=None, color_map=None):
 
     # Plot standard Brownian paths on left subplot
     for i in range(1, n_paths):
-        ax1.plot(t, brownian_paths[i],
-                 color=color_map["c1"], linewidth=1.2, alpha=0.7)
+        ax1.plot(t, brownian_paths[i], color=color_map["c1"], linewidth=1.2, alpha=0.7)
 
     # Add x(t) = \beta(t) to legend
     ax1.plot(
@@ -1605,8 +1581,7 @@ def plot_schoenmakers_score_matching(ax=None, color_map=None):
 
     # Plot guided paths on left subplot
     for i in range(1, n_paths):
-        ax1.plot(t, guided_paths[i],
-                 color=color_map["c2"], linewidth=1.2, alpha=0.7)
+        ax1.plot(t, guided_paths[i], color=color_map["c2"], linewidth=1.2, alpha=0.7)
 
     # Add \mathcal{y}(t) to legend
     ax1.plot(
