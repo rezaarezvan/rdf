@@ -29,9 +29,9 @@ def plot_example_question_regions(ax=None, color_map=None):
     X, Y = np.meshgrid(x, y)
 
     # Define the inequalities
-    g1 = -X**3 + Y  # g_1 = -x_1^3 + x_2 <= 0
-    g2 = X**5 - Y   # g_2 = x_1^5 - x_2 <= 0
-    g3 = -Y         # g_3 = -x_2 <= 0
+    g1 = -(X**3) + Y  # g_1 = -x_1^3 + x_2 <= 0
+    g2 = X**5 - Y  # g_2 = x_1^5 - x_2 <= 0
+    g3 = -Y  # g_3 = -x_2 <= 0
 
     # Create a mask for the feasible region S
     feasible_region = np.logical_and(np.logical_and(g1 <= 0, g2 <= 0), g3 <= 0)
@@ -48,10 +48,8 @@ def plot_example_question_regions(ax=None, color_map=None):
     )
 
     # Plot the boundary curves
-    ax.contour(X, Y, g1, levels=[
-               0], colors=color_map["c5"], linewidths=2.5, zorder=3)
-    ax.contour(X, Y, g2, levels=[
-               0], colors=color_map["c6"], linewidths=2.5, zorder=3)
+    ax.contour(X, Y, g1, levels=[0], colors=color_map["c5"], linewidths=2.5, zorder=3)
+    ax.contour(X, Y, g2, levels=[0], colors=color_map["c6"], linewidths=2.5, zorder=3)
     ax.axhline(0, color=color_map["c7"], linewidth=2.5, zorder=3)
 
     # Mark the point bar(x) = [0, 0]^T
@@ -103,7 +101,7 @@ def plot_example_question_regions(ax=None, color_map=None):
         fontsize=10,
         ha="center",
         va="center",
-        bbox=dict(boxstyle="round,pad=0.3", facecolor="white",  alpha=0.8),
+        bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8),
         color=color_map["c7"],
     )
 

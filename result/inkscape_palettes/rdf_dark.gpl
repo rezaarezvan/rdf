@@ -1,0 +1,24 @@
+GIMP Palette
+Name: RDF Dark
+Columns: 4
+#
+255 255 255  black
+255   0   1  c1
+  0 255   2  c2
+  0   0 255  c3
+255   0 255  c4
+  0 255 255  c5
+255 255   0  c6
+255 128   0  c7
+128   0 255  c8
+204 204 204  gray
+204 204 204  grey
+230 219 116  octonary
+255  74 152  primary
+180 160 255  quaternary
+255 184 107  quinary
+ 10 250 250  secondary
+255 121 198  senary
+204 204 204  septenary
+127 131 255  tertiary
+  0   0   0  white

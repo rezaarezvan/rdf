@@ -45,10 +45,8 @@ def plot_example_question_regions(ax=None, color_map=None):
     )
 
     # Plot the boundary curves
-    ax.contour(X, Y, g1, levels=[
-               0], colors=color_map["c8"], linewidths=2.5, zorder=3)
-    ax.contour(X, Y, g2, levels=[
-               0], colors=color_map["c8"], linewidths=2.5, zorder=3)
+    ax.contour(X, Y, g1, levels=[0], colors=color_map["c8"], linewidths=2.5, zorder=3)
+    ax.contour(X, Y, g2, levels=[0], colors=color_map["c8"], linewidths=2.5, zorder=3)
 
     # Mark the point bar(x) = [0, 0]^T
     ax.scatter(
@@ -154,8 +152,7 @@ def plot_example_question_regions2(ax=None, color_map=None):
     )
 
     # Plot the boundary curves
-    ax.contour(X, Y, g1, levels=[
-               0], colors=color_map["c8"], linewidths=2.5, zorder=3)
+    ax.contour(X, Y, g1, levels=[0], colors=color_map["c8"], linewidths=2.5, zorder=3)
     ax.axhline(0, color=color_map["c8"], linewidth=2.5, zorder=3)
 
     # Mark the points x1 = [0 0]^T, x2 = [-1 0]^T, and x3 = [1 0]^T
@@ -166,7 +163,13 @@ def plot_example_question_regions2(ax=None, color_map=None):
     }
     for label, (px, py) in points.items():
         ax.scatter(
-            px, py, s=100, color=color_map["c1"], edgecolor="white", linewidth=2, zorder=5
+            px,
+            py,
+            s=100,
+            color=color_map["c1"],
+            edgecolor="white",
+            linewidth=2,
+            zorder=5,
         )
         ax.annotate(
             rf"${label}$",
@@ -182,52 +185,124 @@ def plot_example_question_regions2(ax=None, color_map=None):
     # grad f = [-1, 1]^T => -grad f = [1, -1]^T,
     # grad g1 = [2x1, 2x2]^T => at (0,0) = [0, 0]^T
     # grad g2 = [0, -1]^T
-    ax.quiver(0, 0, 1, -1, angles='xy', scale_units='xy',
-              scale=3, color=color_map["c1"], zorder=6)
-    ax.annotate(r"$-\nabla f$", xy=(0.5, -0.5),
-                fontsize=10, color=color_map["c1"])
-    ax.quiver(0, 0, 0, -1, angles='xy', scale_units='xy',
-              scale=3, color=color_map["c2"], zorder=6)
-    ax.annotate(r"$\nabla g_2$", xy=(0.1, -0.5),
-                fontsize=10, color=color_map["c2"])
-    ax.quiver(0, 0, 0, 0, angles='xy', scale_units='xy',
-              scale=1, color=color_map["c3"], zorder=6)
-    ax.annotate(r"$\nabla g_1$", xy=(0.1, 0.1),
-                fontsize=10, color=color_map["c3"])
+    ax.quiver(
+        0,
+        0,
+        1,
+        -1,
+        angles="xy",
+        scale_units="xy",
+        scale=3,
+        color=color_map["c1"],
+        zorder=6,
+    )
+    ax.annotate(r"$-\nabla f$", xy=(0.5, -0.5), fontsize=10, color=color_map["c1"])
+    ax.quiver(
+        0,
+        0,
+        0,
+        -1,
+        angles="xy",
+        scale_units="xy",
+        scale=3,
+        color=color_map["c2"],
+        zorder=6,
+    )
+    ax.annotate(r"$\nabla g_2$", xy=(0.1, -0.5), fontsize=10, color=color_map["c2"])
+    ax.quiver(
+        0,
+        0,
+        0,
+        0,
+        angles="xy",
+        scale_units="xy",
+        scale=1,
+        color=color_map["c3"],
+        zorder=6,
+    )
+    ax.annotate(r"$\nabla g_1$", xy=(0.1, 0.1), fontsize=10, color=color_map["c3"])
 
     # x2
     # grad f = [-1, 1]^T => -grad f = [1, -1]^T,
     # grad g1 = [2x1, 2x2]^T => at (-1,0) = [-2, 0]^T
     # grad g2 = [0, -1]^T
-    ax.quiver(-1, 0, 1, -1, angles='xy', scale_units='xy',
-              scale=3, color=color_map["c1"], zorder=6)
-    ax.annotate(r"$-\nabla f$", xy=(-0.5, -0.5),
-                fontsize=10, color=color_map["c1"])
-    ax.quiver(-1, 0, 0, -1, angles='xy', scale_units='xy',
-              scale=3, color=color_map["c2"], zorder=6)
-    ax.annotate(r"$\nabla g_2$", xy=(-0.9, -0.5),
-                fontsize=10, color=color_map["c2"])
-    ax.quiver(-1, 0, -2, 0, angles='xy', scale_units='xy',
-              scale=3, color=color_map["c3"], zorder=6)
-    ax.annotate(r"$\nabla g_1$", xy=(-1.3, 0.1),
-                fontsize=10, color=color_map["c3"])
+    ax.quiver(
+        -1,
+        0,
+        1,
+        -1,
+        angles="xy",
+        scale_units="xy",
+        scale=3,
+        color=color_map["c1"],
+        zorder=6,
+    )
+    ax.annotate(r"$-\nabla f$", xy=(-0.5, -0.5), fontsize=10, color=color_map["c1"])
+    ax.quiver(
+        -1,
+        0,
+        0,
+        -1,
+        angles="xy",
+        scale_units="xy",
+        scale=3,
+        color=color_map["c2"],
+        zorder=6,
+    )
+    ax.annotate(r"$\nabla g_2$", xy=(-0.9, -0.5), fontsize=10, color=color_map["c2"])
+    ax.quiver(
+        -1,
+        0,
+        -2,
+        0,
+        angles="xy",
+        scale_units="xy",
+        scale=3,
+        color=color_map["c3"],
+        zorder=6,
+    )
+    ax.annotate(r"$\nabla g_1$", xy=(-1.3, 0.1), fontsize=10, color=color_map["c3"])
 
     # x3
     # grad f = [-1, 1]^T => -grad f = [1, -1]^T,
     # grad g1 = [2x1, 2x2]^T => at (1,0) = [2, 0]^T
     # grad g2 = [0, -1]^T
-    ax.quiver(1, 0, 1, -1, angles='xy', scale_units='xy',
-              scale=3, color=color_map["c1"], zorder=6)
-    ax.annotate(r"$-\nabla f$", xy=(1.5, -0.5),
-                fontsize=10, color=color_map["c1"])
-    ax.quiver(1, 0, 0, -1, angles='xy', scale_units='xy',
-              scale=3, color=color_map["c2"], zorder=6)
-    ax.annotate(r"$\nabla g_2$", xy=(0.9, -0.5),
-                fontsize=10, color=color_map["c2"])
-    ax.quiver(1, 0, 2, 0, angles='xy', scale_units='xy',
-              scale=3, color=color_map["c3"], zorder=6)
-    ax.annotate(r"$\nabla g_1$", xy=(1.3, 0.1),
-                fontsize=10, color=color_map["c3"])
+    ax.quiver(
+        1,
+        0,
+        1,
+        -1,
+        angles="xy",
+        scale_units="xy",
+        scale=3,
+        color=color_map["c1"],
+        zorder=6,
+    )
+    ax.annotate(r"$-\nabla f$", xy=(1.5, -0.5), fontsize=10, color=color_map["c1"])
+    ax.quiver(
+        1,
+        0,
+        0,
+        -1,
+        angles="xy",
+        scale_units="xy",
+        scale=3,
+        color=color_map["c2"],
+        zorder=6,
+    )
+    ax.annotate(r"$\nabla g_2$", xy=(0.9, -0.5), fontsize=10, color=color_map["c2"])
+    ax.quiver(
+        1,
+        0,
+        2,
+        0,
+        angles="xy",
+        scale_units="xy",
+        scale=3,
+        color=color_map["c3"],
+        zorder=6,
+    )
+    ax.annotate(r"$\nabla g_1$", xy=(1.3, 0.1), fontsize=10, color=color_map["c3"])
 
     # Customize plot appearance
     ax.set_xlabel(r"$x_1$", fontsize=12)

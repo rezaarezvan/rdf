@@ -35,11 +35,11 @@ def plot_example_question_regions(ax=None, color_map=None):
 
     # Define the objective function and its gradient
     def f(X, Y):
-        return X**2 + (1/100) * Y**2
+        return X**2 + (1 / 100) * Y**2
 
     def grad_f(X, Y):
         dfdx1 = 2 * X
-        dfdx2 = (2/100) * Y
+        dfdx2 = (2 / 100) * Y
         return dfdx1, dfdx2
 
     def f_iso(X, Y):
@@ -55,8 +55,7 @@ def plot_example_question_regions(ax=None, color_map=None):
     Z = f_iso(X_fine, Y_fine)
 
     # Plot the objective function as a color background
-    ax.contourf(X_fine, Y_fine, Z, levels=50,
-                cmap='RdYlGn_r', alpha=0.7, zorder=1)
+    ax.contourf(X_fine, Y_fine, Z, levels=50, cmap="RdYlGn_r", alpha=0.7, zorder=1)
 
     # Compute the gradient at each point in the coarse grid
     # Try the isotropic version first to match the radial pattern
@@ -75,7 +74,7 @@ def plot_example_question_regions(ax=None, color_map=None):
         -U,
         -V,
         N,  # Color by magnitude
-        cmap='viridis',
+        cmap="viridis",
         scale=50,
         width=0.004,
         headwidth=4,
@@ -90,8 +89,8 @@ def plot_example_question_regions(ax=None, color_map=None):
     circle_y = np.sin(theta)
 
     # Plot the constraint boundary
-    ax.plot(circle_x, circle_y, color='white', linewidth=3, zorder=4)
-    ax.plot(circle_x, circle_y, color='black', linewidth=1.5, zorder=5)
+    ax.plot(circle_x, circle_y, color="white", linewidth=3, zorder=4)
+    ax.plot(circle_x, circle_y, color="black", linewidth=1.5, zorder=5)
 
     # Mark the optimal points [0, ±1] and KKT points [±1, 0]
     optimal_points = np.array([[0, 1], [0, -1]])
@@ -101,24 +100,24 @@ def plot_example_question_regions(ax=None, color_map=None):
         optimal_points[:, 0],
         optimal_points[:, 1],
         s=120,
-        color='red',
-        edgecolor='white',
+        color="red",
+        edgecolor="white",
         linewidth=2,
         zorder=7,
         label="Optimal Points",
-        marker='o'
+        marker="o",
     )
 
     ax.scatter(
         kkt_points[:, 0],
         kkt_points[:, 1],
         s=120,
-        color='limegreen',
-        edgecolor='white',
+        color="limegreen",
+        edgecolor="white",
         linewidth=2,
         zorder=7,
         label="KKT Points (Not Optimal)",
-        marker='s'
+        marker="s",
     )
 
     # Customize plot appearance
@@ -135,8 +134,8 @@ def plot_example_question_regions(ax=None, color_map=None):
     ax.spines["right"].set_visible(False)
 
     # Add coordinate axes
-    ax.axhline(0, color='black', linewidth=0.8, alpha=0.5, zorder=2)
-    ax.axvline(0, color='black', linewidth=0.8, alpha=0.5, zorder=2)
+    ax.axhline(0, color="black", linewidth=0.8, alpha=0.5, zorder=2)
+    ax.axvline(0, color="black", linewidth=0.8, alpha=0.5, zorder=2)
 
 
 if __name__ == "__main__":
