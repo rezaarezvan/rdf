@@ -1,0 +1,27 @@
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}[>=stealth, node distance=22mm, thick]
+
+% Styles
+\tikzstyle{v}=[circle, draw=red, minimum size=15mm, font=\LARGE\bfseries]
+\tikzstyle{obs}=[circle, draw=red, fill=blue!50, minimum size=15mm, font=\LARGE\bfseries]
+\tikzstyle{textlabel}=[anchor=center, font=\Huge\bfseries]
+\tikzstyle{redarrow}=[->, red, line width=1mm]
+
+% Title
+\node[textlabel] (title) at (0, 0) {$\mathit{d}$\textbf{-separation}};
+
+% Nodes
+\node[v, below=55mm of title.south, xshift=-10mm] (c) {$c$};
+\node[v, above=10mm of c.north] (e) {$e$};
+\node[v, above left=20mm of e] (a) {$a$};
+\node[obs, above right=20mm of e] (f) {$f$};
+\node[v, below right=20mm of f] (b) {$b$};
+
+% Arrows (red, consistent with your style)
+\draw[redarrow] (e) -- (c);
+\draw[redarrow] (a) -- (e);
+\draw[redarrow] (f) -- (e);
+\draw[redarrow] (f) -- (b);
+
+\end{tikzpicture}

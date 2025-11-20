@@ -1,0 +1,37 @@
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}[>=stealth, node distance=18mm, thick]
+
+% Styles
+\tikzstyle{v}=[circle, draw, minimum size=15mm, font=\LARGE\bfseries]
+\tikzstyle{obs}=[circle, draw, fill=blue!50, minimum size=15mm, font=\LARGE\bfseries]
+\tikzstyle{textlabel}=[anchor=west, font=\LARGE\bfseries]
+
+% Titles
+\node[textlabel, red] (tt) at (0, 0) {\textbf{Tail-to-tail} nodes};
+\node[textlabel, red] (ht) at (7.5, 0) {\textbf{Head-to-tail} nodes};
+\node[textlabel, red] (hh) at (15, 0) {\textbf{Head-to-head} nodes};
+
+% % Tail-to-tail
+\node[obs, below=3mm of tt.south] (c1) {$c$};
+\node[v, below left=14mm of c1] (a1) {$a$};
+\node[v, below right=18mm of c1] (b1) {$b$};
+\draw[->] (c1) -- (a1);
+\draw[->] (c1) -- (b1);
+%
+%
+% % % Head-to-tail
+\node[obs, below=3mm of ht.south] (c2) {$c$};
+\node[v, left=14mm of c2] (a2) {$a$};
+\node[v, right=18mm of c2] (b2) {$b$};
+\draw[->] (a2) -- (c2);
+\draw[->] (c2) -- (b2);
+
+% % Head-to-head
+\node[v, below=25mm of hh.south] (c3) {$c$};
+\node[v, above left=14mm of c3] (a3) {$a$};
+\node[v, above right=18mm of c3] (b3) {$b$};
+\draw[->] (a3) -- (c3);
+\draw[->] (b3) -- (c3);
+
+\end{tikzpicture}
