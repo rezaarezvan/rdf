@@ -1,0 +1,43 @@
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}[>=stealth, node distance=15mm, thick]
+
+% Styles
+\tikzstyle{v}=[circle, draw=black, minimum size=15mm, font=\LARGE\bfseries, line width=0.8mm]
+\tikzstyle{b}=[rectangle, draw=black, fill=black, minimum size=10mm, font=\LARGE\bfseries, line width=0.8mm]
+\tikzstyle{line}=[-, black, line width=0.8mm]
+
+% Nodes
+\node[b, label=left:{\LARGE$p(x)$}] (px) {};
+\node[v, right=20mm of px] (x) {$x$};
+\node[b, right=20mm of x, label=above:{\LARGE$p(y \mid x)$}] (pyx) {};
+\node[v, right=20mm of pyx] (y) {$y$};
+\node[b, right=20mm of y, label=right:{\LARGE$\delta(y - y_{\text{obs}})$}] (delta) {};
+
+% Black structural lines
+\draw[line] (px) -- (x);
+\draw[line] (x) -- (pyx);
+\draw[line] (pyx) -- (y);
+\draw[line] (y) -- (delta);
+
+% Short colored arrows above the lines
+\draw[->, red, line width=0.8mm]
+($(px.north)!0.2!(x.north)$) -- ($(px.north)!0.8!(x.north) + (0mm, -1.5mm)$)
+node[midway, above] {\LARGE$\mu_1$};
+
+\draw[<-, green, line width=0.8mm]
+($(0mm, -1.5mm) + (x.north)!0.2!(pyx.north)$) -- ($(x.north)!0.8!(pyx.north)$)
+node[midway, above] {\LARGE$\mu_3$};
+
+\draw[<-, blue, line width=0.8mm]
+($(pyx.north)!0.2!(y.north)$) -- ($(pyx.north)!0.8!(y.north) + (0mm, -1.5mm)$)
+node[midway, above] {\LARGE$\mu_2$};
+
+\draw[<-, blue, line width=0.8mm]
+($(0mm, -1.5mm) + (y.north)!0.2!(delta.north)$) -- ($(y.north)!0.8!(delta.north)$)
+node[midway, above] {\LARGE$\mu_2$};
+
+
+
+
+\end{tikzpicture}

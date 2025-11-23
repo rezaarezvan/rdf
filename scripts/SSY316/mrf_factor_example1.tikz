@@ -1,0 +1,44 @@
+\usetikzlibrary{positioning,shapes.geometric,fit, backgrounds}
+
+\begin{tikzpicture}[>=stealth, node distance=25mm, thick]
+
+% Styles
+\tikzstyle{v}=[circle, draw=black, minimum size=20mm, line width=0.8mm, font=\LARGE\bfseries]
+\tikzstyle{redregion}=[draw=red, line width=1.2mm, rounded corners=12mm, inner sep=8mm]
+\tikzstyle{blueregion}=[draw=blue, line width=1.2mm, rounded corners=12mm, inner sep=8mm]
+\tikzstyle{greenregion}=[draw=green!60!black, line width=1.2mm, rounded corners=12mm, inner sep=4mm]
+
+% Build network from center
+\node[v] (x3) {$x_3$};
+\node[v, above left=20mm and 15mm of x3] (x1) {$x_1$};
+\node[v, below left=20mm and 15mm of x3] (x2) {$x_2$};
+\node[v, above right=20mm and 15mm of x3] (x4) {$x_4$};
+\node[v, below right=20mm and 15mm of x3] (x5) {$x_5$};
+\node[v, right=30mm of x5] (x6) {$x_6$};
+
+% Edges (undirected)
+\draw[black, line width=0.8mm] (x1) -- (x2);
+\draw[black, line width=0.8mm] (x1) -- (x3);
+\draw[black, line width=0.8mm] (x2) -- (x3);
+\draw[black, line width=0.8mm] (x3) -- (x4);
+\draw[black, line width=0.8mm] (x3) -- (x5);
+\draw[black, line width=0.8mm] (x4) -- (x5);
+\draw[black, line width=0.8mm] (x5) -- (x6);
+
+\draw[redregion]
+    ($(x1) + (-13mm, 30mm)$) --
+    ($(x2) + (-13mm, -30mm)$) --
+    ($(x3) + (20mm, 0mm)$) --
+    cycle;
+
+\draw[blueregion]
+    ($(x4) + (-13mm, 30mm)$) --
+    ($(x5) + (-13mm, -30mm)$) --
+    ($(x3) + (20mm, 0mm)$) --
+    cycle;
+
+\node[greenregion, fit=(x5)(x6)] {};
+
+
+
+\end{tikzpicture}

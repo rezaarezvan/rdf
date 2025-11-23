@@ -1,0 +1,75 @@
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}[>=stealth, node distance=15mm, thick]
+
+% Styles
+\tikzstyle{v}=[circle, draw=black, minimum size=15mm, font=\LARGE\bfseries, line width=0.8mm]
+\tikzstyle{b}=[rectangle, draw=black, fill=black, minimum size=10mm, font=\LARGE\bfseries, line width=0.8mm]
+\tikzstyle{line}=[-, black, line width=0.8mm]
+
+% Nodes
+\node[v] (x11) {$x_1$};
+\node[v, right=20mm of x11] (x21) {$x_2$};
+\node[v, right=20mm of x21] (x31) {$x_3$};
+\node[v, right=20mm of x31] (x41) {$x_4$};
+\node[v, right=20mm of x41]  (x51) {$x_5$};
+
+% Boxes
+\node[b, below=20mm of x11, label=below:{\LARGE$f_A$}] (fa1) {$f_A$};
+\node[b, below=20mm of x21, label=below:{\LARGE$f_B$}] (fb1) {$f_B$};
+\node[b, below=20mm of x31, label=below:{\LARGE$f_C$}] (fc1) {$f_C$};
+\node[b, below=20mm of x41, label=below:{\LARGE$f_D$}] (fd1) {$f_D$};
+\node[b, below=20mm of x51, label=below:{\LARGE$f_E$}] (fe1) {$f_E$};
+
+% Lines
+% x1 connections
+\draw[line] (x11) -- (fa1);
+\draw[line] (x11) -- (fc1);
+
+% x2 connections
+\draw[line] (x21) -- (fb1);
+\draw[line] (x21) -- (fc1);
+
+% x3 connections
+\draw[line] (x31) -- (fc1);
+\draw[line] (x31) -- (fd1);
+\draw[line] (x31) -- (fe1);
+
+% x4 connections
+\draw[line] (x41) -- (fd1);
+
+% x5 connections
+\draw[line] (x51) -- (fe1);
+
+%%% Factored version
+\node[v, right=50mm of x51] (x12) {$x_1$};
+\node[b, below left=20mm and 10mm of x12, label=below:{\LARGE$f_A$}] (fa2) {$f_A$};
+\node[b, below right=20mm and 10mm of x12, label=below:{\LARGE$f_C$}] (fc2) {$f_C$};
+
+\node[v, below left=20mm and 10mm of fc2] (x22) {$x_2$};
+\node[v, below right=20mm and 10mm of fc2] (x32) {$x_3$};
+
+\node[b, below=20mm of x22, label=below:{\LARGE$f_B$}] (fb2) {$f_B$};
+
+\node[b, below left=22mm and 10mm of x32, label=right:{\LARGE$f_D$}] (fd2) {$f_D$};
+\node[b, below right=22mm and 10mm of x32, label=right:{\LARGE$f_E$}] (fe2) {$f_E$};
+
+\node[v, below=20mm of fd2] (x42) {$x_4$};
+\node[v, below=20mm of fe2] (x52) {$x_5$};
+
+% Lines for factored version
+\draw[line] (x12) -- (fa2);
+\draw[line] (x12) -- (fc2);
+
+\draw[line] (x22) -- (fb2);
+\draw[line] (x22) -- (fc2);
+
+\draw[line] (x32) -- (fc2);
+\draw[line] (x32) -- (fd2);
+\draw[line] (x32) -- (fe2);
+
+\draw[line] (x42) -- (fd2);
+\draw[line] (x52) -- (fe2);
+
+
+\end{tikzpicture}

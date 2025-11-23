@@ -1,0 +1,35 @@
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}[>=stealth, node distance=20mm, thick]
+
+% Styles
+\tikzstyle{v}=[circle, draw=black, minimum size=20mm, line width=0.8mm, font=\bfseries\Large]
+
+% % Left side - Bayesian Network (directed)
+\node[v] (bn_x4) {$x_4$};
+\node[v, above left=40mm and 10mm of bn_x4] (bn_x1) {$x_1$};
+\node[v, above=20mm of bn_x4] (bn_x2) {$x_2$};
+\node[v, above right=40mm and 10mm of bn_x4] (bn_x3) {$x_3$};
+
+% Directed edges for Bayesian Network
+\draw[->, line width=0.8mm] (bn_x1) -- (bn_x4);
+\draw[->, line width=0.8mm] (bn_x2) -- (bn_x4);
+\draw[->, line width=0.8mm] (bn_x3) -- (bn_x4);
+
+% Right side - MRF (undirected)
+\node[v, right=100mm of bn_x4] (mrf_x4) {$x_4$};
+\node[v, above left=40mm and 10mm of mrf_x4] (mrf_x1) {$x_1$};
+\node[v, above=20mm of mrf_x4] (mrf_x2) {$x_2$};
+\node[v, above right=40mm and 10mm of mrf_x4] (mrf_x3) {$x_3$};
+
+% Undirected edges for MRF
+\draw[line width=0.8mm] (mrf_x4) -- (mrf_x1);
+\draw[line width=0.8mm] (mrf_x4) -- (mrf_x2);
+\draw[line width=0.8mm] (mrf_x4) -- (mrf_x3);
+
+\draw[line width=0.8mm] (mrf_x2) -- (mrf_x1);
+\draw[line width=0.8mm] (mrf_x2) -- (mrf_x3);
+
+\draw[line width=0.8mm] (mrf_x1) -- (mrf_x3);
+
+\end{tikzpicture}

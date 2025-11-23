@@ -1,0 +1,48 @@
+\usetikzlibrary{positioning,shapes.geometric,fit}
+
+\begin{tikzpicture}[>=stealth, node distance=25mm, thick]
+
+% Styles
+\tikzstyle{v}=[circle, draw=red, minimum size=20mm, line width=0.8mm, font=\LARGE]
+\tikzstyle{obs}=[circle, draw=red, fill=blue!50, minimum size=20mm, line width=0.8mm, font=\LARGE]
+\tikzstyle{region}=[draw=green!60!black, dashed, line width=1.2mm, rounded corners=10mm, inner sep=8mm]
+\tikzstyle{edge}=[-, line width=0.8mm, red]
+
+% Central node as anchor
+\node[obs] (c1) {};
+\node[obs, below=20mm of c1] (c2) {};
+
+\node[v, left=20mm of c1] (a1) {};
+\node[v, below=20mm of a1] (a2) {};
+\node[v, below=20mm of a2] (a3) {};
+
+\node[v, right=20mm of c1] (b1) {};
+\node[v, below=20mm of b1] (b2) {};
+\node[v, right=20mm of b1] (b3) {};
+
+% Edges (undirected)
+% C - C connections
+\draw[edge] (c1) -- (c2);
+% A - C connections
+\draw[edge] (a1) -- (c1);
+\draw[edge] (a1) -- (a2);
+\draw[edge] (a2) -- (c1);
+\draw[edge] (a2) -- (c2);
+\draw[edge] (a2) -- (a3);
+% C - B connections
+\draw[edge] (b1) -- (c1);
+\draw[edge] (b1) -- (b2);
+\draw[edge] (b2) -- (c2);
+% B - B connections
+\draw[edge] (b3) -- (b2);
+\draw[edge] (b3) -- (b1);
+
+% Regions with labels
+% A region = (a2, a3)
+\node[region, fit=(a2)(a3), label={[font=\LARGE, anchor=north]south:$A$}] {};
+% C region = (c1, c2)
+\node[region, fit=(c1)(c2), label={[font=\LARGE, anchor=north]south:$C$}] {};
+% B region = (b1, b2)
+\node[region, fit=(b1)(b2), label={[font=\LARGE, anchor=north]south:$B$}] {};
+
+\end{tikzpicture}
