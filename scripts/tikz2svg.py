@@ -129,7 +129,8 @@ class TikZ2SVG:
         """
         # Inject CSS theme
         css = build_style(self.theme)
-        svg_content = svg_tools.inject_css(svg_content, f"<style>{css}</style>")
+        svg_content = svg_tools.inject_css(
+            svg_content, f"<style>{css}</style>")
 
         # Add unique prefixes to prevent ID conflicts
         prefix = output_file.stem.replace(".", "_").replace("-", "_")

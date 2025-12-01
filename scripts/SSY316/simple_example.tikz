@@ -1,0 +1,25 @@
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}[>=stealth, node distance=20mm, thick]
+
+% Styles
+    \tikzstyle{v}=[circle, draw=black, minimum size=20mm, font=\LARGE\bfseries, line width=0.8mm]
+    \tikzstyle{arrow}=[->, black, line width=0.8mm]
+    \tikzstyle{b}=[circle, draw=black, fill=blue!20, minimum size=20mm, font=\LARGE\bfseries, line width=0.8mm]
+
+% Nodes
+\node[v] (x1) {$x_1$};
+\node[v, right=20mm of x1] (x2) {$x_2$};
+\node[v, right=20mm of x2] (x3) {$x_3$};
+\node[v, right=20mm of x3] (x4) {$x_4$};
+\node[v, right=20mm of x4] (x5) {$x_5$};
+\node[b, right=20mm of x5] (x6) {$x_6$};
+
+% Arrows
+\draw[arrow] (x1) -- (x2);
+\draw[arrow] (x2) -- (x3);
+\draw[arrow] (x3) -- (x4);
+\draw[arrow] (x4) -- (x5);
+\draw[arrow] (x5) -- (x6);
+
+\end{tikzpicture}
