@@ -56,9 +56,6 @@ def plot_concentration(ax=None, color_map=None):
             weight="bold",
         )
 
-    # Add subtle grid
-    ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
-
     # Customize plot appearance
     ax.set_title("Concentration of Four Arms", fontsize=12, pad=15)
     ax.set_xlabel(r"$x$", fontsize=10)
@@ -67,13 +64,6 @@ def plot_concentration(ax=None, color_map=None):
     # Set axis limits with padding
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min, y_max + padding)
-
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
 
     # Clean legend
     ax.legend(
@@ -91,5 +81,5 @@ if __name__ == "__main__":
     plotter = RDF()
 
     svg_content = plotter.create_themed_plot(
-        save_name="four_arms_concentration", plot_func=plot_concentration
+        name="four_arms_concentration", plot_func=plot_concentration
     )

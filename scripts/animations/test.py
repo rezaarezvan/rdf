@@ -137,8 +137,6 @@ def plot_beta_beta_squared(ax=None, color_map=None):
     ax.plot(t, B, color=color_map["c8"], linewidth=2)
     # Plot the squared Brownian motion
     ax.plot(t, B_squared, color=color_map["c7"], linewidth=2)
-    # Add subtle grid
-    ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
     # Customize plot appearance
     ax.set_title(f"Brownian motion and its squared version", fontsize=12, pad=15)
     ax.set_xlabel(r"$t$", fontsize=10)
@@ -146,13 +144,8 @@ def plot_beta_beta_squared(ax=None, color_map=None):
     # Set axis limits with padding
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min - padding, y_max + padding)
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
     # Set aspect ratio to be equal for proper visualization
     ax.set_aspect("equal")
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
     # Legend
     ax.legend(
         ["$\\beta(t)$", "$\\beta^2(t)$"],

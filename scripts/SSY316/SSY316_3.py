@@ -27,15 +27,6 @@ def plot_logistic_sigmoid(ax=None, color_map=None):
     ax.set_title("Logistic Sigmoid Function", fontsize=14)
     ax.legend(fontsize=10)
 
-    ax.grid(True, alpha=0.15)
-
-    # Remove top and right spines (SDE style)
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
-
     # Plot from x = [-8, 8], y = [0, 1]
     ax.set_xlim(-8, 8)
     ax.set_ylim(0, 1)
@@ -137,15 +128,6 @@ def plot_multi_class_regression_linear_and_quadratic(ax=None, color_map=None):
     ax[1].set_title("Quadratic Logistic Regression", fontsize=11)
     ax[1].set_aspect("equal")
 
-    ax[0].grid(True, alpha=0.15)
-    ax[0].spines["top"].set_visible(False)
-    ax[0].spines["right"].set_visible(False)
-    ax[0].tick_params(axis="both", which="major", labelsize=9)
-    ax[1].grid(True, alpha=0.15)
-    ax[1].spines["top"].set_visible(False)
-    ax[1].spines["right"].set_visible(False)
-    ax[1].tick_params(axis="both", which="major", labelsize=9)
-
 
 def plot_multi_class_lda(ax=None, color_map=None):
     """
@@ -204,7 +186,6 @@ def plot_multi_class_lda(ax=None, color_map=None):
             c=color,
             marker=marker,
             s=50,
-            edgecolors="k",
             linewidth=0.5,
             alpha=0.7,
         )
@@ -249,7 +230,6 @@ def plot_multi_class_lda(ax=None, color_map=None):
             c=color,
             marker=marker,
             s=50,
-            edgecolors="k",
             linewidth=0.5,
             alpha=0.8,
         )
@@ -257,17 +237,8 @@ def plot_multi_class_lda(ax=None, color_map=None):
     ax[1].set_xlabel("x", fontsize=11)
     ax[1].set_ylabel("y", fontsize=11)
     ax[1].set_title("LDA with Gaussian Contours", fontsize=12)
-    ax[1].grid(True, alpha=0.3)
     ax[1].set_xlim(x_min, x_max)
     ax[1].set_ylim(y_min, y_max)
-
-    # Clean up spines
-    for a in ax:
-        a.spines["top"].set_visible(False)
-        a.spines["right"].set_visible(False)
-        a.tick_params(axis="both", which="major", labelsize=9)
-
-    plt.tight_layout()
 
 
 def plot_multi_class_qda(ax=None, color_map=None):
@@ -327,7 +298,6 @@ def plot_multi_class_qda(ax=None, color_map=None):
             c=color,
             marker=marker,
             s=50,
-            edgecolors="k",
             linewidth=0.5,
             alpha=0.7,
         )
@@ -372,7 +342,6 @@ def plot_multi_class_qda(ax=None, color_map=None):
             c=color,
             marker=marker,
             s=50,
-            edgecolors="k",
             linewidth=0.5,
             alpha=0.8,
         )
@@ -380,17 +349,8 @@ def plot_multi_class_qda(ax=None, color_map=None):
     ax[1].set_xlabel("x", fontsize=11)
     ax[1].set_ylabel("y", fontsize=11)
     ax[1].set_title("QDA with Gaussian Contours", fontsize=12)
-    ax[1].grid(True, alpha=0.3)
     ax[1].set_xlim(x_min, x_max)
     ax[1].set_ylim(y_min, y_max)
-
-    # Clean up spines
-    for a in ax:
-        a.spines["top"].set_visible(False)
-        a.spines["right"].set_visible(False)
-        a.tick_params(axis="both", which="major", labelsize=9)
-
-    plt.tight_layout()
 
 
 if __name__ == "__main__":
@@ -399,18 +359,15 @@ if __name__ == "__main__":
     plotter = RDF()
 
     svg_content = plotter.create_themed_plot(
-        save_name="logistic_sigmoid", plot_func=plot_logistic_sigmoid
+        name="logistic_sigmoid", plot_func=plot_logistic_sigmoid
     )
-
     svg_content = plotter.create_themed_plot(
-        save_name="multi_class_regression_linear_and_quadratic",
+        name="multi_class_regression_linear_and_quadratic",
         plot_func=plot_multi_class_regression_linear_and_quadratic,
     )
-
     svg_content = plotter.create_themed_plot(
-        save_name="multi_class_lda", plot_func=plot_multi_class_lda
+        name="multi_class_lda", plot_func=plot_multi_class_lda
     )
-
     svg_content = plotter.create_themed_plot(
-        save_name="multi_class_qda", plot_func=plot_multi_class_qda
+        name="multi_class_qda", plot_func=plot_multi_class_qda
     )

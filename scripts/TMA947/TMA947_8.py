@@ -126,12 +126,7 @@ def plot_example_question_regions(ax=None, color_map=None):
     ax.set_xlim(x_min, x_max)
     ax.set_ylim(y_min, y_max)
     ax.set_aspect("equal", "box")
-    ax.grid(True, alpha=0.3, linestyle="-", zorder=0)
     ax.legend(loc="upper right", fontsize=10, framealpha=0.9)
-
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
 
     # Add coordinate axes
     ax.axhline(0, color="black", linewidth=0.8, alpha=0.5, zorder=2)

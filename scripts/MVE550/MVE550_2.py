@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from scipy.stats import beta, gamma, nbinom, poisson
+
 
 def plot_beta_prior_beta_posterior(ax=None, color_map=None):
     """
@@ -17,7 +19,6 @@ def plot_beta_prior_beta_posterior(ax=None, color_map=None):
         ax: Matplotlib axis object to plot on
         color_map: Dictionary of colors for consistent styling
     """
-    from scipy.stats import beta
 
     x = np.linspace(0, 1, 100)
     prior_a, prior_b = 33.4, 33.4
@@ -71,7 +72,6 @@ def plot_poison_gamma_conjugacy(ax=None, color_map=None):
         ax: Matplotlib axis object to plot on
         color_map: Dictionary of colors for consistent styling
     """
-    from scipy.stats import gamma, poisson
 
     x = np.linspace(0, 50, 1000)
 
@@ -140,8 +140,6 @@ def plot_poison_gamma_conjugacy_prediction(ax=None, color_map=None):
         ax: Matplotlib axis object to plot on
         color_map: Dictionary of colors for consistent styling
     """
-    from scipy.stats import nbinom, poisson
-
     x = np.arange(0, 50)
 
     # Bayesian predictive distribution
@@ -169,15 +167,13 @@ if __name__ == "__main__":
     from rdf import RDF
 
     plotter = RDF()
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="beta_prior_posterior",
-    #     plot_func=plot_beta_prior_beta_posterior
-    # )
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="poisson_gamma_conjugacy",
-    #     plot_func=plot_poison_gamma_conjugacy
-    # )
     svg_content = plotter.create_themed_plot(
-        save_name="poisson_gamma_conjugacy_prediction",
+        name="beta_prior_posterior", plot_func=plot_beta_prior_beta_posterior
+    )
+    svg_content = plotter.create_themed_plot(
+        name="poisson_gamma_conjugacy", plot_func=plot_poison_gamma_conjugacy
+    )
+    svg_content = plotter.create_themed_plot(
+        name="poisson_gamma_conjugacy_prediction",
         plot_func=plot_poison_gamma_conjugacy_prediction,
     )

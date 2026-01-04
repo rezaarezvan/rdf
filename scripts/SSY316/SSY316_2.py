@@ -1,8 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from scipy.stats import beta
-
 
 def plot_ml_learning_example(ax=None, color_map=None):
     """
@@ -46,15 +44,6 @@ def plot_ml_learning_example(ax=None, color_map=None):
     ax.set_ylabel("y", fontsize=12)
     ax.legend(fontsize=10)
 
-    ax.grid(True, alpha=0.15)
-
-    # Remove top and right spines (SDE style)
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
-
     # Plot from x = [0, 1], y = [-3, 3]
     ax.set_xlim(0, 1)
     ax.set_ylim(-3, 3)
@@ -71,7 +60,7 @@ def plot_map_learning_example(ax=None, color_map=None):
     by adding Gaussian noise N(0, 0.04).
 
     Model:
-        y(x, w) = w_0 + w_1 x + \epsilon, epsilon ~N(0, 0.04)
+        y(x, w) = w_0 + w_1 x + epsilon, epsilon ~N(0, 0.04)
 
     with prior:
         p(w) = N(w | (0 0)^T, alpha^{-1} I_2), alpha = 2
@@ -122,25 +111,16 @@ def plot_map_learning_example(ax=None, color_map=None):
     axes[2].set_xlabel(r"$w_0$")
     axes[2].set_ylabel(r"$w_1$")
 
-    for ax in axes:
-        ax.grid(True, alpha=0.15)
-        ax.spines["top"].set_visible(False)
-        ax.spines["right"].set_visible(False)
-        ax.tick_params(axis="both", which="major", labelsize=9)
-
-    plt.show()
-
 
 if __name__ == "__main__":
     from rdf import RDF
 
     plotter = RDF()
 
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="ml_learning_example",
-    #     plot_func=plot_ml_learning_example
-    # )
+    svg_content = plotter.create_themed_plot(
+        name="ml_learning_example", plot_func=plot_ml_learning_example
+    )
 
     svg_content = plotter.create_themed_plot(
-        save_name="map_learning_example", plot_func=plot_map_learning_example
+        name="map_learning_example", plot_func=plot_map_learning_example
     )

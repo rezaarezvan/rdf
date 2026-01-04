@@ -139,19 +139,6 @@ def plot_epsilon_greedy_comparison(ax=None, color_map=None):
     # Add subtle grid
     ax2.grid(True, alpha=0.15, linestyle="-", zorder=0)
 
-    # Remove top and right spines
-    ax2.spines["top"].set_visible(False)
-    ax2.spines["right"].set_visible(False)
-
-    # Set consistent tick parameters
-    for ax in [ax1, ax2]:
-        ax.tick_params(axis="both", which="major", labelsize=9)
-
-    # Adjust layout
-    plt.tight_layout()
-    plt.show()
-    return fig
-
 
 if __name__ == "__main__":
     from rdf import RDF
@@ -159,5 +146,5 @@ if __name__ == "__main__":
     plotter = RDF()
 
     svg_content = plotter.create_themed_plot(
-        save_name="epsilon_greedy_comparison", plot_func=plot_epsilon_greedy_comparison
+        name="epsilon_greedy_comparison", plot_func=plot_epsilon_greedy_comparison
     )

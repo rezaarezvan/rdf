@@ -55,11 +55,9 @@ def plot_convex_nonconvex_sets(ax=None, color_map=None):
     ax1.set_xlim(-2.5, 2.5)
     ax1.set_ylim(-2, 2)
     ax1.set_aspect("equal")
-    ax1.grid(True, alpha=0.15)
-    ax1.spines["top"].set_visible(False)
-    ax1.spines["right"].set_visible(False)
-    ax1.spines["bottom"].set_visible(False)
-    ax1.spines["left"].set_visible(False)
+    ax1.grid(False)
+    for spine in ax1.spines.values():
+        spine.set_visible(False)
     ax1.set_xticks([])
     ax1.set_yticks([])
 
@@ -129,17 +127,11 @@ def plot_convex_nonconvex_sets(ax=None, color_map=None):
     ax2.set_xlim(-2.5, 2.5)
     ax2.set_ylim(-2, 2)
     ax2.set_aspect("equal")
-    ax2.grid(True, alpha=0.15)
-    ax2.spines["top"].set_visible(False)
-    ax2.spines["right"].set_visible(False)
-    ax2.spines["bottom"].set_visible(False)
-    ax2.spines["left"].set_visible(False)
+    ax2.grid(False)
+    for spine in ax2.spines.values():
+        spine.set_visible(False)
     ax2.set_xticks([])
     ax2.set_yticks([])
-
-    # Adjust layout
-    plt.tight_layout(pad=2.0)
-    return fig
 
 
 def plot_unit_sphere_3d(ax=None, color_map=None):
@@ -203,9 +195,6 @@ def plot_circle_boundary(ax=None, color_map=None):
     ax.set_xlim(-1.5, 1.5)
     ax.set_ylim(-1.5, 1.5)
     ax.set_aspect("equal")
-    ax.grid(True, alpha=0.15)
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
 
 
 def plot_sphere_and_circle(ax=None, color_map=None):
@@ -228,9 +217,6 @@ def plot_sphere_and_circle(ax=None, color_map=None):
     # 2D subplot for circle
     ax2 = fig.add_subplot(gs[0, 1])
     plot_circle_boundary(ax2, color_map)
-
-    plt.tight_layout(pad=2.0)
-    return fig
 
 
 def plot_overlapping_sets(ax, color_map):
@@ -346,16 +332,11 @@ def plot_three_convex_operations(ax=None, color_map=None):
         ax.set_xlim(-1.5, 1.5)
         ax.set_ylim(-1.5, 1.0)
         ax.set_aspect("equal")
-        ax.grid(True, alpha=0.15)
-        ax.spines["top"].set_visible(False)
-        ax.spines["right"].set_visible(False)
-        ax.spines["bottom"].set_visible(False)
-        ax.spines["left"].set_visible(False)
+        ax.grid(False)
+        for spine in ax.spines.values():
+            spine.set_visible(False)
         ax.set_xticks([])
         ax.set_yticks([])
-
-    plt.tight_layout()
-    return fig
 
 
 def create_c_shape():
@@ -535,16 +516,11 @@ def plot_convex_hull_construction(ax=None, color_map=None):
         ax.set_xlim(-1.8, 1.8)
         ax.set_ylim(-2.0, 1.5)
         ax.set_aspect("equal")
-        ax.grid(True, alpha=0.15)
-        ax.spines["top"].set_visible(False)
-        ax.spines["right"].set_visible(False)
-        ax.spines["bottom"].set_visible(False)
-        ax.spines["left"].set_visible(False)
+        ax.grid(False)
+        for spine in ax.spines.values():
+            spine.set_visible(False)
         ax.set_xticks([])
         ax.set_yticks([])
-
-    plt.tight_layout()
-    return fig
 
 
 def plot_triangle_with_interior_point(ax, color_map):
@@ -668,16 +644,11 @@ def plot_extreme_points_comparison(ax=None, color_map=None):
         ax.set_xlim(-1.5, 1.5)
         ax.set_ylim(-1.5, 1.5)
         ax.set_aspect("equal")
-        ax.grid(True, alpha=0.15)
-        ax.spines["top"].set_visible(False)
-        ax.spines["right"].set_visible(False)
-        ax.spines["bottom"].set_visible(False)
-        ax.spines["left"].set_visible(False)
+        ax.grid(False)
+        for spine in ax.spines.values():
+            spine.set_visible(False)
         ax.set_xticks([])
         ax.set_yticks([])
-
-    plt.tight_layout()
-    return fig
 
 
 def plot_halfspace(ax=None, color_map=None):
@@ -730,16 +701,6 @@ def plot_halfspace(ax=None, color_map=None):
     padding = 0.1
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min - padding, y_max + padding)
-
-    # Add subtle grid
-    ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
-
-    # Remove top and right spines (SDE style)
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
 
     legend_elements = [
         Patch(facecolor=color_map["c8"], alpha=0.15, label="Infeasible Region"),
@@ -802,17 +763,6 @@ def plot_polyhedron_halfspaces(ax=None, color_map=None):
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min - padding, y_max + padding)
 
-    # Add subtle grid
-    ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
-
-    # Remove top and right spines (SDE style)
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
-
-    # Add legend
     legend_elements = [
         Patch(facecolor=color_map["c8"], alpha=0.4, label="Feasible Region"),
     ]
@@ -1029,18 +979,14 @@ def plot_cone_comparison(ax=None, color_map=None):
         ax.set_xlim(-3, 3)
         ax.set_ylim(-3, 2)
         ax.set_aspect("equal")
-        ax.grid(True, alpha=0.15)
-        ax.spines["top"].set_visible(False)
-        ax.spines["right"].set_visible(False)
-        ax.spines["bottom"].set_visible(False)
-        ax.spines["left"].set_visible(False)
+        ax.grid(False)
+        for spine in ax.spines.values():
+            spine.set_visible(False)
         ax.set_xticks([])
         ax.set_yticks([])
 
         # Draw origin
         ax.scatter(0, 0, s=20, color="black", marker="o", zorder=10)
-
-    return fig
 
 
 if __name__ == "__main__":
@@ -1048,33 +994,24 @@ if __name__ == "__main__":
 
     plotter = RDF()
     svg_content = plotter.create_themed_plot(
-        save_name="convex_nonconvex_sets", plot_func=plot_convex_nonconvex_sets
+        name="convex_nonconvex_sets", plot_func=plot_convex_nonconvex_sets
     )
-
     svg_content = plotter.create_themed_plot(
-        save_name="sphere_and_circle", plot_func=plot_sphere_and_circle
+        name="sphere_and_circle", plot_func=plot_sphere_and_circle
     )
-
     svg_content = plotter.create_themed_plot(
-        save_name="three_convex_operations", plot_func=plot_three_convex_operations
+        name="three_convex_operations", plot_func=plot_three_convex_operations
     )
-
     svg_content = plotter.create_themed_plot(
-        save_name="convex_hull_construction", plot_func=plot_convex_hull_construction
+        name="convex_hull_construction", plot_func=plot_convex_hull_construction
     )
-
     svg_content = plotter.create_themed_plot(
-        save_name="extreme_points_comparison", plot_func=plot_extreme_points_comparison
+        name="extreme_points_comparison", plot_func=plot_extreme_points_comparison
     )
-
+    svg_content = plotter.create_themed_plot(name="halfspace", plot_func=plot_halfspace)
     svg_content = plotter.create_themed_plot(
-        save_name="halfspace", plot_func=plot_halfspace
+        name="polyhedron_halfspaces", plot_func=plot_polyhedron_halfspaces
     )
-
     svg_content = plotter.create_themed_plot(
-        save_name="polyhedron_halfspaces", plot_func=plot_polyhedron_halfspaces
-    )
-
-    svg_content = plotter.create_themed_plot(
-        save_name="cone_comparison", plot_func=plot_cone_comparison
+        name="cone_comparison", plot_func=plot_cone_comparison
     )

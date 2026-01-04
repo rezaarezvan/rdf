@@ -2,12 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from scipy.stats import multivariate_normal
-from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.discriminant_analysis import (
-    LinearDiscriminantAnalysis,
-    QuadraticDiscriminantAnalysis,
-)
 
 
 def plot_deterministic_approximate_inference(ax=None, color_map=None):
@@ -45,10 +39,8 @@ def plot_deterministic_approximate_inference(ax=None, color_map=None):
     # Different approximations
     approximations = [
         multivariate_normal(mean=[0, 0], cov=[[3, 0], [0, 3]]),  # Overall
-        multivariate_normal(
-            mean=[-1.5, 0], cov=[[0.5, 0], [0, 1]]),  # Left mode
-        multivariate_normal(mean=[1.5, 0], cov=[
-                            [0.5, 0], [0, 1]]),   # Right mode
+        multivariate_normal(mean=[-1.5, 0], cov=[[0.5, 0], [0, 1]]),  # Left mode
+        multivariate_normal(mean=[1.5, 0], cov=[[0.5, 0], [0, 1]]),  # Right mode
     ]
 
     titles = [
@@ -101,6 +93,6 @@ if __name__ == "__main__":
     plotter = RDF()
 
     svg_content = plotter.create_themed_plot(
-        save_name="deterministic_approximate_inference",
+        name="deterministic_approximate_inference",
         plot_func=plot_deterministic_approximate_inference,
     )

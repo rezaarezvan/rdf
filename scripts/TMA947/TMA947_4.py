@@ -194,16 +194,6 @@ def plot_piecewise_function_analysis(ax=None, color_map=None):
     ax.set_xlim(x_min - 0.2, x_max + 0.2)
     ax.set_ylim(-0.5, 4)
 
-    # Add subtle grid
-    ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
-
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=10)
-
 
 if __name__ == "__main__":
     from rdf import RDF

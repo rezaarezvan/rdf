@@ -87,9 +87,6 @@ def plot_3D_brownian_motion(ax=None, color_map=None):
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min - padding, y_max + padding)
     ax.set_zlim(z_min - padding, z_max + padding)
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
     # Set aspect ratio to be equal for proper visualization
     ax.set_box_aspect([1, 1, 1])  # Aspect ratio is 1:1:1
 
@@ -139,17 +136,9 @@ def plot_brownian_VS_sin(ax=None, color_map=None):
     ax1.set_ylim(y_min - padding, y_max + padding)
     ax2.set_xlim(x_min - padding, x_max + padding)
     ax2.set_ylim(y_min - padding, y_max + padding)
-    # Remove top and right spines
-    ax1.spines["top"].set_visible(False)
-    ax1.spines["right"].set_visible(False)
-    ax2.spines["top"].set_visible(False)
-    ax2.spines["right"].set_visible(False)
     # Set aspect ratio to be equal for proper visualization
     ax1.set_aspect("equal")
     ax2.set_aspect("equal")
-    # Add subtle ticks
-    ax1.tick_params(axis="both", which="major", labelsize=9)
-    ax2.tick_params(axis="both", which="major", labelsize=9)
 
 
 def plot_left_reimann_brownian(ax=None, color_map=None):
@@ -197,11 +186,6 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     # Set axis limits with padding
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min - padding, y_max + padding)
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
     # Add red points on the Brownian motion at the left Riemann sum points
     for i in range(n):
         ax.scatter(x_riemann[i], B[int(x_riemann[i] / dt)], color=color_map["c7"], s=50)
@@ -248,11 +232,6 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     # Set axis limits with padding
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min - padding, y_max + padding)
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
 
 
 def plot_second_order(ax=None, color_map=None):
@@ -300,8 +279,6 @@ def plot_second_order(ax=None, color_map=None):
 
     for ax in (ax1, ax2):
         ax.grid(True, linestyle="-", linewidth=0.5, alpha=0.3)
-        ax.spines["top"].set_visible(False)
-        ax.spines["right"].set_visible(False)
 
 
 if __name__ == "__main__":
@@ -309,8 +286,8 @@ if __name__ == "__main__":
 
     plotter = RDF()
     svg_content = plotter.create_themed_plot(
-        save_name="3d_sde", plot_func=plot_3D_brownian_motion, is_3d=True
+        name="3d_sde", plot_func=plot_3D_brownian_motion, is_3d=True
     )
     svg_content = plotter.create_themed_plot(
-        save_name="3d_surface", plot_func=plot_3d_surface, is_3d=True
+        name="3d_surface", plot_func=plot_3d_surface, is_3d=True
     )

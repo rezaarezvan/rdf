@@ -41,15 +41,8 @@ def plot_SDE_only_drift(ax=None, color_map=None):
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min - padding, y_max + padding)
 
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
     # Set aspect ratio to be equal for proper visualization
     ax.set_aspect("equal")
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
 
 
 def plot_SDE_only_diffusion(ax=None, color_map=None):
@@ -84,15 +77,8 @@ def plot_SDE_only_diffusion(ax=None, color_map=None):
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min - padding, y_max + padding)
 
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
     # Set aspect ratio to be equal for proper visualization
     ax.set_aspect("equal")
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
 
 
 def plot_SDE_example(ax=None, color_map=None):
@@ -137,15 +123,8 @@ def plot_SDE_example(ax=None, color_map=None):
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min - padding, y_max + padding)
 
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
     # Set aspect ratio to be equal for proper visualization
     ax.set_aspect("equal")
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
 
 
 def plot_dynamic_SDE_example(ax=None, color_map=None):
@@ -206,18 +185,11 @@ def plot_dynamic_SDE_example(ax=None, color_map=None):
         bbox_to_anchor=(0.98, 0.98),
     )
 
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
     # Set aspect ratio to be equal for proper visualization
     ax.set_aspect("equal")
 
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
 
-
-def plot_Riemann_sum(ax=None, color_map=None):
+def plot_riemann_sum(ax=None, color_map=None):
     """
     Plot a clean, blog-friendly visualization of a Riemann sum (approximation of an integral).
 
@@ -261,13 +233,7 @@ def plot_Riemann_sum(ax=None, color_map=None):
     # Set axis limits with padding
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min - padding, y_max + padding)
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    # Set aspect ratio to be equal for proper visualization
     ax.set_aspect("equal")
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
 
 
 def plot_random_diff(ax=None, color_map=None):
@@ -311,20 +277,13 @@ def plot_random_diff(ax=None, color_map=None):
     # Add subtle grid
     ax.grid(True, alpha=0.1, linestyle="-", zorder=0)
     # Customize plot appearance
-    # ax.set_title(f'Random Function and its Derivative at x(1)',
-    #              fontsize=12, pad=15)
     ax.set_xlabel(r"$t$", fontsize=10)
     ax.set_ylabel(r"$x(t)$", fontsize=10)
     # Set axis limits with padding
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min - padding, y_max + padding)
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
     # Set aspect ratio to be equal for proper visualization
     ax.set_aspect("equal")
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
 
 
 def plot_brownian_VS_sin(ax=None, color_map=None):
@@ -377,17 +336,9 @@ def plot_brownian_VS_sin(ax=None, color_map=None):
     ax1.set_ylim(y_min - padding, y_max + padding)
     ax2.set_xlim(x_min - padding, x_max + padding)
     ax2.set_ylim(y_min - padding, y_max + padding)
-    # Remove top and right spines
-    ax1.spines["top"].set_visible(False)
-    ax1.spines["right"].set_visible(False)
-    ax2.spines["top"].set_visible(False)
-    ax2.spines["right"].set_visible(False)
     # Set aspect ratio to be equal for proper visualization
     ax1.set_aspect("equal")
     ax2.set_aspect("equal")
-    # Add subtle ticks
-    ax1.tick_params(axis="both", which="major", labelsize=9)
-    ax2.tick_params(axis="both", which="major", labelsize=9)
 
 
 def plot_left_reimann_brownian(ax=None, color_map=None):
@@ -435,11 +386,6 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     # Set axis limits with padding
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min - padding, y_max + padding)
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
     # Add red points on the Brownian motion at the left Riemann sum points
     for i in range(n):
         ax.scatter(x_riemann[i], B[int(x_riemann[i] / dt)], color=color_map["c7"], s=50)
@@ -486,11 +432,6 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     # Set axis limits with padding
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min - padding, y_max + padding)
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
 
 
 def plot_second_order(ax=None, color_map=None):
@@ -507,7 +448,11 @@ def plot_second_order(ax=None, color_map=None):
     color_points = color_map["c1"]
     color_sum = color_map["c8"]
 
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 6), sharex=True)
+    fig = ax.figure
+    ax.remove()
+    gs = fig.add_gridspec(2, 1, height_ratios=[1, 1], hspace=0.3)
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax2 = fig.add_subplot(gs[1, 0])
 
     # Create the Brownian motion
     t = np.arange(0, T + dt, dt)
@@ -538,8 +483,6 @@ def plot_second_order(ax=None, color_map=None):
 
     for ax in (ax1, ax2):
         ax.grid(True, linestyle="-", linewidth=0.5, alpha=0.3)
-        ax.spines["top"].set_visible(False)
-        ax.spines["right"].set_visible(False)
 
 
 def plot_beta_beta_squared(ax=None, color_map=None):
@@ -580,13 +523,8 @@ def plot_beta_beta_squared(ax=None, color_map=None):
     # Set axis limits with padding
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min - padding, y_max + padding)
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
     # Set aspect ratio to be equal for proper visualization
     ax.set_aspect("equal")
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
     # Legend
     ax.legend(
         ["$\\beta(t)$", "$\\beta^2(t)$"],
@@ -606,7 +544,11 @@ def plot_beta_squared_second_order_taylor(ax=None, color_map=None):
 
     x-axis is B(t), y-axis is B^2(t).
     """
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 6), sharex=True)
+    fig = ax.figure
+    ax.remove()
+    gs = fig.add_gridspec(2, 1, height_ratios=[1, 1], hspace=0.3)
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax2 = fig.add_subplot(gs[1, 0])
     # Set seed for reproducibility
     np.random.seed(42078)
     # Create the y values (Brownian motion, Euler-Maruyama)
@@ -675,17 +617,9 @@ def plot_beta_squared_second_order_taylor(ax=None, color_map=None):
     ax1.set_ylim(y_min, y_max)
     ax2.set_xlim(x_min, x_max)
     ax2.set_ylim(y_min, y_max)
-    # Remove top and right spines
-    ax1.spines["top"].set_visible(False)
-    ax1.spines["right"].set_visible(False)
-    ax2.spines["top"].set_visible(False)
-    ax2.spines["right"].set_visible(False)
     # Set aspect ratio to be equal for proper visualization
     ax1.set_aspect("equal")
     ax2.set_aspect("equal")
-    # Add subtle ticks
-    ax1.tick_params(axis="both", which="major", labelsize=9)
-    ax2.tick_params(axis="both", which="major", labelsize=9)
     # Legend
     ax1.legend(
         frameon=True,
@@ -789,13 +723,6 @@ def plot_ornstein_uhlenbeck(ax=None, color_map=None):
     # Add subtle grid
     ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
 
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
-
 
 def plot_reverse_ornstein_uhlenbeck(ax=None, color_map=None):
     """
@@ -868,13 +795,6 @@ def plot_reverse_ornstein_uhlenbeck(ax=None, color_map=None):
 
     # Add subtle grid
     ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
-
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
 
     # Set y-limits to match the example
     ax.set_ylim(-2.5, 2.5)
@@ -960,13 +880,6 @@ def plot_denoising_diffusion(ax=None, color_map=None):
     # Add subtle grid
     ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
 
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
-
     # Set y-limits similar to the example
     ax.set_ylim(-3, 3)
 
@@ -1012,13 +925,8 @@ def plot_brownian_to_point(ax=None, color_map=None):
     # Set axis limits with padding
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min - padding, y_max + padding)
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
     # Set aspect ratio to be equal for proper visualization
     ax.set_aspect("equal")
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
 
 
 def plot_brownian_bridge(ax=None, color_map=None):
@@ -1075,13 +983,6 @@ def plot_brownian_bridge(ax=None, color_map=None):
     # Set axis limits with padding
     ax.set_xlim(t_min - padding, t_max + padding)
     ax.set_ylim(y_min, y_max)
-
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
 
 
 def plot_brownian_transition_density(ax=None, color_map=None):
@@ -1222,13 +1123,6 @@ def plot_brownian_transition_density(ax=None, color_map=None):
     # Set axis limits - only up to time t plus density width
     ax.set_xlim(0, t + t_width + 0.2)  # Added small padding
     ax.set_ylim(y_min, y_max)
-
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
 
     # Add legend
     ax.legend(frameon=True, framealpha=0.9, loc="upper left", fontsize=9)
@@ -1417,13 +1311,6 @@ def plot_brownian_bridge_density(ax=None, color_map=None):
     # Set axis limits with padding
     ax.set_xlim(s - 0.2, T + t_width)
     ax.set_ylim(y_min, y_max)
-
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
 
 
 def plot_schoenmakers_score_matching(ax=None, color_map=None):
@@ -1650,8 +1537,6 @@ def plot_schoenmakers_score_matching(ax=None, color_map=None):
     ax1.set_xlim(0, T + density_scale + 0.1)
     ax1.set_ylim(y_min, y_max)
     ax1.grid(True, alpha=0.15, linestyle="-", zorder=0)
-    ax1.spines["top"].set_visible(False)
-    ax1.spines["right"].set_visible(False)
     ax1.legend(loc="upper left", fontsize=9, frameon=True, framealpha=0.9)
 
     # Customize right subplot appearance
@@ -1661,8 +1546,6 @@ def plot_schoenmakers_score_matching(ax=None, color_map=None):
     ax2.set_xlim(0, T + density_scale + 0.1)
     ax2.set_ylim(y_min, y_max)
     ax2.grid(True, alpha=0.15, linestyle="-", zorder=0)
-    ax2.spines["top"].set_visible(False)
-    ax2.spines["right"].set_visible(False)
     ax2.legend(loc="upper left", fontsize=9, frameon=True, framealpha=0.9)
 
 
@@ -1670,71 +1553,66 @@ if __name__ == "__main__":
     from rdf import RDF
 
     plotter = RDF()
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="SDE_only_drift", plot_func=plot_SDE_only_drift
-    # )
-    #
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="SDE_only_diffusion", plot_func=plot_SDE_only_diffusion
-    # )
-    #
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="SDE_example", plot_func=plot_SDE_example
-    # )
-    #
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="dynamic_SDE_example", plot_func=plot_dynamic_SDE_example
-    # )
-    #
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="Riemann_sum", plot_func=plot_Riemann_sum
-    # )
-    #
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="random_diff", plot_func=plot_random_diff
-    # )
-    #
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="random_riemann", plot_func=plot_random_riemann
-    # )
+
     svg_content = plotter.create_themed_plot(
-        save_name="brownian_VS_sin", plot_func=plot_brownian_VS_sin
+        name="SDE_only_drift", plot_func=plot_SDE_only_drift
     )
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="left_riemann_brownian", plot_func=plot_left_reimann_brownian)
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="second_order", plot_func=plot_second_order)
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="beta_beta_squared", plot_func=plot_beta_beta_squared
-    # )
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="beta_squared_second_order_taylor",
-    #     plot_func=plot_beta_squared_second_order_taylor,
-    # )
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="ornstein_uhlenbeck", plot_func=plot_ornstein_uhlenbeck
-    # )
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="reverse_ornstein_uhlenbeck", plot_func=plot_reverse_ornstein_uhlenbeck
-    # )
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="denoising_diffusion", plot_func=plot_denoising_diffusion
-    # )
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="brownian_to_point", plot_func=plot_brownian_to_point
-    # )
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="brownian_bridge", plot_func=plot_brownian_bridge
-    # )
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="brownian_transition_density",
-    #     plot_func=plot_brownian_transition_density,
-    # )
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="brownian_bridge_density",
-    #     plot_func=plot_brownian_bridge_density,
-    # )
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="schoenmakers_score_matching",
-    #     plot_func=plot_schoenmakers_score_matching,
-    # )
+    svg_content = plotter.create_themed_plot(
+        name="SDE_only_diffusion", plot_func=plot_SDE_only_diffusion
+    )
+    svg_content = plotter.create_themed_plot(
+        name="SDE_example", plot_func=plot_SDE_example
+    )
+    svg_content = plotter.create_themed_plot(
+        name="dynamic_SDE_example", plot_func=plot_dynamic_SDE_example
+    )
+    svg_content = plotter.create_themed_plot(
+        name="riemann_sum", plot_func=plot_riemann_sum
+    )
+    svg_content = plotter.create_themed_plot(
+        name="random_diff", plot_func=plot_random_diff
+    )
+    svg_content = plotter.create_themed_plot(
+        name="brownian_VS_sin", plot_func=plot_brownian_VS_sin
+    )
+    svg_content = plotter.create_themed_plot(
+        name="left_riemann_brownian", plot_func=plot_left_reimann_brownian
+    )
+    svg_content = plotter.create_themed_plot(
+        name="second_order", plot_func=plot_second_order
+    )
+    svg_content = plotter.create_themed_plot(
+        name="beta_beta_squared", plot_func=plot_beta_beta_squared
+    )
+    svg_content = plotter.create_themed_plot(
+        name="beta_squared_second_order_taylor",
+        plot_func=plot_beta_squared_second_order_taylor,
+    )
+    svg_content = plotter.create_themed_plot(
+        name="ornstein_uhlenbeck", plot_func=plot_ornstein_uhlenbeck
+    )
+    svg_content = plotter.create_themed_plot(
+        name="reverse_ornstein_uhlenbeck",
+        plot_func=plot_reverse_ornstein_uhlenbeck,
+    )
+    svg_content = plotter.create_themed_plot(
+        name="denoising_diffusion", plot_func=plot_denoising_diffusion
+    )
+    svg_content = plotter.create_themed_plot(
+        name="brownian_to_point", plot_func=plot_brownian_to_point
+    )
+    svg_content = plotter.create_themed_plot(
+        name="brownian_bridge", plot_func=plot_brownian_bridge
+    )
+    svg_content = plotter.create_themed_plot(
+        name="brownian_transition_density",
+        plot_func=plot_brownian_transition_density,
+    )
+    svg_content = plotter.create_themed_plot(
+        name="brownian_bridge_density",
+        plot_func=plot_brownian_bridge_density,
+    )
+    svg_content = plotter.create_themed_plot(
+        name="schoenmakers_score_matching",
+        plot_func=plot_schoenmakers_score_matching,
+    )

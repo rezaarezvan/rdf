@@ -111,14 +111,6 @@ def plot_example_question_regions(ax=None, color_map=None):
     ax.set_xlim(x_min, x_max)
     ax.set_ylim(y_min, y_max)
     ax.set_aspect("equal", "box")
-    ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
-
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=10)
     # Add x_1 and x_2 axes
     ax.axhline(0, color=color_map["black"], linewidth=1, alpha=0.8, zorder=2)
     ax.axvline(0, color=color_map["black"], linewidth=1, alpha=0.8, zorder=2)

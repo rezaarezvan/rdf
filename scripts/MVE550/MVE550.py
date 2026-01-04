@@ -70,15 +70,12 @@ def plot_stochastic_VS_deterministic_processes(ax=None, color_map=None):
     ax2.set_ylabel("Stock Price")
     ax2.legend()
 
-    plt.tight_layout()
-    return fig
-
 
 if __name__ == "__main__":
     from rdf import RDF
 
     plotter = RDF()
     svg_content = plotter.create_themed_plot(
-        save_name="stochastic_vs_deterministic_processes",
+        name="stochastic_vs_deterministic_processes",
         plot_func=plot_stochastic_VS_deterministic_processes,
     )

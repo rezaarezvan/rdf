@@ -91,16 +91,6 @@ def plot_convex_function_definition(ax=None, color_map=None):
     ax.set_xlim(x_min - padding, x_max + padding)
     ax.set_ylim(y_min, y_max)
 
-    # Add subtle grid
-    ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
-
-    # Remove top and right spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
-
     # Clean legend
     ax.legend(frameon=True, framealpha=0.9, loc="upper right", fontsize=9)
 
@@ -110,6 +100,6 @@ if __name__ == "__main__":
 
     plotter = RDF()
     svg_content = plotter.create_themed_plot(
-        save_name="convex_function_definition",
+        name="convex_function_definition",
         plot_func=plot_convex_function_definition,
     )

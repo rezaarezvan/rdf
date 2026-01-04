@@ -35,15 +35,6 @@ def plot_beta_distribution(ax=None, color_map=None):
     ax.set_ylabel("Probability Density", fontsize=12)
     ax.legend(fontsize=10)
 
-    ax.grid(True, alpha=0.15)
-
-    # Remove top and right spines (SDE style)
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-    # Add subtle ticks
-    ax.tick_params(axis="both", which="major", labelsize=9)
-
 
 def prior_likelihood_posterior_plot(ax=None, color_map=None):
     """
@@ -88,25 +79,16 @@ def prior_likelihood_posterior_plot(ax=None, color_map=None):
     axes[2].set_xlabel(r"$\mu$")
     axes[2].set_ylabel("Density")
 
-    for ax in axes:
-        ax.grid(True, alpha=0.15)
-        ax.spines["top"].set_visible(False)
-        ax.spines["right"].set_visible(False)
-        ax.tick_params(axis="both", which="major", labelsize=9)
-
-    plt.tight_layout()
-
 
 if __name__ == "__main__":
     from rdf import RDF
 
     plotter = RDF()
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="beta_distribution_examples",
-    #     plot_func=plot_beta_distribution
-    # )
+    svg_content = plotter.create_themed_plot(
+        name="beta_distribution_examples", plot_func=plot_beta_distribution
+    )
 
     svg_content = plotter.create_themed_plot(
-        save_name="prior_likelihood_posterior2",
+        name="prior_likelihood_posterior2",
         plot_func=prior_likelihood_posterior_plot,
     )
