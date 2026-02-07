@@ -1,0 +1,25 @@
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}[>=stealth, node distance=15mm, thick]
+
+% Styles
+\tikzstyle{v}=[circle, draw=black, minimum size=20mm, font=\LARGE\bfseries, line width=0.8mm]
+\tikzstyle{arrow}=[->, black, line width=0.8mm]
+
+% Nodes
+\node[v] (x11) {1};
+\node[v, right=20mm of x11] (x21) {2};
+% Middle of x11 and x21 below
+\node[v, below=15mm of $(x11)!0.5!(x21)$] (x31) {3};
+
+% Weighted Arrows
+\draw[arrow, bend left=20] (x11) to node[above]{1} (x21);
+\draw[arrow, bend left=20] (x21) to node[below]{2} (x11);
+
+\draw[arrow, bend left=20] (x21) to node[right]{1} (x31);
+\draw[arrow, bend left=20] (x31) to node[left]{2} (x21);
+
+\draw[arrow, bend left=20] (x31) to node[left]{2} (x11);
+\draw[arrow, bend left=20] (x11) to node[right]{1} (x31);
+
+\end{tikzpicture}

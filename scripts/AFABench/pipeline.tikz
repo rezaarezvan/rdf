@@ -1,0 +1,54 @@
+\usetikzlibrary{positioning}
+
+% \begin{tikzpicture}[>=stealth, node distance=15mm, thick]
+%
+% % Styles
+% \tikzstyle{v}=[circle, draw=black, minimum size=20mm, font=\LARGE\bfseries, line width=0.8mm]
+% \tikzstyle{arrow}=[->, black, line width=0.8mm]
+%
+% % Nodes
+% \node[v] (x11) {1};
+% \node[v, right=20mm of x11] (x21) {2};
+% % Middle of x11 and x21 below
+% \node[v, below=15mm of $(x11)!0.5!(x21)$] (x31) {3};
+%
+% % Weighted Arrows
+% \draw[arrow, bend left=20] (x11) to node[above]{1} (x21);
+% \draw[arrow, bend left=20] (x21) to node[below]{2} (x11);
+%
+% \draw[arrow, bend left=20] (x21) to node[right]{1} (x31);
+% \draw[arrow, bend left=20] (x31) to node[left]{2} (x21);
+%
+% \draw[arrow, bend left=20] (x31) to node[left]{2} (x11);
+% \draw[arrow, bend left=20] (x11) to node[right]{1} (x31);
+%
+% \end{tikzpicture}
+
+
+% AFABench pipeline, show rectangles with {Pretraining, Training, Evaluation} centered in rectangle
+% Rectangles can be dotted or solid, dotted means optional step and solid means required step
+% Above and under the main stage text we want gray or black AFAPredictor and AFAPolicy on train and eval boxes.
+% Gray means that they can be trained jointly or separately, black means that they are (evaluated) together.
+
+\begin{tikzpicture}[>=stealth, node distance=15mm, thick]
+% Styles
+\tikzstyle{stage}=[rectangle, draw=black, minimum width=40mm, minimum height=20mm, font=\LARGE\bfseries, line width=0.8mm, align=center]
+\tikzstyle{optional}=[rectangle, draw=black, dashed, minimum width=40mm, minimum height=20mm, font=\LARGE\bfseries, line width=0.8mm, align=center]
+\tikzstyle{arrow}=[->, black, line width=0.8mm]
+\tikzstyle{component}=[font=\large\bfseries, align=center]
+\tikzstyle{graycomponent}=[font=\large\bfseries, align=center, text=gray]
+% Nodes
+\node[stage] (pretraining) {Pretraining};
+\node[stage, right=30mm of pretraining] (training) {Training};
+\node[optional, right=30mm of training] (evaluation) {Evaluation};
+% Components
+    \node[graycomponent, above=5mm of pretraining] (afapredictor1) {AFAPredictor};
+    \node[graycomponent, below=5mm of pretraining] (afapolicy1) {AFAPolicy};
+    \node[component, above=5mm of training] (afapredictor2) {AFAPredictor};
+    \node[component, below=5mm of training] (afapolicy2) {AFAPolicy};
+    \node[component, above=5mm of evaluation] (afapredictor3) {AFAPredictor};
+    \node[component, below=5mm of evaluation] (afapolicy3) {AFAPolicy};
+% Arrows
+\draw[arrow] (pretraining) to (training);
+\draw[arrow] (training) to (evaluation);
+\end{tikzpicture}

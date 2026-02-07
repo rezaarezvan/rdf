@@ -7,9 +7,8 @@ import tempfile
 from pathlib import Path
 from typing import Optional
 
-from rdf.themes import ColorTheme
-from rdf.css import build_style
-from rdf import svg_tools
+from rdf.theme import ColorTheme
+from rdf.svg import build_css, inject_css
 
 
 class TikZ2SVG:
@@ -128,8 +127,8 @@ class TikZ2SVG:
             Themed SVG content
         """
         # Inject CSS theme
-        css = build_style(self.theme)
-        svg_content = svg_tools.inject_css(svg_content, f"<style>{css}</style>")
+        css = build_css(self.theme)
+        svg_content = inject_css(svg_content, css)
 
         # Add unique prefixes to prevent ID conflicts
         prefix = output_file.stem.replace(".", "_").replace("-", "_")
