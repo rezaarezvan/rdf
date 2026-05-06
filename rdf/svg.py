@@ -59,17 +59,18 @@ def inject_css(svg: str, css: str) -> str:
 
 
 def _apply_colors(svg: str, theme: ColorTheme) -> str:
-    # Base colors c1-c8
+    # Base colors c1-c8 (matplotlib lowercases hex in inline styles)
     for i, (_, col) in enumerate(theme.base.items(), 1):
-        esc = re.escape(col)
-        svg = re.sub(rf'fill="{esc}"', f'class="c{i}"', svg)
-        svg = re.sub(rf'stroke="{esc}"', f'class="c{i}"', svg)
-        svg = re.sub(
-            rf'(style="[^"]*?)fill:\s*{esc}([^"]*")', rf"\1fill:var(--c{i})\2", svg
-        )
-        svg = re.sub(
-            rf'(style="[^"]*?)stroke:\s*{esc}([^"]*")', rf"\1stroke:var(--c{i})\2", svg
-        )
+        for hx in {col, col.upper(), col.lower()}:
+            esc = re.escape(hx)
+            svg = re.sub(rf'fill="{esc}"', f'class="c{i}"', svg)
+            svg = re.sub(rf'stroke="{esc}"', f'class="c{i}"', svg)
+            svg = re.sub(
+                rf'(style="[^"]*?)fill:\s*{esc}([^"]*")', rf"\1fill:var(--c{i})\2", svg
+            )
+            svg = re.sub(
+                rf'(style="[^"]*?)stroke:\s*{esc}([^"]*")', rf"\1stroke:var(--c{i})\2", svg
+            )
     # Theme colors
     for name, hex_color in theme.light.items():
         if name not in theme.base:
