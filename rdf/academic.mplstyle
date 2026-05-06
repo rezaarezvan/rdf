@@ -1,5 +1,5 @@
-# RDF Academic Figure Defaults
-# Auto-applied by RDF, override via plt.style.use() or custom mplstyle
+# RDF default style — tuned for blog-width SVGs embedded in articles.
+# Not a paper/PDF style. For paper figures, pass a custom style via RDF(style=...).
 
 # Spines - clean L-shape (no top/right)
 axes.spines.top: False
@@ -25,6 +25,7 @@ axes.facecolor: none
 axes.labelsize: 11
 axes.titlesize: 12
 axes.linewidth: 0.8
+axes.formatter.use_mathtext: True
 
 # Ticks
 xtick.labelsize: 9
@@ -34,7 +35,8 @@ ytick.direction: out
 xtick.major.width: 0.8
 ytick.major.width: 0.8
 
-# Figure
+# Figure — golden-ratio at ~700px body-text width (SVG is vector, dpi only affects raster fallback)
+figure.figsize: 5.5, 3.4
 figure.facecolor: none
 figure.dpi: 150
 
@@ -42,8 +44,12 @@ figure.dpi: 150
 lines.linewidth: 1.5
 lines.markersize: 6
 
+# Errorbars
+errorbar.capsize: 3
+
 # Legend
-legend.framealpha: 0.9
+legend.framealpha: 0.85
+legend.fancybox: True
 legend.fontsize: 10
 legend.edgecolor: 0.8
 
