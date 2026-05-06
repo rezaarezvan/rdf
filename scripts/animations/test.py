@@ -1,14 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from rdf import RDF
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.patches import Circle, Rectangle, Polygon
 
-# Basic line plot animation
+from rdf import figure
 
 
-def animate_sine_wave(ax=None, color_map=None):
+@figure("sine_animated", animation="draw", duration=3.0, loop=True)
+def animate_sine_wave(ax, color_map):
     x = np.linspace(0, 10, 100)
     y = np.sin(x)
     ax.plot(x, y, color=color_map["c1"], linewidth=2)
@@ -21,7 +21,8 @@ def animate_sine_wave(ax=None, color_map=None):
 # Multiple line animation
 
 
-def animate_multiple_functions(ax=None, color_map=None):
+@figure("multiple_functions", animation="draw", duration=4.0, loop=True)
+def animate_multiple_functions(ax, color_map):
     x = np.linspace(0, 10, 100)
     ax.plot(x, np.sin(x), color=color_map["c1"], linewidth=2, label="sin(x)")
     ax.plot(x, np.cos(x), color=color_map["c2"], linewidth=2, label="cos(x)")
@@ -42,7 +43,8 @@ def animate_multiple_functions(ax=None, color_map=None):
 # Scatter plot animation
 
 
-def animate_scatter(ax=None, color_map=None):
+@figure("scatter_fade", animation="draw", duration=2.0, loop=True)
+def animate_scatter(ax, color_map):
     np.random.seed(42)
     x = np.random.rand(50)
     y = np.random.rand(50)
@@ -57,7 +59,8 @@ def animate_scatter(ax=None, color_map=None):
 # Bar chart animation
 
 
-def animate_bar_chart(ax=None, color_map=None):
+@figure("bar_chart_fade", animation="draw", duration=2.5, loop=True)
+def animate_bar_chart(ax, color_map):
     categories = ["A", "B", "C", "D", "E"]
     values = [25, 40, 30, 55, 15]
     colors = [color_map[f"c{i + 1}"] for i in range(len(categories))]
@@ -70,7 +73,8 @@ def animate_bar_chart(ax=None, color_map=None):
 # Shape animation
 
 
-def animate_shapes(ax=None, color_map=None):
+@figure("shapes_pulse", animation="draw", duration=2.0, loop=True)
+def animate_shapes(ax, color_map):
     # Add various shapes
     circle = Circle((0.5, 0.5), 0.2, color=color_map["c1"], alpha=0.7)
     square = Rectangle((0.1, 0.1), 0.2, 0.2, color=color_map["c2"], alpha=0.7)
@@ -91,7 +95,8 @@ def animate_shapes(ax=None, color_map=None):
 # 3D surface plot animation
 
 
-def animate_3d_surface(ax=None, color_map=None):
+@figure("surface_3d", animation="draw", duration=5.0, loop=True, is_3d=True)
+def animate_3d_surface(ax, color_map):
     x = np.linspace(-5, 5, 50)
     y = np.linspace(-5, 5, 50)
     X, Y = np.meshgrid(x, y)
@@ -108,7 +113,8 @@ def animate_3d_surface(ax=None, color_map=None):
     return surf
 
 
-def plot_beta_beta_squared(ax=None, color_map=None):
+@figure("beta_beta_squared", animation="draw", duration=2.0, loop=True)
+def plot_beta_beta_squared(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of a Brownian motion and its squared version.
     Starting from the SDE (x(t) = B(t)),
@@ -157,7 +163,8 @@ def plot_beta_beta_squared(ax=None, color_map=None):
     )
 
 
-def plot_subfig_example(ax=None, color_map=None):
+@figure("subfig_example", animation="draw", duration=3.0, loop=True)
+def plot_subfig_example(ax, color_map):
     """
     Example of a subfigure with multiple plots.
     """
@@ -177,76 +184,3 @@ def plot_subfig_example(ax=None, color_map=None):
     plt.tight_layout()
 
 
-if __name__ == "__main__":
-    plotter = RDF()
-
-    # Line animations
-    plotter.create_animated_plot(
-        save_name="sine_animated",
-        plot_func=animate_sine_wave,
-        animation_type="draw",
-        animation_duration=3.0,
-        loop=True,
-    )
-
-    plotter.create_animated_plot(
-        save_name="multiple_functions",
-        plot_func=animate_multiple_functions,
-        animation_type="draw",
-        animation_duration=4.0,
-        loop=True,
-    )
-
-    # Fade animations
-    plotter.create_animated_plot(
-        save_name="scatter_fade",
-        plot_func=animate_scatter,
-        animation_type="draw",
-        animation_duration=2.0,
-        loop=True,
-    )
-
-    plotter.create_animated_plot(
-        save_name="bar_chart_fade",
-        plot_func=animate_bar_chart,
-        animation_type="draw",
-        animation_duration=2.5,
-        loop=True,
-    )
-
-    # Pulse animation
-    plotter.create_animated_plot(
-        save_name="shapes_pulse",
-        plot_func=animate_shapes,
-        animation_type="draw",
-        animation_duration=2.0,
-        loop=True,
-    )
-
-    # 3D animation
-    plotter.create_animated_plot(
-        save_name="surface_3d",
-        plot_func=animate_3d_surface,
-        animation_type="draw",
-        animation_duration=5.0,
-        loop=True,
-        is_3d=True,
-    )
-
-    # Beta and beta squared plot
-    plotter.create_animated_plot(
-        save_name="beta_beta_squared",
-        plot_func=plot_beta_beta_squared,
-        animation_type="draw",
-        animation_duration=2.0,
-        loop=True,
-    )
-
-    # Example of subfigures
-    plotter.create_animated_plot(
-        save_name="subfig_example",
-        plot_func=plot_subfig_example,
-        animation_type="draw",
-        animation_duration=3.0,
-        loop=True,
-    )

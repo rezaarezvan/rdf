@@ -1,10 +1,7 @@
-import os
-import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
-from pathlib import Path
 from matplotlib import cm
 from scipy.integrate import solve_ivp
 from matplotlib.colors import Normalize
@@ -14,9 +11,7 @@ from scipy.stats import multivariate_normal
 from matplotlib.patches import FancyArrowPatch
 from matplotlib.colors import LinearSegmentedColormap
 
-SAVE_PATH = Path("result") / Path(sys.argv[0]).stem
-STYLE_NAME = "paper_light"
-plt.style.use(f"./{STYLE_NAME}.mplstyle")
+from rdf import figure
 
 
 def plot_diffusion_causality(ax=None, color_map=None):
@@ -329,8 +324,6 @@ def plot_diffusion_causality(ax=None, color_map=None):
     ax3.set_xticks([])
     ax3.set_yticks([])
 
-    # Save the figure
-    os.makedirs(SAVE_PATH, exist_ok=True)
 
 
 def plot_deterministic_ODE(ax=None, color_map=None):
@@ -495,14 +488,13 @@ def euler_maruyama(drift_func, diffusion_func, x0, t_span, dt, seed=None):
     return t, x
 
 
-def plot_stochastic_SDE(ax=None, color_map=None):
+@figure("stochastic_SDE")
+def plot_stochastic_SDE(fig, color_map):
     """
     Creates a visualization demonstrating stochastic SDE trajectories compared to deterministic ODE solutions.
     Shows the effect of noise (diffusion term) in creating variance around the deterministic paths.
     """
-    fig = ax.figure
     fig.set_size_inches(12, 5.5)
-    ax.remove()
     gs = fig.add_gridspec(1, 2, width_ratios=[1, 1], wspace=0.3)
     ax1 = fig.add_subplot(gs[0, 0])
     ax2 = fig.add_subplot(gs[0, 1])
@@ -625,8 +617,6 @@ def plot_stochastic_SDE(ax=None, color_map=None):
     ax2.grid(True, alpha=0.3)
     ax2.set_aspect("equal")
 
-    # Save the figure
-    os.makedirs(SAVE_PATH, exist_ok=True)
 
 
 def plot_diffusion_models(ax=None, color_map=None):
@@ -911,8 +901,6 @@ def plot_diffusion_models(ax=None, color_map=None):
     plt.tight_layout()
     plt.subplots_adjust(top=0.9)
 
-    # Save the figure
-    os.makedirs(SAVE_PATH, exist_ok=True)
 
 
 def plot_flow_matching(ax=None, color_map=None):
@@ -1234,8 +1222,6 @@ def plot_flow_matching(ax=None, color_map=None):
         ),
     )
 
-    # Save the figure
-    os.makedirs(SAVE_PATH, exist_ok=True)
 
 
 def plot_linear_nonlinear_transformations(ax=None, color_map=None):
@@ -1646,27 +1632,4 @@ def plot_linear_nonlinear_transformations(ax=None, color_map=None):
             0, 8, facecolor="#fff0f0", alpha=0.2, zorder=-10
         )  # Light red for data
 
-    # Save the figure
-    os.makedirs(SAVE_PATH, exist_ok=True)
 
-
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="diffusion_causality", plot_func=plot_diffusion_causality, is_3d=False)
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="deterministic_ODE", plot_func=plot_deterministic_ODE
-    # )
-    svg_content = plotter.create_themed_plot(
-        save_name="stochastic_SDE", plot_func=plot_stochastic_SDE
-    )
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="diffusion_models", plot_func=plot_diffusion_models, is_3d=False)
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="flow_matching", plot_func=plot_flow_matching, is_3d=False)
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="linear_nonlinear_transformations",
-    #     plot_func=plot_linear_nonlinear_transformations,
-    #     is_3d=False,
