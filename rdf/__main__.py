@@ -3,18 +3,21 @@
 
 from __future__ import annotations
 
+import runpy
 import sys
 from pathlib import Path
 
 from rdf import inkscape
 from rdf.svg import build_css
 from rdf.theme import ColorTheme
+from rdf import registry
 
 
 def usage():
     print("""usage: python -m rdf <command> [args]
 
 commands:
+  build <path>                          Render every @figure in a file or directory
   inkscape <file.svg> [-o output.svg]   Convert Inkscape SVG to RDF format
   inkscape <*.svg> --batch              Batch convert multiple SVGs
   palette --css                         Export palette as CSS variables
@@ -62,8 +65,29 @@ def cmd_palette(args: list[str]):
         usage()
 
 
+def cmd_build(args: list[str]):
+    from rdf import RDF
+
+    assert args, "usage: python -m rdf build <path>"
+    target = Path(args[0])
+    assert target.exists(), f"not found: {target}"
+    files = sorted(target.glob("*.py")) if target.is_dir() else [target]
+    saved_argv = sys.argv
+    for f in files:
+        registry.reset()
+        sys.argv = [str(f)]
+        try:
+            runpy.run_path(str(f), run_name="__rdf_build__")
+        finally:
+            sys.argv = saved_argv
+        if registry.registered():
+            registry.build(RDF(name=f.stem))
+
+
 def main():
     match sys.argv[1:]:
+        case ["build", *args]:
+            cmd_build(args)
         case ["inkscape", *args]:
             cmd_inkscape(args)
         case ["palette", *args]:

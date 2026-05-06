@@ -1,6 +1,7 @@
 from rdf.rdf import RDF
 from rdf import inkscape
 from rdf.theme import ColorTheme
+from rdf.registry import figure, build, registered, reset
 
 
 def tag(artist, gid: str) -> None:
@@ -8,4 +9,13 @@ def tag(artist, gid: str) -> None:
     artist.set_gid(gid)
 
 
-__all__ = ["RDF", "ColorTheme", "inkscape", "tag"]
+__all__ = [
+    "RDF",
+    "ColorTheme",
+    "inkscape",
+    "tag",
+    "figure",
+    "build",
+    "registered",
+    "reset",
+]
