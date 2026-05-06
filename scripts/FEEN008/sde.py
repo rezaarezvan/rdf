@@ -1,16 +1,14 @@
+"""SDE.py — plots of different SDEs."""
 import numpy as np
 import matplotlib.pyplot as plt
 
 from scipy.stats import norm
 
-"""
-SDE.py
-
-Make plots of different SDEs
-"""
+from rdf import figure
 
 
-def plot_SDE_only_drift(ax=None, color_map=None):
+@figure("SDE_only_drift")
+def plot_SDE_only_drift(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of an SDE with only drift (ODE).
 
@@ -45,7 +43,8 @@ def plot_SDE_only_drift(ax=None, color_map=None):
     ax.set_aspect("equal")
 
 
-def plot_SDE_only_diffusion(ax=None, color_map=None):
+@figure("SDE_only_diffusion")
+def plot_SDE_only_diffusion(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of an SDE with only diffusion (Brownian motion).
 
@@ -81,7 +80,8 @@ def plot_SDE_only_diffusion(ax=None, color_map=None):
     ax.set_aspect("equal")
 
 
-def plot_SDE_example(ax=None, color_map=None):
+@figure("SDE_example")
+def plot_SDE_example(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of a (simple) SDE.
 
@@ -127,7 +127,8 @@ def plot_SDE_example(ax=None, color_map=None):
     ax.set_aspect("equal")
 
 
-def plot_dynamic_SDE_example(ax=None, color_map=None):
+@figure("dynamic_SDE_example")
+def plot_dynamic_SDE_example(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of a (simple) SDE.
 
@@ -189,7 +190,8 @@ def plot_dynamic_SDE_example(ax=None, color_map=None):
     ax.set_aspect("equal")
 
 
-def plot_riemann_sum(ax=None, color_map=None):
+@figure("riemann_sum")
+def plot_riemann_sum(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of a Riemann sum (approximation of an integral).
 
@@ -236,7 +238,8 @@ def plot_riemann_sum(ax=None, color_map=None):
     ax.set_aspect("equal")
 
 
-def plot_random_diff(ax=None, color_map=None):
+@figure("random_diff")
+def plot_random_diff(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of a random function and its derivative at x(1).
 
@@ -286,7 +289,8 @@ def plot_random_diff(ax=None, color_map=None):
     ax.set_aspect("equal")
 
 
-def plot_brownian_VS_sin(ax=None, color_map=None):
+@figure("brownian_VS_sin")
+def plot_brownian_VS_sin(fig, color_map):
     """
     Plot a clean, blog-friendly visualization of a Brownian motion and a sine function.
 
@@ -296,8 +300,6 @@ def plot_brownian_VS_sin(ax=None, color_map=None):
 
     Sub plots on top of each other vertically stacked
     """
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(2, 1, height_ratios=[1, 1], hspace=0.3)
     ax1 = fig.add_subplot(gs[0, 0])
     ax2 = fig.add_subplot(gs[1, 0])
@@ -391,7 +393,8 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
         ax.scatter(x_riemann[i], B[int(x_riemann[i] / dt)], color=color_map["c7"], s=50)
 
 
-def plot_left_reimann_brownian(ax=None, color_map=None):
+@figure("left_riemann_brownian")
+def plot_left_reimann_brownian(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of a left Riemann sum for a Brownian motion.
 
@@ -434,7 +437,8 @@ def plot_left_reimann_brownian(ax=None, color_map=None):
     ax.set_ylim(y_min - padding, y_max + padding)
 
 
-def plot_second_order(ax=None, color_map=None):
+@figure("second_order")
+def plot_second_order(fig, color_map):
     """
     Plot a clean, blog-friendly visualization of the second-order sum of Brownian motion.
     Consider the second-order sum of Brownian motion:
@@ -448,8 +452,6 @@ def plot_second_order(ax=None, color_map=None):
     color_points = color_map["c1"]
     color_sum = color_map["c8"]
 
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(2, 1, height_ratios=[1, 1], hspace=0.3)
     ax1 = fig.add_subplot(gs[0, 0])
     ax2 = fig.add_subplot(gs[1, 0])
@@ -485,7 +487,8 @@ def plot_second_order(ax=None, color_map=None):
         ax.grid(True, linestyle="-", linewidth=0.5, alpha=0.3)
 
 
-def plot_beta_beta_squared(ax=None, color_map=None):
+@figure("beta_beta_squared")
+def plot_beta_beta_squared(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of a Brownian motion and its squared version.
     Starting from the SDE (x(t) = B(t)),
@@ -536,7 +539,8 @@ def plot_beta_beta_squared(ax=None, color_map=None):
     )
 
 
-def plot_beta_squared_second_order_taylor(ax=None, color_map=None):
+@figure("beta_squared_second_order_taylor")
+def plot_beta_squared_second_order_taylor(fig, color_map):
     """
     Plot a clean, blog-friendly visualization of a squared Brownian motion as a function of B(t),
     with it's second-order Taylor expansion, 2B_i(B(t) - B_i) + B_i^2.
@@ -544,8 +548,6 @@ def plot_beta_squared_second_order_taylor(ax=None, color_map=None):
 
     x-axis is B(t), y-axis is B^2(t).
     """
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(2, 1, height_ratios=[1, 1], hspace=0.3)
     ax1 = fig.add_subplot(gs[0, 0])
     ax2 = fig.add_subplot(gs[1, 0])
@@ -638,7 +640,8 @@ def plot_beta_squared_second_order_taylor(ax=None, color_map=None):
     )
 
 
-def plot_ornstein_uhlenbeck(ax=None, color_map=None):
+@figure("ornstein_uhlenbeck")
+def plot_ornstein_uhlenbeck(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of the Ornstein-Uhlenbeck process.
 
@@ -724,7 +727,8 @@ def plot_ornstein_uhlenbeck(ax=None, color_map=None):
     ax.grid(True, alpha=0.15, linestyle="-", zorder=0)
 
 
-def plot_reverse_ornstein_uhlenbeck(ax=None, color_map=None):
+@figure("reverse_ornstein_uhlenbeck")
+def plot_reverse_ornstein_uhlenbeck(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of the Reverse-Time Ornstein-Uhlenbeck process.
 
@@ -800,7 +804,8 @@ def plot_reverse_ornstein_uhlenbeck(ax=None, color_map=None):
     ax.set_ylim(-2.5, 2.5)
 
 
-def plot_denoising_diffusion(ax=None, color_map=None):
+@figure("denoising_diffusion")
+def plot_denoising_diffusion(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of a denoising diffusion probabilistic model
     represented as a stochastic differential equation (SDE):
@@ -887,7 +892,8 @@ def plot_denoising_diffusion(ax=None, color_map=None):
     ax.set_xlim(0, 1)
 
 
-def plot_brownian_to_point(ax=None, color_map=None):
+@figure("brownian_to_point")
+def plot_brownian_to_point(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of a Brownian motion
     converging to a point/line $v$ at time $T$,
@@ -929,7 +935,8 @@ def plot_brownian_to_point(ax=None, color_map=None):
     ax.set_aspect("equal")
 
 
-def plot_brownian_bridge(ax=None, color_map=None):
+@figure("brownian_bridge")
+def plot_brownian_bridge(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of a Brownian motion
     going from t_0 to t_1 and then from t_1 to t_2.
@@ -985,7 +992,8 @@ def plot_brownian_bridge(ax=None, color_map=None):
     ax.set_ylim(y_min, y_max)
 
 
-def plot_brownian_transition_density(ax=None, color_map=None):
+@figure("brownian_transition_density")
+def plot_brownian_transition_density(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of the transition density of a Brownian motion.
     P(beta(t) | beta(s))
@@ -1128,7 +1136,8 @@ def plot_brownian_transition_density(ax=None, color_map=None):
     ax.legend(frameon=True, framealpha=0.9, loc="upper left", fontsize=9)
 
 
-def plot_brownian_bridge_density(ax=None, color_map=None):
+@figure("brownian_bridge_density")
+def plot_brownian_bridge_density(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of a Brownian bridge with transition density
     at an intermediate time.
@@ -1313,7 +1322,8 @@ def plot_brownian_bridge_density(ax=None, color_map=None):
     ax.set_ylim(y_min, y_max)
 
 
-def plot_schoenmakers_score_matching(ax=None, color_map=None):
+@figure("schoenmakers_score_matching")
+def plot_schoenmakers_score_matching(fig, color_map):
     """
     Plot a clean, blog-friendly visualization of the Schoenmakers et al. (2013) score matching approach.
 
@@ -1322,10 +1332,6 @@ def plot_schoenmakers_score_matching(ax=None, color_map=None):
 
     Right subplot: Shows the reverse process from π back to the standard normal.
     """
-    # Create figure with two subplots side by side
-    # fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(1, 2, width_ratios=[1, 1], wspace=0.3)
     ax1 = fig.add_subplot(gs[0, 0])
     ax2 = fig.add_subplot(gs[0, 1])
@@ -1549,70 +1555,3 @@ def plot_schoenmakers_score_matching(ax=None, color_map=None):
     ax2.legend(loc="upper left", fontsize=9, frameon=True, framealpha=0.9)
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-
-    svg_content = plotter.create_themed_plot(
-        name="SDE_only_drift", plot_func=plot_SDE_only_drift
-    )
-    svg_content = plotter.create_themed_plot(
-        name="SDE_only_diffusion", plot_func=plot_SDE_only_diffusion
-    )
-    svg_content = plotter.create_themed_plot(
-        name="SDE_example", plot_func=plot_SDE_example
-    )
-    svg_content = plotter.create_themed_plot(
-        name="dynamic_SDE_example", plot_func=plot_dynamic_SDE_example
-    )
-    svg_content = plotter.create_themed_plot(
-        name="riemann_sum", plot_func=plot_riemann_sum
-    )
-    svg_content = plotter.create_themed_plot(
-        name="random_diff", plot_func=plot_random_diff
-    )
-    svg_content = plotter.create_themed_plot(
-        name="brownian_VS_sin", plot_func=plot_brownian_VS_sin
-    )
-    svg_content = plotter.create_themed_plot(
-        name="left_riemann_brownian", plot_func=plot_left_reimann_brownian
-    )
-    svg_content = plotter.create_themed_plot(
-        name="second_order", plot_func=plot_second_order
-    )
-    svg_content = plotter.create_themed_plot(
-        name="beta_beta_squared", plot_func=plot_beta_beta_squared
-    )
-    svg_content = plotter.create_themed_plot(
-        name="beta_squared_second_order_taylor",
-        plot_func=plot_beta_squared_second_order_taylor,
-    )
-    svg_content = plotter.create_themed_plot(
-        name="ornstein_uhlenbeck", plot_func=plot_ornstein_uhlenbeck
-    )
-    svg_content = plotter.create_themed_plot(
-        name="reverse_ornstein_uhlenbeck",
-        plot_func=plot_reverse_ornstein_uhlenbeck,
-    )
-    svg_content = plotter.create_themed_plot(
-        name="denoising_diffusion", plot_func=plot_denoising_diffusion
-    )
-    svg_content = plotter.create_themed_plot(
-        name="brownian_to_point", plot_func=plot_brownian_to_point
-    )
-    svg_content = plotter.create_themed_plot(
-        name="brownian_bridge", plot_func=plot_brownian_bridge
-    )
-    svg_content = plotter.create_themed_plot(
-        name="brownian_transition_density",
-        plot_func=plot_brownian_transition_density,
-    )
-    svg_content = plotter.create_themed_plot(
-        name="brownian_bridge_density",
-        plot_func=plot_brownian_bridge_density,
-    )
-    svg_content = plotter.create_themed_plot(
-        name="schoenmakers_score_matching",
-        plot_func=plot_schoenmakers_score_matching,
-    )

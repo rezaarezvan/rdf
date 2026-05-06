@@ -1,8 +1,11 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 
-def plot_margin_principle(ax=None, color_map=None):
+from rdf import figure
+
+
+@figure("margin_principle")
+def plot_margin_principle(ax, color_map):
     """
     Create a clean, blog-friendly visualization of the maximum margin principle
     for Support Vector Machines (SVM).
@@ -130,10 +133,3 @@ def plot_margin_principle(ax=None, color_map=None):
     ax.set_ylim(-7.5, 7.5)
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        save_name="margin_principle", plot_func=plot_margin_principle
-    )

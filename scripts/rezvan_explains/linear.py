@@ -1,7 +1,11 @@
 import numpy as np
 
 
-def plot_halfspace(ax=None, color_map=None):
+from rdf import figure
+
+
+@figure("linear_halfspace")
+def plot_halfspace(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of a linear halfspace.
     Demonstrates how a line divides 2D space into two regions.
@@ -64,10 +68,3 @@ def plot_halfspace(ax=None, color_map=None):
     ax.set_aspect("equal")
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        save_name="linear_halfspace", plot_func=plot_halfspace
-    )

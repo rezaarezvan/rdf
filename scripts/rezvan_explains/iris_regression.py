@@ -1,28 +1,24 @@
 import numpy as np
 import sklearn.datasets as datasets
-import matplotlib.pyplot as plt
+
 from scipy.stats import gaussian_kde
 
+from rdf import figure
 
-def plot_probabilities(ax=None, color_map=None):
-    """Plot p(y), p(x|y), and p(y|x) for Iris dataset petal length"""
-    fig, (ax1, ax2) = plt.subplots(1, 2)
+
+@figure("iris_probabilities")
+def plot_probabilities(fig, color_map):
+    """Plot p(x|y) and p(y|x) for Iris dataset petal length."""
+    ax1, ax2 = fig.subplots(1, 2)
 
     X, y = datasets.load_iris(return_X_y=True)
     petal_length = X[:, 2]
     colors = list(color_map.values())[:3]
     classes = datasets.load_iris().target_names
 
-    # # Plot 1: p(y) - Prior probabilities
     class_counts = np.bincount(y)
     priors = class_counts / len(y)
-    # ax1.bar(range(3), priors, color=colors)
-    # ax1.set_xticks(range(3))
-    # ax1.set_xticklabels(classes, rotation=45)
-    # ax1.set_title('p(y) - Class Priors')
-    # ax1.set_ylabel('Probability')
 
-    # Plot 2: p(x|y) - Class conditionals
     x_range = np.linspace(petal_length.min(), petal_length.max(), 200)
     for i, color in enumerate(colors):
         mask = y == i
@@ -35,14 +31,10 @@ def plot_probabilities(ax=None, color_map=None):
     ax1.set_ylabel("Density")
     ax1.legend()
 
-    # Plot 3: p(y|x) - Posteriors
     kdes = [gaussian_kde(petal_length[y == i]) for i in range(3)]
     posteriors = np.zeros((len(x_range), 3))
-
     for i in range(3):
-        likelihood = kdes[i](x_range)
-        posteriors[:, i] = likelihood * priors[i]
-
+        posteriors[:, i] = kdes[i](x_range) * priors[i]
     posteriors /= posteriors.sum(axis=1, keepdims=True)
 
     for i, color in enumerate(colors):
@@ -53,28 +45,12 @@ def plot_probabilities(ax=None, color_map=None):
     ax2.set_xlabel("Petal Length (cm)")
     ax2.set_ylabel("Probability")
     ax2.legend()
+    fig.tight_layout()
 
-    plt.tight_layout()
 
-
-def plot_linear_halfspace_example(ax=None, color_map=None):
-    """
-    Plot a simple linear halfspace example
-    f(x) < 0 class -1
-    f(x) > 0 class 1
-    x_1 feature 1
-    x_2 (y) feature 2
-    w = [5, 2]^T
-    b = 3
-
-    Should color each half-space according to the class, plot some random points in each half space
-
-    Put markers/text on the plot to show f(x) = 0, f(x) < 0, f(x) > 0 and text (class -1, class 1)
-    Grid
-    Blog/paper friendly/ready
-    """
-    fig, ax = plt.subplots()
-
+@figure("linear_halfspace")
+def plot_linear_halfspace_example(ax):
+    """Linear halfspace: f(x) = w·x + b, w=[5,2], b=3."""
     w = np.array([5, 2])
     b = 3
     x1 = np.linspace(-10, 10, 100)
@@ -83,7 +59,6 @@ def plot_linear_halfspace_example(ax=None, color_map=None):
     ax.plot(x1, x2, label="f(x) = 0")
     ax.fill_between(x1, x2, -10, alpha=0.2, color="blue", label="f(x) < 0")
     ax.fill_between(x1, x2, 10, alpha=0.2, color="red", label="f(x) > 0")
-
     ax.scatter(
         np.random.uniform(-10, 10, 10),
         np.random.uniform(-10, 10, 10),
@@ -96,49 +71,19 @@ def plot_linear_halfspace_example(ax=None, color_map=None):
         color="red",
         label="class 1",
     )
-
     ax.set_title("Linear Halfspace Example")
     ax.set_xlabel("x1")
     ax.set_ylabel("x2")
     ax.legend()
 
-    plt.tight_layout()
 
-
-def plot_sigmoid(ax=None, color_map=None):
-    """
-    Plot the sigmoid function
-    """
-    fig, ax = plt.subplots()
-
+@figure("sigmoid")
+def plot_sigmoid(ax):
+    """Plot the sigmoid function."""
     x = np.linspace(-10, 10, 100)
     y = 1 / (1 + np.exp(-x))
-
     ax.plot(x, y, label="sigmoid")
-
     ax.set_title("Sigmoid Function")
     ax.set_xlabel("f(x)")
     ax.set_ylabel(r"$\sigma(f(x))$")
     ax.legend()
-
-    plt.tight_layout()
-
-
-# def plot_
-
-
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        save_name="iris_probabilities", plot_func=plot_probabilities
-    )
-
-    svg_content = plotter.create_themed_plot(
-        save_name="linear_halfspace", plot_func=plot_linear_halfspace_example
-    )
-
-    svg_content = plotter.create_themed_plot(
-        save_name="sigmoid", plot_func=plot_sigmoid
-    )

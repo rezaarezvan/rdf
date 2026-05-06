@@ -1,8 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from rdf import figure
 
-def plot_convex_functions(ax=None, color_map=None):
+
+@figure("convex_functions")
+def plot_convex_functions(ax, color_map):
     """
     Create a clean, blog-friendly visualization of convex and non-convex functions.
     Shows a convex function with unique minimum and a non-convex function with
@@ -84,10 +87,3 @@ def plot_convex_functions(ax=None, color_map=None):
     return fig
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        save_name="convex_functions", plot_func=plot_convex_functions
-    )

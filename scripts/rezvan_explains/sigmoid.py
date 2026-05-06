@@ -1,8 +1,11 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 
-def plot_sigmoid(ax=None, color_map=None):
+from rdf import figure
+
+
+@figure("sigmoid")
+def plot_sigmoid(ax, color_map):
     """
     Create a clean, blog-friendly plot of the sigmoid function.
 
@@ -37,10 +40,3 @@ def plot_sigmoid(ax=None, color_map=None):
     ax.set_ylim(-0.1, 1.1)
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        save_name="sigmoid", plot_func=plot_sigmoid
-    )

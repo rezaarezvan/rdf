@@ -1,14 +1,12 @@
+"""3d_sde.py — plots of SDEs in 3D."""
 import numpy as np
 import matplotlib.pyplot as plt
 
-"""
-3d_sde.py
-
-Make plots of different SDEs in 3D.
-"""
+from rdf import figure
 
 
-def plot_3d_surface(ax=None, color_map=None):
+@figure("3d_surface", is_3d=True)
+def plot_3d_surface(ax, color_map):
     """
     Create a 3D surface plot with theme support.
     """
@@ -33,7 +31,8 @@ def plot_3d_surface(ax=None, color_map=None):
     return surf  # Return the surface for potential additional customization
 
 
-def plot_3D_brownian_motion(ax=None, color_map=None):
+@figure("3d_sde", is_3d=True)
+def plot_3D_brownian_motion(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of a 3D Brownian motion.
 
@@ -280,14 +279,3 @@ def plot_second_order(ax=None, color_map=None):
     for ax in (ax1, ax2):
         ax.grid(True, linestyle="-", linewidth=0.5, alpha=0.3)
 
-
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        name="3d_sde", plot_func=plot_3D_brownian_motion, is_3d=True
-    )
-    svg_content = plotter.create_themed_plot(
-        name="3d_surface", plot_func=plot_3d_surface, is_3d=True
-    )

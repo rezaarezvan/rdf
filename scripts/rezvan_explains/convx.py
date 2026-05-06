@@ -4,8 +4,11 @@ import matplotlib.patches as patches
 
 from matplotlib.path import Path
 
+from rdf import figure
 
-def plot_convex_sets(ax=None, color_map=None):
+
+@figure("convex_sets")
+def plot_convex_sets(ax, color_map):
     """
     Create a clean, blog-friendly visualization of convex and non-convex sets.
     Shows examples with line segments demonstrating convexity properties.
@@ -76,10 +79,3 @@ def plot_convex_sets(ax=None, color_map=None):
     ax.set_aspect("equal")
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        save_name="convex_sets", plot_func=plot_convex_sets
-    )

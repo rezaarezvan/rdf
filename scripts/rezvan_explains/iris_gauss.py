@@ -1,10 +1,13 @@
 import numpy as np
 from sklearn.datasets import load_iris
-import matplotlib.pyplot as plt
 from scipy.stats import norm
 
 
-def plot_gaussian_conditionals(ax=None, color_map=None):
+from rdf import figure
+
+
+@figure("iris_gaussian")
+def plot_gaussian_conditionals(ax, color_map):
     """
     Create a clean, blog-friendly histogram of iris petal lengths with Gaussian fits.
 
@@ -85,10 +88,3 @@ def plot_gaussian_conditionals(ax=None, color_map=None):
     ax.set_ylim(0, max_density * 1.1)
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        save_name="iris_gaussian", plot_func=plot_gaussian_conditionals
-    )

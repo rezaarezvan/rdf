@@ -2,7 +2,11 @@ import numpy as np
 from sklearn.datasets import load_iris
 
 
-def plot_linear_separation(ax=None, color_map=None):
+from rdf import figure
+
+
+@figure("iris_linear_separation")
+def plot_linear_separation(ax, color_map):
     """
     Create a clean, blog-friendly visualization of linearly separable Iris classes
     using petal measurements. Shows how two Iris species can be separated by a
@@ -87,10 +91,3 @@ def plot_linear_separation(ax=None, color_map=None):
     ax.set_ylim(y_min - y_margin, y_max + y_margin)
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        save_name="iris_linear_separation", plot_func=plot_linear_separation
-    )

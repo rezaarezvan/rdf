@@ -1,8 +1,10 @@
 import numpy as np
-import matplotlib.pyplot as plt
+
+from rdf import figure
 
 
-def plot_concentration(ax=None, color_map=None):
+@figure("four_arms_concentration")
+def plot_concentration(ax, color_map):
     """
     Plot a clean, blog-friendly visualization of four arms with (different) mean
     \\mu_n and their empirical (dotted) distribution and show how concentration can differ.
@@ -75,11 +77,3 @@ def plot_concentration(ax=None, color_map=None):
     )
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-
-    svg_content = plotter.create_themed_plot(
-        name="four_arms_concentration", plot_func=plot_concentration
-    )

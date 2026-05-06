@@ -2,7 +2,11 @@ import numpy as np
 from sklearn.datasets import load_iris
 
 
-def plot_iris_histogram(ax=None, color_map=None):
+from rdf import figure
+
+
+@figure("iris_histogram")
+def plot_iris_histogram(ax, color_map):
     """
     Args:
         ax: Matplotlib axis object to plot on
@@ -48,10 +52,3 @@ def plot_iris_histogram(ax=None, color_map=None):
     ax.set_ylim(0, max_freq * 1.1)
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        save_name="iris_histogram", plot_func=plot_iris_histogram
-    )

@@ -4,7 +4,11 @@ import matplotlib.pyplot as plt
 from scipy.stats import gaussian_kde
 
 
-def plot_probabilities(ax=None, color_map=None):
+from rdf import figure
+
+
+@figure("iris_probabilities")
+def plot_probabilities(ax, color_map):
     """
     Create clean, blog-friendly plots of class conditionals and posteriors for Iris dataset.
     Shows p(x|y) (class conditionals) and p(y|x) (posterior probabilities) for petal length.
@@ -91,10 +95,3 @@ def plot_probabilities(ax=None, color_map=None):
     return fig
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        save_name="iris_probabilities", plot_func=plot_probabilities
-    )

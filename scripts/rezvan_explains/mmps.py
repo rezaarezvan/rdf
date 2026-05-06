@@ -1,8 +1,11 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 
-def plot_soft_margin(ax=None, color_map=None):
+from rdf import figure
+
+
+@figure("soft_margin_principle")
+def plot_soft_margin(ax, color_map):
     """
     Create a clean, blog-friendly visualization of the soft margin principle
     for Support Vector Machines (SVM), showing cases where perfect separation
@@ -137,10 +140,3 @@ def plot_soft_margin(ax=None, color_map=None):
     ax.set_ylim(-7.5, 7.5)
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        save_name="soft_margin_principle", plot_func=plot_soft_margin
-    )

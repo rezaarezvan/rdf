@@ -1,8 +1,10 @@
 import numpy as np
-import matplotlib.pyplot as plt
+
+from rdf import figure
 
 
-def plot_epsilon_greedy_comparison(ax=None, color_map=None):
+@figure("epsilon_greedy_comparison")
+def plot_epsilon_greedy_comparison(fig, color_map):
     """
     Plot side-by-side comparison of epsilon-greedy multi-armed bandit performance:
     Left: Average reward over time
@@ -10,12 +12,9 @@ def plot_epsilon_greedy_comparison(ax=None, color_map=None):
 
     Shows results for epsilon = 0.1, 0.01, and 0 (greedy)
     """
-    # Create figure with two subplots side by side
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(1, 2, width_ratios=[1, 1], wspace=0.3)
-    ax1 = fig.add_subplot(gs[0, 0])  # Average reward
-    ax2 = fig.add_subplot(gs[0, 1])  # Optimal action %
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax2 = fig.add_subplot(gs[0, 1])
 
     # Simulation parameters
     n_arms = 10  # Number of bandit arms
@@ -140,11 +139,3 @@ def plot_epsilon_greedy_comparison(ax=None, color_map=None):
     ax2.grid(True, alpha=0.15, linestyle="-", zorder=0)
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-
-    svg_content = plotter.create_themed_plot(
-        name="epsilon_greedy_comparison", plot_func=plot_epsilon_greedy_comparison
-    )
