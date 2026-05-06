@@ -1,8 +1,10 @@
 import numpy as np
-import matplotlib.pyplot as plt
+
+from rdf import figure
 
 
-def plot_ml_learning_example(ax=None, color_map=None):
+@figure("ml_learning_example")
+def plot_ml_learning_example(ax):
     """
     Create a plot demonstrating Maximum Likelihood (ML) learning example.
 
@@ -49,7 +51,8 @@ def plot_ml_learning_example(ax=None, color_map=None):
     ax.set_ylim(-3, 3)
 
 
-def plot_map_learning_example(ax=None, color_map=None):
+@figure("map_learning_example")
+def plot_map_learning_example(fig):
     """
     Create a plot demonstrating Maximum A Posteriori (MAP) learning example.
 
@@ -71,8 +74,6 @@ def plot_map_learning_example(ax=None, color_map=None):
         ax: Matplotlib axis object to plot on
         color_map: Dictionary of colors for consistent styling
     """
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(1, 3, width_ratios=[1, 1, 1], wspace=0.4)
     axes = [fig.add_subplot(gs[0, i]) for i in range(3)]
 
@@ -112,15 +113,3 @@ def plot_map_learning_example(ax=None, color_map=None):
     axes[2].set_ylabel(r"$w_1$")
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-
-    svg_content = plotter.create_themed_plot(
-        name="ml_learning_example", plot_func=plot_ml_learning_example
-    )
-
-    svg_content = plotter.create_themed_plot(
-        name="map_learning_example", plot_func=plot_map_learning_example
-    )

@@ -1,10 +1,12 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 from scipy.stats import multivariate_normal
 
+from rdf import figure
 
-def plot_monte_carlo_inference(ax=None, color_map=None):
+
+@figure("monte_carlo_inference")
+def plot_monte_carlo_inference(ax, color_map):
     """
     Create with:
         p(z) bi modal Gaussian where the left one is higher
@@ -34,7 +36,8 @@ def plot_monte_carlo_inference(ax=None, color_map=None):
     ax.legend(fontsize=10)
 
 
-def plot_monte_carlo_inference_importance_sampling(ax=None, color_map=None):
+@figure("monte_carlo_inference_importance_sampling")
+def plot_monte_carlo_inference_importance_sampling(ax, color_map):
     """
     Create with:
         p(z) bi modal Gaussian where the left one is higher
@@ -69,15 +72,3 @@ def plot_monte_carlo_inference_importance_sampling(ax=None, color_map=None):
     ax.legend(fontsize=10)
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-
-    svg_content = plotter.create_themed_plot(
-        name="monte_carlo_inference", plot_func=plot_monte_carlo_inference
-    )
-    svg_content = plotter.create_themed_plot(
-        name="monte_carlo_inference_importance_sampling",
-        plot_func=plot_monte_carlo_inference_importance_sampling,
-    )

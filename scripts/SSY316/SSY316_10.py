@@ -1,10 +1,12 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 from scipy.stats import multivariate_normal
 
+from rdf import figure
 
-def plot_deterministic_approximate_inference(ax=None, color_map=None):
+
+@figure("deterministic_approximate_inference")
+def plot_deterministic_approximate_inference(fig, color_map):
     """
     Create with:
         Blue: Bimodal distribution, shaped like an 8
@@ -20,8 +22,6 @@ def plot_deterministic_approximate_inference(ax=None, color_map=None):
         ax: Matplotlib axis object to plot on
         color_map: Dictionary of colors for consistent styling
     """
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(1, 3, width_ratios=[1, 1, 1], wspace=0.4)
     ax = [fig.add_subplot(gs[0, i]) for i in range(3)]
 
@@ -87,12 +87,3 @@ def plot_deterministic_approximate_inference(ax=None, color_map=None):
         ax[i].set_yticks([])
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-
-    svg_content = plotter.create_themed_plot(
-        name="deterministic_approximate_inference",
-        plot_func=plot_deterministic_approximate_inference,
-    )

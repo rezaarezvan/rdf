@@ -1,8 +1,10 @@
 import numpy as np
-import matplotlib.pyplot as plt
+
+from rdf import figure
 
 
-def plot_piecewise_function_analysis(ax=None, color_map=None):
+@figure("piecewise_function_analysis")
+def plot_piecewise_function_analysis(ax, color_map):
     """
     Create a clean visualization of a piecewise function showing:
     - Jump discontinuity with filled/hollow circles
@@ -195,11 +197,3 @@ def plot_piecewise_function_analysis(ax=None, color_map=None):
     ax.set_ylim(-0.5, 4)
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        save_name="piecewise_function_analysis",
-        plot_func=plot_piecewise_function_analysis,
-    )

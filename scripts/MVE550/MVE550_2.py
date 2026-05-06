@@ -1,10 +1,12 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 from scipy.stats import beta, gamma, nbinom, poisson
 
+from rdf import figure
 
-def plot_beta_prior_beta_posterior(ax=None, color_map=None):
+
+@figure("beta_prior_posterior")
+def plot_beta_prior_beta_posterior(ax, color_map):
     """
     Plot Beta prior and posterior distributions for a Bernoulli process.
 
@@ -49,7 +51,8 @@ def plot_beta_prior_beta_posterior(ax=None, color_map=None):
     ax.legend()
 
 
-def plot_poison_gamma_conjugacy(ax=None, color_map=None):
+@figure("poisson_gamma_conjugacy")
+def plot_poison_gamma_conjugacy(ax, color_map):
     """
     Plot Poisson likelihood and Gamma prior/posterior distributions.
 
@@ -110,7 +113,8 @@ def plot_poison_gamma_conjugacy(ax=None, color_map=None):
     ax.legend()
 
 
-def plot_poison_gamma_conjugacy_prediction(ax=None, color_map=None):
+@figure("poisson_gamma_conjugacy_prediction")
+def plot_poison_gamma_conjugacy_prediction(ax, color_map):
     """
     Plot predictive distributions for Poisson-Gamma conjugacy.
 
@@ -163,17 +167,3 @@ def plot_poison_gamma_conjugacy_prediction(ax=None, color_map=None):
     ax.legend()
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        name="beta_prior_posterior", plot_func=plot_beta_prior_beta_posterior
-    )
-    svg_content = plotter.create_themed_plot(
-        name="poisson_gamma_conjugacy", plot_func=plot_poison_gamma_conjugacy
-    )
-    svg_content = plotter.create_themed_plot(
-        name="poisson_gamma_conjugacy_prediction",
-        plot_func=plot_poison_gamma_conjugacy_prediction,
-    )

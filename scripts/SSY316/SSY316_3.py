@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 from scipy.stats import multivariate_normal
 from sklearn.linear_model import LogisticRegression
@@ -9,8 +8,11 @@ from sklearn.discriminant_analysis import (
     QuadraticDiscriminantAnalysis,
 )
 
+from rdf import figure
 
-def plot_logistic_sigmoid(ax=None, color_map=None):
+
+@figure("logistic_sigmoid")
+def plot_logistic_sigmoid(ax):
     """
     Create a plot of the logistic sigmoid function.
 
@@ -32,7 +34,8 @@ def plot_logistic_sigmoid(ax=None, color_map=None):
     ax.set_ylim(0, 1)
 
 
-def plot_multi_class_regression_linear_and_quadratic(ax=None, color_map=None):
+@figure("multi_class_regression_linear_and_quadratic")
+def plot_multi_class_regression_linear_and_quadratic(fig):
     """
     Create a plot demonstrating multi-class regression with linear and quadratic models.
 
@@ -40,8 +43,6 @@ def plot_multi_class_regression_linear_and_quadratic(ax=None, color_map=None):
         ax: Matplotlib axis object to plot on
         color_map: Dictionary of colors for consistent styling
     """
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(1, 2, width_ratios=[1, 1], wspace=0.4)
     ax = [fig.add_subplot(gs[0, i]) for i in range(2)]
     # Generate synthetic data
@@ -129,7 +130,8 @@ def plot_multi_class_regression_linear_and_quadratic(ax=None, color_map=None):
     ax[1].set_aspect("equal")
 
 
-def plot_multi_class_lda(ax=None, color_map=None):
+@figure("multi_class_lda")
+def plot_multi_class_lda(fig):
     """
     Create a plot demonstrating multi-class classification using LDA.
 
@@ -137,8 +139,6 @@ def plot_multi_class_lda(ax=None, color_map=None):
         ax: Matplotlib axis object to plot on
         color_map: Dictionary of colors for consistent styling
     """
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(1, 2, width_ratios=[1, 1], wspace=0.3)
     ax = [fig.add_subplot(gs[0, i]) for i in range(2)]
 
@@ -241,7 +241,8 @@ def plot_multi_class_lda(ax=None, color_map=None):
     ax[1].set_ylim(y_min, y_max)
 
 
-def plot_multi_class_qda(ax=None, color_map=None):
+@figure("multi_class_qda")
+def plot_multi_class_qda(fig):
     """
     Create a plot demonstrating multi-class classification using QDA.
 
@@ -249,8 +250,6 @@ def plot_multi_class_qda(ax=None, color_map=None):
         ax: Matplotlib axis object to plot on
         color_map: Dictionary of colors for consistent styling
     """
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(1, 2, width_ratios=[1, 1], wspace=0.3)
     ax = [fig.add_subplot(gs[0, i]) for i in range(2)]
 
@@ -353,21 +352,3 @@ def plot_multi_class_qda(ax=None, color_map=None):
     ax[1].set_ylim(y_min, y_max)
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-
-    svg_content = plotter.create_themed_plot(
-        name="logistic_sigmoid", plot_func=plot_logistic_sigmoid
-    )
-    svg_content = plotter.create_themed_plot(
-        name="multi_class_regression_linear_and_quadratic",
-        plot_func=plot_multi_class_regression_linear_and_quadratic,
-    )
-    svg_content = plotter.create_themed_plot(
-        name="multi_class_lda", plot_func=plot_multi_class_lda
-    )
-    svg_content = plotter.create_themed_plot(
-        name="multi_class_qda", plot_func=plot_multi_class_qda
-    )

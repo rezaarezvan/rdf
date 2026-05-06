@@ -1,8 +1,10 @@
 import numpy as np
-import matplotlib.pyplot as plt
+
+from rdf import figure
 
 
-def plot_example_question_regions(ax=None, color_map=None):
+@figure("example_question_regions4")
+def plot_example_question_regions(ax, color_map):
     """
     Create a clean visualization of shaded regions for example question,
     S = {
@@ -116,15 +118,3 @@ def plot_example_question_regions(ax=None, color_map=None):
     ax.axvline(0, color=color_map["black"], linewidth=1, alpha=0.8, zorder=2)
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="example_question_regions", plot_func=plot_example_question_regions
-    # )
-
-    svg_content = plotter.create_themed_plot(
-        save_name="example_question_regions4", plot_func=plot_example_question_regions
-    )

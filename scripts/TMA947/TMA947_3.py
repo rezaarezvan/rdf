@@ -1,8 +1,10 @@
 import numpy as np
-import matplotlib.pyplot as plt
+
+from rdf import figure
 
 
-def plot_convex_function_definition(ax=None, color_map=None):
+@figure("convex_function_definition")
+def plot_convex_function_definition(ax, color_map):
     """
     Create a clean, blog-friendly visualization of the definition of a convex function.
 
@@ -95,11 +97,3 @@ def plot_convex_function_definition(ax=None, color_map=None):
     ax.legend(frameon=True, framealpha=0.9, loc="upper right", fontsize=9)
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        name="convex_function_definition",
-        plot_func=plot_convex_function_definition,
-    )

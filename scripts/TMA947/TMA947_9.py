@@ -1,8 +1,9 @@
 import numpy as np
-import matplotlib.pyplot as plt
+
+from rdf import figure
 
 
-def plot_example_polyhedron_regions(ax=None, color_map=None):
+def plot_example_polyhedron_regions(ax, color_map):
     """
     Create a clean visualization of the feasible set of a LP (polyhedron),
 
@@ -79,7 +80,7 @@ def plot_example_polyhedron_regions(ax=None, color_map=None):
     ax.axvline(0, color="black", linewidth=0.8, alpha=0.5, zorder=2)
 
 
-def plot_example_polyhedron_regions_and_negative_gradient(ax=None, color_map=None):
+def plot_example_polyhedron_regions_and_negative_gradient(ax, color_map):
     """
     Create a clean visualization of the feasible set of a LP (polyhedron),
 
@@ -201,7 +202,8 @@ def plot_example_polyhedron_regions_and_negative_gradient(ax=None, color_map=Non
     ax.axvline(0, color="black", linewidth=0.8, alpha=0.5, zorder=2)
 
 
-def plot_example_polyhedron_regions2(ax=None, color_map=None):
+@figure("example_polyhedron_regions2")
+def plot_example_polyhedron_regions2(ax, color_map):
     """
     Create a clean visualization of the feasible set of the polyhedron,
 
@@ -275,20 +277,3 @@ def plot_example_polyhedron_regions2(ax=None, color_map=None):
     ax.axvline(0, color="black", linewidth=0.8, alpha=0.5, zorder=2)
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="example_polyhedron_regions", plot_func=plot_example_polyhedron_regions
-    # )
-
-    # svg_content = plotter.create_themed_plot(
-    #     save_name="example_polyhedron_regions_and_negative_gradient", plot_func=plot_example_polyhedron_regions_and_negative_gradient
-    # )
-
-    svg_content = plotter.create_themed_plot(
-        save_name="example_polyhedron_regions2",
-        plot_func=plot_example_polyhedron_regions2,
-    )

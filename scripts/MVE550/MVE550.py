@@ -1,8 +1,10 @@
 import numpy as np
-import matplotlib.pyplot as plt
+
+from rdf import figure
 
 
-def plot_stochastic_VS_deterministic_processes(ax=None, color_map=None):
+@figure("stochastic_vs_deterministic_processes")
+def plot_stochastic_VS_deterministic_processes(fig):
     """
     Create a visualization comparing stochastic and deterministic processes.
 
@@ -16,8 +18,6 @@ def plot_stochastic_VS_deterministic_processes(ax=None, color_map=None):
         ax: Matplotlib axis object to plot on
         color_map: Dictionary of colors for consistent styling
     """
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(1, 2, width_ratios=[1, 1], wspace=0.4)
 
     # Create subplots
@@ -71,11 +71,3 @@ def plot_stochastic_VS_deterministic_processes(ax=None, color_map=None):
     ax2.legend()
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        name="stochastic_vs_deterministic_processes",
-        plot_func=plot_stochastic_VS_deterministic_processes,
-    )

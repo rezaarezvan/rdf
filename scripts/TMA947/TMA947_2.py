@@ -3,8 +3,11 @@ import matplotlib.pyplot as plt
 
 from matplotlib.patches import Ellipse, Path, PathPatch, Polygon, Patch
 
+from rdf import figure
 
-def plot_convex_nonconvex_sets(ax=None, color_map=None):
+
+@figure("convex_nonconvex_sets")
+def plot_convex_nonconvex_sets(fig, color_map):
     """
     Create a clean, blog-friendly visualization of convex and non-convex sets
     showing the line segment property.
@@ -14,8 +17,6 @@ def plot_convex_nonconvex_sets(ax=None, color_map=None):
         color_map: Dictionary of colors for consistent styling
     """
     # Create figure with two subplots side by side
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(1, 2, height_ratios=[1], width_ratios=[1, 1], wspace=0.3)
     ax1 = fig.add_subplot(gs[0, 0])
     ax2 = fig.add_subplot(gs[0, 1])
@@ -197,7 +198,8 @@ def plot_circle_boundary(ax=None, color_map=None):
     ax.set_aspect("equal")
 
 
-def plot_sphere_and_circle(ax=None, color_map=None):
+@figure("sphere_and_circle")
+def plot_sphere_and_circle(fig, color_map):
     """
     Create side-by-side visualization of unit sphere and circle boundary.
 
@@ -206,15 +208,11 @@ def plot_sphere_and_circle(ax=None, color_map=None):
         color_map: Dictionary of colors for consistent styling
     """
     # Create figure with two subplots
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(1, 2, width_ratios=[1, 1], wspace=0.3)
 
-    # 3D subplot for sphere
     ax1 = fig.add_subplot(gs[0, 0], projection="3d")
     plot_unit_sphere_3d(ax1, color_map)
 
-    # 2D subplot for circle
     ax2 = fig.add_subplot(gs[0, 1])
     plot_circle_boundary(ax2, color_map)
 
@@ -305,7 +303,8 @@ def plot_sphere_halves(ax, color_map):
     ax.view_init(elev=20, azim=45)
 
 
-def plot_three_convex_operations(ax=None, color_map=None):
+@figure("three_convex_operations")
+def plot_three_convex_operations(fig, color_map):
     """
     Create three visualizations of convex set operations.
 
@@ -313,14 +312,11 @@ def plot_three_convex_operations(ax=None, color_map=None):
         ax: Matplotlib axis object to plot on
         color_map: Dictionary of colors for consistent styling
     """
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(1, 3, width_ratios=[1, 1, 1], wspace=0.4)
 
-    # Create subplots
-    ax1 = fig.add_subplot(gs[0, 0])  # Overlapping
-    ax2 = fig.add_subplot(gs[0, 1])  # Disconnected
-    ax3 = fig.add_subplot(gs[0, 2], projection="3d")  # 3D sphere halves
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax2 = fig.add_subplot(gs[0, 1])
+    ax3 = fig.add_subplot(gs[0, 2], projection="3d")
 
     # Plot each example
     plot_overlapping_sets(ax1, color_map)
@@ -489,7 +485,8 @@ def plot_convex_combinations(ax, color_map):
     )
 
 
-def plot_convex_hull_construction(ax=None, color_map=None):
+@figure("convex_hull_construction")
+def plot_convex_hull_construction(fig, color_map):
     """
     Create three visualizations of convex hull construction.
 
@@ -497,14 +494,11 @@ def plot_convex_hull_construction(ax=None, color_map=None):
         ax: Matplotlib axis object to plot on
         color_map: Dictionary of colors for consistent styling
     """
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(1, 3, width_ratios=[1, 1, 1], wspace=0.4)
 
-    # Create subplots
-    ax1 = fig.add_subplot(gs[0, 0])  # Minimal convex hull
-    ax2 = fig.add_subplot(gs[0, 1])  # Larger convex sets
-    ax3 = fig.add_subplot(gs[0, 2])  # Convex combinations
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax2 = fig.add_subplot(gs[0, 1])
+    ax3 = fig.add_subplot(gs[0, 2])
 
     # Plot each example
     plot_minimal_convex_hull(ax1, color_map)
@@ -619,7 +613,8 @@ def plot_triangle_extreme_only(ax, color_map):
     ax.plot([v3[0], v1[0]], [v3[1], v1[1]], color_map["c8"], linewidth=3, alpha=0.8)
 
 
-def plot_extreme_points_comparison(ax=None, color_map=None):
+@figure("extreme_points_comparison")
+def plot_extreme_points_comparison(fig, color_map):
     """
     Create comparison showing polytope with and without interior points.
 
@@ -627,13 +622,10 @@ def plot_extreme_points_comparison(ax=None, color_map=None):
         ax: Matplotlib axis object to plot on
         color_map: Dictionary of colors for consistent styling
     """
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(1, 2, width_ratios=[1, 1], wspace=0.4)
 
-    # Create subplots
-    ax1 = fig.add_subplot(gs[0, 0])  # With interior point
-    ax2 = fig.add_subplot(gs[0, 1])  # Extreme points only
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax2 = fig.add_subplot(gs[0, 1])
 
     # Plot each example
     plot_triangle_with_interior_point(ax1, color_map)
@@ -651,7 +643,8 @@ def plot_extreme_points_comparison(ax=None, color_map=None):
         ax.set_yticks([])
 
 
-def plot_halfspace(ax=None, color_map=None):
+@figure("halfspace")
+def plot_halfspace(ax, color_map):
     """
     Create a clean visualization of a polyhedron as intersection of half-spaces.
     Shows linear constraints Ax ≤ b with shaded infeasible regions.
@@ -708,7 +701,8 @@ def plot_halfspace(ax=None, color_map=None):
     ax.legend(handles=legend_elements, loc="upper right", fontsize=10, framealpha=0.9)
 
 
-def plot_polyhedron_halfspaces(ax=None, color_map=None):
+@figure("polyhedron_halfspaces")
+def plot_polyhedron_halfspaces(ax, color_map):
     """
     Create a clean visualization of a polyhedron as intersection of half-spaces.
     Shows linear constraints Ax ≤ b with shaded infeasible regions.
@@ -954,7 +948,8 @@ def plot_nonconvex_cones(ax, color_map):
     ax.text(point2[0] + 0.1, point2[1], "$x_2$", fontsize=11, ha="left")
 
 
-def plot_cone_comparison(ax=None, color_map=None):
+@figure("cone_comparison")
+def plot_cone_comparison(fig, color_map):
     """
     Create comparison showing convex cone vs non-convex union of cones.
 
@@ -962,13 +957,10 @@ def plot_cone_comparison(ax=None, color_map=None):
         ax: Matplotlib axis object to plot on
         color_map: Dictionary of colors for consistent styling
     """
-    fig = ax.figure
-    ax.remove()
     gs = fig.add_gridspec(1, 2, width_ratios=[1, 1], wspace=0.4)
 
-    # Create subplots
-    ax1 = fig.add_subplot(gs[0, 0])  # Convex cone
-    ax2 = fig.add_subplot(gs[0, 1])  # Non-convex union
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax2 = fig.add_subplot(gs[0, 1])
 
     # Plot each example
     plot_convex_cone(ax1, color_map)
@@ -989,29 +981,3 @@ def plot_cone_comparison(ax=None, color_map=None):
         ax.scatter(0, 0, s=20, color="black", marker="o", zorder=10)
 
 
-if __name__ == "__main__":
-    from rdf import RDF
-
-    plotter = RDF()
-    svg_content = plotter.create_themed_plot(
-        name="convex_nonconvex_sets", plot_func=plot_convex_nonconvex_sets
-    )
-    svg_content = plotter.create_themed_plot(
-        name="sphere_and_circle", plot_func=plot_sphere_and_circle
-    )
-    svg_content = plotter.create_themed_plot(
-        name="three_convex_operations", plot_func=plot_three_convex_operations
-    )
-    svg_content = plotter.create_themed_plot(
-        name="convex_hull_construction", plot_func=plot_convex_hull_construction
-    )
-    svg_content = plotter.create_themed_plot(
-        name="extreme_points_comparison", plot_func=plot_extreme_points_comparison
-    )
-    svg_content = plotter.create_themed_plot(name="halfspace", plot_func=plot_halfspace)
-    svg_content = plotter.create_themed_plot(
-        name="polyhedron_halfspaces", plot_func=plot_polyhedron_halfspaces
-    )
-    svg_content = plotter.create_themed_plot(
-        name="cone_comparison", plot_func=plot_cone_comparison
-    )
