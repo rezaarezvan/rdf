@@ -1,0 +1,36 @@
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}[>=stealth, thick]
+
+% Styles
+\tikzstyle{state}=[circle, draw=black, minimum size=9mm, inner sep=1pt, line width=0.5mm, font=\small]
+\tikzstyle{move}=[->, black, line width=0.5mm]
+\tikzstyle{lbl}=[font=\footnotesize, fill=white, inner sep=1pt]
+
+% Root (player to move: MAX)
+\node[state] (root) at (6.0, 0) {$-50$};
+
+% MIN level
+\node[state] (m1) at (2.5, -2.2) {$-80$};
+\node[state] (m2) at (9.5, -2.2) {$-50$};
+
+% Leaves (terminal values)
+\foreach \i/\x/\v in {1/0.0/-50, 2/1.25/-50, 3/2.5/-50, 4/3.75/-50, 5/5.0/-80} {
+    \node[state] (l\i) at (\x, -4.6) {$\v$};
+    \draw[move] (m1) -- (l\i);
+}
+\foreach \i/\x/\v in {6/7.0/-50, 7/8.5/-50, 8/10.0/-50, 9/11.5/-50} {
+    \node[state] (l\i) at (\x, -4.6) {$\v$};
+    \draw[move] (m2) -- (l\i);
+}
+
+% Moves from the root
+\draw[move] (root) -- node[lbl, above left=1pt] {$a_1$} (m1);
+\draw[move] (root) -- node[lbl, above right=1pt] {$a_2$} (m2);
+
+% Level labels
+\node[font=\small\bfseries, anchor=west] at (12.6, 0) {MAX};
+\node[font=\small\bfseries, anchor=west] at (12.6, -2.2) {MIN};
+\node[font=\small\bfseries, anchor=west] at (12.6, -4.6) {Terminal};
+
+\end{tikzpicture}

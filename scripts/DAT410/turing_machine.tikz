@@ -1,0 +1,54 @@
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}[>=stealth, thick]
+
+% Styles
+\tikzstyle{cell}=[draw=black, minimum size=6mm, inner sep=0pt, line width=0.4mm]
+\tikzstyle{head}=[draw=black, minimum size=2.5mm, inner sep=0pt, line width=0.4mm]
+\tikzstyle{wire}=[black, line width=0.4mm]
+
+% Input tape
+\foreach \i in {0,...,11} {
+    \node[cell] (in\i) at (0.6*\i, 0) {};
+    \node[font=\footnotesize] at (0.6*\i, -0.5) {\pgfmathparse{int(\i+1)}\pgfmathresult};
+}
+\node[font=\small, anchor=south] at (3.3, 0.4) {Input tape};
+\node[font=\footnotesize, anchor=west] at (7.0, 0) {\dots etc};
+
+% Output tape
+\foreach \i in {0,...,11} {
+    \node[cell] (out\i) at (10.5+0.6*\i, 0) {};
+    \node[font=\footnotesize] at (10.5+0.6*\i, -0.5) {\pgfmathparse{int(\i+1)}\pgfmathresult};
+}
+\node[font=\small, anchor=south] at (13.8, 0.4) {Output tape};
+\node[font=\footnotesize, anchor=west] at (17.5, 0) {\dots etc};
+
+% Read / write heads
+\node[head, below=3.5mm of in4.south] (rhead) {};
+\node[font=\small, anchor=east, left=2mm of rhead] {Read head};
+\node[head, below=3.5mm of out10.south] (whead) {};
+\node[font=\small, anchor=west, right=2mm of whead] {Write head};
+
+% Control box
+\node[draw=black, line width=0.5mm, align=left, text width=34mm, inner sep=3mm]
+    (control) at (9.0, -3.2)
+    {Control containing an algorithm / program that specifies the required computation};
+
+% Memory tape
+\foreach \i in {0,...,17} {
+    \node[cell] (mem\i) at (2.4+0.6*\i, -6.4) {};
+    \node[font=\footnotesize] at (2.4+0.6*\i, -6.9) {\pgfmathparse{int(\i+1)}\pgfmathresult};
+}
+\node[font=\footnotesize, anchor=west] at (13.0, -6.4) {\dots etc};
+\node[font=\small] at (7.5, -7.5) {Memory};
+
+% Memory head
+\node[head, above=3.5mm of mem8.north] (mhead) {};
+\node[font=\small, anchor=east] at (6.7, -5.35) {Memory read/write head};
+
+% Wires
+\draw[wire] (rhead.south) |- ($(control.west)+(-0.5,0.5)$) -- ($(control.west)+(0,0.5)$);
+\draw[wire] (whead.south) |- ($(control.east)+(0.5,0.5)$) -- ($(control.east)+(0,0.5)$);
+\draw[wire] (mhead.north) |- ($(control.south)+(0,-0.4)$) -- (control.south);
+
+\end{tikzpicture}

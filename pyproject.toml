@@ -1,0 +1,29 @@
+[project]
+name = "rdf"
+version = "0.3.0"
+description = "Themed, tagged SVG figures for math-heavy ML blogs"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+classifiers = ["Programming Language :: Python :: 3"]
+dependencies = ["matplotlib>=3.10"]
+
+[project.scripts]
+rdf = "rdf.__main__:main"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+scripts = ["numpy>=2", "scipy>=1.14", "scikit-learn>=1.5"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["rdf"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"rdf/academic.mplstyle" = "rdf/academic.mplstyle"
+
+[tool.uv]
+default-groups = ["dev", "scripts"]

@@ -1,10 +1,15 @@
-from __future__ import annotations
-
 import json
 from pathlib import Path
 from dataclasses import dataclass, field
 
 Palette = dict[str, str]
+
+AXIS_SENTINEL = "#FE0102"
+GRID_SENTINEL = "#FE0304"
+BLACK_SENTINEL = "#FE0506"
+
+AXIS_INK = ("#2a241c", "#e6dfd2")
+GRID_INK = ("rgba(42, 36, 28, 0.14)", "rgba(230, 223, 210, 0.16)")
 
 
 @dataclass(slots=True)
@@ -14,36 +19,55 @@ class ColorTheme:
     light: Palette
     dark: Palette
     base: Palette = field(repr=False)
+    # (light, dark) chrome; not part of the indexed palette.
+    axis: tuple[str, str] = AXIS_INK
+    grid: tuple[str, str] = GRID_INK
 
     @classmethod
-    def default(cls) -> ColorTheme:
+    def default(cls) -> "ColorTheme":
         return cls(
             light={
-                "primary": "#d62728",
-                "secondary": "#2ca02c",
-                "tertiary": "#1f77b4",
-                "quaternary": "#9467bd",
-                "quinary": "#8c564b",
-                "senary": "#e377c2",
-                "septenary": "#7f7f7f",
-                "octonary": "#bcbd22",
+                "c1": "#D55E00",  # vermillion
+                "c2": "#009E73",  # bluish green
+                "c3": "#56B4E9",  # sky blue
+                "c4": "#CC79A7",  # reddish purple
+                "c5": "#E69F00",  # orange
+                "c6": "#C7B42E",  # yellow (darkened from #F0E442)
+                "c7": "#999999",  # neutral gray (de-emphasis slot)
+                "c8": "#0072B2",  # blue
+                "primary": "#D55E00",
+                "secondary": "#009E73",
+                "tertiary": "#56B4E9",
+                "quaternary": "#CC79A7",
+                "quinary": "#E69F00",
+                "senary": "#C7B42E",
+                "septenary": "#999999",
+                "octonary": "#0072B2",
                 "black": "#000000",
-                "gray": "#7f7f7f",
-                "grey": "#7f7f7f",
+                "gray": "#999999",
+                "grey": "#999999",
                 "white": "#ffffff",
             },
             dark={
-                "primary": "#FF4A98",
-                "secondary": "#0AFAFA",
-                "tertiary": "#7F83FF",
-                "quaternary": "#B4A0FF",
-                "quinary": "#FFB86B",
-                "senary": "#FF79C6",
-                "septenary": "#CCCCCC",
-                "octonary": "#E6DB74",
+                "c1": "#E36A1C",
+                "c2": "#23AB7F",
+                "c3": "#3F9FD3",
+                "c4": "#C673A1",
+                "c5": "#C38819",
+                "c6": "#847500",
+                "c7": "#929292",
+                "c8": "#1F81C2",
+                "primary": "#E36A1C",
+                "secondary": "#23AB7F",
+                "tertiary": "#3F9FD3",
+                "quaternary": "#C673A1",
+                "quinary": "#C38819",
+                "senary": "#847500",
+                "septenary": "#929292",
+                "octonary": "#1F81C2",
                 "black": "#FFFFFF",
-                "gray": "#CCCCCC",
-                "grey": "#CCCCCC",
+                "gray": "#929292",
+                "grey": "#929292",
                 "white": "#000000",
             },
             base={
@@ -61,12 +85,25 @@ class ColorTheme:
     def to_json(self, path: str | Path) -> None:
         Path(path).expanduser().write_text(
             json.dumps(
-                {"light": self.light, "dark": self.dark, "base": self.base}, indent=2
+                {
+                    "light": self.light,
+                    "dark": self.dark,
+                    "base": self.base,
+                    "axis": list(self.axis),
+                    "grid": list(self.grid),
+                },
+                indent=2,
             ),
             "utf-8",
         )
 
     @classmethod
-    def from_json(cls, path: str | Path) -> ColorTheme:
+    def from_json(cls, path: str | Path) -> "ColorTheme":
         data = json.loads(Path(path).expanduser().read_text("utf-8"))
-        return cls(light=data["light"], dark=data["dark"], base=data["base"])
+        return cls(
+            light=data["light"],
+            dark=data["dark"],
+            base=data["base"],
+            axis=tuple(data.get("axis", AXIS_INK)),
+            grid=tuple(data.get("grid", GRID_INK)),
+        )

@@ -1,81 +1,70 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-
-from matplotlib.path import Path
 
 from rdf import figure
 
+_WOBBLE = 0.95
+_SIGMA2 = 0.5
+_SPREAD = 0.9
 
-@figure("convex_sets")
-def plot_convex_sets(ax, color_map):
-    """
-    Create a clean, blog-friendly visualization of convex and non-convex sets.
-    Shows examples with line segments demonstrating convexity properties.
 
-    Args:
-        ax: Matplotlib axis object to plot on
-        color_map: Dictionary of colors for consistent styling
-    """
-    # Set up the plot bounds
-    ax.set_xlim(-1.5, 5.5)
-    ax.set_ylim(-2, 2)
+def _radius(theta, wobble):
+    """Unit circle, dented inward at theta = pi by `wobble`."""
+    return 1.0 - wobble * np.exp(-((np.abs(theta - np.pi)) ** 2) / _SIGMA2)
 
-    # Draw convex hexagon
-    hex_vertices = np.array(
-        [[0, 1], [0.866, 0.5], [0.866, -0.5], [0, -1], [-0.866, -0.5], [-0.866, 0.5]]
-    )
-    hex_path = Path(hex_vertices, closed=True)
-    hex_patch = patches.PathPatch(
-        hex_path, facecolor="none", edgecolor=color_map["c1"], linewidth=2, alpha=0.8
-    )
-    ax.add_patch(hex_patch)
 
-    # Add line segment for hexagon
-    ax.plot(
-        [-0.5, 0.5], [-0.5, 0.5], "--", color=color_map["c1"], linewidth=1.5, alpha=0.8
-    )
+def _endpoints():
+    theta = np.array([np.pi - _SPREAD, np.pi + _SPREAD])
+    r = _radius(theta, _WOBBLE)
+    return np.column_stack([r * np.cos(theta), r * np.sin(theta)])
 
-    # Draw non-convex shape (curved)
-    theta = np.linspace(0, 2 * np.pi, 100)
-    r = 0.8 + 0.3 * np.sin(3 * theta)
-    x = 2 + r * np.cos(theta)
-    y = r * np.sin(theta)
-    ax.plot(x, y, color=color_map["c2"], linewidth=2, alpha=0.8)
 
-    # Add line segment for non-convex shape
-    ax.plot(
-        [1.5, 2.5], [-0.5, 0.5], "--", color=color_map["c2"], linewidth=1.5, alpha=0.8
-    )
+def _panel(ax, color_map, wobble, title):
+    theta = np.linspace(0, 2 * np.pi, 600)
+    r = _radius(theta, wobble)
+    x, y = r * np.cos(theta), r * np.sin(theta)
+    ax.fill(x, y, color=color_map["c2"], alpha=0.15)
+    ax.plot(x, y, color=color_map["c2"], zorder=2)
 
-    # Draw square (convex)
-    square = plt.Rectangle(
-        (3.5, -1), 1.5, 2, fill=False, edgecolor=color_map["c3"], linewidth=2, alpha=0.8
-    )
-    ax.add_patch(square)
+    a, b = _endpoints()
+    t = np.linspace(0, 1, 400)[:, None]
+    seg = (1 - t) * a + t * b
+    edge = _radius(np.arctan2(seg[:, 1], seg[:, 0]) % (2 * np.pi), wobble)
+    outside = np.hypot(*seg.T) > edge
 
-    # Add line segment for square
-    ax.plot(
-        [3.7, 4.8], [-0.5, 0.5], "--", color=color_map["c3"], linewidth=1.5, alpha=0.8
-    )
+    ax.plot(*seg[~outside].T, color=color_map["black"], linewidth=1.4, zorder=4)
+    if outside.any():
+        ax.plot(*seg[outside].T, color=color_map["c1"], linewidth=2.2, zorder=4)
+        ax.annotate(
+            "Outside the set",
+            xy=seg[outside].mean(axis=0),
+            xytext=(-6, 0),
+            textcoords="offset points",
+            ha="right",
+            va="center",
+            fontsize=10,
+            color=color_map["c1"],
+        )
 
-    # Add labels
-    ax.text(0, -1.5, "Convex", ha="center", va="center", fontsize=10)
-    ax.text(2, -1.5, "Non-convex", ha="center", va="center", fontsize=10)
-    ax.text(4.25, -1.5, "Convex", ha="center", va="center", fontsize=10)
+    for point, label, offset in (
+        (a, "$x^{(1)}$", (-11, 3)),
+        (b, "$x^{(2)}$", (-11, -11)),
+    ):
+        ax.scatter(*point, s=26, color=color_map["black"], zorder=5)
+        ax.annotate(label, point, textcoords="offset points", xytext=offset, ha="right")
 
-    # Customize plot appearance
-    ax.set_title("Examples of Convex and Non-convex Sets", fontsize=12, pad=15)
-
-    # Remove axes for cleaner look
+    ax.set_title(title)
+    ax.set_xlim(-1.7, 1.25)
+    ax.set_ylim(-1.2, 1.2)
+    ax.set_aspect("equal")
     ax.set_xticks([])
     ax.set_yticks([])
-
-    # Remove all spines
+    ax.grid(False)
     for spine in ax.spines.values():
         spine.set_visible(False)
 
-    # Set aspect ratio to equal for proper shape display
-    ax.set_aspect("equal")
 
-
+@figure("convex_sets", height=2.6)
+def plot_convex_sets(fig, color_map):
+    ax1, ax2 = fig.subplots(1, 2)
+    _panel(ax1, color_map, 0.0, "Convex")
+    _panel(ax2, color_map, _WOBBLE, "Non-convex")

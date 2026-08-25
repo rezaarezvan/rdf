@@ -1,97 +1,37 @@
 import numpy as np
-from sklearn.datasets import load_iris
-import matplotlib.pyplot as plt
 from scipy.stats import gaussian_kde
-
+from sklearn.datasets import load_iris
 
 from rdf import figure
 
 
-@figure("iris_probabilities")
-def plot_probabilities(ax, color_map):
-    """
-    Create clean, blog-friendly plots of class conditionals and posteriors for Iris dataset.
-    Shows p(x|y) (class conditionals) and p(y|x) (posterior probabilities) for petal length.
+@figure("iris_probabilities", height=3.1)
+def plot_probabilities(fig, color_map):
+    ax1, ax2 = fig.subplots(1, 2)
 
-    Args:
-        ax: Matplotlib axis object (unused, following RDP convention)
-        color_map: Dictionary of colors for consistent styling
-    """
-    # Create figure with two subplots
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 4))
-
-    # Load and prepare data
     iris = load_iris()
-    X = iris.data
+    petal_length = iris.data[:, 2]
     y = iris.target
-    petal_length = X[:, 2]
-    classes = iris.target_names
+    priors = np.bincount(y) / len(y)
 
-    # Calculate priors
-    class_counts = np.bincount(y)
-    priors = class_counts / len(y)
+    lo, hi = petal_length.min() - 0.5, petal_length.max() + 0.5
+    x = np.linspace(lo, hi, 200)
 
-    # Create smooth x-range for plotting
-    x_range = np.linspace(petal_length.min() - 0.5, petal_length.max() + 0.5, 200)
-
-    # Plot 1: Class Conditionals p(x|y)
-    for i, (species, color) in enumerate(
-        zip(classes, [color_map[f"c{j + 1}"] for j in range(3)])
-    ):
-        # Fit KDE
-        mask = y == i
-        kde = gaussian_kde(petal_length[mask], bw_method="silverman")
-
-        # Plot density curve
-        density = kde(x_range)
-        ax1.plot(x_range, density, color=color, linewidth=2, label=species, zorder=3)
-        ax1.fill_between(x_range, density, color=color, alpha=0.2, zorder=2)
-
-    # Style first subplot
-    ax1.set_title("p(x|y) - Class Conditionals", fontsize=12, pad=15)
-    ax1.set_xlabel("Petal Length (cm)", fontsize=10)
-    ax1.set_ylabel("Density", fontsize=10)
-
-    # Plot 2: Posteriors p(y|x)
-    # Fit KDE for each class
     kdes = [gaussian_kde(petal_length[y == i], bw_method="silverman") for i in range(3)]
-
-    # Calculate posteriors
-    posteriors = np.zeros((len(x_range), 3))
-    for i in range(3):
-        likelihood = kdes[i](x_range)
-        posteriors[:, i] = likelihood * priors[i]
-
-    # Normalize posteriors
+    likelihoods = np.column_stack([kde(x) for kde in kdes])
+    posteriors = likelihoods * priors
     posteriors /= posteriors.sum(axis=1, keepdims=True)
 
-    # Plot posterior probabilities
-    for i, (species, color) in enumerate(
-        zip(classes, [color_map[f"c{j + 1}"] for j in range(3)])
-    ):
-        ax2.plot(
-            x_range, posteriors[:, i], color=color, linewidth=2, label=species, zorder=3
-        )
-        ax2.fill_between(x_range, posteriors[:, i], color=color, alpha=0.2, zorder=2)
+    for ax, curves in ((ax1, likelihoods), (ax2, posteriors)):
+        for i, species in enumerate(iris.target_names):
+            color = color_map[f"c{i + 1}"]
+            ax.plot(x, curves[:, i], color=color, label=species.capitalize(), zorder=3)
+            ax.fill_between(x, curves[:, i], color=color, alpha=0.2, zorder=2)
 
-    # Style second subplot
-    ax2.set_title("p(y|x) - Posterior Probabilities", fontsize=12, pad=15)
-    ax2.set_xlabel("Petal Length (cm)", fontsize=10)
-    ax2.set_ylabel("Probability", fontsize=10)
-
-    # Common styling for both subplots
-    for ax in [ax1, ax2]:
-        # Clean legend
-        ax.legend(frameon=True, framealpha=0.9, loc="upper right", fontsize=9)
-
-        # Set y-axis limits
+        ax.set_xlabel("Petal length (cm)")
+        ax.set_xlim(lo, hi)
         ax.set_ylim(0, ax.get_ylim()[1] * 1.1)
 
-        # Set x-axis limits
-        ax.set_xlim(petal_length.min() - 0.5, petal_length.max() + 0.5)
-
-    # Adjust layout with more compact spacing
-    plt.tight_layout(pad=1.2, w_pad=2)
-    return fig
-
-
+    ax1.set_ylabel("$p(x \\mid y)$")
+    ax2.set_ylabel("$p(y \\mid x)$")
+    ax2.legend(loc="upper right")

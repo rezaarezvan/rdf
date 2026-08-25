@@ -1,93 +1,49 @@
 import numpy as np
 from sklearn.datasets import load_iris
 
-
 from rdf import figure
 
 
 @figure("iris_linear_separation")
 def plot_linear_separation(ax, color_map):
-    """
-    Create a clean, blog-friendly visualization of linearly separable Iris classes
-    using petal measurements. Shows how two Iris species can be separated by a
-    simple linear boundary.
-
-    Args:
-        ax: Matplotlib axis object to plot on
-        color_map: Dictionary of colors for consistent styling
-    """
-    # Load iris dataset
     iris = load_iris()
-    X = iris.data
-    y = iris.target
+    mask = iris.target < 2
+    petal = iris.data[mask][:, 2:4]
+    y = iris.target[mask]
 
-    # Select setosa and versicolor (first two classes)
-    mask = y < 2
-    X = X[mask]
-    y = y[mask]
-
-    # Get petal length and width
-    petal_length = X[:, 2]
-    petal_width = X[:, 3]
-
-    # Add padding to axis limits
-    x_min, x_max = petal_length.min(), petal_length.max()
-    y_min, y_max = petal_width.min(), petal_width.max()
-    padding = 0.1
-
-    # Plot the two classes with larger, more visible points
     for i, species in enumerate(iris.target_names[:2]):
-        mask = y == i
         ax.scatter(
-            petal_length[mask],
-            petal_width[mask],
+            *petal[y == i].T,
             c=color_map[f"c{i + 1}"],
             s=70,
-            alpha=0.7,
-            label=species,
-            edgecolor="white",
+            alpha=0.8,
+            label=species.capitalize(),
+            edgecolor=color_map["white"],
             linewidth=0.5,
             zorder=3,
         )
 
-    # Draw separating line with better positioning
-    margin = 0.2
-    x_line = np.array([1, 5])
-    y_line = -0.42 * x_line - 0.35  # Adjusted for better separation
+    mu = np.array([petal[y == i].mean(axis=0) for i in (0, 1)])
+    w = mu[1] - mu[0]
+    b = -w @ mu.mean(axis=0)
 
-    # Plot decision boundary
+    lo, hi = petal.min(axis=0), petal.max(axis=0)
+    pad = (hi - lo) * 0.1
+    lo, hi = lo - pad, hi + pad
+
+    x_line = np.array([lo[0], hi[0]])
     ax.plot(
-        y_line,
-        y_line,
+        x_line,
+        -(w[0] * x_line + b) / w[1],
         "--",
-        color="black",
-        linewidth=2,
-        label="Decision Boundary",
+        color=color_map["black"],
+        label="Decision boundary",
         zorder=2,
     )
 
-    # Customize plot appearance
-    ax.set_title(
-        "Linear Separation of Iris Classes\nusing Petal Measurements",
-        fontsize=12,
-        pad=15,
-    )
-    ax.set_xlabel("Petal Length (cm)", fontsize=10)
-    ax.set_ylabel("Petal Width (cm)", fontsize=10)
+    ax.set_xlabel("Petal length (cm)")
+    ax.set_ylabel("Petal width (cm)")
+    ax.legend(loc="upper left")
 
-    # Clean legend with better positioning
-    ax.legend(
-        frameon=True,
-        framealpha=0.9,
-        loc="upper left",
-        fontsize=9,
-        bbox_to_anchor=(0.02, 0.98),
-    )
-
-    # Set consistent limits with padding
-    x_margin = (x_max - x_min) * padding
-    y_margin = (y_max - y_min) * padding
-    ax.set_xlim(x_min - x_margin, x_max + x_margin)
-    ax.set_ylim(y_min - y_margin, y_max + y_margin)
-
-
+    ax.set_xlim(lo[0], hi[0])
+    ax.set_ylim(lo[1], hi[1])

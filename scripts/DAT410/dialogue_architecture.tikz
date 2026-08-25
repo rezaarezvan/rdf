@@ -1,0 +1,26 @@
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}[>=stealth, thick]
+
+% Styles
+\tikzstyle{block}=[draw=black, align=center, minimum height=12mm, minimum width=32mm, line width=0.5mm, font=\small]
+\tikzstyle{arrow}=[->, black, line width=0.5mm]
+
+% Blocks
+\node[block] (sr) at (0, 0) {Speech\\Recognition};
+\node[block, right=14mm of sr] (nlu) {Natural Language\\Understanding};
+\node[block, below right=8mm and 14mm of nlu] (dm) {Dialogue\\Manager};
+\node[block, right=14mm of dm] (tm) {Task\\Manager};
+\node[block, below left=8mm and 14mm of dm] (nlg) {Natural Language\\Generation};
+\node[block, left=14mm of nlg] (tts) {Text-to-Speech\\Synthesis};
+
+% Flow
+\draw[arrow] ($(sr.west)+(-1.0,0)$) -- (sr.west);
+\draw[arrow] (sr) -- (nlu);
+\draw[arrow] (nlu.east) -- ++(0.5,0) |- ($(dm.west)+(0,0.2)$);
+\draw[arrow] ($(dm.west)+(0,-0.2)$) -| ++(-0.5,-0.5) |- (nlg.east);
+\draw[<->, black, line width=0.5mm] (dm) -- (tm);
+\draw[arrow] (nlg) -- (tts);
+\draw[arrow] (tts.west) -- ++(-1.0,0);
+
+\end{tikzpicture}

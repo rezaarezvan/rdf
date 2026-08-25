@@ -1,0 +1,44 @@
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}[>=stealth, thick]
+
+% Styles
+\tikzstyle{unit}=[circle, draw=black, minimum size=11mm, line width=0.5mm, font=\normalsize]
+\tikzstyle{op}=[draw=black, minimum size=10mm, line width=0.5mm, font=\normalsize]
+\tikzstyle{arrow}=[->, black, line width=0.5mm]
+\tikzstyle{wlbl}=[font=\small, fill=white, inner sep=1pt]
+
+% Inputs
+\node[unit] (x1) at (0, 0) {$x_1$};
+\node[unit] (x2) at (0, -1.8) {$x_2$};
+\node[font=\large] (dots) at (0, -3.3) {$\vdots$};
+\node[unit] (xm) at (0, -4.8) {$x_m$};
+
+% Bias
+\node[unit] (b) at (4.0, 0.6) {$b$};
+
+% Summation
+\node[unit] (sum) at (4.0, -2.4) {$\Sigma$};
+
+% Activation
+\node[op] (act) at (7.0, -2.4) {$f$};
+
+% Output
+\node[unit] (y) at (9.8, -2.4) {$y$};
+
+% Column labels
+\node[font=\small] at (0, 1.4) {Inputs};
+\node[font=\small] at (4.0, 1.6) {Bias};
+\node[font=\small] at (4.0, -3.9) {Summation};
+\node[font=\small] at (7.0, -3.9) {Activation};
+\node[font=\small] at (9.8, -3.9) {Output};
+
+% Weighted connections
+\draw[arrow] (x1) -- node[wlbl, pos=0.45] {$w_1$} (sum);
+\draw[arrow] (x2) -- node[wlbl, pos=0.45] {$w_2$} (sum);
+\draw[arrow] (xm) -- node[wlbl, pos=0.45] {$w_m$} (sum);
+\draw[arrow] (b) -- (sum);
+\draw[arrow] (sum) -- node[wlbl, above=1pt] {$z$} (act);
+\draw[arrow] (act) -- (y);
+
+\end{tikzpicture}

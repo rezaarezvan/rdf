@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import re
 from enum import Enum, auto
 
@@ -67,8 +65,3 @@ def animate(
     elif style is AnimationType.PULSE:
         svg = re.sub(r'<path[^>]*d="[^"]*"[^>]*>', _add_class("anim-pulse"), svg)
     return svg
-
-
-# Backwards compatibility
-AnimationStyle = AnimationType
-add_animation = animate

@@ -71,15 +71,20 @@ def cmd_build(args: list[str]):
     assert args, "usage: python -m rdf build <path>"
     target = Path(args[0])
     assert target.exists(), f"not found: {target}"
-    files = sorted(target.glob("*.py")) if target.is_dir() else [target]
-    saved_argv = sys.argv
+    files = (
+        sorted(p for p in target.glob("*.py") if not p.name.startswith("_"))
+        if target.is_dir()
+        else [target]
+    )
+    saved_argv, saved_path = sys.argv, list(sys.path)
     for f in files:
         registry.reset()
         sys.argv = [str(f)]
+        sys.path.insert(0, str(f.parent.resolve()))
         try:
             runpy.run_path(str(f), run_name="__rdf_build__")
         finally:
-            sys.argv = saved_argv
+            sys.argv, sys.path = saved_argv, list(saved_path)
         if registry.registered():
             registry.build(RDF(name=f.stem))
 

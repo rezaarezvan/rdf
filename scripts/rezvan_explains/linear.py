@@ -1,70 +1,39 @@
 import numpy as np
 
-
 from rdf import figure
 
 
-@figure("linear_halfspace")
+@figure("linear_halfspace", height=6.1)
 def plot_halfspace(ax, color_map):
-    """
-    Plot a clean, blog-friendly visualization of a linear halfspace.
-    Demonstrates how a line divides 2D space into two regions.
+    lo, hi = -5.2, 5.2
 
-    Args:
-        ax: Matplotlib axis object to plot on
-        color_map: Dictionary of colors for consistent styling
-    """
-    # Set up the plot bounds with padding
-    x_min, x_max = -5, 5
-    y_min, y_max = -5, 5
-    padding = 0.2  # Add padding for better appearance
+    x = np.array([lo, hi])
+    y = -0.5 * x + 1
 
-    # Create the dividing line
-    x = np.array([x_min - padding, x_max + padding])
-    y = -0.5 * x + 1  # Line equation: y = -0.5x + 1
-
-    # Color the halfspaces first (lower z-order)
     ax.fill_between(
         x,
         y,
-        y_max + padding,
+        hi,
         color=color_map["c2"],
         alpha=0.15,
-        label="Positive Halfspace",
+        label="Positive halfspace",
         zorder=1,
     )
     ax.fill_between(
         x,
-        y_min - padding,
+        lo,
         y,
         color=color_map["c1"],
         alpha=0.15,
-        label="Negative Halfspace",
+        label="Negative halfspace",
         zorder=1,
     )
+    ax.plot(x, y, color=color_map["black"], label="Decision boundary", zorder=3)
 
-    # Plot the decision boundary on top
-    ax.plot(x, y, color="black", linewidth=2, label="Decision Boundary", zorder=3)
+    ax.set_xlabel("$x_1$")
+    ax.set_ylabel("$x_2$")
+    ax.legend(loc="upper right")
 
-    # Customize plot appearance
-    ax.set_title("Linear Halfspace Example", fontsize=12, pad=15)
-    ax.set_xlabel(r"$x_1$", fontsize=10)
-    ax.set_ylabel(r"$x_2$", fontsize=10)
-
-    # Clean legend
-    ax.legend(
-        frameon=True,
-        framealpha=0.9,
-        loc="upper right",
-        fontsize=9,
-        bbox_to_anchor=(0.98, 0.98),
-    )
-
-    # Set axis limits with padding
-    ax.set_xlim(x_min - padding, x_max + padding)
-    ax.set_ylim(y_min - padding, y_max + padding)
-
-    # Set aspect ratio to be equal for proper visualization
+    ax.set_xlim(lo, hi)
+    ax.set_ylim(lo, hi)
     ax.set_aspect("equal")
-
-

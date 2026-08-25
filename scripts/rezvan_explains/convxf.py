@@ -1,89 +1,65 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 from rdf import figure
 
 
-@figure("convex_functions")
-def plot_convex_functions(ax, color_map):
-    """
-    Create a clean, blog-friendly visualization of convex and non-convex functions.
-    Shows a convex function with unique minimum and a non-convex function with
-    multiple local minima.
-
-    Args:
-        ax: Matplotlib axis object to plot on
-        color_map: Dictionary of colors for consistent styling
-    """
-    # Create figure with two subplots side by side
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
-
-    # Generate x values
+def _panel(ax, color_map, f, slot, chord_x, title):
     x = np.linspace(-2, 2, 200)
+    ax.plot(x, f(x), color=color_map[slot], zorder=3)
 
-    # Plot convex function (parabola)
-    y1 = x**2
-    ax1.plot(x, y1, color=color_map["c1"], linewidth=2)
+    cx = np.array(chord_x)
+    ax.plot(
+        cx,
+        f(cx),
+        "--",
+        color=color_map["black"],
+        linewidth=1.2,
+        label="Line segment",
+        zorder=4,
+    )
+    ax.scatter(cx, f(cx), s=26, color=color_map["black"], zorder=5)
 
-    # Mark minimum point for convex function
-    min_x1, min_y1 = 0, 0
-    ax1.plot(
-        min_x1, min_y1, "o", color=color_map["c1"], markersize=8, label="Global Minimum"
+    ax.set_title(title)
+    ax.set_xlim(-2.2, 2.2)
+    ax.set_ylim(-0.5, 4)
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.grid(False)
+    for name, pos in (("left", "zero"), ("bottom", "zero")):
+        ax.spines[name].set_position(pos)
+
+    for marker, transform in (
+        (">", ax.get_yaxis_transform()),
+        ("^", ax.get_xaxis_transform()),
+    ):
+        xy = (1, 0) if marker == ">" else (0, 1)
+        ax.plot(
+            *xy,
+            marker=marker,
+            color=color_map["black"],
+            transform=transform,
+            clip_on=False,
+        )
+
+
+@figure("convex_functions", height=3.1)
+def plot_convex_functions(fig, color_map):
+    ax1, ax2 = fig.subplots(1, 2)
+
+    _panel(ax1, color_map, lambda x: x**2, "c2", (-1.5, 1.2), "Convex")
+    _panel(
+        ax2,
+        color_map,
+        lambda x: x**4 - 2 * x**2 + 1,
+        "c1",
+        (-1.4, 1.4),
+        "Non-convex",
     )
 
-    # Plot non-convex function (double-well potential)
-    y2 = x**4 - 2 * x**2 + 1
-    ax2.plot(x, y2, color=color_map["c2"], linewidth=2)
-
-    # Mark local and global minima for non-convex function
-    min_x2 = np.array([-1, 1])
-    min_y2 = min_x2**4 - 2 * min_x2**2 + 1
-    ax2.plot(
-        min_x2, min_y2, "o", color=color_map["c2"], markersize=8, label="Local Minima"
+    ax1.scatter(0, 0, s=45, color=color_map["c2"], zorder=6, label="Global minimum")
+    ax2.scatter(
+        [-1, 1], [0, 0], s=45, color=color_map["c1"], zorder=6, label="Local minima"
     )
 
-    # Add saddle point
-    saddle_x, saddle_y = 0, 1
-    ax2.plot(
-        saddle_x,
-        saddle_y,
-        "s",
-        color=color_map["c3"],
-        markersize=8,
-        label="Saddle Point",
-    )
-
-    # Customize both subplots
-    for ax, title in zip([ax1, ax2], ["Convex Function", "Non-convex Function"]):
-        ax.set_title(title, fontsize=12, pad=15)
-        ax.spines["left"].set_position("zero")
-        ax.spines["bottom"].set_position("zero")
-        ax.spines["top"].set_visible(False)
-        ax.spines["right"].set_visible(False)
-
-        # Set limits with padding
-        ax.set_xlim(-2.2, 2.2)
-        ax.set_ylim(-0.5, 4)
-
-        # Remove ticks, only keep arrows at ends
-        ax.set_xticks([])
-        ax.set_yticks([])
-
-        # Add arrows at the end of axes
-        ax.plot(1, 0, ">k", transform=ax.get_yaxis_transform(), clip_on=False)
-        ax.plot(0, 1, "^k", transform=ax.get_xaxis_transform(), clip_on=False)
-
-    # Add legend to second subplot only
-    ax2.legend(
-        frameon=True,
-        framealpha=0.9,
-        loc="upper right",
-        fontsize=9,
-        bbox_to_anchor=(0.98, 0.98),
-    )
-
-    # Adjust layout
-    plt.tight_layout(pad=2.0)
-    return fig
-
-
+    ax1.legend(loc="upper center")
+    ax2.legend(loc="upper center")

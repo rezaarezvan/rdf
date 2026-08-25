@@ -1,7 +1,7 @@
-from __future__ import annotations
-
 import re
 from typing import TYPE_CHECKING
+
+from rdf.theme import AXIS_SENTINEL, BLACK_SENTINEL, GRID_SENTINEL
 
 if TYPE_CHECKING:
     from rdf.theme import ColorTheme
@@ -21,33 +21,28 @@ TAG_PATTERNS = [
 ]
 
 CSS_TEMPLATE = """
-:root {{ --axis-color:#000; --grid-stroke:rgba(0,0,0,0.2); --plot3d-stroke:rgba(0,0,0,0.3); --plot3d-grid:rgba(0,0,0,0.2); }}
-@media (prefers-color-scheme:dark) {{ :root {{ --axis-color:#fff; --grid-stroke:rgba(255,255,255,0.2); --plot3d-stroke:rgba(255,255,255,0.3); --plot3d-grid:rgba(255,255,255,0.2); }} }}
-{light}
-@media (prefers-color-scheme:dark) {{ {dark} }}
-text,.text {{ fill:var(--axis-color)!important; stroke:none!important; }}
-.axis line,.axis path,.tick line,.tick path,path.domain,line.grid {{ stroke:var(--axis-color)!important; }}
-.legend text {{ fill:var(--axis-color)!important; }}
-.patch path[style*="stroke: currentColor"] {{ stroke:var(--axis-color)!important; }}
-g.legend>g:first-child>path:first-child {{ fill:rgba(255,255,255,0.8)!important; stroke:rgba(0,0,0,0.1)!important; }}
-@media (prefers-color-scheme:dark) {{ g.legend>g:first-child>path:first-child {{ fill:rgba(26,26,26,0.8)!important; stroke:rgba(255,255,255,0.1)!important; }} }}
-.plot3d path,.plot3d polygon {{ stroke:var(--plot3d-stroke)!important; }}
-.plot3d-grid line {{ stroke:var(--plot3d-grid)!important; }}
-.plot3d-surface path[style*="fill:"] {{ fill-opacity:0.9!important; }}
-@media (prefers-color-scheme:dark) {{ .plot3d-surface path[style*="fill:"] {{ fill-opacity:0.95!important; filter:saturate(1.2)!important; }} }}
+:root {{ --axis-color:{axis_light}; --grid-color:{grid_light}; {light} }}
+@media (prefers-color-scheme:dark) {{
+  :root {{ --axis-color:{axis_dark}; --grid-color:{grid_dark}; {dark} }}
+}}
+.plot3d path,.plot3d polygon {{ stroke:var(--axis-color); }}
+.plot3d-grid line {{ stroke:var(--grid-color); }}
 """.strip()
 
 
-def _cls(pal: dict[str, str]) -> str:
-    return "".join(
-        f".{k}{{fill:{v};stroke:{v};}}:root{{--{k}:{v};}}"
-        for k, v in sorted(pal.items())
-    )
+def _vars(pal: dict[str, str]) -> str:
+    return "".join(f"--{k}:{v};" for k, v in sorted(pal.items()))
 
 
-def build_css(theme: ColorTheme) -> str:
+def build_css(theme: "ColorTheme") -> str:
+    # Theme wins over base, so c1..c8 bake in as real colors per mode.
     return CSS_TEMPLATE.format(
-        light=_cls(theme.light | theme.base), dark=_cls(theme.dark | theme.base)
+        light=_vars(theme.base | theme.light),
+        dark=_vars(theme.base | theme.dark),
+        axis_light=theme.axis[0],
+        axis_dark=theme.axis[1],
+        grid_light=theme.grid[0],
+        grid_dark=theme.grid[1],
     )
 
 
@@ -58,36 +53,28 @@ def inject_css(svg: str, css: str) -> str:
     return svg
 
 
-def _apply_colors(svg: str, theme: ColorTheme) -> str:
-    # Base colors c1-c8 (matplotlib lowercases hex in inline styles)
-    for i, (_, col) in enumerate(theme.base.items(), 1):
-        for hx in {col, col.upper(), col.lower()}:
-            esc = re.escape(hx)
-            svg = re.sub(rf'fill="{esc}"', f'class="c{i}"', svg)
-            svg = re.sub(rf'stroke="{esc}"', f'class="c{i}"', svg)
-            svg = re.sub(
-                rf'(style="[^"]*?)fill:\s*{esc}([^"]*")', rf"\1fill:var(--c{i})\2", svg
-            )
-            svg = re.sub(
-                rf'(style="[^"]*?)stroke:\s*{esc}([^"]*")', rf"\1stroke:var(--c{i})\2", svg
-            )
-    # Theme colors
+def _to_var(svg: str, hex_color: str, var_name: str) -> str:
+    """Point every inline fill/stroke at `hex_color` to var(--var_name)."""
+    esc = re.escape(hex_color)
+    for prop in ("fill", "stroke"):
+        svg = re.sub(
+            rf'(style="[^"]*?){prop}:\s*{esc}([^"]*")',
+            rf"\1{prop}:var(--{var_name})\2",
+            svg,
+            flags=re.IGNORECASE,
+        )
+    return svg
+
+
+def _apply_colors(svg: str, theme: "ColorTheme") -> str:
+    svg = _to_var(svg, AXIS_SENTINEL, "axis-color")
+    svg = _to_var(svg, GRID_SENTINEL, "grid-color")
+    svg = _to_var(svg, BLACK_SENTINEL, "black")
+    for i, col in enumerate(theme.base.values(), 1):
+        svg = _to_var(svg, col, f"c{i}")
     for name, hex_color in theme.light.items():
         if name not in theme.base:
-            for hx in [hex_color, hex_color.upper(), hex_color.lower()]:
-                esc = re.escape(hx)
-                svg = re.sub(rf'fill="{esc}"', f'class="{name}"', svg)
-                svg = re.sub(rf'stroke="{esc}"', f'class="{name}"', svg)
-                svg = re.sub(
-                    rf'(style="[^"]*?)fill:\s*{esc}([^"]*")',
-                    rf"\1fill:var(--{name})\2",
-                    svg,
-                )
-                svg = re.sub(
-                    rf'(style="[^"]*?)stroke:\s*{esc}([^"]*")',
-                    rf"\1stroke:var(--{name})\2",
-                    svg,
-                )
+            svg = _to_var(svg, hex_color, name)
     return svg
 
 
@@ -97,11 +84,11 @@ def _apply_tags(svg: str) -> str:
     return svg
 
 
-def tag(svg: str, theme: ColorTheme) -> str:
+def tag(svg: str, theme: "ColorTheme") -> str:
     assert "<svg" in svg, "invalid SVG"
     return _apply_tags(_apply_colors(svg, theme))
 
 
-def process(svg: str, theme: ColorTheme) -> str:
+def process(svg: str, theme: "ColorTheme") -> str:
     """Full SVG processing: inject CSS + apply color classes + element tags."""
     return tag(inject_css(svg, build_css(theme)), theme)

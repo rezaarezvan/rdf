@@ -182,5 +182,3 @@ def plot_subfig_example(ax, color_map):
     animate_bar_chart(ax4, color_map)
 
     plt.tight_layout()
-
-

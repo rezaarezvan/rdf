@@ -1,7 +1,4 @@
-# RDF default style — tuned for blog-width SVGs embedded in articles.
-# Not a paper/PDF style. For paper figures, pass a custom style via RDF(style=...).
-
-# Spines - clean L-shape (no top/right)
+# Spines, clean L-shape (no top/right)
 axes.spines.top: False
 axes.spines.right: False
 axes.spines.left: True
@@ -10,50 +7,74 @@ axes.spines.bottom: True
 # Grid
 axes.grid: True
 axes.axisbelow: True
-grid.alpha: 0.15
+grid.alpha: 1.0
 grid.linestyle: -
-grid.linewidth: 0.5
+grid.linewidth: 0.6
 
-# Typography
 font.family: serif
-font.serif: Computer Modern Roman, DejaVu Serif, Times New Roman
-font.size: 11
-mathtext.fontset: cm
+font.serif: EB Garamond, STIX Two Text, DejaVu Serif
+font.size: 12
+mathtext.fontset: custom
+mathtext.rm: EB Garamond
+mathtext.it: EB Garamond:italic
+mathtext.bf: EB Garamond:bold
+mathtext.bfit: EB Garamond:italic:bold
+mathtext.cal: STIXGeneral:italic
+mathtext.tt: DejaVu Sans Mono
+mathtext.sf: DejaVu Sans
+mathtext.fallback: stix
 
 # Axes
 axes.facecolor: none
-axes.labelsize: 11
+axes.labelsize: 12
 axes.titlesize: 12
-axes.linewidth: 0.8
+axes.linewidth: 0.7
+axes.labelpad: 5.0
+axes.titlepad: 8.0
 axes.formatter.use_mathtext: True
+axes.unicode_minus: True
 
 # Ticks
-xtick.labelsize: 9
-ytick.labelsize: 9
+xtick.labelsize: 10.5
+ytick.labelsize: 10.5
 xtick.direction: out
 ytick.direction: out
-xtick.major.width: 0.8
-ytick.major.width: 0.8
+xtick.major.width: 0.7
+ytick.major.width: 0.7
+xtick.major.size: 3.0
+ytick.major.size: 3.0
+xtick.major.pad: 4.0
+ytick.major.pad: 4.0
 
-# Figure — golden-ratio at ~700px body-text width (SVG is vector, dpi only affects raster fallback)
-figure.figsize: 5.5, 3.4
+figure.figsize: 6.5, 4.017
 figure.facecolor: none
-figure.dpi: 150
+figure.constrained_layout.use: True
+figure.constrained_layout.h_pad: 0.03
+figure.constrained_layout.w_pad: 0.03
+figure.constrained_layout.hspace: 0.04
+figure.constrained_layout.wspace: 0.04
 
 # Lines
-lines.linewidth: 1.5
-lines.markersize: 6
+lines.linewidth: 1.6
+lines.markersize: 5
+lines.solid_capstyle: round
+lines.dash_capstyle: round
+
+# Patches
+patch.force_edgecolor: False
+scatter.edgecolors: none
 
 # Errorbars
 errorbar.capsize: 3
 
-# Legend
-legend.framealpha: 0.85
-legend.fancybox: True
-legend.fontsize: 10
-legend.edgecolor: 0.8
+legend.frameon: False
+legend.fontsize: 10.5
+legend.handlelength: 1.8
+legend.handletextpad: 0.6
+legend.labelspacing: 0.35
+legend.borderaxespad: 0.4
 
-# Save
-savefig.bbox: tight
+savefig.bbox: standard
 savefig.transparent: True
-savefig.pad_inches: 0.05
+
+svg.hashsalt: rdf

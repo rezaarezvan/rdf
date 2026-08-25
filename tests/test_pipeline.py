@@ -1,6 +1,3 @@
-from __future__ import annotations
-
-import warnings
 from pathlib import Path
 
 import matplotlib
@@ -10,6 +7,7 @@ import numpy as np
 import pytest
 
 from rdf import RDF, tag
+from rdf.rdf import BLOG_WIDTH
 from rdf.theme import ColorTheme
 from rdf.svg import build_css, process
 from rdf.animate import AnimationType, animate
@@ -63,14 +61,6 @@ def test_signature_dispatch_passes_fig_when_requested(rdf: RDF):
     assert seen["fig"] is not None
 
 
-def test_save_name_deprecation_still_works(rdf: RDF):
-    with warnings.catch_warnings(record=True) as w:
-        warnings.simplefilter("always")
-        rdf.create_themed_plot(save_name="legacy", plot_func=_line)
-    assert any(issubclass(rec.category, DeprecationWarning) for rec in w)
-    assert (rdf.save_root / "legacy.svg").exists()
-
-
 def test_build_css_is_deterministic():
     a = build_css(ColorTheme.default())
     b = build_css(ColorTheme.default())
@@ -112,3 +102,41 @@ def test_tag_helper_sets_gid(rdf: RDF):
     svg = rdf.create("tagged", plot)
     assert seen["line"].get_gid() == "series-A"
     assert 'id="series-A"' in svg
+
+
+def test_canvas_is_the_standard_width(rdf: RDF):
+    # A tight bbox would crop this to the content and every figure would
+    # land at a different width on the page.
+    for name, height in [("wide", None), ("tall", 5.0)]:
+        svg = rdf.create(name, _line, height=height)
+        assert f'width="{BLOG_WIDTH * 72:g}pt"' in svg
+
+
+def test_axis_furniture_is_themed(rdf: RDF):
+    svg = rdf.create("axes", _line)
+    assert "var(--axis-color)" in svg
+    assert "var(--grid-color)" in svg
+    assert "stroke: #000000" not in svg
+
+
+def test_render_is_deterministic(rdf: RDF):
+    assert rdf.create("a", _line) == rdf.create("b", _line)
+
+
+def test_returning_a_foreign_figure_raises(rdf: RDF):
+    def sneaky(ax, color_map):
+        fig, (a, b) = plt.subplots(1, 2)
+        a.plot([0, 1], [0, 1], color=color_map["c1"])
+        return fig
+
+    with pytest.raises(ValueError, match="returned its own figure"):
+        rdf.create("sneaky", sneaky)
+
+
+def test_black_survives_matplotlibs_default_fill_elision(rdf: RDF):
+    def black_text(ax, color_map):
+        ax.plot([0, 1], [0, 1], color=color_map["c1"])
+        ax.text(0.5, 0.5, "label", color=color_map["black"])
+
+    svg = rdf.create("black", black_text)
+    assert "var(--black)" in svg

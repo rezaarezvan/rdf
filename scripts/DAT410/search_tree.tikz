@@ -1,0 +1,41 @@
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}[>=stealth, thick]
+
+% Styles
+\tikzstyle{root}=[circle, draw=black, fill=black!20, minimum size=8mm, line width=0.5mm]
+\tikzstyle{mid}=[circle, draw=black, fill=black, minimum size=3.5mm]
+\tikzstyle{leaf}=[circle, draw=black, fill=black, minimum size=1.6mm, inner sep=0pt]
+\tikzstyle{move}=[->, black, line width=0.4mm]
+
+% Root: empty board
+\node[root] (root) at (6.6, 0) {};
+\node[font=\small, anchor=south] at (6.6, 0.5) {Empty board};
+\node[font=\small, anchor=west] at (9.5, 0.9) {Node, $v$};
+\draw[->, black, line width=0.3mm, dashed] (9.4, 0.8) -- (7.1, 0.25);
+
+% First move: 9 children
+\foreach \i in {0,...,8} {
+    \node[mid] (c\i) at (1.5*\i, -2.0) {};
+    \draw[move] (root) -- (c\i);
+}
+\node[font=\small, anchor=east] at (-0.6, -2.0) {First move (9)};
+
+% Second move: 8 grandchildren under each child (drawn as dot fans)
+\foreach \i in {0,...,8} {
+    \foreach \j in {0,...,7} {
+        \node[leaf] at (1.5*\i - 0.63 + 0.18*\j, -3.4) {};
+        \draw[black, line width=0.15mm] (c\i) -- (1.5*\i - 0.63 + 0.18*\j, -3.5);
+    }
+}
+\node[font=\small] at (6.6, -4.1) {Second move (8)};
+
+% Third level, expanded under the leftmost node only
+\foreach \j in {0,...,6} {
+    \node[leaf] at (-0.8 + 0.18*\j, -5.0) {};
+    \draw[black, line width=0.1mm] (c0) ++(-0.63, -1.5) -- (-0.8 + 0.18*\j, -5.1);
+}
+\node[font=\footnotesize] at (0.7, -5.0) {\dots};
+\node[font=\small, anchor=north] at (0.0, -5.4) {Third move (7)};
+
+\end{tikzpicture}
