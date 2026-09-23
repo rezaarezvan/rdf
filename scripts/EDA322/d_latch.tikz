@@ -1,0 +1,27 @@
+\begin{tikzpicture}[line width=0.8pt]
+\node[nand port] (n1) at (0, 1.6) {};
+\node[nand port] (n2) at (0, -1.6) {};
+\node[nand port] (n3) at (3.6, 1.4) {};
+\node[nand port] (n4) at (3.6, -1.4) {};
+\node[not port, scale=0.7] (inv) at (-2.2, -1.88) {};
+
+\draw (-4, 1.88) node[left] {$D$} -- (n1.in 1);
+\fill (-3.3, 1.88) circle (1.8pt);
+\draw (-3.3, 1.88) |- (inv.in);
+\draw (inv.out) -- (n2.in 2);
+
+\draw (-4, 0) node[left] {$C$} -- (-1.4, 0);
+\fill (-1.4, 0) circle (1.8pt);
+\draw (-1.4, 0) |- (n1.in 2);
+\draw (-1.4, 0) |- (n2.in 1);
+
+\draw (n1.out) -- (n3.in 1);
+\draw (n2.out) -- (n4.in 2);
+
+\draw (n3.out) -- ++(1, 0) node[right] {$Q$};
+\draw (n4.out) -- ++(1, 0) node[right] {$Q'$};
+\fill ($(n3.out) + (0.6, 0)$) coordinate (qo) circle (1.8pt);
+\fill ($(n4.out) + (0.6, 0)$) coordinate (qn) circle (1.8pt);
+\draw (qo) -- ++(0, -1) -- ($(n4.in 1) + (-0.5, 0.6)$) |- (n4.in 1);
+\draw (qn) -- ++(0, 1) -- ($(n3.in 2) + (-0.5, -0.6)$) |- (n3.in 2);
+\end{tikzpicture}

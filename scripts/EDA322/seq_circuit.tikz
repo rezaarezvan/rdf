@@ -1,0 +1,28 @@
+\begin{tikzpicture}[
+  blk/.style={draw, line width=0.8pt, minimum width=28mm, minimum height=16mm, align=center},
+  w/.style={line width=0.8pt, -{Stealth[length=2.2mm]}},
+  dot/.style={circle, fill, inner sep=1.3pt},
+]
+\node[blk] (cl1) at (0, 0) {Combinational\\circuit};
+\node[blk, minimum width=20mm, minimum height=22mm] (mem) at (4.2, -0.3) {Memory\\elements\\i.e.\ flip-flops};
+\node[blk] (cl2) at (8.6, 0) {Combinational\\circuit};
+
+\coordinate (win) at (-3, 0.35);
+\node[left] at (win) {$W$};
+\node[dot] (wd) at (-2.3, 0.35) {};
+\draw[line width=0.8pt] (win) -- (wd);
+\draw[w] (wd) -- (cl1.west |- wd);
+\draw[w, draw=c8] (wd) -- ++(0, 1.6) -| ($(cl2.north west) + (-0.5, 0)$) |- ($(cl2.west) + (0, 0.45)$);
+
+\draw[w] (cl1.east |- 0, 0.1) -- (mem.west |- 0, 0.1);
+\coordinate (clk) at (-3, -2.1);
+\node[left] at (clk) {Clock};
+\draw[w] (clk) -| ++(5.35, 1.3) -- (mem.west |- 0, -0.8);
+
+\node[dot] (qd) at (6.2, 0) {};
+\draw[line width=0.8pt] (mem.east |- qd) -- (qd) node[pos=0.4, below] {$Q$};
+\draw[w] (qd) -- (cl2.west |- qd);
+\draw[w] (qd) -- ++(0, -2.6) -| (-2.3, -0.45) -- (cl1.west |- 0, -0.45);
+
+\draw[w] (cl2.east) -- ++(1, 0) node[right] {$Z$};
+\end{tikzpicture}
