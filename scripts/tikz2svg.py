@@ -137,6 +137,9 @@ class TikZ2SVG:
         svg_content = svg_content.replace('href="#', f'href="#{prefix}_')
         svg_content = svg_content.replace("url(#", f"url(#{prefix}_")
 
+        # pdf2svg sizes are unitless (read as px); they are pt, like matplotlib's
+        end = svg_content.index(">", svg_content.index("<svg"))
+        svg_content = re.sub(r'\b(width|height)="([\d.]+)"', r'\1="\2pt"', svg_content[:end]) + svg_content[end:]
         slots = {v.lstrip("#").upper(): k for k, v in self.theme.base.items()}
 
         def rgb(m: re.Match[str]) -> str:
