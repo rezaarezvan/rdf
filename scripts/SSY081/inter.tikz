@@ -1,0 +1,20 @@
+\begin{tikzpicture}[>={Stealth[length=2mm]}, line width=0.7pt, blk/.style={draw, minimum width=18mm, minimum height=8mm}]
+\node[blk] (a1) at (0, 0) {System 1};
+\node[blk] (a2) at (3.6, 0) {System 2};
+\draw[->] (-2.2, 0) node[above right] {$f(t)$} -- (a1);
+\draw[->] (a1) -- node[above] {$y_1(t)$} (a2);
+\draw[->] (a2) -- (5.8, 0) node[above left] {$y(t)$};
+\node[anchor=west] at (6.2, 0) {Series connection};
+\begin{scope}[yshift=-3.2cm]
+\node[blk] (b1) at (0.8, 1) {System 1};
+\node[blk] (b2) at (0.8, -1) {System 2};
+\node[draw, circle, inner sep=1pt] (s) at (3.8, 0) {$+$};
+\draw (-2.2, 0) node[above right] {$f(t)$} -- (-1, 0);
+\draw[->] (-1, 0) |- (b1);
+\draw[->] (-1, 0) |- (b2);
+\draw[->] (b1) -| node[pos=0.3, above] {$y_1(t)$} (s);
+\draw[->] (b2) -| node[pos=0.3, below] {$y_2(t)$} (s);
+\draw[->] (s) -- (5.8, 0) node[above left] {$y(t)$};
+\node[anchor=west] at (6.2, 0) {Parallel connection};
+\end{scope}
+\end{tikzpicture}

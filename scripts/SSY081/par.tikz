@@ -1,0 +1,11 @@
+\begin{tikzpicture}[>={Stealth[length=2mm]}, line width=0.7pt, blk/.style={draw, minimum width=16mm, minimum height=8mm}]
+\node[blk] (h1) at (0, 1) {$h_1(t)$};
+\node[blk] (h2) at (0, -1) {$h_2(t)$};
+\node[draw, circle, inner sep=1pt] (s) at (2.8, 0) {$+$};
+\draw (-2.6, 0) node[above right] {$f(t)$} -- (-1.6, 0);
+\draw[->] (-1.6, 0) |- (h1);
+\draw[->] (-1.6, 0) |- (h2);
+\draw[->] (h1) -| node[pos=0.3, above] {$y_1(t)$} (s);
+\draw[->] (h2) -| node[pos=0.3, below] {$y_2(t)$} (s);
+\draw[->] (s) -- (4.4, 0) node[above left] {$y(t)$};
+\end{tikzpicture}

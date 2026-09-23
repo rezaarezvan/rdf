@@ -1,0 +1,7 @@
+\begin{tikzpicture}[>={Stealth[length=2mm]}, line width=0.7pt, blk/.style={draw, minimum width=16mm, minimum height=8mm}]
+\node[blk] (h1) at (0, 0) {$h_1(t)$};
+\node[blk] (h2) at (3.4, 0) {$h_2(t)$};
+\draw[->] (-2, 0) node[above right] {$f(t)$} -- (h1);
+\draw[->] (h1) -- node[above] {$y_1(t)$} (h2);
+\draw[->] (h2) -- (5.4, 0) node[above left] {$y(t)$};
+\end{tikzpicture}
