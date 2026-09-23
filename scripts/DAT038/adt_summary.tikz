@@ -1,6 +1,6 @@
 \begin{tikzpicture}[
-  adt/.style={draw=c1, fill=c1, fill opacity=0.12, text opacity=1, rounded corners=3pt, inner sep=4pt, font=\sffamily\small\bfseries},
-  impl/.style={text=c7, font=\sffamily\footnotesize, align=center},
+  adt/.style={draw=c1, fill=c1, fill opacity=0.12, text opacity=1, rounded corners=3pt, inner sep=4pt, font=\bfseries},
+  impl/.style={text=c7, font=\small, align=center},
   edge/.style={draw=c1, line width=0.9pt},
 ]
 \node[adt] (col) at (6.2, 0) {Collection<E>};
@@ -22,7 +22,7 @@
 \draw[edge, draw opacity=0.4] (stack) -- (deque) -- (queue);
 
 \node[impl] at (1.6, -5.7) {linked list, dynamic array};
-\node[impl] at (6.8, -3.5) {binary heap\\[-1pt]{\scriptsize(meldable heap, Fibonacci heap)}};
+\node[impl] at (6.8, -3.5) {binary heap\\[-1pt]{\footnotesize(meldable heap, Fibonacci heap)}};
 \node[impl] at (12.2, -2.1) {hash table};
 \node[impl] at (6.8, -6.3) {adjacency list, adjacency matrix};
 \node[impl] at (11.9, -5.7) {linked list, dynamic array,\\binary search tree, red-black tree, AVL tree};

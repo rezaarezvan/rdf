@@ -1,4 +1,4 @@
-\begin{tikzpicture}[x=13mm, y=6.5mm]
+\begin{tikzpicture}[x=16mm, y=7.5mm]
 \foreach \i in {0,...,3} {
   \node at (-\i, 0) {$a_\i$};
   \node at (-\i, -1) {$b_\i$};

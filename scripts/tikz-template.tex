@@ -1,16 +1,16 @@
-\documentclass[tikz,border=12pt]{standalone}
+\documentclass[12pt,tikz,border=12pt]{standalone}
 \usepackage{tikz}
 \usepackage[siunitx]{circuitikz}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern} % Latin Modern fonts for better rendering
+\usepackage{lmodern} % Computer Modern maths, as KaTeX
+\usepackage[lining]{ebgaramond} % text, as the prose and matplotlib figures
 \usepackage[T1]{fontenc}
 \usepackage{microtype} % Better typography
 
 \usetikzlibrary{arrows.meta,positioning,calc}
 
 \tikzset{
-    every node/.style={color=black, font=\sffamily\small},
-    every math node/.style={font=\small},
+    every node/.style={color=black},
     every path/.style={color=black},
     every circle/.style={draw=black},
     every rectangle/.style={draw=black}
