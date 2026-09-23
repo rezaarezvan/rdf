@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import re
 import subprocess
 import tempfile
 
@@ -136,6 +137,14 @@ class TikZ2SVG:
         svg_content = svg_content.replace('href="#', f'href="#{prefix}_')
         svg_content = svg_content.replace("url(#", f"url(#{prefix}_")
 
+        slots = {v.lstrip("#").upper(): k for k, v in self.theme.base.items()}
+
+        def rgb(m: re.Match[str]) -> str:
+            h = "".join(f"{round(float(x) * 2.55):02X}" for x in m.groups()[1:])
+            return f'{m[1]}="var(--{slots[h]})"' if h in slots else m[0]
+
+        svg_content = re.sub(r'(fill|stroke)="rgb\(([\d.]+)%, ([\d.]+)%, ([\d.]+)%\)"', rgb, svg_content)
+
         # Replace black colors with theme colors for dark mode compatibility
         replacements = [
             ('stroke="rgb(0%, 0%, 0%)"', 'stroke="var(--black)"'),
@@ -174,7 +183,8 @@ class TikZ2SVG:
 
             # Create LaTeX file
             template = self._read_template()
-            tex_content = template.replace("% TIKZ_CONTENT_HERE", tikz_code)
+            colors = "".join(rf"\definecolor{{{k}}}{{HTML}}{{{v.lstrip('#')}}}" for k, v in self.theme.base.items())
+            tex_content = template.replace("% TIKZ_CONTENT_HERE", colors + "\n" + tikz_code)
             tex_file = tmp_path / "temp.tex"
             tex_file.write_text(tex_content, encoding="utf-8")
 
