@@ -9,7 +9,8 @@ from pathlib import Path
 from typing import Optional
 
 from rdf.theme import ColorTheme
-from rdf.svg import build_css, inject_css
+from rdf.rdf import ZOOM
+from rdf.svg import build_css, inject_css, zoom
 
 
 class TikZ2SVG:
@@ -137,9 +138,7 @@ class TikZ2SVG:
         svg_content = svg_content.replace('href="#', f'href="#{prefix}_')
         svg_content = svg_content.replace("url(#", f"url(#{prefix}_")
 
-        # pdf2svg sizes are unitless (read as px); they are pt, like matplotlib's
-        end = svg_content.index(">", svg_content.index("<svg"))
-        svg_content = re.sub(r'\b(width|height)="([\d.]+)"', r'\1="\2pt"', svg_content[:end]) + svg_content[end:]
+        svg_content = zoom(svg_content, ZOOM)
         slots = {v.lstrip("#").upper(): k for k, v in self.theme.base.items()}
 
         def rgb(m: re.Match[str]) -> str:
@@ -154,6 +153,8 @@ class TikZ2SVG:
             ('stroke="black"', 'stroke="var(--black)"'),
             ('fill="rgb(0%, 0%, 0%)"', 'fill="var(--black)"'),
             ('fill="black"', 'fill="var(--black)"'),
+            ('fill="rgb(100%, 100%, 100%)"', 'fill="var(--white)"'),
+            ('stroke="rgb(100%, 100%, 100%)"', 'stroke="var(--white)"'),
             ("<g>", '<g class="glyph">'),
             ('text-anchor="middle"', 'text-anchor="middle" class="math"'),
             ('text-anchor="start"', 'text-anchor="start" class="math"'),

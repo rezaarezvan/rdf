@@ -103,6 +103,13 @@ def minify(svg: str) -> str:
     return _PATH_D.sub(lambda m: _NUM.sub(_round, m.group()), svg)
 
 
+def zoom(svg: str, k: float) -> str:
+    """Declare the root <svg> k times larger than drawn, in pt."""
+    end = svg.index(">", svg.index("<svg"))
+    size = lambda m: f'{m[1]}="{float(m[2]) * k:g}pt"'
+    return re.sub(r'\b(width|height)="([\d.]+)(?:pt)?"', size, svg[:end]) + svg[end:]
+
+
 def process(svg: str, theme: "ColorTheme") -> str:
     """Full SVG processing: inject CSS + apply color classes + element tags."""
     return tag(inject_css(minify(svg), build_css(theme)), theme)

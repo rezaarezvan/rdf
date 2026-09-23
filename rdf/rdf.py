@@ -11,13 +11,15 @@ from cycler import cycler
 from matplotlib.figure import Figure
 from matplotlib import font_manager
 
-from rdf.svg import process as process_svg
+from rdf.svg import process as process_svg, zoom
 from rdf.theme import AXIS_SENTINEL, BLACK_SENTINEL, GRID_SENTINEL, ColorTheme
 from rdf.animate import AnimationType, animate
 
 MPLSTYLE = Path(__file__).parent / "academic.mplstyle"
 
 BLOG_WIDTH = 6.5
+# Drawn ZOOM x smaller than declared, so type and strokes read at prose size.
+ZOOM = 1.35
 GOLDEN = 1.618
 
 FONTS = Path(__file__).parent / "fonts"
@@ -105,7 +107,8 @@ class RDF:
             plt.style.context(str(self.style)),
             plt.rc_context(_rc_overrides(self.theme)),
         ):
-            fig = plt.figure(figsize=(self.width, height or self.width / GOLDEN))
+            h = height or self.width / GOLDEN
+            fig = plt.figure(figsize=(self.width / ZOOM, h / ZOOM))
             params = inspect.signature(plot_func).parameters
             ax = (
                 fig.add_subplot(111, projection="3d" if is_3d else None)
@@ -131,7 +134,7 @@ class RDF:
             buf = io.StringIO()
             fig.savefig(buf, format="svg", transparent=True, metadata={"Date": None})
             plt.close(fig)
-            return buf.getvalue()
+            return zoom(buf.getvalue(), ZOOM)
 
     def create(
         self,
