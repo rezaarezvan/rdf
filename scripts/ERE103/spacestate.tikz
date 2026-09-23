@@ -1,0 +1,16 @@
+\begin{tikzpicture}[>={Stealth[length=2mm]}, line width=0.7pt, blk/.style={draw, minimum width=10mm, minimum height=8mm}]
+\node[blk] (kr) at (0, 0) {$K_r$};
+\node[draw, circle, minimum size=4mm, inner sep=0pt] (s) at (1.8, 0) {};
+\node[blk, minimum width=26mm] (p) at (4.4, 0) {$\dot{x} = Ax + Bu$};
+\node[blk] (c) at (7.6, 0) {$C$};
+\node[blk] (l) at (4.4, -1.6) {$L$};
+\draw[->] (-1.4, 0) node[above right] {$r$} -- (kr);
+\draw[->] (kr) -- (s);
+\draw[->] (s) -- node[above] {$u$} (p);
+\draw[->] (p) -- node[above, pos=0.35] {$x$} (c);
+\draw[->] (c) -- (9, 0) node[above left] {$y$};
+\draw[->] (6.3, 0) |- (l);
+\draw[->] (l) -| (s);
+\node at (1.5, 0.35) {\small $+$};
+\node at (1.55, -0.4) {\small $-$};
+\end{tikzpicture}
