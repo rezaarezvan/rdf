@@ -1,0 +1,14 @@
+\begin{tikzpicture}[>={Stealth[length=2mm]}, line width=0.7pt]
+\foreach \n/\x/\y/\c/\t in {t1/0/2.6/c8/Predict taken, t2/6/2.6/c8/Predict taken, n1/0/0/c1/Predict not taken, n2/6/0/c1/Predict not taken} {
+    \draw[\c, line width=1.1pt, fill=\c, fill opacity=0.15] (\x, \y) ellipse (1.8 and 0.7);
+    \node (\n) at (\x, \y) {\t};
+}
+\draw[->, c8] (-0.6, 3.27) .. controls (-0.9, 4.4) and (0.9, 4.4) .. node[above, black] {Taken} (0.6, 3.27);
+\draw[->] (1.8, 2.8) -- node[above] {Not taken} (4.2, 2.8);
+\draw[->, c8] (4.2, 2.4) -- node[below, black] {Taken} (1.8, 2.4);
+\draw[->] (5.8, 1.9) -- node[left] {Not taken} (5.8, 0.7);
+\draw[->, c8] (6.2, 0.7) -- node[right, black] {Taken} (6.2, 1.9);
+\draw[->] (4.2, 0.2) -- node[above] {Not taken} (1.8, 0.2);
+\draw[->, c8] (1.8, -0.2) -- node[below, black] {Taken} (4.2, -0.2);
+\draw[->] (-0.6, -0.67) .. controls (-0.9, -1.8) and (0.9, -1.8) .. node[below] {Not taken} (0.6, -0.67);
+\end{tikzpicture}

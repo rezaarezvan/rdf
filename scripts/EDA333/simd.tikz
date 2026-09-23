@@ -1,0 +1,16 @@
+\begin{tikzpicture}[>={Stealth[length=2mm]}, line width=0.7pt, blk/.style={draw, minimum width=10mm, minimum height=7mm}]
+\node[blk] (im) at (3.7, 2.2) {IM};
+\foreach \name/\x in {1/0, 2/1.6, 3/3.2, N/7.4} {
+    \node[blk] (p\name) at (\x, 0) {$P_{\name}$};
+    \node[blk] (dm\name) at (\x, -1.6) {$\mathrm{DM}_{\name}$};
+    \draw[<->] (p\name) -- node[left] {$D_{\name}$} (dm\name);
+    \draw[->] (\x, 1.1) -- (p\name);
+}
+\draw (im) -- (3.7, 1.1) node[pos=0.5, right] {$I$};
+\draw (0, 1.1) -- (7.4, 1.1);
+\draw[<->] (p1) -- (p2);
+\draw[<->] (p2) -- (p3);
+\draw[<->] (p3.east) -- ++(0.45, 0);
+\draw[<->] (pN.west) -- ++(-0.45, 0);
+\node at (5.3, 0) {$\cdots$};
+\end{tikzpicture}

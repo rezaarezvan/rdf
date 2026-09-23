@@ -1,0 +1,7 @@
+\begin{tikzpicture}[>={Stealth[length=2.4mm]}, line width=0.8pt, blk/.style={draw, minimum width=14mm, minimum height=11mm}]
+\node[blk] (im) at (0, 0) {IM};
+\node[blk] (p) at (3, 0) {P};
+\node[blk] (dm) at (6, 0) {DM};
+\draw[->] (im) -- node[above] {$I$} (p);
+\draw[<->] (p) -- node[above] {$D$} (dm);
+\end{tikzpicture}

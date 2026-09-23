@@ -1,0 +1,34 @@
+\begin{tikzpicture}[>={Stealth[length=1.8mm]}, line width=0.7pt]
+\def\rh{0.45}
+\node[font=\bfseries, align=center] at (0, 5.4) {Virtual page\\number};
+\draw (-0.9, 4.25) rectangle (0.9, 4.65);
+\node[font=\bfseries] at (3.9, 5.25) {Page table};
+\node[align=center] at (4.1, 4.4) {Physical page or\\disk address};
+\node at (2.3, 4.05) {Valid};
+\foreach \v [count=\i from 0] in {1,1,1,1,0,1,1,0,1,1,0,1} {
+  \pgfmathsetmacro{\y}{3.3 - \i*\rh}
+  \ifnum\v=0 \fill[c7, fill opacity=0.35] (2.2, \y) rectangle (5.6, \y+\rh); \fi
+  \draw (2.2, \y) rectangle (5.6, \y+\rh);
+  \node at (2.42, \y+\rh/2) {\v};
+  \fill (4.3, \y+\rh/2) circle (1.8pt);
+  \coordinate (p\i) at (4.3, \y+\rh/2);
+}
+\draw (2.65, -1.65) -- (2.65, 3.75);
+\draw (2.2, 3.3+\rh) rectangle (5.6, 3.75);
+\draw[->] (0, 4.25) |- ($(p5)+(-2.3, 0)$);
+\node[font=\bfseries] at (10, 4.0) {Physical memory};
+\foreach \i in {0,...,7} {
+  \draw (8.6, 3.2 - \i*\rh) rectangle (11.4, 3.2 - \i*\rh + \rh);
+  \coordinate (m\i) at (8.6, 3.2 - \i*\rh + \rh/2);
+}
+\node[font=\bfseries] at (10, -0.25) {Disk storage};
+\draw (8.4, -0.9) -- (8.4, -3.3) arc[start angle=180, end angle=360, x radius=1.6, y radius=0.35] -- (11.6, -0.9);
+\draw (10, -0.9) ellipse[x radius=1.6, y radius=0.35];
+\foreach \i in {0,1,2} {
+  \fill[c7, fill opacity=0.35] (8.8, -1.55 - \i*0.65) rectangle (11.2, -1.2 - \i*0.65);
+  \draw (8.8, -1.55 - \i*0.65) rectangle (11.2, -1.2 - \i*0.65);
+  \coordinate (d\i) at (8.8, -1.375 - \i*0.65);
+}
+\foreach \a/\b in {0/m4, 1/m1, 2/m5, 3/m6, 5/m0, 6/m7, 8/m2, 9/m3, 11/m1} \draw[->, line width=0.5pt] (p\a) -- (\b);
+\foreach \a/\b in {4/d0, 7/d1, 10/d2} \draw[->, line width=0.5pt] (p\a) -- (\b);
+\end{tikzpicture}

@@ -1,0 +1,49 @@
+\begin{tikzpicture}[>={Stealth[length=1.8mm]}, line width=0.7pt]
+\def\rh{0.42}
+\node[font=\bfseries, align=center] at (-0.55, 6.9) {Virtual page\\number};
+\draw (-1.4, 5.55) rectangle (0.3, 5.95);
+\node[font=\bfseries] at (4.35, 7.6) {TLB};
+\foreach \x/\t in {1.5/Valid, 2.3/Dirty, 3.1/Ref, 4.6/Tag} \node[font=\footnotesize, anchor=base] at (\x, 6.5) {\t};
+\node[align=center] at (6.95, 6.85) {Physical page\\address};
+\foreach \v/\d/\r [count=\i from 0] in {1/0/1, 1/1/1, 1/1/1, 1/0/1, 0/0/0, 1/0/1} {
+  \pgfmathsetmacro{\y}{5.93 - \i*\rh - \rh/2}
+  \node at (1.5, \y) {\v}; \node at (2.3, \y) {\d}; \node at (3.1, \y) {\r};
+  \coordinate (t\i) at (6.95, \y);
+}
+\foreach \i in {0,...,6} \draw (1.1, 5.93 - \i*\rh) -- (8.3, 5.93 - \i*\rh);
+\draw (1.1, 6.35) rectangle (8.3, 3.41);
+\foreach \x in {1.9, 2.7, 3.5, 5.7} \draw (\x, 3.41) -- (\x, 6.35);
+\node[font=\bfseries] at (3.6, 2.6) {Page table};
+\foreach \x/\t in {1.5/Valid, 2.3/Dirty, 3.1/Ref} \node[font=\footnotesize, anchor=base] at (\x, 1.55) {\t};
+\node[align=center] at (4.95, 1.9) {Physical page\\or disk address};
+\foreach \v/\d/\r [count=\i from 0] in {1/0/1, 1/0/0, 1/0/0, 1/0/1, 0/0/0, 1/0/1, 1/0/1, 0/0/0, 1/1/1, 1/1/1, 0/0/0, 1/1/1} {
+  \pgfmathsetmacro{\y}{1.0 - \i*\rh - \rh/2}
+  \ifnum\v=0 \fill[c7, fill opacity=0.35] (1.1, \y-\rh/2) rectangle (6.4, \y+\rh/2); \fi
+  \node at (1.5, \y) {\v}; \node at (2.3, \y) {\d}; \node at (3.1, \y) {\r};
+  \fill (4.95, \y) circle (1.8pt);
+  \coordinate (p\i) at (4.95, \y);
+}
+\foreach \i in {0,...,12} \draw (1.1, 1.0 - \i*\rh) -- (6.4, 1.0 - \i*\rh);
+\draw (1.1, 1.42) rectangle (6.4, 1.0 - 12*\rh);
+\foreach \x in {1.9, 2.7, 3.5} \draw (\x, 1.0 - 12*\rh) -- (\x, 1.42);
+\draw (-0.55, 5.55) -- (-0.55, 0.79);
+\draw[->] (-0.55, 0.79) -- (1.1, 0.79);
+\draw[->] (-0.55, 4.52) -- (1.1, 4.52);
+\node[font=\bfseries] at (12.3, 4.75) {Physical memory};
+\foreach \i in {0,...,9} {
+  \draw (11, 4.3 - \i*\rh) rectangle (13.6, 4.3 - \i*\rh - \rh);
+  \coordinate (m\i) at (11, 4.3 - \i*\rh - \rh/2);
+}
+\node[font=\bfseries] at (12.3, -0.35) {Disk storage};
+\draw (10.7, -1.0) -- (10.7, -3.5) arc[start angle=180, end angle=360, x radius=1.6, y radius=0.35] -- (13.9, -1.0);
+\draw (12.3, -1.0) ellipse[x radius=1.6, y radius=0.35];
+\foreach \i in {0,1,2} {
+  \fill[c7, fill opacity=0.35] (11.1, -1.7 - \i*0.65) rectangle (13.5, -1.35 - \i*0.65);
+  \draw (11.1, -1.7 - \i*0.65) rectangle (13.5, -1.35 - \i*0.65);
+  \coordinate (d\i) at (11.1, -1.525 - \i*0.65);
+}
+\foreach \i in {0,1,2,3,5} \fill[c8] (t\i) circle (1.8pt);
+\foreach \a/\b in {0/m5, 1/m3, 2/m1, 3/m6, 5/m8} \draw[->, c8, line width=0.5pt] (t\a) -- (\b);
+\foreach \a/\b in {0/m9, 1/m7, 2/m4, 3/m0, 5/m2, 6/m6, 8/m1, 9/m5, 11/m3} \draw[->, line width=0.5pt] (p\a) -- (\b);
+\foreach \a/\b in {4/d0, 7/d1, 10/d2} \draw[->, line width=0.5pt] (p\a) -- (\b);
+\end{tikzpicture}

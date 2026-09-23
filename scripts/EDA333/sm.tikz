@@ -1,0 +1,25 @@
+\begin{tikzpicture}[>={Stealth[length=2mm]}, line width=0.7pt]
+\newcommand{\stack}[3]{
+    \foreach \k in {2, 1, 0} {
+        \draw[fill=white] (#1 - 0.15*\k, -0.15*\k) rectangle ++(#2, 2);
+    }
+    \node at (#1 + #2/2, 1.3) {#3};
+}
+\newcommand{\preg}[1]{\fill (#1, -0.5) rectangle ++(0.14, 2.6);}
+\stack{0}{1.4}{IF}
+\preg{1.8}
+\stack{2.8}{1.4}{ID}
+\preg{4.6}
+\foreach \y/\u in {1.5/INT, 0.8/FP, -0.1/MEM} {
+    \draw (5.2, \y - 0.25) rectangle ++(1.6, 0.5);
+    \foreach \k in {1, 2, 3} \draw (5.2 + 0.4*\k, \y - 0.25) -- ++(0, 0.5);
+    \draw[->, c1, line width=1.1pt] (4.2, 0.9) -- (5.2, \y);
+    \draw[->] (6.8, \y) -- (7.8, \y);
+    \node[draw, minimum width=15mm, minimum height=5mm] at (8.55, \y) {\u};
+}
+\preg{7.35}
+\preg{9.7}
+\stack{10.6}{0.9}{CDB}
+\preg{11.9}
+\stack{12.6}{0.9}{CT}
+\end{tikzpicture}

@@ -1,0 +1,44 @@
+\begin{tikzpicture}[>={Stealth[length=1.8mm]}, line width=0.7pt, x=0.78cm, st/.style={draw, minimum width=8mm, minimum height=15mm}, pc/.style={draw, minimum width=9mm, minimum height=6mm}]
+\newcommand{\preg}[1]{\fill (#1, -0.9) ++(-0.06, 0) rectangle ++(0.12, 1.8);}
+\node[pc] (pc1) at (0, 0.65) {PC1};
+\node[pc] (pc2) at (0, -0.65) {PC2};
+\draw (1.2, 1.05) -- (1.7, 0.6) -- (1.7, -0.6) -- (1.2, -1.05) -- cycle;
+\draw[->] (pc1) -- (1.2, 0.65);
+\draw[->] (pc2) -- (1.2, -0.65);
+\node[st] (if) at (2.9, 0) {IF};
+\preg{4}
+\node[st] (ts) at (5.1, 0) {TS};
+\preg{6.2}
+\node[st] (id) at (7.3, 0) {ID};
+\preg{8.4}
+\node[draw, rounded corners, minimum width=11mm, minimum height=5mm, rotate=-90, font=\small] (mux) at (9.3, 0) {MUX};
+\node[st, minimum width=11mm] (ex) at (11.1, 0) {EX};
+\preg{12.5}
+\node[st, minimum width=10mm] (mem) at (13.6, 0) {MEM};
+\preg{14.7}
+\node[st] (wb) at (15.7, 0) {WB};
+\preg{16.7}
+\draw[->] (1.7, 0) -- (if);
+\foreach \a/\b in {if/4, ts/6.2, id/8.4, ex/12.5, mem/14.7, wb/16.7} \draw[->] (\a) -- (\b - 0.06, 0);
+\draw[->] (4.06, 0) -- (ts);
+\draw[->] (6.26, 0) -- (id);
+\draw[->] (8.46, 0) -- (mux);
+\draw[->] (mux) -- (ex);
+\draw[->] (12.56, 0) -- (mem);
+\draw[->] (14.76, 0) -- (wb);
+\node[draw, minimum width=9mm, minimum height=8mm, align=center, font=\small, anchor=south east] (t1) at (7.25, 2.3) {Reg\\T1};
+\node[draw, minimum width=9mm, minimum height=8mm, align=center, font=\small, anchor=south west] (t2) at (7.35, 2.3) {Reg\\T2};
+\draw[<->] (id) -- (7.3, 2.3);
+\draw[->] (16.76, 0) -- (17.1, 0) |- (t2.east);
+\draw[->] (12.5, 0.9) |- (8.95, 1.4) -- (8.95, 0.3);
+\draw[->] (14.7, 0.9) |- (9.15, 1.6) -- (9.15, 0.3);
+\node[font=\small, below] at (4, -0.9) {IF/TS};
+\node[font=\small, below] at (6.2, -0.9) {TS/ID};
+\node[font=\small, below] at (8.4, -0.9) {ID/EX};
+\node[font=\small, below] at (12.5, -0.9) {EX/MEM};
+\node[font=\small, below] at (14.7, -0.9) {MEM/WB};
+\node[draw, minimum height=6mm] (sel) at (5.1, -2) {Thread selection};
+\draw[->] (sel) -- (ts);
+\draw[->] (sel.west) -| (1.45, -0.8);
+\draw[->] (mem) |- (sel.east);
+\end{tikzpicture}
