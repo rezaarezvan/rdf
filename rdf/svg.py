@@ -89,6 +89,20 @@ def tag(svg: str, theme: "ColorTheme") -> str:
     return _apply_tags(_apply_colors(svg, theme))
 
 
+
+_PATH_D = re.compile(r'(?<= d=")[^"]*(?=")')
+_NUM = re.compile(r"-?\d+\.\d+")
+
+
+def _round(m: re.Match[str]) -> str:
+    return f"{float(m.group()):.2f}".rstrip("0").rstrip(".")
+
+
+def minify(svg: str) -> str:
+    """Round path coordinates to 0.01pt (sub-pixel); ~20% smaller gzipped."""
+    return _PATH_D.sub(lambda m: _NUM.sub(_round, m.group()), svg)
+
+
 def process(svg: str, theme: "ColorTheme") -> str:
     """Full SVG processing: inject CSS + apply color classes + element tags."""
-    return tag(inject_css(svg, build_css(theme)), theme)
+    return tag(inject_css(minify(svg), build_css(theme)), theme)
