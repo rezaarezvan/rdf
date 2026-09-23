@@ -9,7 +9,7 @@ from typing import Callable, Optional
 import matplotlib.pyplot as plt
 from cycler import cycler
 from matplotlib.figure import Figure
-from matplotlib.font_manager import FontProperties, findfont
+from matplotlib import font_manager
 
 from rdf.svg import process as process_svg
 from rdf.theme import AXIS_SENTINEL, BLACK_SENTINEL, GRID_SENTINEL, ColorTheme
@@ -20,24 +20,18 @@ MPLSTYLE = Path(__file__).parent / "academic.mplstyle"
 BLOG_WIDTH = 6.5
 GOLDEN = 1.618
 
-_font_checked = False
+FONTS = Path(__file__).parent / "fonts"
 
 
-def _check_font() -> None:
-    global _font_checked
-    if _font_checked:
-        return
-    _font_checked = True
-    family = plt.rcParams["font.family"][0]
-    wanted = (plt.rcParams.get(f"font.{family}") or [family])[0]
-    try:
-        findfont(FontProperties(family=wanted), fallback_to_default=False)
-    except Exception:
-        warnings.warn(
-            f"font {wanted!r} is not installed; matplotlib will substitute "
-            f"silently. Install it and clear ~/.matplotlib/fontlist-*.json.",
-            stacklevel=3,
-        )
+def _register_fonts() -> None:
+    fm = font_manager.fontManager
+    fm.ttflist = [f for f in fm.ttflist if f.name != "EB Garamond"]
+    for f in sorted(FONTS.glob("*.ttf")):
+        fm.addfont(f)
+    fm._findfont_cached.cache_clear()
+
+
+_register_fonts()
 
 
 def _rc_overrides(theme: ColorTheme) -> dict:
@@ -111,7 +105,6 @@ class RDF:
             plt.style.context(str(self.style)),
             plt.rc_context(_rc_overrides(self.theme)),
         ):
-            _check_font()
             fig = plt.figure(figsize=(self.width, height or self.width / GOLDEN))
             params = inspect.signature(plot_func).parameters
             ax = (

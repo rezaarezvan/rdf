@@ -24,6 +24,7 @@ packages = ["rdf"]
 
 [tool.hatch.build.targets.wheel.force-include]
 "rdf/academic.mplstyle" = "rdf/academic.mplstyle"
+"rdf/fonts" = "rdf/fonts"
 
 [tool.uv]
 default-groups = ["dev", "scripts"]
