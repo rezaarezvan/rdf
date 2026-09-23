@@ -1,0 +1,10 @@
+\begin{tikzpicture}[american, american voltages, open poles opacity=0, line width=0.8pt]
+\node[ocirc] (a) at (4.8, 2.5) {};
+\node[ocirc] (b) at (4.8, 0) {};
+\draw (0, 0) to[V, l=$12\,\mathrm{V}$, invert] (0, 2.5) to[R, l=$3\,\Omega$] (2.2, 2.5) node[circ] {} to[R, l=$7\,\Omega$] (a);
+\draw (b) -- (0, 0);
+\draw (2.2, 2.5) to[R, l=$6\,\Omega$] (2.2, 0) node[circ] {};
+\node[c1] at (4.8, 1.95) {$+$};
+\node[c1] at (4.8, 1.25) {$V_{oc}$};
+\node[c1] at (4.8, 0.55) {$-$};
+\end{tikzpicture}

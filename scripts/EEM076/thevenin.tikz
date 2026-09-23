@@ -1,0 +1,7 @@
+\begin{tikzpicture}[american, every node/.style={}, line width=0.7pt, box/.style={draw, minimum width=21mm, minimum height=8mm, fill=none}, ann/.style={c1, -{Stealth[length=2mm]}, line width=0.8pt}]
+\draw (0,0) to[I, l=$1\angle 0^\circ\,\mathrm{A}$] (0,3) -- (2,3) node[circ]{} node[above, c1] {$\mathbf{V}_1$} to[generic, l=$-j10\,\Omega$] (6,3) node[circ]{} node[above, c1] {$\mathbf{V}_2$} -- (8,3)
+  to[I, l=$0.5\angle{-90^\circ}\,\mathrm{A}$] (8,0) -- (0,0);
+\draw (2,3) -- (2,1.9) node[box, anchor=north] (a) {$4 - j2\,\Omega$}; \draw (a.south) -- (2,0) node[circ]{};
+\draw (6,3) -- (6,1.9) node[box, anchor=north] (b) {$2 + j4\,\Omega$}; \draw (b.south) -- (6,0) node[circ]{};
+\draw[ann] (2.3,0.95) -- (2.3,0.25) node[midway, right, c1] {$\mathbf{I}_1$};
+\end{tikzpicture}

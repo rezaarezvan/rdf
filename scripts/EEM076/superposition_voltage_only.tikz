@@ -1,0 +1,8 @@
+\begin{tikzpicture}[american, american voltages, open poles opacity=0, line width=0.8pt]
+\node[ocirc] (t1) at (4.5, 2.4) {};
+\node[ocirc] (t2) at (4.5, 0.6) {};
+\draw (0, 0) to[V, l=$3\,\mathrm{V}$, invert] (0, 3) to[R, l=$6\,\Omega$] (2.5, 3) node[circ] {} -- (4.5, 3) -- (t1);
+\draw (t2) -- (4.5, 0) -- (0, 0);
+\draw (2.5, 3) to[R, l=$9\,\Omega$] (2.5, 0) node[circ] {};
+\draw[c1, -{Stealth}, line width=1pt] (2.85, 2.85) -- (2.85, 2.3) node[midway, right] {$i_x'$};
+\end{tikzpicture}

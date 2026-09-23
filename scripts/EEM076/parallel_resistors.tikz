@@ -1,0 +1,10 @@
+\begin{tikzpicture}[american, open poles opacity=0, american voltages, line width=0.8pt]
+\node[ocirc] (p) at (0, 3) {};
+\node[ocirc] (n) at (0, 0) {};
+\draw (p) to[short, i=$i$] (1.5, 3) -- (6, 3);
+\draw (n) -- (6, 0);
+\draw (1.5, 3) node[circ] {} to[R, l=$R_1$, i>_=$i_1$] (1.5, 0) node[circ] {};
+\draw (3.75, 3) node[circ] {} to[R, l=$R_2$, i>_=$i_2$] (3.75, 0) node[circ] {};
+\draw (6, 3) to[R, l=$R_3$, i>_=$i_3$] (6, 0);
+\draw (0, 0.1) to[open, v^<=$v$] (0, 2.9);
+\end{tikzpicture}

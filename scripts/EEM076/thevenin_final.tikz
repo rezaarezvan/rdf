@@ -1,0 +1,5 @@
+\begin{tikzpicture}[american, american voltages, open poles opacity=0, line width=0.8pt]
+\draw (0, 0) to[V, l=$8\,\mathrm{V}$, invert] (0, 2.5) to[R, l_=$9\,\Omega$] (3.8, 2.5) to[R, l_=$R_L$] (3.8, 0) -- (0, 0);
+\draw[c1, dashed, line width=1pt] (-1.4, -0.3) rectangle (2.6, 3.1);
+\node[below] at (0.6, -0.3) {Network $A$};
+\end{tikzpicture}

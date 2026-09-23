@@ -1,0 +1,11 @@
+\begin{tikzpicture}[american, open poles opacity=0, line width=0.8pt]
+\node[ocirc, label=right:$a$] (a) at (0, 3) {};
+\node[ocirc, label=right:$b$] (b) at (0, 0) {};
+\draw (b) to[R] (a);
+\node at (-1.2, 3) {$+$};
+\node at (-1.2, 1.5) {$v_{ab}$};
+\node at (-1.2, 0) {$-$};
+\node at (1.6, 3) {$-$};
+\node at (1.6, 1.5) {$v_{ba}$};
+\node at (1.6, 0) {$+$};
+\end{tikzpicture}

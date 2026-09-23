@@ -1,0 +1,23 @@
+\begin{tikzpicture}[line width=0.6pt]
+\def\ro{3.3}\def\ri{1.1}
+\foreach \a/\c in {90/c3, 0/c5, 270/c1, 180/c2} {
+  \fill[\c, fill opacity=0.18] (\a:\ri) arc (\a:\a-90:\ri) -- (\a-90:\ro) arc (\a-90:\a:\ro) -- cycle;
+  \fill[\c, fill opacity=0.45] (0,0) -- (\a:\ri) arc (\a:\a-90:\ri) -- cycle;
+}
+\draw (0,0) circle (\ro) (0,0) circle (\ri);
+\foreach \a in {0,30,...,330} \draw (\a:\ri) -- (\a:\ro);
+\foreach \a/\t in {
+  75/{$I R$}, 45/{$\dfrac{P}{I}$}, 15/{$\sqrt{PR}$},
+  -15/{$\dfrac{V}{I}$}, -45/{$\dfrac{P}{I^2}$}, -75/{$\dfrac{V^2}{P}$},
+  -105/{$\dfrac{V}{R}$}, -135/{$\dfrac{P}{V}$}, -165/{$\sqrt{\dfrac{P}{R}}$},
+  165/{$I^2 R$}, 135/{$I V$}, 105/{$\dfrac{V^2}{R}$}}
+  \node at (\a:2.25) {\t};
+\node at (45:0.55) {$V$};
+\node at (135:0.55) {$P$};
+\node at (225:0.55) {$I$};
+\node at (315:0.55) {$R$};
+\node[anchor=south east] at (135:\ro) {$P$ = power};
+\node[anchor=south west] at (45:\ro) {$V$ = voltage};
+\node[anchor=north east] at (225:\ro) {$I$ = current};
+\node[anchor=north west] at (315:\ro) {$R$ = resistance};
+\end{tikzpicture}

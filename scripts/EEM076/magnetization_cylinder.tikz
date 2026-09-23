@@ -1,0 +1,11 @@
+\begin{tikzpicture}[>={Stealth[length=2mm]}, line width=0.8pt]
+\fill[c3, fill opacity=0.18] (-1.8, 0) -- (-1.8, 4.2) arc (180:360:1.8 and 0.55) -- (1.8, 0) arc (0:-180:1.8 and 0.55);
+\fill[c3, fill opacity=0.28] (0, 4.2) ellipse (1.8 and 0.55);
+\draw (0, 4.2) ellipse (1.8 and 0.55);
+\draw (-1.8, 4.2) -- (-1.8, 0) arc (180:360:1.8 and 0.55) -- (1.8, 4.2);
+\newcommand{\mom}[2]{\draw[line width=0.6pt] (#1, #2) ellipse (0.2 and 0.08); \draw[->, line width=0.9pt] (#1, #2) -- ++(0, 0.35) node[right, inner sep=1pt, scale=0.8] {$\mu$};}
+\foreach \x/\y in {-0.9/4.3, 0.3/4.45, 1.0/4.1, -0.3/4.0} \mom{\x}{\y}
+\foreach \x in {-1.2, -0.4, 0.4, 1.2} \foreach \y in {0.2, 0.9, 1.6, 2.3, 3.0} \mom{\x}{\y}
+\node[left] at (-2.0, 2.1) {$L$};
+\draw[->, line width=0.6pt] (1.7, 5.3) node[right] {$A$} to[bend right=20] (0.9, 4.45);
+\end{tikzpicture}

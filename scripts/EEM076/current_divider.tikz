@@ -1,0 +1,7 @@
+\begin{tikzpicture}[american, american voltages, line width=0.8pt]
+\draw (0, 0) to[I, l=$i_{\mathrm{total}}$] (0, 3) -- (5, 3);
+\draw (0, 0) -- (5, 0);
+\draw (2.5, 3) node[circ] {} to[R, l=$R_1$, i>_=$i_1$] (2.5, 0) node[circ] {};
+\draw (1.6, 0.4) to[open, v^<=$v$] (1.6, 2.6);
+\draw (5, 3) to[R, l=$R_2$, i>_=$i_2$] (5, 0);
+\end{tikzpicture}

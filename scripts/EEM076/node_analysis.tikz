@@ -1,0 +1,11 @@
+\begin{tikzpicture}[american, every node/.style={}, line width=0.7pt, box/.style={draw, minimum width=21mm, minimum height=8mm, fill=none}, ann/.style={c1, -{Stealth[length=2mm]}, line width=0.8pt}]
+\draw (0,0) to[I, l=$1\angle 0^\circ\,\mathrm{A}$] (0,3) -- (1.8,3) node[circ]{} node[above, c1] {$\mathbf{V}_1$} -- (3.4,3) node[circ]{} -- (4.6,3) node[circ]{}
+  to[L, l_=$j10\,\Omega$] (7,3) node[circ]{} -- (8.2,3) node[circ]{} -- (9.8,3) node[circ]{} node[above, c1] {$\mathbf{V}_2$} -- (11.4,3)
+  to[I, l=$0.5\angle{-90^\circ}\,\mathrm{A}$] (11.4,0) -- (0,0);
+\draw (4.6,3) -- (4.6,4.2) to[C, l=$-j5\,\Omega$] (7,4.2) -- (7,3);
+\draw (1.8,3) to[R, l=$5\,\Omega$, -*] (1.8,0);
+\draw (3.4,3) to[C, l=$-j10\,\Omega$, -*] (3.4,0);
+\draw (8.2,3) to[L, l_=$j5\,\Omega$, -*] (8.2,0);
+\draw (9.8,3) to[R, l=$10\,\Omega$, -*] (9.8,0);
+\draw (5.8,0) node[circ]{} -- (5.8,-0.3) node[ground]{};
+\end{tikzpicture}

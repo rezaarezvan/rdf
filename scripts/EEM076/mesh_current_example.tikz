@@ -1,0 +1,8 @@
+\begin{tikzpicture}[american, american voltages, open poles opacity=0, line width=0.8pt]
+\draw (0, 0) to[V, l=$5\,\mathrm{V}$, invert] (0, 3) to[R, l=$4\,\Omega$] (3, 3) node[circ] {} to[R, l=$5\,\Omega$] (6, 3) to[V, l=$1\,\mathrm{V}$] (6, 0) -- (0, 0);
+\draw (3, 3) to[R, l=$2\,\Omega$] (3, 1.5) to[V, l=$2\,\mathrm{V}$, invert] (3, 0) node[circ] {};
+\draw[c1, line width=1pt, -{Stealth}] (1.5, 1.5) ++(150:0.55) arc (150:-100:0.55);
+\node[c1] at (1.5, 1.5) {$i_1$};
+\draw[c1, line width=1pt, -{Stealth}] (4.5, 1.5) ++(150:0.55) arc (150:-100:0.55);
+\node[c1] at (4.5, 1.5) {$i_2$};
+\end{tikzpicture}

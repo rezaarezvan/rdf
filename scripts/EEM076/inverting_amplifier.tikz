@@ -1,0 +1,19 @@
+\begin{tikzpicture}[american, every node/.style={}, line width=0.7pt, >={Stealth[length=2.2mm]}, oafill/.style={fill=c3, fill opacity=0.18, draw opacity=0, text opacity=0}]
+\node[op amp, oafill] at (0,0) {};
+\node[op amp] (A) at (0,0) {};
+\draw (A.-) -- ++(-0.6,0) node[circ] (n) {} to[R, l_=$R_1$] ++(-2.6,0) node[ocirc] (t) {} -- ++(-1.2,0) coordinate (s);
+\draw (s) to[V, l_=$v_{\mathrm{in}}$] ++(0,-2.2) -- ++(1.2,0) node[ocirc]{} -- ++(0,-0.4) node[ground]{};
+\draw (A.out) -- ++(0.6,0) node[circ] (o) {} -- ++(1.2,0) node[ocirc] (vo) {} -- ++(1.4,0) to[R, l=$R_L$] ++(0,-2.4) node[ground]{};
+\draw (n) -- ++(0,1.4) coordinate (f) to[R, l=$R_2$] (f -| o) -- (o);
+\draw (A.+) -- ++(-0.3,0) coordinate (p) -- ++(0,-0.7) -- ++(-0.9,0) coordinate (g) -- ++(0,-0.9) node[ground]{};
+\node at ([yshift=-0.6cm]vo.center) {$+$}; \node at ([yshift=-1.2cm]vo.center) {$v_o$}; \node at ([yshift=-1.8cm]vo.center) {$-$};
+\draw[->] ([xshift=-2.4cm, yshift=0.9cm]n.center) -- ++(0.9,0);
+\node[above left] at ([xshift=-1.6cm, yshift=0.9cm]n.center) {$i_1 = \dfrac{v_{\mathrm{in}}}{R_1}$};
+\draw[->] ([xshift=-0.25cm, yshift=0.9cm]n.center) -- ++(0,0.9) -- ++(0.7,0) node[pos=0.5, above] {$i_2$};
+\draw[c8, ->] ([xshift=0.1cm, yshift=0.25cm]n.center) -- ([yshift=0.25cm]A.-) node[pos=0.4, above, c8] {$0$};
+\node[c8] at ([xshift=-0.35cm, yshift=-0.35cm]n.center) {$+$};
+\node[c8, left] at ([xshift=-0.1cm, yshift=-0.85cm]n.center) {$0\,\mathrm{V}$};
+\node[c8] at ([xshift=-0.35cm, yshift=-1.35cm]n.center) {$-$};
+\node[c8, align=center, right] (sp) at ([xshift=0.1cm, yshift=-1.4cm]p.center) {Summing-point\\constraint};
+\draw[c8, ->] (sp.north west) to[bend left=35] ([xshift=0.15cm, yshift=-0.1cm]n.center);
+\end{tikzpicture}

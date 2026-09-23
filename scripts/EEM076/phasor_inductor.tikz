@@ -1,0 +1,7 @@
+\begin{tikzpicture}[>={Stealth[length=2.6mm]}, line width=0.8pt]
+\draw (-0.6, 0) -- (5, 0);
+\draw (0, -2.8) -- (0, 2.8);
+\draw[->, c8, line width=1.1pt] (0, 0) -- (30:4.6) node[right] {$\mathbf{V}_L = V_M \angle \theta$};
+\draw[->, c1, line width=1.1pt] (0, 0) -- (-60:2.8) node[right] {$\mathbf{I}_L = I_M \angle (\theta - 90^\circ)$};
+\draw (30:0.35) -- ++(-60:0.35) -- ++(210:0.35);
+\end{tikzpicture}

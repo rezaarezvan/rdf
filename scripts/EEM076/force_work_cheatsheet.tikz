@@ -1,0 +1,12 @@
+\begin{tikzpicture}[line width=0.8pt,
+  q/.style={circle, draw, line width=1pt, minimum size=26mm, align=center},
+  arr/.style={c8, line width=1.2pt, -{Stealth[length=2.5mm]}}]
+\node[q] (f) at (0, 4.6) {Force\\$\vec{\mathbf{F}}$};
+\node[q] (w) at (7, 4.6) {Work\\$W$};
+\node[q] (e) at (0, 0) {E.\ Field\\$\vec{\mathbf{E}}$};
+\node[q] (v) at (7, 0) {Voltage\\$\Delta V$};
+\draw[arr] (f) -- node[above, black] {Integrate} node[below, black] {$\displaystyle -\int \vec{\mathbf{F}} \cdot d\vec{r}$} (w);
+\draw[arr] (e) -- node[above, black] {$\displaystyle -\int \vec{\mathbf{E}} \cdot d\vec{r}$} node[below, black] {Integrate} (v);
+\draw[arr] (f) -- node[left, black] {Divide by $Q$} node[right, black] {$\dfrac{\vec{\mathbf{F}}}{Q}$} (e);
+\draw[arr] (w) -- node[left, black] {$\dfrac{W}{Q}$} node[right, black] {Divide by $Q$} (v);
+\end{tikzpicture}

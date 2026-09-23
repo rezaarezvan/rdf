@@ -1,0 +1,6 @@
+\begin{tikzpicture}[american, every node/.style={}, line width=0.7pt]
+\draw (0,3) -- (1.6,3) to[C, l=$200\,\mathrm{mF}$, *-] (3.4,3) to[L, l=$2\,\mathrm{H}$] (5.4,3) -- (8.4,3)
+  to[C, l_=$500\,\mathrm{mF}$] (8.4,0) -- (0,0);
+\draw (1.6,3) to[R, l=$10\,\Omega$, -*] (1.6,0);
+\draw (6,3) to[R, l_=$6\,\Omega$, *-*] (6,0);
+\end{tikzpicture}

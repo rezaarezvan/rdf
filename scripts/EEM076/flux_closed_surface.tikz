@@ -1,0 +1,12 @@
+\begin{tikzpicture}[line width=0.8pt]
+\fill[c3, fill opacity=0.3] (0, 0) circle (2.2);
+\draw[c3] (0, 0) circle (2.2);
+\foreach \a in {70, 200, 320} {
+  \draw[c7, line width=1pt, -{Stealth[length=2.5mm]}] (0, 0) -- (\a:1.9);
+  \begin{scope}[shift={(\a:2)}, rotate=\a]
+    \fill[c3, fill opacity=0.8] (-0.08, -0.3) rectangle (0.08, 0.3);
+    \draw[c3] (-0.08, -0.3) rectangle (0.08, 0.3);
+  \end{scope}
+}
+\fill[c7] (0, 0) circle (0.15);
+\end{tikzpicture}

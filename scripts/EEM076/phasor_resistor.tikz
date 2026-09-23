@@ -1,0 +1,7 @@
+\begin{tikzpicture}[>={Stealth[length=2.6mm]}, line width=0.8pt]
+\draw (-0.6, 0) -- (5, 0);
+\draw (0, -0.6) -- (0, 2.8);
+\draw[->, c8, line width=1.1pt] (0, 0) -- (30:4.6) node[right] {$\mathbf{V}_R$};
+\draw[->, c1, line width=1.1pt] (0, 0) -- (30:2.4) node[below right] {$\mathbf{I}_R$};
+\draw (1.2, 0) arc (0:30:1.2) node[pos=0.5, right] {$\theta$};
+\end{tikzpicture}

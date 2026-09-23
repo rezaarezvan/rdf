@@ -1,0 +1,46 @@
+\begin{tikzpicture}[american, american voltages, open poles opacity=0, line width=0.8pt]
+\ctikzset{label/align=straight}
+\tikzset{src/.style={circle, draw, minimum size=7mm, inner sep=0pt}, lab/.style={c1}}
+\begin{scope}
+\draw (0, 0) to[I, l=$3.1\,\mathrm{A}$, name=s1] (0, 2) -- (5, 2);
+\draw (5, 0) to[I, l_=$-1.4\,\mathrm{A}$, invert] (5, 2);
+\draw (0, 0) -- (5, 0);
+\draw (1.6, 2) node[circ] {} to[R, l_=$2\,\Omega$] (1.6, 0) node[circ] {};
+\draw (3.4, 2) node[circ] {} to[R, l=$1\,\Omega$] (3.4, 0) node[circ] {};
+\draw (1.6, 2) to[R, l=$5\,\Omega$] (3.4, 2);
+\node at (2.5, -1.3) {($a$)};
+\end{scope}
+\foreach \x/\y/\p in {11/0/b, 0/-5/c, 11/-5/d} {
+\begin{scope}[shift={(\x, \y)}]
+\coordinate (n1) at (0, 2.6); \coordinate (n2) at (4, 2.6); \coordinate (n3) at (2, 0);
+\draw (n1) to[R, l=$5\,\Omega$] (n2);
+\draw (n1) to[R, l=$2\,\Omega$] (n3);
+\draw (n2) to[R, l_=$1\,\Omega$] (n3);
+\draw (n3) .. controls (-0.6, 0) and (-1.2, 1.6) .. (n1);
+\draw (n3) .. controls (4.6, 0) and (5.2, 1.6) .. (n2);
+\node[src, fill=white, fill opacity=0, text opacity=1] at (-0.62, 1.2) {\tikz \draw[-{Stealth}] (0.12, -0.18) -- (-0.08, 0.2);};
+\node[src, fill opacity=0, text opacity=1] at (4.62, 1.2) {\tikz \draw[-{Stealth}] (0.08, 0.2) -- (-0.12, -0.18);};
+\node[left=12pt] at (-0.62, 1.2) {$3.1\,\mathrm{A}$};
+\node[right=12pt] at (4.62, 1.2) {$-1.4\,\mathrm{A}$};
+\foreach \n in {n1, n2, n3} \node[circ] at (\n) {};
+\node at (2, -1.3) {($\p$)};
+\end{scope}}
+\begin{scope}[shift={(11, 0)}]
+\node[lab, above] at (0, 2.6) {1}; \node[lab, above] at (4, 2.6) {2}; \node[lab, below right] at (2, 0) {3};
+\end{scope}
+\begin{scope}[shift={(0, -5)}]
+\node[lab, above] at (0, 2.6) {1}; \node[lab, above] at (4, 2.6) {2};
+\node[lab] at (0.25, 2.25) {$+$}; \node[lab] at (3.75, 2.25) {$+$};
+\node[lab] at (1.7, 0.25) {$-$}; \node[lab] at (2.3, 0.25) {$-$};
+\node[lab] at (0.55, 1.0) {$v_1$}; \node[lab] at (3.45, 1.0) {$v_2$};
+\node[below=6pt] at (2, 0) {Reference node};
+\end{scope}
+\begin{scope}[shift={(11, -5)}]
+\node[above] at (0, 2.6) {$v_1$}; \node[above] at (4, 2.6) {$v_2$};
+\draw[c8, line width=1.6pt, -{Stealth}] (0.3, 3.0) -- (1.2, 3.0);
+\draw[c1, line width=1.6pt, -{Stealth}] (3.7, 3.0) -- (2.8, 3.0);
+\draw[c8, line width=1.6pt, -{Stealth}] (0.35, 2.25) -- (0.8, 1.65);
+\draw[c1, line width=1.6pt, -{Stealth}] (3.65, 2.25) -- (3.2, 1.65);
+\node[below=6pt] at (2, 0) {Ref.};
+\end{scope}
+\end{tikzpicture}

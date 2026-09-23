@@ -1,0 +1,11 @@
+\begin{tikzpicture}[>={Stealth[length=2.4mm]}, line width=0.8pt]
+\fill[c2, fill opacity=0.15] (0, 0) rectangle (3, 4);
+\coordinate (p1) at (0, 4); \coordinate (p2) at (0, 0); \coordinate (p3) at (3, 0); \coordinate (p4) at (3, 4);
+\draw[c8, line width=1.3pt] (p1) -- (p2) -- (p3) -- (p4) -- cycle;
+\foreach \a/\b in {p1/p2, p2/p3, p3/p4, p4/p1} \draw[c8, line width=1.3pt, ->] (\a) -- ($(\a)!0.58!(\b)$);
+\draw[|<->|] (0, 4.5) -- (3, 4.5) node[midway, above] {$\Delta x$};
+\draw[|<->|] (3.9, 0) -- (3.9, 4) node[midway, right] {$\Delta y$};
+\draw[->, c1, line width=2pt] (-0.8, 0.6) -- (-0.8, 3) node[above] {$E_y(x)$};
+\draw[->, c1, line width=2pt] (5.2, 0.4) -- (5.2, 2.8) node[above] {$E_y(x + \Delta x)$};
+\draw[->, line width=1pt] (1.6, 2.1) -- (0.6, 1.5) node[pos=0.4, above] {$\hat{\mathbf{n}}$};
+\end{tikzpicture}

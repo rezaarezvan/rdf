@@ -1,0 +1,13 @@
+\begin{tikzpicture}[>={Stealth[length=2.6mm]}, line width=0.8pt]
+\coordinate (a) at (0, 0); \coordinate (b) at (1.2, 4.2); \coordinate (c) at (4.2, 1.2); \coordinate (d) at (3.0, -3.0);
+\foreach \y in {2.6, 1.6, 0.6, -0.4} \draw[c8, line width=1.1pt] (-1.4, \y + 0.5) -- (0.35 + 0.2*\y, \y + 0.1);
+\fill[c6, fill opacity=0.25] (a) -- (b) -- (c) -- (d) -- cycle;
+\draw (a) -- (b) -- (c) -- (d) -- cycle;
+\foreach \t in {0.2, 0.4, 0.6, 0.8} {\draw[line width=0.3pt, black!50] ($(a)!\t!(b)$) -- ($(d)!\t!(c)$); \draw[line width=0.3pt, black!50] ($(a)!\t!(d)$) -- ($(b)!\t!(c)$);}
+\foreach \p in {{(1.3, 2.8)}, {(2.1, 2.2)}, {(1.2, 1.2)}, {(2.2, 0.6)}, {(1.6, -0.3)}, {(2.5, -1.2)}} \draw[->, c8, line width=1.1pt] \p -- ++(3.4, -1.0);
+\coordinate (o) at (2.1, 0.6);
+\draw[->, line width=1.3pt] (o) -- ++(2.6, 1.3) node[right] {$\vec{\mathbf{A}}$};
+\draw (o) ++(0.9, 0.45) arc (26.6:-16.4:1.0) node[pos=0.5, right] {$\theta$};
+\node at (0.9, 0.4) {$S$};
+\node[right, c8] at (5.6, -0.7) {$\vec{\mathbf{B}}$};
+\end{tikzpicture}

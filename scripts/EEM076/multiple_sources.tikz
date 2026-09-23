@@ -1,0 +1,10 @@
+\begin{tikzpicture}[american, every node/.style={}, line width=0.7pt, box/.style={draw, minimum width=21mm, minimum height=8mm, fill=none}, ann/.style={c1, -{Stealth[length=2mm]}, line width=0.8pt}]
+\draw (0,0) to[sV, l=$\mathbf{V}_s$, invert] (0,3) to[R, l_=$1\,\Omega$] (3,3) to[I, l=$\mathbf{I}_s$, *-*] (5.6,3) -- (8,3) to[C, l_=$1\,\mathrm{F}$] (8,0) -- (0,0);
+\draw (3,3) to[L, l_=$2\,\mathrm{H}$, -*] (3,0);
+\draw (5.6,3) to[R, l_=$2\,\Omega$, -*] (5.6,0);
+\draw[ann] (0.3,3.4) -- (1,3.4) node[midway, above, c1] {$\mathbf{I}_{R_1}$};
+\draw[ann] (3.35,0.9) -- (3.35,0.2) node[midway, right, c1] {$\mathbf{I}_L$};
+\draw[ann] (5.95,2.8) -- (5.95,2.1) node[midway, right, c1] {$\mathbf{I}_{R_2}$};
+\draw[ann] (7.65,2.8) -- (7.65,2.1) node[midway, left, c1] {$\mathbf{I}_C$};
+\node[font=\small] at (0.55,1.95) {$+$}; \node[font=\small] at (0.55,1.05) {$-$};
+\end{tikzpicture}

@@ -1,0 +1,19 @@
+\begin{tikzpicture}[line width=0.8pt]
+\foreach \y in {0, 1, 2, 3, 4} \draw[c5, line width=1pt, -{Stealth[length=2.5mm]}] (0, \y) -- (8, \y);
+\node at (8.4, 2) {$\mathbf{E}$};
+\coordinate (n) at (2, 1.4);
+\coordinate (p) at (6, 2.6);
+\draw (n) -- (p);
+\fill[c8] (n) circle (0.35);
+\fill[c1] (p) circle (0.35);
+\node[white] at (n) {$-$};
+\node[white] at (p) {$+$};
+\draw[line width=2pt, -{Stealth[length=3mm]}] (1.3, 1.4) -- (0.2, 1.4);
+\node at (1.1, 1.75) {$-q$};
+\draw[line width=2pt, -{Stealth[length=3mm]}] (6.7, 2.6) -- (7.8, 2.6);
+\node at (6.9, 2.95) {$q$};
+\draw[{Stealth[length=2mm]}-{Stealth[length=2mm]}] ($(n)!0.8cm!90:(p)$) -- node[below=1pt, sloped] {$2a$} ($(p)!0.8cm!-90:(n)$);
+\draw ($(n)!0.45cm!90:(p)$) -- ($(n)!1cm!90:(p)$);
+\draw ($(p)!0.45cm!-90:(n)$) -- ($(p)!1cm!-90:(n)$);
+\draw (4, 2) ++(0:1.2) arc (0:16.7:1.2) node[midway, right] {$\theta$};
+\end{tikzpicture}

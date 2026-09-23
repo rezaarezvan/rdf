@@ -1,0 +1,15 @@
+\begin{tikzpicture}[american, every node/.style={}, line width=0.7pt, >={Stealth[length=2.2mm]}, oafill/.style={fill=c3, fill opacity=0.18, draw opacity=0, text opacity=0}]
+\node[op amp, noinv input up, oafill] at (0,0) {};
+\node[op amp, noinv input up] (A) at (0,0) {};
+\draw (A.+) -- ++(-2.6,0) node[ocirc]{} -- ++(-1.6,0) coordinate (s1);
+\draw (s1) to[V, l_=$v_1$] ++(0,-2.4) -- ++(1.6,0) node[ocirc]{} -- ++(0,-0.4) node[ground]{};
+\draw (A.-) -- ++(-1.4,0) node[ocirc]{} -- ++(-0.9,0) coordinate (s2);
+\draw (s2) to[V, l_=$v_2$] ++(0,-1.5) -- ++(0.9,0) node[ocirc]{} -- ++(0,-0.4) node[ground]{};
+\draw (A.out) -- ++(1,0) node[ocirc] (o) {};
+\node at ([yshift=-0.5cm]o.center) {$+$}; \node[right] at ([xshift=-0.9cm, yshift=-1.3cm]o.center) {$v_o = A_{\mathrm{OL}}(v_1 - v_2)$}; \node at ([yshift=-2.1cm]o.center) {$-$};
+\draw ([yshift=-2.4cm]o.center) node[ocirc]{} -- ++(0,-0.45) node[ground]{};
+\node[align=center] (ni) at ([xshift=-1.7cm, yshift=1.1cm]A.+) {Noninverting\\input};
+\draw[->] (ni.east) to[bend left=30] ([xshift=-0.1cm, yshift=0.1cm]A.+);
+\node[align=center] (in) at ([xshift=0.5cm, yshift=-1cm]A.-) {Inverting\\input};
+\draw[->] (in.north west) to[bend left=30] ([xshift=-0.1cm, yshift=-0.1cm]A.-);
+\end{tikzpicture}

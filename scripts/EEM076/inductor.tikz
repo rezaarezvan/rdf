@@ -1,0 +1,7 @@
+\begin{tikzpicture}[line width=0.8pt]
+\draw (0, 0) node[ocirc] {} to[L, l=$L$] (3.4, 0) node[ocirc] {};
+\draw[c8, -{Stealth[length=2mm]}] (0.3, 0.4) -- node[above] {$i_L$} (1.1, 0.4);
+\node[c8] at (1.1, -0.5) {$+$};
+\node[c8] at (1.7, -0.5) {$v_L$};
+\node[c8] at (2.3, -0.5) {$-$};
+\end{tikzpicture}

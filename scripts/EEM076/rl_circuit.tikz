@@ -1,0 +1,9 @@
+\begin{tikzpicture}[line width=0.8pt, ann/.style={c8}]
+\draw (0, 0) to[R, l=$R$] (0, 3) -- (3, 3) to[L, l_=$L$] (3, 0) -- (0, 0);
+\draw[c8, -{Stealth[length=2mm]}] (1.1, 3.4) -- node[above] {$i(t)$} (1.9, 3.4);
+\foreach \x/\v in {-1.3/v_R, 4.2/v_L} {
+  \node[ann] at (\x, 2.3) {$+$};
+  \node[ann] at (\x, 1.5) {$\v$};
+  \node[ann] at (\x, 0.7) {$-$};
+}
+\end{tikzpicture}
