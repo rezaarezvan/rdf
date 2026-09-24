@@ -26,7 +26,7 @@ def plot_binary_test_ideal(ax, color_map):
     ax.plot(x, pos, color=color_map["c1"], linewidth=1.5)
 
     ax.axvline(T, color=color_map["black"], linewidth=1.5)
-    ax.text(T, 0.55, r"Threshold, $T$", ha="center", va="bottom", fontsize=11)
+    ax.text(T + 0.15, 0.55, r"Threshold, $T$", ha="left", va="bottom", fontsize=11)
     ax.text(3.0, 0.22, r"$-$", ha="center", fontsize=14)
     ax.text(7.5, 0.12, r"$+$", ha="center", fontsize=14)
 
@@ -60,7 +60,7 @@ def plot_binary_test_overlap(ax, color_map):
     ax.fill_between(x[fp], neg[fp], color=color_map["c4"], alpha=0.9)
 
     ax.axvline(T, color=color_map["black"], linewidth=1.5)
-    ax.text(T, 0.4, r"Threshold, $T$", ha="center", va="bottom", fontsize=11)
+    ax.text(T + 0.15, 0.4, r"Threshold, $T$", ha="left", va="bottom", fontsize=11)
     ax.text(3.5, 0.18, r"$-$", ha="center", fontsize=14)
     ax.text(7.2, 0.1, r"$+$", ha="center", fontsize=14)
     ax.text(4.9, 0.025, "FN", ha="center", fontsize=9)

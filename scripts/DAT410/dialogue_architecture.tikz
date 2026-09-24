@@ -3,7 +3,7 @@
 \begin{tikzpicture}[>=stealth, thick]
 
 % Styles
-\tikzstyle{block}=[draw=black, align=center, minimum height=12mm, minimum width=32mm, line width=0.5mm, font=\small]
+\tikzstyle{block}=[draw=black, align=center, minimum height=12mm, minimum width=32mm, line width=0.5mm]
 \tikzstyle{arrow}=[->, black, line width=0.5mm]
 
 % Blocks
