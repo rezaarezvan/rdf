@@ -1,43 +1,12 @@
-\usetikzlibrary{positioning}
-
-\begin{tikzpicture}[>=stealth, node distance=15mm, thick]
-
-% Styles
-\tikzstyle{v}=[circle, draw=black, minimum size=15mm, font=\LARGE\bfseries, line width=0.8mm]
-\tikzstyle{b}=[rectangle, draw=black, fill=black, minimum size=10mm, font=\LARGE\bfseries, line width=0.8mm]
-\tikzstyle{line}=[-, black, line width=0.8mm]
-
-% Nodes
-\node[b, label=left:{\LARGE$p(x)$}] (px) {};
-\node[v, right=20mm of px] (x) {$x$};
-\node[b, right=20mm of x, label=above:{\LARGE$p(y \mid x)$}] (pyx) {};
-\node[v, right=20mm of pyx] (y) {$y$};
-\node[b, right=20mm of y, label=right:{\LARGE$\delta(y - y_{\text{obs}})$}] (delta) {};
-
-% Black structural lines
-\draw[line] (px) -- (x);
-\draw[line] (x) -- (pyx);
-\draw[line] (pyx) -- (y);
-\draw[line] (y) -- (delta);
-
-% Short colored arrows above the lines
-\draw[->, red, line width=0.8mm]
-($(px.north)!0.2!(x.north)$) -- ($(px.north)!0.8!(x.north) + (0mm, -1.5mm)$)
-node[midway, above] {\LARGE$\mu_1$};
-
-\draw[<-, green, line width=0.8mm]
-($(0mm, -1.5mm) + (x.north)!0.2!(pyx.north)$) -- ($(x.north)!0.8!(pyx.north)$)
-node[midway, above] {\LARGE$\mu_3$};
-
-\draw[<-, blue, line width=0.8mm]
-($(pyx.north)!0.2!(y.north)$) -- ($(pyx.north)!0.8!(y.north) + (0mm, -1.5mm)$)
-node[midway, above] {\LARGE$\mu_2$};
-
-\draw[<-, blue, line width=0.8mm]
-($(0mm, -1.5mm) + (y.north)!0.2!(delta.north)$) -- ($(y.north)!0.8!(delta.north)$)
-node[midway, above] {\LARGE$\mu_2$};
-
-
-
-
+\usetikzlibrary{positioning, calc}
+\begin{tikzpicture}[>={Stealth[length=2.5mm]}, line width=0.8pt, v/.style={circle, draw, minimum size=10mm, inner sep=1pt}, obs/.style={v, fill=c8, fill opacity=0.35, text opacity=1}, f/.style={rectangle, fill, minimum size=3.5mm, inner sep=0pt}]
+\node[f, label=left:{$p(x)$}] (px) {};
+\node[v, right=12mm of px] (x) {$x$};
+\node[f, right=12mm of x, label=below:{$p(y \mid x)$}] (pyx) {};
+\node[v, right=12mm of pyx] (y) {$y$};
+\node[f, right=12mm of y, label=right:{$\delta(y - y_{\text{obs}})$}] (d) {};
+\draw (px) -- (x) -- (pyx) -- (y) -- (d);
+\foreach \a/\b/\c/\m/\dir in {px/x/c1/1/->, x/pyx/c2/3/<-, pyx/y/c8/2/<-, y/d/c8/2/<-} {
+    \draw[\dir, \c, line width=1.2pt] ($(\a)!0.25!(\b) + (0, 0.45)$) -- node[above] {$\mu_\m$} ($(\a)!0.75!(\b) + (0, 0.45)$);
+}
 \end{tikzpicture}

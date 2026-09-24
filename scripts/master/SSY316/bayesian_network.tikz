@@ -1,18 +1,9 @@
-\begin{tikzpicture}[>=stealth, node distance=18mm]
-
-\tikzstyle{var}=[circle, draw, minimum size=20mm, line width=0.8mm, font=\boldmath\LARGE]
-
-\node[var] (x1) {$x_1$};
-\node[var, right=22mm of x1] (x3) {$x_3$};
-\node[var, right=22mm of x3] (x2) {$x_2$};
-\node[var, below=16mm of x3] (x4) {$x_4$};
-\node[var, right=22mm of x4] (x5) {$x_5$};
-
-\draw[->, line width=0.8mm] (x1) -- (x3);
-\draw[->, line width=0.8mm] (x1) -- (x4);
-\draw[->, line width=0.8mm] (x3) -- (x4);
-\draw[->, line width=0.8mm] (x3) -- (x5);
-\draw[->, line width=0.8mm] (x2) -- (x5);
-\draw[->, line width=0.8mm] (x4) -- (x5);
-
+\usetikzlibrary{positioning}
+\begin{tikzpicture}[>={Stealth[length=2.5mm]}, line width=0.8pt, v/.style={circle, draw, minimum size=10mm, inner sep=1pt}, obs/.style={v, fill=c8, fill opacity=0.35, text opacity=1}, f/.style={rectangle, fill, minimum size=3.5mm, inner sep=0pt}]
+\node[v] (x1) {$x_1$};
+\node[v, right=12mm of x1] (x3) {$x_3$};
+\node[v, right=12mm of x3] (x2) {$x_2$};
+\node[v, below=10mm of x3] (x4) {$x_4$};
+\node[v, right=12mm of x4] (x5) {$x_5$};
+\foreach \a/\b in {x1/x3, x1/x4, x3/x4, x3/x5, x2/x5, x4/x5} \draw[->] (\a) -- (\b);
 \end{tikzpicture}

@@ -1,6 +1,8 @@
-\usetikzlibrary{positioning}
 \begin{tikzpicture}[>={Stealth[length=2.5mm]}, line width=0.8pt, v/.style={circle, draw, minimum size=10mm, inner sep=1pt}, obs/.style={v, fill=c8, fill opacity=0.35, text opacity=1}, f/.style={rectangle, fill, minimum size=3.5mm, inner sep=0pt}]
-\node[v] (x1) {$x_1$};
-\foreach \i [evaluate=\i as \j using int(\i - 1)] in {2, 3, 4} \node[v, right=10mm of x\j] (x\i) {$x_\i$};
-\foreach \a/\b in {1/2, 2/3, 3/4} \draw[->] (x\a) -- (x\b);
+\node[v] (a) at (0, 0) {$a$};
+\node[obs] (f) at (3, 0) {$f$};
+\node[v] (e) at (1.5, -1.5) {$e$};
+\node[v] (b) at (4.5, -1.5) {$b$};
+\node[v] (c) at (1.5, -3) {$c$};
+\foreach \a/\b in {a/e, f/e, f/b, e/c} \draw[->] (\a) -- (\b);
 \end{tikzpicture}

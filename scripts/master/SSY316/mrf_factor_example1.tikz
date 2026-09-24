@@ -1,44 +1,13 @@
-\usetikzlibrary{positioning,shapes.geometric,fit, backgrounds}
-
-\begin{tikzpicture}[>=stealth, node distance=25mm, thick]
-
-% Styles
-\tikzstyle{v}=[circle, draw=black, minimum size=20mm, line width=0.8mm, font=\LARGE\bfseries]
-\tikzstyle{redregion}=[draw=red, line width=1.2mm, rounded corners=12mm, inner sep=8mm]
-\tikzstyle{blueregion}=[draw=blue, line width=1.2mm, rounded corners=12mm, inner sep=8mm]
-\tikzstyle{greenregion}=[draw=green!60!black, line width=1.2mm, rounded corners=12mm, inner sep=4mm]
-
-% Build network from center
-\node[v] (x3) {$x_3$};
-\node[v, above left=20mm and 15mm of x3] (x1) {$x_1$};
-\node[v, below left=20mm and 15mm of x3] (x2) {$x_2$};
-\node[v, above right=20mm and 15mm of x3] (x4) {$x_4$};
-\node[v, below right=20mm and 15mm of x3] (x5) {$x_5$};
-\node[v, right=30mm of x5] (x6) {$x_6$};
-
-% Edges (undirected)
-\draw[black, line width=0.8mm] (x1) -- (x2);
-\draw[black, line width=0.8mm] (x1) -- (x3);
-\draw[black, line width=0.8mm] (x2) -- (x3);
-\draw[black, line width=0.8mm] (x3) -- (x4);
-\draw[black, line width=0.8mm] (x3) -- (x5);
-\draw[black, line width=0.8mm] (x4) -- (x5);
-\draw[black, line width=0.8mm] (x5) -- (x6);
-
-\draw[redregion]
-    ($(x1) + (-13mm, 30mm)$) --
-    ($(x2) + (-13mm, -30mm)$) --
-    ($(x3) + (20mm, 0mm)$) --
-    cycle;
-
-\draw[blueregion]
-    ($(x4) + (-13mm, 30mm)$) --
-    ($(x5) + (-13mm, -30mm)$) --
-    ($(x3) + (20mm, 0mm)$) --
-    cycle;
-
-\node[greenregion, fit=(x5)(x6)] {};
-
-
-
+\usetikzlibrary{fit, calc}
+\begin{tikzpicture}[>={Stealth[length=2.5mm]}, line width=0.8pt, v/.style={circle, draw, minimum size=10mm, inner sep=1pt}, obs/.style={v, fill=c8, fill opacity=0.35, text opacity=1}, f/.style={rectangle, fill, minimum size=3.5mm, inner sep=0pt}]
+\node[v] (x3) at (0, 0) {$x_3$};
+\node[v] (x1) at (-1.6, 1.6) {$x_1$};
+\node[v] (x2) at (-1.6, -1.6) {$x_2$};
+\node[v] (x4) at (1.6, 1.6) {$x_4$};
+\node[v] (x5) at (1.6, -1.6) {$x_5$};
+\node[v] (x6) at (3.8, -1.6) {$x_6$};
+\foreach \a/\b in {x1/x2, x1/x3, x2/x3, x3/x4, x3/x5, x4/x5, x5/x6} \draw (\a) -- (\b);
+\draw[c1, line width=1.2pt, rounded corners=5mm] ($(x1) + (-0.8, 1.1)$) -- ($(x2) + (-0.8, -1.1)$) -- ($(x3) + (1.1, 0)$) -- cycle;
+\draw[c8, line width=1.2pt, rounded corners=5mm] ($(x4) + (0.8, 1.1)$) -- ($(x5) + (0.8, -1.1)$) -- ($(x3) + (-1.1, 0)$) -- cycle;
+\node[draw=c2, line width=1.2pt, rounded corners=5mm, inner sep=1.5mm, fit=(x5)(x6)] {};
 \end{tikzpicture}

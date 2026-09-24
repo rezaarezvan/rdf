@@ -3,113 +3,38 @@ import numpy as np
 from rdf import figure
 
 
-@figure("ml_learning_example")
-def plot_ml_learning_example(ax):
-    """
-    Create a plot demonstrating Maximum Likelihood (ML) learning example.
-
-    p(x, y) = p(x) p(y | x)
-    x ~ Uniform(0, 1)
-    y | x ~ N(sin (2pi x), 0.1)
-
-    Optimal predictor under quadratic loss: hat(y)^* := sin(2pi x)
-    ML predictor: hat(y)_ML := mu(x, w_ML)
-
-    D = {(x_i, y_i)}_{i=1}^N, N=10
-    Plot baseline, sin(2pi x) dotted black
-    and M = 1 (green), M = 3 (red), M = 9 (blue) ML predictors
-
-    Args:
-        ax: Matplotlib axis object to plot on
-        color_map: Dictionary of colors for consistent styling
-    """
-    # Generate data
-    N = 10
-    x_data = np.linspace(0, 1, N)
-    y_data = np.sin(2 * np.pi * x_data) + np.random.normal(0, 0.1, N)
-
-    # True function
-    x_true = np.linspace(0, 1, 400)
-    y_true = np.sin(2 * np.pi * x_true)
-    ax.plot(x_true, y_true, "k--", label="True function", linewidth=2)
-
-    # ML predictors for different model complexities
-    model_complexities = [1, 3, 9]
-    colors = ["green", "red", "blue"]
-    for M, color in zip(model_complexities, colors):
-        coeffs = np.polyfit(x_data, y_data, M)
-        y_ml = np.polyval(coeffs, x_true)
-        ax.plot(x_true, y_ml, color=color, label=f"ML Predictor (M={M})", linewidth=2)
-
-    ax.scatter(x_data, y_data, color="black", zorder=5, label="Data points")
-    ax.set_xlabel("x", fontsize=12)
-    ax.set_ylabel("y", fontsize=12)
-    ax.legend(fontsize=10)
-
-    # Plot from x = [0, 1], y = [-3, 3]
-    ax.set_xlim(0, 1)
-    ax.set_ylim(-3, 3)
+@figure("ml_learning_example", height=3.4)
+def plot_ml_learning_example(ax, color_map):
+    rng = np.random.default_rng(0)
+    x = np.linspace(0, 1, 10)
+    y = np.sin(2 * np.pi * x) + rng.normal(0, 0.1, x.size)
+    t = np.linspace(0, 1, 400)
+    ax.plot(t, np.sin(2 * np.pi * t), color=color_map["black"], ls="--", label=r"$\sin(2\pi x)$")
+    for m, c in ((1, "c2"), (3, "c1"), (9, "c8")):
+        ax.plot(t, np.polyval(np.polyfit(x, y, m), t), color=color_map[c], label=f"$M = {m}$")
+    ax.scatter(x, y, color=color_map["black"], s=16, zorder=5)
+    ax.set(xlim=(0, 1), ylim=(-2, 2), xlabel="$x$", ylabel="$y$")
+    ax.legend(loc="lower left", ncol=2)
 
 
-@figure("map_learning_example")
-def plot_map_learning_example(fig):
-    """
-    Create a plot demonstrating Maximum A Posteriori (MAP) learning example.
-
-    Problem: Fitting straight line to noisy measurements generated from,
-
-    f(x, a) = a_0 + a_1 x, a_0 = -0.3, a_1 = 0.5
-
-    by adding Gaussian noise N(0, 0.04).
-
-    Model:
-        y(x, w) = w_0 + w_1 x + epsilon, epsilon ~N(0, 0.04)
-
-    with prior:
-        p(w) = N(w | (0 0)^T, alpha^{-1} I_2), alpha = 2
-
-    Perform 200 measurements, plot prior, likelihood, and posterior over w, (subplot 1x3).
-
-    Args:
-        ax: Matplotlib axis object to plot on
-        color_map: Dictionary of colors for consistent styling
-    """
-    gs = fig.add_gridspec(1, 3, width_ratios=[1, 1, 1], wspace=0.4)
-    axes = [fig.add_subplot(gs[0, i]) for i in range(3)]
-
-    # Generate data
-    np.random.seed(0)
-    N = 200
-    x_data = np.random.uniform(0, 1, N)
-    a_0, a_1 = -0.3, 0.5
-    y_data = a_0 + a_1 * x_data + np.random.normal(0, 0.04**0.5, N)
-    # Prior parameters
-    alpha = 2
-    # Prior
-    w0 = np.linspace(-1, 1, 100)
-    w1 = np.linspace(-1, 1, 100)
-    W0, W1 = np.meshgrid(w0, w1)
-    prior = np.exp(-0.5 * alpha * (W0**2 + W1**2))
-    axes[0].contourf(W0, W1, prior, levels=50, cmap="Blues")
-    axes[0].set_title("Prior Distribution")
-    axes[0].set_xlabel(r"$w_0$")
-    axes[0].set_ylabel(r"$w_1$")
-    # Likelihood
-    likelihood = np.zeros_like(prior)
-    for i in range(len(w0)):
-        for j in range(len(w1)):
-            w = np.array([w0[i], w1[j]])
-            y_pred = w[0] + w[1] * x_data
-            likelihood[j, i] = np.exp(-0.5 * np.sum((y_data - y_pred) ** 2) / 0.04)
-    axes[1].contourf(W0, W1, likelihood, levels=50, cmap="Oranges")
-    axes[1].set_title("Likelihood Function")
-    axes[1].set_xlabel(r"$w_0$")
-    axes[1].set_ylabel(r"$w_1$")
-    # Posterior
-    posterior = prior * likelihood
-    axes[2].contourf(W0, W1, posterior, levels=50, cmap="Greens")
-    axes[2].set_title("Posterior Distribution")
-    axes[2].set_xlabel(r"$w_0$")
-    axes[2].set_ylabel(r"$w_1$")
-
-
+@figure("map_learning_example", height=2.8)
+def plot_map_learning_example(fig, color_map):
+    rng = np.random.default_rng(0)
+    x = rng.uniform(0, 1, 200)
+    y = -0.3 + 0.5 * x + rng.normal(0, 0.2, x.size)
+    log_prior = lambda W0, W1: -(W0**2 + W1**2)
+    log_lik = lambda W0, W1: -0.5 * ((y[:, None, None] - W0 - W1 * x[:, None, None]) ** 2).sum(0) / 0.04
+    panels = (
+        ("Prior", "c8", (-1, 1), (-1, 1), log_prior),
+        ("Likelihood", "c1", (-0.45, -0.15), (0.25, 0.75), log_lik),
+        ("Posterior", "c2", (-0.45, -0.15), (0.25, 0.75), lambda a, b: log_prior(a, b) + log_lik(a, b)),
+    )
+    for ax, (title, c, xl, yl, f) in zip(fig.subplots(1, 3), panels):
+        W0, W1 = np.meshgrid(np.linspace(*xl, 150), np.linspace(*yl, 150))
+        p = np.exp(f(W0, W1) - f(W0, W1).max())
+        levels = np.linspace(0.05, 1, 6)
+        ax.contourf(W0, W1, p, levels=levels, colors=[color_map[c]], alpha=0.2)
+        ax.contour(W0, W1, p, levels=levels, colors=[color_map[c]], linewidths=0.8)
+        ax.plot(-0.3, 0.5, "+", color=color_map["black"], ms=8)
+        ax.set(xlim=xl, ylim=yl, xlabel="$w_0$", ylabel="$w_1$")
+        ax.set_title(title, fontsize=11)

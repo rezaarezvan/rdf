@@ -1,83 +1,37 @@
 import numpy as np
-
 from scipy.stats import beta
 
 from rdf import figure
 
-
-@figure("beta_distribution_examples")
-def plot_beta_distribution(ax):
-    """
-    Create a plot of the Beta distribution for demonstration.
-
-    Three realizations of the Beta distribution with different parameters,
-
-    1. a = 1, b = 1
-    2. a = 0.1, b = 0.1
-    3. a = 2, b = 4
-
-    Args:
-        ax: Matplotlib axis object to plot on
-        color_map: Dictionary of colors for consistent styling
-    """
-    x = np.linspace(0, 1, 400)
-
-    params = [(1, 1), (0.1, 0.1), (2, 4)]
-    labels = [
-        r"$\mathrm{Beta}(1, 1)$",
-        r"$\mathrm{Beta}(0.1, 0.1)$",
-        r"$\mathrm{Beta}(2, 4)$",
-    ]
-
-    for (a, b), label in zip(params, labels):
-        y = beta.pdf(x, a, b)
-        ax.plot(x, y, label=label, linewidth=2)
-
-    ax.set_xlabel("x", fontsize=12)
-    ax.set_ylabel("Probability Density", fontsize=12)
-    ax.legend(fontsize=10)
+MU = np.linspace(0, 1, 400)
 
 
-@figure("prior_likelihood_posterior2")
-def prior_likelihood_posterior_plot(fig):
-    """
-    Create a subfigure (1x3 grid) showing the prior, likelihood, and posterior distributions for:
-
-        1. Prior: p(mu) = Beta(mu; a, b) with a=1, b=1
-        2. Likelihood: p(D|mu) = mu^h (1 - mu)^(N-h) with N=5, h=4
-        3. Posterior: p(mu|D) = Beta(mu; a', b') with a'=5, b'=2
-
-    Args:
-        ax: Matplotlib axis object to plot on
-        color_map: Dictionary of colors for consistent styling
-    """
-    gs = fig.add_gridspec(1, 3, width_ratios=[1, 1, 1], wspace=0.4)
-    axes = [fig.add_subplot(gs[0, i]) for i in range(3)]
-
-    x = np.linspace(0, 1, 400)
-
-    # Prior
-    a_prior, b_prior = 4, 2
-    y_prior = beta.pdf(x, a_prior, b_prior)
-    axes[0].plot(x, y_prior, color="blue", linewidth=2)
-    axes[0].set_title("Prior Distribution")
-    axes[0].set_xlabel(r"$\mu$")
-    axes[0].set_ylabel("Density")
-
-    # Likelihood
-    N, h = 5, 4
-    y_likelihood = x**h * (1 - x) ** (N - h)
-    axes[1].plot(x, y_likelihood, color="orange", linewidth=2)
-    axes[1].set_title("Likelihood Function")
-    axes[1].set_xlabel(r"$\mu$")
-    axes[1].set_ylabel("Likelihood")
-
-    # Posterior
-    a_post, b_post = a_prior + h, b_prior + (N - h)
-    y_post = beta.pdf(x, a_post, b_post)
-    axes[2].plot(x, y_post, color="green", linewidth=2)
-    axes[2].set_title("Posterior Distribution")
-    axes[2].set_xlabel(r"$\mu$")
-    axes[2].set_ylabel("Density")
+@figure("beta_distribution_examples", height=3.2)
+def plot_beta_distribution(ax, color_map):
+    for (a, b), c in zip(((1, 1), (0.1, 0.1), (2, 4)), ("c8", "c1", "c2")):
+        ax.plot(MU, beta.pdf(MU, a, b), color=color_map[c], label=rf"$\mathrm{{Beta}}({a}, {b})$")
+    ax.set(xlim=(0, 1), ylim=(0, 3), xlabel=r"$\mu$", ylabel="Density")
+    ax.legend(loc="upper center")
 
 
+def _prior_likelihood_posterior(fig, color_map, a, b, n=5, h=4):
+    axs = fig.subplots(1, 3)
+    curves = (
+        (beta.pdf(MU, a, b), rf"$p(\mu) = \mathrm{{Beta}}({a}, {b})$", "c8"),
+        (MU**h * (1 - MU) ** (n - h), rf"$p(\mathcal{{D}} \mid \mu) = \mu^{h}(1 - \mu)$", "c1"),
+        (beta.pdf(MU, a + h, b + n - h), rf"$p(\mu \mid \mathcal{{D}}) = \mathrm{{Beta}}({a + h}, {b + n - h})$", "c2"),
+    )
+    for ax, (y, label, c) in zip(axs, curves):
+        ax.plot(MU, y, color=color_map[c])
+        ax.set(xlim=(0, 1), ylim=(0, 1.2 * y.max()), xlabel=r"$\mu$", yticks=[])
+        ax.set_title(label, fontsize=10)
+
+
+@figure("prior_likelihood_posterior", height=2.6)
+def plot_prior_likelihood_posterior(fig, color_map):
+    _prior_likelihood_posterior(fig, color_map, 1, 1)
+
+
+@figure("prior_likelihood_posterior2", height=2.6)
+def plot_prior_likelihood_posterior2(fig, color_map):
+    _prior_likelihood_posterior(fig, color_map, 5, 2)

@@ -1,74 +1,27 @@
 import numpy as np
-
-from scipy.stats import multivariate_normal
+from scipy.stats import norm
 
 from rdf import figure
 
+Z = np.linspace(-5, 5, 800)
+P = 0.9 * norm.pdf(Z, -1.5, np.sqrt(0.4)) + 0.6 * norm.pdf(Z, 1.5, np.sqrt(0.7))
+F = 1 / (1 + np.exp(-0.8 * Z))
 
-@figure("monte_carlo_inference")
+
+def _base(ax, color_map):
+    ax.plot(Z, P, color=color_map["c8"], label="$p(z)$")
+    ax.plot(Z, F, color=color_map["c1"], label="$f(z)$")
+    ax.set(xlim=(-5, 5), ylim=(0, 1.05), xlabel="$z$")
+
+
+@figure("monte_carlo_inference", height=3.0)
 def plot_monte_carlo_inference(ax, color_map):
-    """
-    Create with:
-        p(z) bi modal Gaussian where the left one is higher
-        f(z) looks like a logistic sigmoid
-
-    Args:
-        ax: Matplotlib axis object to plot on
-        color_map: Dictionary of colors for consistent styling
-    """
-    x = np.linspace(-5, 5, 800)
-
-    # Bimodal density (make left peak taller)
-    p_z = 0.9 * multivariate_normal.pdf(
-        x, mean=-1.5, cov=0.4
-    ) + 0.6 * multivariate_normal.pdf(x, mean=1.5, cov=0.7)
-
-    # Smooth sigmoid curve
-    f_z = 1 / (1 + np.exp(-0.8 * x))
-
-    # Axis styling to mimic the reference figure
-    ax.set_xlabel("z", fontsize=14)
-    ax.set_ylim(-0.05, max(p_z) * 1.2)
-    ax.set_xlim(min(x), max(x))
-    ax.plot(x, p_z, label="p(z)", color=color_map["c8"], linewidth=2)
-    ax.plot(x, f_z, label="f(z)", color=color_map["c7"], linewidth=2)
-    ax.set_xlabel("z", fontsize=12)
-    ax.legend(fontsize=10)
+    _base(ax, color_map)
+    ax.legend(loc="upper left")
 
 
-@figure("monte_carlo_inference_importance_sampling")
+@figure("monte_carlo_inference_importance_sampling", height=3.0)
 def plot_monte_carlo_inference_importance_sampling(ax, color_map):
-    """
-    Create with:
-        p(z) bi modal Gaussian where the left one is higher
-        f(z) looks like a logistic sigmoid
-        q(z) Gaussian centered between the two modes of p(z)
-
-    Args:
-        ax: Matplotlib axis object to plot on
-        color_map: Dictionary of colors for consistent styling
-    """
-    x = np.linspace(-5, 5, 800)
-
-    # Bimodal density (make left peak taller)
-    p_z = 0.9 * multivariate_normal.pdf(
-        x, mean=-1.5, cov=0.4
-    ) + 0.6 * multivariate_normal.pdf(x, mean=1.5, cov=0.7)
-
-    # Smooth sigmoid curve
-    f_z = 1 / (1 + np.exp(-0.8 * x))
-
-    # Importance sampling proposal distribution q(z)
-    q_z = multivariate_normal.pdf(x, mean=0, cov=2.0)
-
-    # Axis styling to mimic the reference figure
-    ax.set_xlabel("z", fontsize=14)
-    ax.set_ylim(-0.05, max(p_z) * 1.2)
-    ax.set_xlim(min(x), max(x))
-    ax.plot(x, p_z, label="p(z)", color=color_map["c8"], linewidth=2)
-    ax.plot(x, f_z, label="f(z)", color=color_map["c7"], linewidth=2)
-    ax.plot(x, q_z, label="q(z)", color=color_map["c2"], linewidth=2)
-    ax.set_xlabel("z", fontsize=12)
-    ax.legend(fontsize=10)
-
-
+    _base(ax, color_map)
+    ax.plot(Z, norm.pdf(Z, 0, np.sqrt(2)), color=color_map["c2"], label="$q(z)$")
+    ax.legend(loc="upper left")

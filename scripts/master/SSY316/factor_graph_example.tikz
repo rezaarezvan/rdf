@@ -1,75 +1,20 @@
-\usetikzlibrary{positioning}
-
-\begin{tikzpicture}[>=stealth, node distance=15mm, thick]
-
-% Styles
-\tikzstyle{v}=[circle, draw=black, minimum size=15mm, font=\LARGE\bfseries, line width=0.8mm]
-\tikzstyle{b}=[rectangle, draw=black, fill=black, minimum size=10mm, font=\LARGE\bfseries, line width=0.8mm]
-\tikzstyle{line}=[-, black, line width=0.8mm]
-
-% Nodes
-\node[v] (x11) {$x_1$};
-\node[v, right=20mm of x11] (x21) {$x_2$};
-\node[v, right=20mm of x21] (x31) {$x_3$};
-\node[v, right=20mm of x31] (x41) {$x_4$};
-\node[v, right=20mm of x41]  (x51) {$x_5$};
-
-% Boxes
-\node[b, below=20mm of x11, label=below:{\LARGE$f_A$}] (fa1) {$f_A$};
-\node[b, below=20mm of x21, label=below:{\LARGE$f_B$}] (fb1) {$f_B$};
-\node[b, below=20mm of x31, label=below:{\LARGE$f_C$}] (fc1) {$f_C$};
-\node[b, below=20mm of x41, label=below:{\LARGE$f_D$}] (fd1) {$f_D$};
-\node[b, below=20mm of x51, label=below:{\LARGE$f_E$}] (fe1) {$f_E$};
-
-% Lines
-% x1 connections
-\draw[line] (x11) -- (fa1);
-\draw[line] (x11) -- (fc1);
-
-% x2 connections
-\draw[line] (x21) -- (fb1);
-\draw[line] (x21) -- (fc1);
-
-% x3 connections
-\draw[line] (x31) -- (fc1);
-\draw[line] (x31) -- (fd1);
-\draw[line] (x31) -- (fe1);
-
-% x4 connections
-\draw[line] (x41) -- (fd1);
-
-% x5 connections
-\draw[line] (x51) -- (fe1);
-
-%%% Factored version
-\node[v, right=50mm of x51] (x12) {$x_1$};
-\node[b, below left=20mm and 10mm of x12, label=below:{\LARGE$f_A$}] (fa2) {$f_A$};
-\node[b, below right=20mm and 10mm of x12, label=below:{\LARGE$f_C$}] (fc2) {$f_C$};
-
-\node[v, below left=20mm and 10mm of fc2] (x22) {$x_2$};
-\node[v, below right=20mm and 10mm of fc2] (x32) {$x_3$};
-
-\node[b, below=20mm of x22, label=below:{\LARGE$f_B$}] (fb2) {$f_B$};
-
-\node[b, below left=22mm and 10mm of x32, label=right:{\LARGE$f_D$}] (fd2) {$f_D$};
-\node[b, below right=22mm and 10mm of x32, label=right:{\LARGE$f_E$}] (fe2) {$f_E$};
-
-\node[v, below=20mm of fd2] (x42) {$x_4$};
-\node[v, below=20mm of fe2] (x52) {$x_5$};
-
-% Lines for factored version
-\draw[line] (x12) -- (fa2);
-\draw[line] (x12) -- (fc2);
-
-\draw[line] (x22) -- (fb2);
-\draw[line] (x22) -- (fc2);
-
-\draw[line] (x32) -- (fc2);
-\draw[line] (x32) -- (fd2);
-\draw[line] (x32) -- (fe2);
-
-\draw[line] (x42) -- (fd2);
-\draw[line] (x52) -- (fe2);
-
-
+\begin{tikzpicture}[>={Stealth[length=2.5mm]}, line width=0.8pt, v/.style={circle, draw, minimum size=10mm, inner sep=1pt}, obs/.style={v, fill=c8, fill opacity=0.35, text opacity=1}, f/.style={rectangle, fill, minimum size=3.5mm, inner sep=0pt}]
+\foreach \i/\l in {1/A, 2/B, 3/C, 4/D, 5/E} {
+    \node[v] (x\i) at (1.5 * \i, 0) {$x_\i$};
+    \node[f, label=below:{$f_\l$}] (f\l) at (1.5 * \i, -1.6) {};
+}
+\foreach \a/\b in {1/A, 1/C, 2/B, 2/C, 3/C, 3/D, 3/E, 4/D, 5/E} \draw (x\a) -- (f\b);
+\begin{scope}[xshift=10.5cm]
+    \node[v] (y1) at (0, 0) {$x_1$};
+    \node[f, label=left:{$f_A$}] (gA) at (-0.8, -1.2) {};
+    \node[f, label=right:{$f_C$}] (gC) at (0.8, -1.2) {};
+    \node[v] (y2) at (0, -2.4) {$x_2$};
+    \node[v] (y3) at (1.6, -2.4) {$x_3$};
+    \node[f, label=left:{$f_B$}] (gB) at (0, -3.6) {};
+    \node[f, label=right:{$f_D$}] (gD) at (0.9, -3.6) {};
+    \node[f, label=right:{$f_E$}] (gE) at (2.3, -3.6) {};
+    \node[v] (y4) at (0.9, -4.8) {$x_4$};
+    \node[v] (y5) at (2.3, -4.8) {$x_5$};
+    \foreach \a/\b in {y1/gA, y1/gC, y2/gC, y3/gC, y2/gB, y3/gD, y3/gE, y4/gD, y5/gE} \draw (\a) -- (\b);
+\end{scope}
 \end{tikzpicture}

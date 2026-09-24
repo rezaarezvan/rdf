@@ -1,48 +1,13 @@
-\usetikzlibrary{positioning,shapes.geometric,fit}
-
-\begin{tikzpicture}[>=stealth, node distance=25mm, thick]
-
-% Styles
-\tikzstyle{v}=[circle, draw=red, minimum size=20mm, line width=0.8mm, font=\LARGE]
-\tikzstyle{obs}=[circle, draw=red, fill=blue!50, minimum size=20mm, line width=0.8mm, font=\LARGE]
-\tikzstyle{region}=[draw=green!60!black, dashed, line width=1.2mm, rounded corners=10mm, inner sep=8mm]
-\tikzstyle{edge}=[-, line width=0.8mm, red]
-
-% Central node as anchor
-\node[obs] (c1) {};
-\node[obs, below=20mm of c1] (c2) {};
-
-\node[v, left=20mm of c1] (a1) {};
-\node[v, below=20mm of a1] (a2) {};
-\node[v, below=20mm of a2] (a3) {};
-
-\node[v, right=20mm of c1] (b1) {};
-\node[v, below=20mm of b1] (b2) {};
-\node[v, right=20mm of b1] (b3) {};
-
-% Edges (undirected)
-% C - C connections
-\draw[edge] (c1) -- (c2);
-% A - C connections
-\draw[edge] (a1) -- (c1);
-\draw[edge] (a1) -- (a2);
-\draw[edge] (a2) -- (c1);
-\draw[edge] (a2) -- (c2);
-\draw[edge] (a2) -- (a3);
-% C - B connections
-\draw[edge] (b1) -- (c1);
-\draw[edge] (b1) -- (b2);
-\draw[edge] (b2) -- (c2);
-% B - B connections
-\draw[edge] (b3) -- (b2);
-\draw[edge] (b3) -- (b1);
-
-% Regions with labels
-% A region = (a2, a3)
-\node[region, fit=(a2)(a3), label={[font=\LARGE, anchor=north]south:$A$}] {};
-% C region = (c1, c2)
-\node[region, fit=(c1)(c2), label={[font=\LARGE, anchor=north]south:$C$}] {};
-% B region = (b1, b2)
-\node[region, fit=(b1)(b2), label={[font=\LARGE, anchor=north]south:$B$}] {};
-
+\usetikzlibrary{fit}
+\begin{tikzpicture}[>={Stealth[length=2.5mm]}, line width=0.8pt, v/.style={circle, draw, minimum size=10mm, inner sep=1pt}, obs/.style={v, fill=c8, fill opacity=0.35, text opacity=1}, f/.style={rectangle, fill, minimum size=3.5mm, inner sep=0pt}]
+\node[v] (a1) at (0, 0) {};
+\node[v] (a2) at (0, -1.6) {};
+\node[v] (a3) at (0, -3.2) {};
+\node[obs] (c1) at (1.8, 0) {};
+\node[obs] (c2) at (1.8, -1.6) {};
+\node[v] (b1) at (3.6, 0) {};
+\node[v] (b2) at (3.6, -1.6) {};
+\node[v] (b3) at (5.4, 0) {};
+\foreach \a/\b in {c1/c2, a1/c1, a1/a2, a2/c1, a2/c2, a2/a3, b1/c1, b1/b2, b2/c2, b3/b2, b3/b1} \draw (\a) -- (\b);
+\foreach \n/\l in {{(a2)(a3)}/A, {(c1)(c2)}/C, {(b1)(b2)}/B} \node[draw=c2, dashed, line width=1.2pt, rounded corners=4mm, inner sep=2mm, fit=\n, label=below:{$\l$}] {};
 \end{tikzpicture}
