@@ -1,0 +1,14 @@
+\usetikzlibrary{shapes.geometric}
+\begin{tikzpicture}[line width=0.8pt,
+    sys/.style={draw=c1, fill=c1, fill opacity=0.15, text opacity=1, minimum width=30mm, minimum height=15mm, align=center},
+    db/.style={draw=c1, fill=c1, fill opacity=0.15, text opacity=1, cylinder, shape border rotate=90, aspect=0.3, minimum width=38mm, minimum height=50mm, align=center}]
+\node[sys] (o) at (0, 2) {Order Filing\\System};
+\node[sys] (i) at (0, 0) {Invoicing\\System};
+\node[sys] (p) at (0, -2) {Payroll\\System};
+\node[sys] (d) at (5.2, 0) {DBMS};
+\node[db] (c) at (10.4, 0) {Central database\\[2mm]Contains employee,\\order, inventory,\\pricing, and\\customer data};
+\draw[c1] (o.east) -- (d.north west);
+\draw[c1] (i.east) -- (d.west);
+\draw[c1] (p.east) -- (d.south west);
+\draw[c1] (d.east) -- (c.west);
+\end{tikzpicture}

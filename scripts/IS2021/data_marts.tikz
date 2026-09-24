@@ -1,0 +1,37 @@
+\usetikzlibrary{shapes.geometric}
+\begin{tikzpicture}[line width=0.8pt, >={Stealth[length=2.5mm]},
+    db/.style={draw=c8, fill=c8, fill opacity=0.2, text opacity=1, cylinder, shape border rotate=90, aspect=0.3, minimum width=12mm, minimum height=13mm},
+    small/.style={db, minimum width=8mm, minimum height=8mm},
+    lbl/.style={font=\bfseries, align=center},
+    pc/.pic={
+        \draw[fill=c3, fill opacity=0.3, rounded corners=1pt] (-0.55, 0.1) rectangle (0.55, 0.85);
+        \draw (-0.7, -0.25) rectangle (0.7, 0.05);
+        \draw (-0.6, -0.55) -- (0.6, -0.55) -- (0.7, -0.35) -- (-0.7, -0.35) -- cycle;
+    }]
+\node[lbl] at (0, 4.3) {Source OLTP\\systems};
+\node[db] (s1) at (0, 3) {};
+\node[db] (s2) at (0, 1.1) {};
+\node[db] (s3) at (0, -0.8) {};
+\node[db, minimum width=36mm, minimum height=44mm, font=\Large\bfseries, align=center] (dw) at (4.5, 1.1) {Data\\warehouse};
+\draw[->] (s1.east) -- (dw.west);
+\draw[->] (s2.east) -- (dw.west);
+\draw[->] (s3.east) -- (dw.west);
+\node[lbl, font=\Large\bfseries] at (10, 4.2) {Data marts};
+\node[db] (m1) at (8.8, 3) {};
+\node[small] (m2) at (10.5, 3) {};
+\node[db] (m3) at (8.8, 1.5) {};
+\node[small] (m4) at (10.5, -0.6) {};
+\draw[->] (dw.east) ++(0, 0.3) -- (m1.west);
+\draw[->] (dw.east) ++(0, 0.1) -- (m3.west);
+\draw[->] (dw.east) ++(0, -0.1) -- (m4.west);
+\draw[->] (m1.east) -- (m2.west);
+\draw[dotted] (dw.east) ++(0, 0) -- (12, 1.1 |- 0, 0.95);
+\draw[dotted] (9.6, 2.6) -- (9.6, 0.95);
+\draw[dotted] (10.5, 2.6) -- (10.5, 0.95);
+\draw[dotted] (11.1, -0.6) -- (11.3, -0.6) -- (11.3, 0.95);
+\draw[dotted] (12, 3) -- (12, -0.8);
+\draw[dotted] (12, 3) -- (13.2, 3);
+\draw[dotted] (12, -0.8) -- (13.2, -0.8);
+\pic at (14, 3) {pc};
+\pic at (14, -0.8) {pc};
+\end{tikzpicture}

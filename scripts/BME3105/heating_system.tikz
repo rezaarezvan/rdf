@@ -1,0 +1,17 @@
+\begin{tikzpicture}[>={Stealth[length=2mm]}, line width=0.7pt, blk/.style={draw, minimum height=11mm, align=center}]
+\node[blk, minimum width=20mm] (t) at (0, 0) {Thermostat};
+\node[blk, minimum width=12mm] (g) at (2.6, 0) {Gas\\valve};
+\node[blk, minimum width=16mm] (f) at (4.9, 0) {Furnace};
+\node[draw, circle, minimum size=7mm, inner sep=0pt] (s) at (7.4, 0) {$\Sigma$};
+\node[blk, minimum width=14mm] (h) at (9.6, 0) {House};
+\draw[->] (-3.4, 0) -- (t);
+\node[above right, align=left] at (-3.4, 0.1) {Desired\\temperature};
+\draw[->] (t) -- (g);
+\draw[->] (g) -- (f);
+\draw[->] (f) -- node[above, pos=0.4] {$Q_{\mathrm{in}}$} node[below, pos=0.85] {\small $+$} (s);
+\draw[->] (s) -- (h);
+\draw[->] (h) -- (12.6, 0);
+\node[above right, align=left] at (11.2, 0.1) {Room\\temperature};
+\draw[->] (7.4, 1.6) node[above, align=center] {Heat loss\\$Q_{\mathrm{out}}$} -- node[pos=0.8, left] {\small $-$} (s);
+\draw[->] (11.3, 0) node[circle, fill, inner sep=1.2pt] {} -- (11.3, -1.2) -| (t);
+\end{tikzpicture}

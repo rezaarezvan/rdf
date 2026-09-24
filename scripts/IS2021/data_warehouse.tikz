@@ -1,0 +1,37 @@
+\usetikzlibrary{shapes.geometric}
+\begin{tikzpicture}[line width=0.8pt, >={Stealth[length=2.5mm]},
+    db/.style={draw=c8, fill=c8, fill opacity=0.2, text opacity=1, cylinder, shape border rotate=90, aspect=0.3, minimum width=12mm, minimum height=14mm},
+    lbl/.style={font=\small\bfseries, align=center},
+    screen/.pic={
+        \draw[fill=c3, fill opacity=0.3, rounded corners=1pt] (-0.4, 0) rectangle (0.4, 0.55);
+        \draw (-0.1, 0) -- (-0.15, -0.15) -- (0.15, -0.15) -- (0.1, 0);
+    }]
+\node[db] (op) at (0, 4.5) {};
+\node[lbl, below=1mm of op] {Operational System};
+\node[db] (erp) at (0, 2.5) {};
+\node[lbl, below=1mm of erp] {ERP};
+\node[db] (crm) at (0, 0.5) {};
+\node[lbl, below=1mm of crm] {CRM};
+\draw[fill=c8, fill opacity=0.2, text opacity=1] (-0.5, -2.1) -- (0.25, -2.1) -- (0.5, -1.85) -- (0.5, -0.9) -- (-0.5, -0.9) -- cycle;
+\node[lbl] (ff) at (0, -1.5) {Flat\\Files};
+\node[draw=c2, fill=c2, fill opacity=0.2, text opacity=1, minimum width=26mm, minimum height=62mm, align=center] (etl) at (4, 1.2) {\textbf{ETL}\\[3mm]{\small Extraction,}\\{\small Transformation,}\\{\small Loading}};
+\draw[->] (0.8, 4.3) -- (etl.west |- 0, 3.6);
+\draw[->] (0.8, 2.4) -- (etl.west |- 0, 1.9);
+\draw[->] (0.8, 0.5) -- (etl.west |- 0, 0.9);
+\draw[->] (0.8, -1.5) -- (etl.west |- 0, -0.6);
+\node[draw=c5, fill=c5, fill opacity=0.2, text opacity=1, cylinder, shape border rotate=90, aspect=0.25, minimum width=40mm, minimum height=62mm] (dw) at (9, 1.2) {};
+\node[db, draw=c5, fill=c5, minimum width=16mm, minimum height=10mm, font=\small\bfseries] at (9, 2.2) {Metadata};
+\node[db, draw=c5, fill=c5, minimum width=16mm, minimum height=10mm, font=\small\bfseries, align=center] at (8.05, 0.1) {Summary\\Data};
+\node[db, draw=c5, fill=c5, minimum width=16mm, minimum height=10mm, font=\small\bfseries] at (9.95, 0.1) {Raw data};
+\node[lbl, below=1mm of dw] {Data Warehouse};
+\draw[->] (etl.east) -- (dw.west);
+\pic at (14.3, 3.9) {screen};
+\node[lbl] at (14.3, 3.4) {Olap Analysis};
+\pic at (14.3, 1.4) {screen};
+\node[lbl] at (14.3, 0.9) {Reporting};
+\pic at (14.3, -1.1) {screen};
+\node[lbl] at (14.3, -1.6) {Data Mining};
+\draw[->] (11.2, 2.4) -- (13.6, 3.9);
+\draw[->] (11.2, 1.4) -- (13.6, 1.5);
+\draw[->] (11.2, 0.4) -- (13.6, -0.8);
+\end{tikzpicture}

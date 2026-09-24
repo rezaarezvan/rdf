@@ -1,0 +1,73 @@
+\usetikzlibrary{decorations.pathreplacing}
+\begin{tikzpicture}[line width=0.6pt, >={Stealth[length=2.5mm]}, font=\small]
+\newcommand{\sub}[2]{
+    \draw[fill=c7, fill opacity=0.35, text opacity=1] (#1, #2) rectangle ++(3, 0.5);
+    \node[font=\small\bfseries] at (#1 + 1.5, #2 + 0.25) {Substrate};
+}
+\newcommand{\film}[4]{\draw (#1 + #3, #2 + 0.5) rectangle (#1 + #4, #2 + 0.68);}
+\newcommand{\resist}[4]{\draw[c1, fill=c1, fill opacity=0.35] (#1 + #3, #2 + #4) rectangle (#1 + #4 + 0, #2 + #4 + 0.22);}
+\newcommand{\res}[5]{\draw[c1, fill=c1, fill opacity=0.35] (#1 + #3, #2 + #5) rectangle (#1 + #4, #2 + #5 + 0.22);}
+\sub{0}{0}
+\film{0}{0}{0}{3}
+\node[align=left] (l) at (0.7, 1.5) {Layer to be\\patterned};
+\draw[->] (l.south) ++(0.4, 0) -- (1.6, 0.72);
+\draw[->, c8, line width=1.2pt] (3.3, 0.4) -- (4.1, 0.4);
+\sub{4.4}{0}
+\film{4.4}{0}{0}{3}
+\res{4.4}{0}{0}{3}{0.68}
+\node (pr) at (5.4, 1.6) {Photoresist};
+\draw[->] (pr.south) -- (6, 0.92);
+\draw[->, c8, line width=1.2pt] (7.7, 0.4) -- (8.5, 0.4);
+\sub{8.8}{0}
+\film{8.8}{0}{0}{3}
+\res{8.8}{0}{0}{3}{0.68}
+\fill[c6, opacity=0.35] (8.8, 1.45) rectangle (11.8, 2.2);
+\foreach \a/\b in {0/0.45, 1.25/1.45, 2.55/3} \fill[c6, opacity=0.35] (8.8 + \a, 0.9) rectangle (8.8 + \b, 1.3);
+\draw (8.8, 1.3) rectangle (11.8, 1.45);
+\fill (8.8 + 0.45, 1.3) rectangle (8.8 + 1.25, 1.45);
+\fill (8.8 + 1.45, 1.3) rectangle (8.8 + 2.55, 1.45);
+\node[font=\small\bfseries] at (10.3, 1.85) {Light};
+\node[align=center] (pm) at (7.6, 1.6) {Photo\\Mask};
+\draw[->] (pm.east) -- (8.8, 1.38);
+\node at (10.3, -0.35) {Align \& Expose};
+\draw[->, c8, line width=1.2pt] (12, 0.6) -- (12.4, 0.6) -- (12.4, -5.9) -- (12, -5.9);
+\draw[->, c8, line width=1.2pt] (12.4, -2.7) -- (12, -2.7);
+\node[c8, font=\small\bfseries, fill=white, fill opacity=0, text opacity=1] at (12.7, -4.3) {or};
+\sub{8.8}{-3}
+\film{8.8}{-3}{0}{3}
+\res{8.8}{-3}{0.45}{1.25}{0.68}
+\res{8.8}{-3}{1.45}{2.55}{0.68}
+\node[align=center] at (10.3, -3.55) {(Positive Resist)\\Development};
+\draw[->, c8, line width=1.2pt] (8.5, -2.75) -- (7.7, -2.75);
+\sub{4.4}{-3}
+\film{4.4}{-3}{0.45}{1.25}
+\film{4.4}{-3}{1.45}{2.55}
+\res{4.4}{-3}{0.45}{1.25}{0.68}
+\res{4.4}{-3}{1.45}{2.55}{0.68}
+\node at (5.9, -3.55) {Etching (Dry or Wet)};
+\draw[->, c8, line width=1.2pt] (4.1, -2.75) -- (3.3, -2.75);
+\sub{0}{-3}
+\film{0}{-3}{0.45}{1.25}
+\film{0}{-3}{1.45}{2.55}
+\node at (1.5, -3.55) {Resist Removal};
+\draw[decorate, decoration={brace, amplitude=4pt}] (0, -1.7) -- (3, -1.7) node[midway, above=4pt] {Patterned Wafers};
+\sub{8.8}{-6.2}
+\film{8.8}{-6.2}{0}{3}
+\res{8.8}{-6.2}{0}{0.45}{0.68}
+\res{8.8}{-6.2}{1.25}{1.45}{0.68}
+\res{8.8}{-6.2}{2.55}{3}{0.68}
+\node at (10.3, -6.55) {(Negative Resist)};
+\draw[->, c8, line width=1.2pt] (8.5, -5.95) -- (7.7, -5.95);
+\sub{4.4}{-6.2}
+\film{4.4}{-6.2}{0}{0.45}
+\film{4.4}{-6.2}{1.25}{1.45}
+\film{4.4}{-6.2}{2.55}{3}
+\res{4.4}{-6.2}{0}{0.45}{0.68}
+\res{4.4}{-6.2}{1.25}{1.45}{0.68}
+\res{4.4}{-6.2}{2.55}{3}{0.68}
+\draw[->, c8, line width=1.2pt] (4.1, -5.95) -- (3.3, -5.95);
+\sub{0}{-6.2}
+\film{0}{-6.2}{0}{0.45}
+\film{0}{-6.2}{1.25}{1.45}
+\film{0}{-6.2}{2.55}{3}
+\end{tikzpicture}

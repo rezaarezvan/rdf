@@ -1,0 +1,6 @@
+\begin{tikzpicture}[>={Stealth[length=2mm]}, line width=0.7pt]
+\draw[->] (-1.5, 0) -- (3, 0) node[right] {$x_1$};
+\draw[->] (0, -1.5) -- (0, 3) node[above] {$x_2$};
+\draw[c8, ->, line width=0.9pt] (-1.2, 0.9) node[circle, fill, inner sep=1.2pt] {} node[below left, black] {$x_0$} to[out=0, in=-90] (-0.4, 2.2) node[circle, fill, inner sep=1.2pt] {};
+\node[above left] at (-0.4, 2.2) {$x_f$};
+\end{tikzpicture}

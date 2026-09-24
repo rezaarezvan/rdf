@@ -1,0 +1,10 @@
+\begin{tikzpicture}[>={Stealth[length=2mm]}, line width=0.6pt]
+\foreach \i in {1,...,4} {
+    \node[draw, minimum size=3.5mm] (x\i) at (0, -1.1*\i) {};
+    \node[draw, circle, minimum size=7mm, fill=c8, fill opacity=0.35, text opacity=1] (y\i) at (3.6, -1.1*\i) {};
+    \draw[->] (y\i) -- ++(1, 0);
+}
+\foreach \i in {1,...,4} \foreach \j in {1,...,4} \draw[->] (x\i) -- (y\j);
+\node[align=center] at (0, -5.4) {Input\\layer};
+\node[align=center] at (3.6, -5.4) {Output\\layer};
+\end{tikzpicture}

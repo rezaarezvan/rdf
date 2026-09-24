@@ -1,0 +1,25 @@
+\usetikzlibrary{decorations.text}
+\begin{tikzpicture}[line width=0.8pt, >={Stealth[length=2.5mm]}]
+\def\R{4.2}
+\def\r{3.3}
+\foreach \a/\b/\c in {90/210/c2, -30/90/c8, 210/330/c1} {
+    \fill[\c, opacity=0.3] (\a:\R) arc (\a:\b:\R) -- (\b:\r) arc (\b:\a:\r) -- cycle;
+}
+\draw (0, 0) circle (\R);
+\draw (0, 0) circle (\r);
+\draw (0, 0) circle (1.1);
+\foreach \a in {90, 210, 330} \draw (\a:1.1) -- (\a:\R);
+\node[font=\Large\bfseries, align=center] at (0, 0) {Big\\Data};
+\path[decorate, decoration={text along path, text={|\large\bfseries|Variety}, text align=center}] (205:3.62) arc (205:95:3.62);
+\path[decorate, decoration={text along path, text={|\large\bfseries|Velocity}, text align=center}] (85:3.62) arc (85:-25:3.62);
+\path[decorate, decoration={text along path, text={|\large\bfseries|Volume}, text align=center}] (215:3.9) arc (215:325:3.9);
+\node at (192:2.4) {Structured};
+\node[align=center] at (122:2.25) {Structured \&\\Unstructured};
+\draw[->] (160:1.45) arc (160:125:1.45);
+\node at (62:2.45) {Batch};
+\node[align=center] at (350:2.25) {Streaming\\Data};
+\draw[->] (55:1.45) arc (55:20:1.45);
+\node at (300:2.45) {Terabytes};
+\node at (240:2.45) {Zettabytes};
+\draw[->] (295:1.45) arc (295:245:1.45);
+\end{tikzpicture}

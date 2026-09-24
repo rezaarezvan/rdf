@@ -1,0 +1,18 @@
+\begin{tikzpicture}[>={Stealth[length=2mm]}, line width=0.7pt, blk/.style={draw, minimum width=20mm, minimum height=11mm, align=center}, sum/.style={draw, circle, minimum size=6mm, inner sep=0pt, path picture={\draw (path picture bounding box.north west) -- (path picture bounding box.south east) (path picture bounding box.north east) -- (path picture bounding box.south west);}}]
+\node[blk] (it) at (0, 0) {Input\\transducer};
+\node[blk] (c) at (3, 0) {Controller};
+\node[sum] (s1) at (5.2, 0) {};
+\node[blk] (p) at (7.4, 0) {Process\\or Plant};
+\node[sum] (s2) at (9.6, 0) {};
+\node[c8, align=center, anchor=east] at (-1.6, 0) {Input\\or\\Reference};
+\draw[->] (-1.6, 0) -- (it);
+\draw[->] (it) -- (c);
+\draw[->] (c) -- node[pos=0.8, above] {\small $+$} (s1);
+\draw[->] (s1) -- (p);
+\draw[->] (p) -- node[pos=0.8, above] {\small $+$} (s2);
+\draw[->] (s2) -- (11.2, 0) node[c8, right, align=center] {Output\\or\\Controlled\\variable};
+\draw[->] (5.2, 1.4) node[c8, above] {Disturbance 1} -- node[pos=0.75, left] {\small $+$} (s1);
+\draw[->] (9.6, 1.4) node[c8, above] {Disturbance 2} -- node[pos=0.75, left] {\small $+$} (s2);
+\node[below=2mm of s1, align=center] {Summing\\junction};
+\node[below=2mm of s2, align=center] {Summing\\junction};
+\end{tikzpicture}

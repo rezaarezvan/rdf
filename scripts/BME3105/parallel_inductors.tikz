@@ -1,0 +1,4 @@
+\begin{tikzpicture}[american, line width=0.7pt]
+\draw (0, 0) to[sV] (0, 3) -- (1.8, 3) to[short, i=$i_2$] (3.8, 3) to[R, l=$R$] (3.8, 1.5) to[L, l=$L_2$] (3.8, 0) -- (0, 0);
+\draw (1.8, 3) node[circ] {} to[L, l=$L_1$, i>_=$i_1$] (1.8, 0) node[circ] {};
+\end{tikzpicture}

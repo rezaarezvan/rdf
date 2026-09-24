@@ -1,0 +1,23 @@
+\begin{tikzpicture}[american, line width=0.7pt, ann/.style={-{Stealth[length=2mm]}}]
+\foreach \y/\name/\comp/\eq in {0/Resistor/R/{$v = Ri$}, -3/Capacitor/C/{$i = C\dfrac{dv}{dt}$}, -6/Inductor/L/{$v = L\dfrac{di}{dt}$}} {
+    \node[anchor=west] at (-3.2, \y) {\name};
+    \draw (0, \y + 1.1) node[ocirc] {} to[\comp] (0, \y - 1.1) node[ocirc] {};
+    \node at (-0.7, \y + 1.0) {$+$};
+    \node at (-0.7, \y) {$v$};
+    \node at (-0.7, \y - 1.0) {$-$};
+    \draw[ann] (0.45, \y + 0.8) -- node[right] {$i$} (0.45, \y + 0.2);
+    \node[anchor=west] at (1.6, \y) {\eq};
+}
+\node[anchor=west, align=left] at (5.4, 0) {Voltage\\source};
+\draw (8, 1.1) node[ocirc] {} to[sV] (8, -1.1) node[ocirc] {};
+\node at (7.3, 1.0) {$+$};
+\node at (7.3, 0) {$v$};
+\node at (7.3, -1.0) {$-$};
+\node at (8.8, 0) {$v_s$};
+\node[anchor=west] at (9.6, 0) {$v = v_s$};
+\node[anchor=west, align=left] at (5.4, -3) {Current\\source};
+\draw (8, -1.9) node[ocirc] {} to[american current source] (8, -4.1) node[ocirc] {};
+\draw[ann] (8.45, -2.1) -- node[right] {$i$} (8.45, -2.7);
+\node at (8.8, -3.6) {$i_s$};
+\node[anchor=west] at (9.6, -3) {$i = i_s$};
+\end{tikzpicture}

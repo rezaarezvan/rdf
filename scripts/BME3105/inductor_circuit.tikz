@@ -1,0 +1,9 @@
+\begin{tikzpicture}[american, line width=0.7pt, ann/.style={-{Stealth[length=2mm]}}]
+\draw (0, 0) to[sV, l=$V_s$] (0, 3) -- (4, 3) to[L] (4, 0) -- (0, 0);
+\draw[ann] (4.5, 2.1) -- node[right] {$i$} (4.5, 1.1);
+\node at (-1.2, 2.8) {$+$};
+\node at (-1.2, 0.2) {$-$};
+\node at (5.4, 2.8) {$+$};
+\node at (5.4, 1.5) {$V$};
+\node at (5.4, 0.2) {$-$};
+\end{tikzpicture}
