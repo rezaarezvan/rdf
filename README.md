@@ -33,32 +33,14 @@ if __name__ == "__main__":
     build()
 ```
 
-Each plot function receives only what it asks for (`ax`, `fig`, `color_map`).
-Take `fig` if you need subplots — call `fig.subplots(...)`, never
-`plt.subplots(...)`; rdf renders the figure it hands you and refuses one you
-build yourself.
-
 Or build a whole directory:
 ```bash
 python -m rdf build path/to/figures/
 ```
 
-A file whose name starts with `_` is a helper shared within a set, not a figure
-file; `build` skips it and puts its directory on `sys.path` so siblings can
-import it.
-
-## canvas
-Every figure renders at one width — `BLOG_WIDTH`, 6.5in / 468pt / 624 CSS px —
-so a page of figures shares one size, one set of margins, and one apparent type
-size. `height=` is the only free dimension; give it to equal-aspect diagrams,
-which otherwise collapse to a narrow strip on a golden-ratio canvas. Override
-with `RDF(width=...)`.
-
-Output is deterministic: the same source renders byte-identical SVGs, so a
-rebuild is a readable diff.
-
 ## CSS
-Embedded SVGs reference these CSS variables. Define them in your site, override per theme:
+Embedded SVGs reference these CSS variables.
+Define them in your site, override per theme:
 
 The default palette is Okabe–Ito (colorblind-safe), with the yellow slot darkened for light surfaces, `c7` reserved as the neutral gray, and a lightness-retargeted dark variant.
 ```css
@@ -80,18 +62,9 @@ The default palette is Okabe–Ito (colorblind-safe), with the yellow slot darke
 }
 ```
 
-Axis colours are not yours to set in a style file — rdf injects them as
-sentinels so they come out as `var(--axis-color)` / `var(--grid-color)`. Same
-for `color_map["black"]`: matplotlib omits a `fill` that equals SVG's default,
-so a literal black would lose its theming, and rdf routes it through a sentinel
-to stop that.
-
 ## style
-The default mplstyle targets web SVG: fixed blog width, transparent background,
-no top/right spines, frameless legends, and **EB Garamond** with STIX for maths
-so figures read as the prose they sit in. Install EB Garamond (then clear
-`~/.matplotlib/fontlist-*.json`) or rdf warns and matplotlib substitutes
-silently.
+The default mplstyle targets web SVG: fixed blog width, transparent background, no top/right spines, frameless legends, and **EB Garamond** with STIX for maths so figures read as the prose they sit in.
+Install EB Garamond (then clear `~/.matplotlib/fontlist-*.json`) or rdf warns and matplotlib substitutes silently.
 
 For a paper/PDF style or anything else, pass your own:
 
@@ -109,4 +82,4 @@ python -m rdf palette --inkscape       Inkscape palette (.gpl)
 ```
 
 ## gallery
-`scripts/<level>/<course>/` mirrors the blog (`bachelor`, `master`, `exchange`, `essays`); figures build to `result/<level>/<course>/`.
+`scripts/<level>/<course>/` mirrors my blog (`bachelor`, `master`, `exchange`, `essays`); figures build to `result/<level>/<course>/`.
