@@ -53,9 +53,11 @@ def plot_even(fig, color_map):
     axs = fig.subplots(1, 2)
     t = np.linspace(-4, 4, 400)
     bump = np.exp(-t**2 / 2) + 0.35 * np.exp(-(np.abs(t) - 2) ** 2 / 0.3)
-    for ax, y, lab in ((axs[0], bump, "$f_e(t)$"), (axs[1], np.sign(t) * bump, "$f_o(t)$")):
+    for ax, y, lab, up in ((axs[0], bump, "$f_e(t)$", False), (axs[1], np.sign(t) * bump, "$f_o(t)$", True)):
         ax.plot(t, y, color=color_map["c8"])
-        _signal_axes(ax, [(-2, "$-a$"), (2, "$a$")], xlim=(-4, 4), ylim=(-1.4, 1.4), ylabel=lab)
+        _signal_axes(ax, [(-2, ""), (2, "")], xlim=(-4, 4), ylim=(-1.4, 1.4), ylabel=lab)
+        ax.text(-2, 0.1 if up else -0.1, "$-a$", ha="center", va="bottom" if up else "top")
+        ax.text(2, -0.1, "$a$", ha="center", va="top")
         for a in (-2, 2):
             ax.plot([a, a], [0, y[np.argmin(np.abs(t - a))]], ls=":", color=color_map["c7"], lw=0.8)
 
@@ -63,9 +65,8 @@ def plot_even(fig, color_map):
 @figure("period", height=2.4)
 def plot_period(ax, color_map):
     t = np.linspace(-7, 7, 1200)
-    ph = np.mod(t + 1, 4) - 1
-    y = np.where(ph < 0, -0.3 * (ph + 1) ** 0.5 * np.exp(-(ph + 1) * 3) * 3, np.exp(-((ph - 1) ** 2) / 0.25))
-    y[np.abs(np.diff(ph, prepend=ph[0])) > 1] = np.nan
+    ph = np.mod(t + 1, 4)
+    y = np.exp(-((ph - 2) ** 2) / 0.25) - 0.35 * np.exp(-((ph - 3.3) ** 2) / 0.08)
     ax.plot(t, y, color=color_map["c8"])
     _signal_axes(ax, [], xlim=(-7, 7), ylim=(-0.8, 1.4))
     for x in (-1, 3):

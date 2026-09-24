@@ -19,7 +19,7 @@
 }
 \preg{7.35}
 \preg{9.7}
-\stack{10.6}{0.9}{CDB}
-\preg{11.9}
-\stack{12.6}{0.9}{CT}
+\stack{10.6}{1.3}{CDB}
+\preg{12.3}
+\stack{13.0}{1.3}{CT}
 \end{tikzpicture}

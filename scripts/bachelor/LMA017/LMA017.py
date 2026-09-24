@@ -42,7 +42,7 @@ def plot_paraboloid_levels(ax, color_map):
 def plot_level_curves_xy(ax, color_map):
     x = np.linspace(-5, 5, 400)
     x = x[np.abs(x) > 0.05]
-    for k, c in ((1, "c4"), (2, "c8"), (5, "c2"), (10, "c1")):
+    for k, c in ((1, "black"), (2, "c8"), (5, "c2"), (10, "c1")):
         for sign, ls in ((1, "-"), (-1, "--")):
             for half in (x[x > 0], x[x < 0]):
                 y = sign * k / half

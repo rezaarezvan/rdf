@@ -93,7 +93,7 @@ def plot_sphere_and_circle(fig, color_map):
     ax2.plot(np.cos(t), np.sin(t), color=color_map["c1"], lw=1.6)
     a, b = np.array([np.cos(2.4), np.sin(2.4)]), np.array([np.cos(-0.5), np.sin(-0.5)])
     _segment(ax2, color_map, a, b, ls="--")
-    _point(ax2, color_map, (a + b) / 2, r"$\frac{1}{2}(\mathbf{x}_1 + \mathbf{x}_2)$", offset=(-4, -20))
+    _point(ax2, color_map, (a + b) / 2, r"$\frac{1}{2}(\mathbf{x}_1 + \mathbf{x}_2)$", offset=(6, 6))
     _plane(ax2, (-1.4, 1.4), (-1.4, 1.4))
 
 
@@ -200,7 +200,7 @@ def plot_cone_comparison(fig, color_map):
     d = np.array([np.cos(np.radians(32)), np.sin(np.radians(32))])
     ax1.plot(*np.c_[[0, 0], 2.1 * d], ls=":", color=color_map["c7"], lw=1)
     for s, label in ((0.55, r"$0.5\,\mathbf{x}$"), (1.1, r"$\mathbf{x}$"), (1.75, r"$1.6\,\mathbf{x}$")):
-        _point(ax1, color_map, s * d, label, offset=(6, -12))
+        _point(ax1, color_map, s * d, label, offset=(-30, 2) if s < 1 else (6, -12))
     _point(ax1, color_map, (0, 0), "$\\mathbf{0}$", offset=(-12, -2))
     ax1.set_xlabel("Convex cone")
     sector(ax2, np.radians(15), np.radians(40), "c1")
@@ -356,9 +356,11 @@ def plot_example_polyhedron_regions(ax, color_map):
 @figure("example_polyhedron_regions_and_negative_gradient", height=3.4)
 def plot_example_polyhedron_regions_and_negative_gradient(ax, color_map):
     _lp_region(ax, color_map)
-    ax.axhline(1.5, color=color_map["c2"], ls="--", lw=1)
+    ax.axhline(0, color=color_map["c2"], ls="--", lw=1.4)
     _arrow(ax, color_map, (1.6, 2.6), (0, -1.0), "c1", r"$-\mathbf{c}$", offset=(4, 12))
-    _point(ax, color_map, (1, 0), r"$\mathbf{x}^\star$", c="c1", offset=(8, -12))
+    _point(ax, color_map, (1, 0), c="c1")
+    ax.annotate(r"$\mathbf{x}^\star$", (1, 0), xytext=(1.8, 0.25), color=color_map["c1"],
+                arrowprops=dict(arrowstyle="-", color=color_map["c1"], lw=0.8))
 
 
 @figure("example_polyhedron_regions2", height=3.4)
@@ -369,9 +371,9 @@ def plot_example_polyhedron_regions2(ax, color_map):
     ax.plot(x, 1 + 2 * x, color=color_map["c8"], lw=1.4)
     ax.plot(x, x - 1, color=color_map["c1"], lw=1.4)
     ax.text(0.9, 2.35, r"$-2x_1 + x_2 \leq 1$", color=color_map["c8"])
-    ax.text(1.35, -0.35, r"$x_1 - x_2 \leq 1$", color=color_map["c1"])
+    ax.text(1.35, 0.08, r"$x_1 - x_2 \leq 1$", color=color_map["c1"])
     ax.axhline(0, color=color_map["black"], lw=0.8)
     ax.axvline(0, color=color_map["black"], lw=0.8)
-    for q, off in zip(p, ((-30, -14), (6, 6), (-34, 2))):
+    for q, off in zip(p, ((6, -14), (8, -14), (6, 2))):
         _point(ax, color_map, q, f"$({q[0]:g}, {q[1]:g})$", c="c1", offset=off)
     _plane(ax, (-0.6, 2), (-0.6, 2.6))

@@ -5,7 +5,7 @@
 % Styles
 \tikzstyle{state}=[circle, draw=black, minimum size=9mm, inner sep=1pt, line width=0.5mm, font=\small]
 \tikzstyle{move}=[->, black, line width=0.5mm]
-\tikzstyle{lbl}=[font=\footnotesize, fill=white, inner sep=1pt]
+\tikzstyle{lbl}=[font=\footnotesize, inner sep=1pt]
 
 % Root (player to move: MAX)
 \node[state] (root) at (6.0, 0) {$-50$};

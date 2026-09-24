@@ -2,9 +2,9 @@
 \node[draw, fill=c1, fill opacity=0.15, text opacity=1, minimum width=22mm, minimum height=24mm, align=center] (net) at (0, 1.25) {Complex\\network};
 \draw (1.1, 2.25) -- (2.6, 2.25) node[circ] {} to[R, l=$R_L$] (2.6, 0.25) node[circ] {} -- (1.1, 0.25);
 \begin{scope}[shift={(5, 0)}]
-\draw (0, 0) to[I, l=$I_N$] (0, 2.5) -- (3.8, 2.5) to[R, l=$R_L$] (3.8, 0) -- (0, 0);
+\draw (0, 0) to[I, l=$I_N$] (0, 2.5) -- (4.6, 2.5) to[R, l_=$R_L$] (4.6, 0) -- (0, 0);
 \draw (2, 2.5) node[circ] {} to[R, l=$R_N$] (2, 0) node[circ] {};
-\node[circ] at (3.8, 2.5) {}; \node[circ] at (3.8, 0) {};
-\draw[c1, dashed, line width=1pt] (-1.4, -0.35) rectangle (2.9, 3.0);
+\node[circ] at (4.6, 2.5) {}; \node[circ] at (4.6, 0) {};
+\draw[c1, dashed, line width=1pt] (-1.4, -0.35) rectangle (3.6, 3.0);
 \end{scope}
 \end{tikzpicture}

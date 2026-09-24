@@ -22,7 +22,8 @@ def plot_activation_functions(fig, color_map):
         ax.axhline(0, color=color_map["black"], lw=0.6)
         ax.axvline(0, color=color_map["black"], lw=0.6)
         ax.set_title(f"{name}\n{formula}", fontsize=11)
-        ax.set(xlim=(-4, 4), ylim=(-1.5, 4), xticks=[-4, 0, 4], yticks=[-1, 0, 2, 4])
+        bounded = y.max() <= 1
+        ax.set(xlim=(-4, 4), ylim=(-1.2, 1.2) if bounded else (-1.5, 4), xticks=[-4, 0, 4], yticks=[-1, 0, 1] if bounded else [-1, 0, 2, 4])
 
 
 def _panel(ax, color_map, center, a, b, angle, e1, e2, axes=None):

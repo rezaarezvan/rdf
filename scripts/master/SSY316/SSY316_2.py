@@ -3,18 +3,18 @@ import numpy as np
 from rdf import figure
 
 
-@figure("ml_learning_example", height=3.4)
+@figure("ml_learning_example", height=3.8)
 def plot_ml_learning_example(ax, color_map):
-    rng = np.random.default_rng(0)
+    rng = np.random.default_rng(1)
     x = np.linspace(0, 1, 10)
-    y = np.sin(2 * np.pi * x) + rng.normal(0, 0.1, x.size)
+    y = np.sin(2 * np.pi * x) + rng.normal(0, 0.3, x.size)
     t = np.linspace(0, 1, 400)
     ax.plot(t, np.sin(2 * np.pi * t), color=color_map["black"], ls="--", label=r"$\sin(2\pi x)$")
     for m, c in ((1, "c2"), (3, "c1"), (9, "c8")):
-        ax.plot(t, np.polyval(np.polyfit(x, y, m), t), color=color_map[c], label=f"$M = {m}$")
+        ax.plot(t, np.polynomial.Polynomial.fit(x, y, m)(t), color=color_map[c], label=f"$M = {m}$")
     ax.scatter(x, y, color=color_map["black"], s=16, zorder=5)
     ax.set(xlim=(0, 1), ylim=(-2, 2), xlabel="$x$", ylabel="$y$")
-    ax.legend(loc="lower left", ncol=2)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.27), ncol=4)
 
 
 @figure("map_learning_example", height=2.8)

@@ -17,5 +17,5 @@
 \draw[<-, line width=0.5pt] (1.95, -0.85) -- (2.9, -2.1);
 \draw[<-, line width=0.5pt] (3.65, -1.0) -- (3.1, -2.1) node[below] {Capacitor plates};
 \foreach \y in {-0.6, -0.3, 0, 0.3, 0.6} \draw[->, c1, line width=1pt] (2.1, \y) -- (3.3, \y);
-\node[c1] at (2.7, -1.25) {$\vec{E}$};
+\node[c1] at (2.7, 0.95) {$\vec{E}$};
 \end{tikzpicture}

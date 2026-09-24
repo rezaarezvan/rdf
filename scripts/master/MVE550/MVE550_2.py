@@ -27,5 +27,5 @@ def plot_poisson_gamma_conjugacy_prediction(ax, color_map):
     x = np.arange(0, 50)
     ax.plot(x, nbinom.pmf(x, 67, 3 / 4), "o-", color=color_map["c8"], ms=3, lw=1, label=r"Bayesian, $\mathrm{NegBin}(67, 1/4)$")
     ax.plot(x, poisson.pmf(x, 67 / 3), "s--", color=color_map["c1"], ms=3, lw=1, label=r"Frequentist, $\mathrm{Poisson}(67/3)$")
-    ax.set(xlabel="$x_4$", ylabel="Probability", xlim=(0, 49))
+    ax.set(xlabel="$x_4$", ylabel="Probability", xlim=(0, 49), ylim=(0, 0.11))
     ax.legend(loc="upper right")

@@ -11,7 +11,7 @@ def plot_beta_distribution(ax, color_map):
     for (a, b), c in zip(((1, 1), (0.1, 0.1), (2, 4)), ("c8", "c1", "c2")):
         ax.plot(MU, beta.pdf(MU, a, b), color=color_map[c], label=rf"$\mathrm{{Beta}}({a}, {b})$")
     ax.set(xlim=(0, 1), ylim=(0, 3), xlabel=r"$\mu$", ylabel="Density")
-    ax.legend(loc="upper center")
+    ax.legend(loc="upper right", bbox_to_anchor=(0.9, 0.95))
 
 
 def _prior_likelihood_posterior(fig, color_map, a, b, n=5, h=4):

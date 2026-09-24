@@ -6,7 +6,7 @@
 \tikzstyle{unit}=[circle, draw=black, minimum size=11mm, line width=0.5mm, font=\normalsize]
 \tikzstyle{op}=[draw=black, minimum size=10mm, line width=0.5mm, font=\normalsize]
 \tikzstyle{arrow}=[->, black, line width=0.5mm]
-\tikzstyle{wlbl}=[font=\small, fill=white, inner sep=1pt]
+\tikzstyle{wlbl}=[font=\small, inner sep=2pt]
 
 % Inputs
 \node[unit] (x1) at (0, 0) {$x_1$};
@@ -34,9 +34,9 @@
 \node[font=\small] at (9.8, -3.9) {Output};
 
 % Weighted connections
-\draw[arrow] (x1) -- node[wlbl, pos=0.45] {$w_1$} (sum);
-\draw[arrow] (x2) -- node[wlbl, pos=0.45] {$w_2$} (sum);
-\draw[arrow] (xm) -- node[wlbl, pos=0.45] {$w_m$} (sum);
+\draw[arrow] (x1) -- node[wlbl, pos=0.45, above right] {$w_1$} (sum);
+\draw[arrow] (x2) -- node[wlbl, pos=0.45, above] {$w_2$} (sum);
+\draw[arrow] (xm) -- node[wlbl, pos=0.45, below right] {$w_m$} (sum);
 \draw[arrow] (b) -- (sum);
 \draw[arrow] (sum) -- node[wlbl, above=1pt] {$z$} (act);
 \draw[arrow] (act) -- (y);

@@ -8,8 +8,8 @@ def _bm(rng, n, dt):
     return np.concatenate([[0.0], np.cumsum(rng.normal(0, np.sqrt(dt), n - 1))])
 
 
-def _below(ax, ncol=3):
-    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.22), ncol=ncol)
+def _below(ax, ncol=3, y=-0.22):
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, y), ncol=ncol)
 
 
 @figure("SDE_only_drift", height=3.2)
@@ -87,7 +87,7 @@ def plot_random_diff(ax, color_map):
     ax.plot(t, x1 + dx1 * (t - 1), color=color_map["c1"], ls="--", lw=1.2, label=f"slope $\\dot{{x}}(1) = {dx1:.2f}$")
     ax.plot(1, x1, "o", color=color_map["c1"], ms=5)
     ax.set(xlim=(0, 2 * np.pi), ylim=(-2.4, 2.4), xlabel="$t$", ylabel="$x(t)$")
-    ax.legend(loc="lower left")
+    ax.legend(loc="upper right")
 
 
 @figure("random_riemann", height=3.2)
@@ -135,7 +135,7 @@ def plot_second_order(fig, color_map):
     ax2.plot(t, t, color=color_map["black"], ls="--", lw=1, label="$t$")
     ax1.set(ylabel=r"$\beta(t)$")
     ax2.set(xlim=(0, T), xlabel="$t$", ylabel=r"$\sum_{t_i < t} (\Delta \beta_i)^2$")
-    ax2.legend(loc="upper left", ncol=2)
+    ax2.legend(loc="center left", bbox_to_anchor=(1, 0.5))
 
 
 @figure("beta_beta_squared", height=3.2)
@@ -211,7 +211,7 @@ def plot_reverse_ornstein_uhlenbeck(ax, color_map):
                 arrowprops=dict(arrowstyle="-|>", color=color_map["black"], lw=0.8))
     ax.text(1.0, 1.08, "reverse time", ha="center", va="bottom", transform=ax.get_xaxis_transform())
     ax.set(xlim=(0, T), xlabel="$t$", ylabel="$x(t)$")
-    ax.legend(loc="lower right")
+    _below(ax, ncol=1, y=-0.3)
 
 
 @figure("denoising_diffusion", height=3.4)
@@ -219,11 +219,11 @@ def plot_denoising_diffusion(ax, color_map):
     rng = np.random.default_rng(11)
     t = np.linspace(0, 0.999, 1500)
     tau = t**2 / (1 - t) ** 2
-    for x0, c in zip((-2, -1, 0, 1, 2), ("c1", "c5", "c2", "c3", "c8")):
+    for x0, c in zip((-2, -1, 0, 1, 2), ("c1", "c5", "c2", "black", "c8")):
         w = np.concatenate([[0.0], np.cumsum(rng.normal(0, np.sqrt(np.diff(tau))))])
         ax.plot(t, (1 - t) * (x0 + w), color=color_map[c], lw=1, label=f"$x_0 = {x0}$")
     ax.set(xlim=(0, 1), ylim=(-3.2, 3.2), xlabel="$t$", ylabel="$x(t)$")
-    _below(ax, ncol=5)
+    _below(ax, ncol=5, y=-0.3)
 
 
 @figure("brownian_to_point", height=3.2)
@@ -298,13 +298,13 @@ def plot_brownian_bridge_density(ax, color_map):
     ax.plot(s, a, "o", color=color_map["c1"], ms=5, zorder=5)
     ax.plot(T, v, "o", color=color_map["c1"], ms=5, zorder=5)
     ax.annotate(r"$\beta(s)$", (s, a), xytext=(-8, -14), textcoords="offset points", ha="right", color=color_map["c1"])
-    ax.annotate(r"$\beta(T) = v$", (T, v), xytext=(-8, 8), textcoords="offset points", ha="right", color=color_map["c1"])
+    ax.annotate(r"$\beta(T) = v$", (T, v), xytext=(6, 0), textcoords="offset points", ha="left", va="center", color=color_map["c1"])
     ax.text(t + 0.33, mean - 1.6 * sd, r"$p(\beta(t) \mid \beta(s), \beta(T) = v)$", color=color_map["c2"])
     _marks(ax, color_map, ((s, "$s$"), (t, "$t$"), (T, "$T$")))
-    ax.set(xlim=(s - 0.2, T + 0.2), ylabel=r"$\beta$")
+    ax.set(xlim=(s - 0.2, T + 0.6), ylabel=r"$\beta$")
 
 
-@figure("schoenmakers_score_matching", height=3.6)
+@figure("schoenmakers_score_matching", height=4.0)
 def plot_schoenmakers_score_matching(fig, color_map):
     ax1, ax2 = fig.subplots(1, 2, sharey=True)
     rng = np.random.default_rng(14)
@@ -343,5 +343,5 @@ def plot_schoenmakers_score_matching(fig, color_map):
     ax2.plot(T + 0.25 * p / p.max(), y, color=color_map["c2"], lw=1.5, label=r"$\pi$")
     for ax in (ax1, ax2):
         ax.set(xlim=(0, T + 0.3), ylim=(-3.2, 3.2), xlabel="$t$")
-        ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.25), ncol=2)
+        ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.32), ncol=2)
     ax1.set(ylabel="$x$")

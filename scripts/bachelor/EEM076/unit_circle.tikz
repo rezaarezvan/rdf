@@ -3,7 +3,7 @@
 \draw[->] (0, -1.25) -- (0, 1.35) node[left] {Im};
 \draw (0, 0) circle (1);
 \draw[->, c8, line width=1.1pt] (0, 0) -- (65:1);
-\draw[c1] (65:1) -- (0.4226, 0) node[pos=0.5, right] {$\sin \varphi$};
+\draw[c1] (65:1) -- (0.4226, 0) node[pos=0.72, right] {$\sin \varphi$};
 \draw (0.3, 0) arc (0:65:0.3);
 \node at (32:0.44) {$\varphi$};
 \node[below left] at (0, 0) {$0$};

@@ -8,5 +8,5 @@
 \draw[c8, dashed, line width=0.6pt] (2.3,-0.4) rectangle (9.7,4.6);
 \node[align=center] (lbl) at (7.6,4.1) {Voltage-controlled\\voltage source};
 \draw[->] (lbl.west) to[bend right=40] (6.85,1.8);
-\draw[decorate, decoration={brace, mirror, amplitude=8pt}] (2.3,-0.6) -- (9.7,-0.6);
+\draw[decorate, decoration={brace, mirror, amplitude=8pt}] (2.3,-0.6) -- (9.7,-0.6) node[midway, below=10pt] {Amplifier};
 \end{tikzpicture}

@@ -53,4 +53,4 @@ def plot_palmer(ax, color_map):
         pts = np.array([(float(r["culmen_length_mm"]), float(r["culmen_depth_mm"])) for r in rows if r["species"] == species])
         ax.scatter(pts[:, 0], pts[:, 1], color=color_map[c], s=12, label=species)
     ax.set(xlabel="Culmen length (mm)", ylabel="Culmen depth (mm)")
-    ax.legend(loc="lower left")
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=3)

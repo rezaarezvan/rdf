@@ -14,7 +14,7 @@
 \path[decorate, decoration={text along path, text={|\large\bfseries|Velocity}, text align=center}] (85:3.62) arc (85:-25:3.62);
 \path[decorate, decoration={text along path, text={|\large\bfseries|Volume}, text align=center}] (215:3.9) arc (215:325:3.9);
 \node at (192:2.4) {Structured};
-\node[align=center] at (122:2.25) {Structured \&\\Unstructured};
+\node[align=center, font=\small] at (-1.5, 1.75) {Structured \&\\Unstructured};
 \draw[->] (160:1.45) arc (160:125:1.45);
 \node at (62:2.45) {Batch};
 \node[align=center] at (350:2.25) {Streaming\\Data};

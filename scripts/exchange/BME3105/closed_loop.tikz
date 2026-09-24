@@ -10,7 +10,7 @@
 \draw[->] (-1.6, 0) -- (it);
 \draw[->] (it) -- node[pos=0.8, above] {\small $+$} (s0);
 \draw[->] (s0) -- (c);
-\node[c8, align=center, above] at (3.2, 0.45) {Error\\or\\Actuating\\signal};
+\node[c8, align=center, above] at (2.95, 0.7) {Error\\or\\Actuating\\signal};
 \draw[->] (c) -- node[pos=0.8, above] {\small $+$} (s1);
 \draw[->] (s1) -- (p);
 \draw[->] (p) -- node[pos=0.8, above] {\small $+$} (s2);

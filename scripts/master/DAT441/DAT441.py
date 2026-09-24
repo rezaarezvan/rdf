@@ -12,7 +12,7 @@ def _concentration(ax, color_map, offset):
         ax.plot(x, np.exp(-0.5 * ((x - mu) / sd) ** 2) / (sd * np.sqrt(2 * np.pi)), color=c, label=rf"$\mu_{i + 1}$")
         ax.axvline(mu + offset, color=c, ls="--", lw=1)
     ax.set(xlim=(-2, 10), ylim=(0, 1.6), xlabel="$x$", ylabel="Density")
-    ax.legend(loc="upper right")
+    ax.legend(loc="upper left")
 
 
 @figure("four_arms_concentration", height=3.2)

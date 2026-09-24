@@ -5,7 +5,6 @@
 \draw (6, 2) to[R, l=$R_5$] (6, 0);
 \draw (0, 0) -- (6, 0);
 \node[circ] at (3, 0) {};
-\node[circ] at (3.5, 0) {};
 \node[below left] at (v1) {$v_1$};
 \node[above] at (v2) {$v_2$};
 \node[below right] at (v3) {$v_3$};
