@@ -102,11 +102,11 @@ RDF(style=Path("paper.mplstyle"))
 
 ## CLI
 ```
-python -m rdf build <path>             render every @figure in a file or directory
+python -m rdf build <path>             render every @figure in a file or directory (recursive)
 python -m rdf inkscape <file.svg>      convert Inkscape SVG to RDF format
 python -m rdf palette --css            CSS variables block
 python -m rdf palette --inkscape       Inkscape palette (.gpl)
 ```
 
 ## gallery
-`scripts/` — every subdirectory is a built figure set.
+`scripts/<level>/<course>/` mirrors the blog (`bachelor`, `master`, `exchange`, `essays`); figures build to `result/<level>/<course>/`.

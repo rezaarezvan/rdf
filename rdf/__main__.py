@@ -72,7 +72,7 @@ def cmd_build(args: list[str]):
     target = Path(args[0])
     assert target.exists(), f"not found: {target}"
     files = (
-        sorted(p for p in target.glob("*.py") if not p.name.startswith("_"))
+        sorted(p for p in target.rglob("*.py") if not p.name.startswith("_"))
         if target.is_dir()
         else [target]
     )
@@ -86,7 +86,13 @@ def cmd_build(args: list[str]):
         finally:
             sys.argv, sys.path = saved_argv, list(saved_path)
         if registry.registered():
-            registry.build(RDF(name=f.stem))
+            registry.build(RDF(name=_out_name(f)))
+
+
+def _out_name(f: Path) -> str:
+    parts = f.resolve().parent.parts
+    rel = parts[len(parts) - parts[::-1].index("scripts") :] if "scripts" in parts else ()
+    return str(Path(*rel)) if rel else f.stem
 
 
 def main():
