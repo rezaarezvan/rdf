@@ -42,7 +42,7 @@ def _panel(ax, color_map, f, slot, chord_x, title):
         )
 
 
-@figure("convex_functions", height=3.1)
+@figure("convex_functions", height=3.6)
 def plot_convex_functions(fig, color_map):
     ax1, ax2 = fig.subplots(1, 2)
 
@@ -61,5 +61,5 @@ def plot_convex_functions(fig, color_map):
         [-1, 1], [0, 0], s=45, color=color_map["c1"], zorder=6, label="Local minima"
     )
 
-    ax1.legend(loc="upper center")
-    ax2.legend(loc="upper center")
+    for ax in (ax1, ax2):
+        ax.legend(loc="upper center", bbox_to_anchor=(0.5, 0))

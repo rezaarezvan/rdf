@@ -15,7 +15,6 @@ def plot_sigmoid(ax, color_map):
 
     ax.set_xlabel("$f(x)$")
     ax.set_ylabel(r"$\sigma(f(x))$")
-    ax.legend(loc="upper left")
 
     ax.set_xlim(-10, 10)
     ax.set_ylim(-0.1, 1.1)

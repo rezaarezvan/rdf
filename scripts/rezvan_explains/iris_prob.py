@@ -5,7 +5,7 @@ from sklearn.datasets import load_iris
 from rdf import figure
 
 
-@figure("iris_probabilities", height=3.1)
+@figure("iris_probabilities", height=3.5)
 def plot_probabilities(fig, color_map):
     ax1, ax2 = fig.subplots(1, 2)
 
@@ -34,4 +34,4 @@ def plot_probabilities(fig, color_map):
 
     ax1.set_ylabel("$p(x \\mid y)$")
     ax2.set_ylabel("$p(y \\mid x)$")
-    ax2.legend(loc="upper right")
+    fig.legend(*ax2.get_legend_handles_labels(), loc="outside lower center", ncol=3)
