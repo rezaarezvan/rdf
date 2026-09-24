@@ -1,0 +1,26 @@
+\usetikzlibrary{shapes.symbols}
+\begin{tikzpicture}[>={Stealth[length=2.5mm]}, line width=0.8pt,
+    box/.style={draw=c8, fill=c8, fill opacity=0.2, text opacity=1, rounded corners=4pt, align=center, text width=3.2cm, minimum height=1.6cm},
+    cld/.style={draw=c8, fill=c8, fill opacity=0.2, text opacity=1, cloud, cloud puffs=13, aspect=2.4, align=center, inner sep=2pt}]
+\node[box] (s1) at (-0.4, 4.6) {1. The problem situation: unstructured};
+\node[box] (s2) at (1.6, 1.8) {2. The problem situation: expressed};
+\node[cld] (s3) at (1.6, -2.6) {3. Root definition\\of relevant systems};
+\node[cld] (s4) at (8.8, -2.6) {4. Conceptual\\models};
+\node[box] (s5) at (8.2, 1.4) {5. Comparison of models to the problem situation};
+\node[box] (s6) at (11.4, 3.2) {6. Definition of feasible desirable changes};
+\node[box] (s7) at (7.4, 4.6) {7. Action to solve the problem or improve the situation};
+\draw[->, c8] (s1) -- (s2);
+\draw[->, c8] (s2) -- (s3);
+\draw[->, c8] (s3) -- (s4);
+\draw[->, c8] (s4) -- (s5);
+\draw[->, c8] (s5) -- (s6);
+\draw[->, c8] (s6) -- (s7);
+\draw[dashed] (-2.2, -0.3) -- (13.6, -0.3);
+\node[anchor=south west] at (-2.2, -0.3) {Real world thinking};
+\node[anchor=north west] at (-2.2, -0.3) {Systems thinking};
+\node[align=center] at (-1.9, 2.9) {Finding\\out};
+\node[align=center, font=\bfseries\large] at (4.9, 2.4) {Soft\\Systems\\Methodology};
+\node[align=center] at (5.0, -1.8) {Building\\models};
+\node[align=center] at (11.4, 0.9) {Evaluating\\models};
+\node[align=center] at (10.4, 5.2) {Taking\\action};
+\end{tikzpicture}
