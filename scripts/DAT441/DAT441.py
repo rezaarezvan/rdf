@@ -2,78 +2,24 @@ import numpy as np
 
 from rdf import figure
 
+ARMS = [(1, 0.3), (3, 0.5), (5.5, 0.8), (8, 0.4)]
 
-@figure("four_arms_concentration")
+
+def _concentration(ax, color_map, offset):
+    x = np.linspace(-2, 10, 1000)
+    for i, (mu, sd) in enumerate(ARMS):
+        c = color_map[("c1", "c2", "c8", "black")[i]]
+        ax.plot(x, np.exp(-0.5 * ((x - mu) / sd) ** 2) / (sd * np.sqrt(2 * np.pi)), color=c, label=rf"$\mu_{i + 1}$")
+        ax.axvline(mu + offset, color=c, ls="--", lw=1)
+    ax.set(xlim=(-2, 10), ylim=(0, 1.6), xlabel="$x$", ylabel="Density")
+    ax.legend(loc="upper right")
+
+
+@figure("four_arms_concentration", height=3.2)
 def plot_concentration(ax, color_map):
-    """
-    Plot a clean, blog-friendly visualization of four arms with (different) mean
-    \\mu_n and their empirical (dotted) distribution and show how concentration can differ.
-    """
-    # Set up the plot bounds with padding
-    x_min, x_max = -2, 10
-    y_min, y_max = -0.1, 2
-    padding = 0.2
-
-    # Create x values for plotting the distributions
-    x = np.linspace(x_min, x_max, 1000)
-
-    # Define four arms with different means and standard deviations (concentrations)
-    arms = [
-        {"mean": 1, "std": 0.3, "label": r"$\mu_1$"},
-        {"mean": 3, "std": 0.5, "label": r"$\mu_2$"},
-        {"mean": 5.5, "std": 0.8, "label": r"$\mu_3$"},
-        {"mean": 8, "std": 0.4, "label": r"$\mu_4$"},
-    ]
-
-    # Plot each arm's probability distribution
-    for i, arm in enumerate(arms):
-        mean = arm["mean"]
-        std = arm["std"]
-        label = arm["label"]
-
-        # Calculate Gaussian probability density
-        pdf = (1 / (std * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mean) / std) ** 2)
-
-        # Plot the distribution curve
-        ax.plot(x, pdf, color=color_map[f"c{i + 1}"], linewidth=2.5, label=label)
-
-        # Add a vertical line at the mean
-        ax.axvline(
-            x=mean + 0.5,
-            color=color_map[f"c{i + 1}"],
-            linestyle="--",
-            alpha=0.7,
-            linewidth=1.5,
-        )
-
-        # Add mean label at the bottom
-        ax.text(
-            mean,
-            -0.10,
-            label,
-            fontsize=11,
-            ha="center",
-            va="top",
-            color=color_map[f"c{i + 1}"],
-            weight="bold",
-        )
-
-    # Customize plot appearance
-    ax.set_title("Concentration of Four Arms", fontsize=12, pad=15)
-    ax.set_xlabel(r"$x$", fontsize=10)
-    ax.set_ylabel("Probability Density", fontsize=10)
-
-    # Set axis limits with padding
-    ax.set_xlim(x_min - padding, x_max + padding)
-    ax.set_ylim(y_min, y_max + padding)
-
-    # Clean legend
-    ax.legend(
-        frameon=True,
-        framealpha=0.9,
-        loc="upper right",
-        fontsize=9,
-        bbox_to_anchor=(0.98, 0.98),
-    )
+    _concentration(ax, color_map, 0)
 
 
+@figure("four_arms_concentration_mixed", height=3.2)
+def plot_concentration_mixed(ax, color_map):
+    _concentration(ax, color_map, 0.5)
