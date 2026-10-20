@@ -15,7 +15,7 @@ TAG_PATTERNS = [
     (r'<g id="ytick_[^"]*"', r'<g class="tick ytick"'),
     (r'<g id="ztick_[^"]*"', r'<g class="tick ztick"'),
     (r'<g id="patch_[^"]*"', r'<g class="patch"'),
-    (r'<g id="(Poly3D|Line3D)[^"]*"', r'<g class="plot3d"'),
+    (r'<g id="(Line3D)[^"]*"', r'<g class="plot3d"'),
     (r'<g id="([^\"]*grid3d[^\"]*)"', r'<g id="\1" class="plot3d-grid"'),
     (r'<g id="(grid_[^"]*)"', r'<g id="\1" class="grid"'),
 ]

@@ -1,0 +1,65 @@
+\begin{tikzpicture}[
+  node distance=4mm and 5mm,
+  >={Triangle[open, length=1.8mm, width=1.8mm]},
+  box/.style={draw=black, rounded corners=2.5pt, line width=0.8pt, minimum width=17mm, minimum height=7mm, font=\small},
+  cell/.style={anchor=center, minimum size=5.6mm, inner sep=0pt, font=\scriptsize, line width=0.4pt},
+  true/.style={cell, draw=c7, fill=c7, fill opacity=0.18, text opacity=1},
+  hid/.style={cell, draw=c7, fill=c7, fill opacity=0.6},
+  obs/.style={cell, draw=c8, fill=c8, fill opacity=1, text opacity=1, text=white},
+  new/.style={cell, draw=c7, fill=white, fill opacity=1, text opacity=1},
+  grid/.style={matrix of nodes, nodes in empty cells, ampersand replacement=\&, column sep=0.6mm, row sep=0.6mm},
+  probs/.style={matrix of nodes, ampersand replacement=\&, column sep=-0.4pt, nodes={draw=black, line width=0.4pt, font=\scriptsize, minimum width=6mm, minimum height=4mm, inner sep=0pt}},
+  act/.style={draw=c1, text=c1, rounded corners=1.5pt, line width=0.8pt, minimum size=5mm, font=\small},
+  flow/.style={->, line width=0.8pt},
+  note/.style={font=\scriptsize, align=right},
+]
+\node[box] (data) {Dataset};
+\matrix (x) [grid, right=of data, nodes={true}] {
+  1.2 \& 2.1 \& 3.7 \& 4.3 \\
+  5.4 \& 6.8 \& 7.9 \& 8.9 \\
+  9.5 \& 10.6 \& 11.7 \& 12.2 \\
+  13.3 \& 14.1 \& 15.6 \& 16.4 \\
+};
+\node[above=0.5mm of x, font=\small] {True features};
+\node[below=0.5mm of x, font=\small] {$x$};
+\node[box, right=of x] (init) {Initializer};
+
+\matrix (s0) [grid, right=of init, nodes={hid}] {
+  \& \& \& \\
+  \& \& \& |[obs]| 8.9 \\
+  \& \& \& \\
+  |[obs]| 13.3 \& \& \& |[obs]| 16.4 \\
+};
+\node[box, above=of s0] (clf0) {Classifier};
+\matrix (p0) [probs, above=3mm of clf0] {0.3 \& 0.5 \& 0.2 \\};
+\node[box, below=7mm of s0] (pol0) {Policy};
+
+\node[box, right=of s0] (unm) {Unmasker};
+\node[act] (a0) at (unm |- pol0) {2};
+\node[below=0mm of a0, font=\small] {$a_0$};
+
+\matrix (s1) [grid, right=of unm, nodes={hid}] {
+  \& \& |[new]| 3.7 \& |[new]| 4.3 \\
+  \& \& |[new]| 7.9 \& |[obs]| 8.9 \\
+  \& \& \& \\
+  |[obs]| 13.3 \& \& \& |[obs]| 16.4 \\
+};
+\node[draw=c1, line width=0.8pt, rounded corners=1pt, fit=(s1-1-3)(s1-2-4), inner sep=0.6mm] (blk) {};
+\node[above=-0.6mm of blk.north, text=c1, font=\tiny] {2};
+\node[box, above=of s1] (clf1) {Classifier};
+\matrix (p1) [probs, above=3mm of clf1] {0.6 \& 0.3 \& 0.1 \\};
+\node[box, below=7mm of s1] (pol1) {Policy};
+\node[act, draw=black, text=black, right=5mm of pol1] (a1) {0};
+\node[above=0mm of a1, font=\tiny] {STOP};
+\node[below=0mm of a1, font=\small] {$a_1$};
+
+\foreach \a/\b in {data/x, x/init, init/s0, s0/unm, unm/s1, s0/clf0, clf0/p0, s0/pol0, pol0/a0, a0/unm, s1/clf1, clf1/p1, s1/pol1, pol1/a1}
+  \draw[flow] (\a) -- (\b);
+
+\node[note, anchor=south east] (n1) at ([xshift=-2mm, yshift=1mm]s0-1-1.north west) {Some features are\\initially unobserved};
+\draw[->, line width=0.4pt, >={Stealth[length=1.2mm]}] (n1.east) to[out=0, in=120] (s0-1-1.north west);
+\node[note, anchor=north east] (n2) at ([xshift=-2mm, yshift=-1mm]s0-4-1.south west) {Some features are\\\textcolor{c8}{initially observed}};
+\draw[->, line width=0.4pt, draw=c8, >={Stealth[length=1.2mm]}] (n2.east) to[out=0, in=240] (s0-4-1.south west);
+\node[anchor=north west, font=\small] at ([yshift=-0.5mm]s0.south west) {$t=0$};
+\node[anchor=north west, font=\small] at ([yshift=-0.5mm]s1.south west) {$t=1$};
+\end{tikzpicture}

@@ -2,9 +2,9 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="468pt" height="289.246pt" viewBox="0 0 346.666667 214.256283" xmlns="http://www.w3.org/2000/svg" version="1.1">
-<style>:root { --axis-color:#2a241c; --grid-color:rgba(42, 36, 28, 0.14); --black:#000000;--c1:#D55E00;--c2:#009E73;--c3:#56B4E9;--c4:#CC79A7;--c5:#E69F00;--c6:#C7B42E;--c7:#999999;--c8:#0072B2;--gray:#999999;--grey:#999999;--octonary:#0072B2;--primary:#D55E00;--quaternary:#CC79A7;--quinary:#E69F00;--secondary:#009E73;--senary:#C7B42E;--septenary:#999999;--tertiary:#56B4E9;--white:#ffffff; }
+<style>:root { --axis-color:#2a241c; --grid-color:rgba(42, 36, 28, 0.14); --black:#000000;--c1:#D55E00;--c2:#009E73;--c3:#56B4E9;--c4:#CC79A7;--c5:#E69F00;--c6:#F0E442;--c7:#999999;--c8:#0072B2;--gray:#999999;--grey:#999999;--octonary:#0072B2;--primary:#D55E00;--quaternary:#CC79A7;--quinary:#E69F00;--secondary:#009E73;--senary:#F0E442;--septenary:#999999;--tertiary:#56B4E9;--white:#ffffff; }
 @media (prefers-color-scheme:dark) {
-  :root { --axis-color:#e6dfd2; --grid-color:rgba(230, 223, 210, 0.16); --black:#FFFFFF;--c1:#E36A1C;--c2:#23AB7F;--c3:#3F9FD3;--c4:#C673A1;--c5:#C38819;--c6:#847500;--c7:#929292;--c8:#1F81C2;--gray:#929292;--grey:#929292;--octonary:#1F81C2;--primary:#E36A1C;--quaternary:#C673A1;--quinary:#C38819;--secondary:#23AB7F;--senary:#847500;--septenary:#929292;--tertiary:#3F9FD3;--white:#000000; }
+  :root { --axis-color:#e6dfd2; --grid-color:rgba(230, 223, 210, 0.16); --black:#ECECE6;--c1:#D55E00;--c2:#009E73;--c3:#56B4E9;--c4:#CC79A7;--c5:#E69F00;--c6:#F0E442;--c7:#999999;--c8:#0072B2;--gray:#999999;--grey:#999999;--octonary:#0072B2;--primary:#D55E00;--quaternary:#CC79A7;--quinary:#E69F00;--secondary:#009E73;--senary:#F0E442;--septenary:#999999;--tertiary:#56B4E9;--white:#1E1F1C; }
 }
 .plot3d path,.plot3d polygon { stroke:var(--axis-color); }
 .plot3d-grid line { stroke:var(--grid-color); }</style>
@@ -73,73 +73,85 @@ L 155.26 114.75
   </g>
   <g id="grid3d_1" class="plot3d-grid">
    <g class="plot3d">
-    <path d="M 99.26 171.61 
-L 162.41 116.87 
-L 161.68 12.97 
+    <path d="M 95.56 170.38 
+L 158.88 115.82 
+L 157.97 12.04 
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
-    <path d="M 120.66 178.66 
-L 182.74 122.88 
-L 183.09 18.33 
+    <path d="M 112.42 175.94 
+L 174.92 120.57 
+L 174.85 16.27 
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
-    <path d="M 142.48 185.85 
-L 203.44 129.01 
-L 204.92 23.79 
+    <path d="M 129.55 181.59 
+L 191.18 125.38 
+L 191.99 20.55 
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
-    <path d="M 164.74 193.18 
-L 224.53 135.25 
-L 227.17 29.35 
+    <path d="M 146.95 187.32 
+L 207.68 130.27 
+L 209.39 24.9 
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
-    <path d="M 187.44 200.66 
-L 246 141.61 
-L 249.86 35.02 
+    <path d="M 164.63 193.14 
+L 224.42 135.22 
+L 227.06 29.32 
+" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
+    <path d="M 182.58 199.06 
+L 241.4 140.25 
+L 245 33.81 
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
    </g>
   </g>
   <g id="grid3d_2" class="plot3d-grid">
    <g class="plot3d">
-    <path d="M 92.16 55.83 
-L 96.71 164.88 
-L 204.45 200.09 
+    <path d="M 89.57 57.7 
+L 94.27 166.96 
+L 202.23 202.38 
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
-    <path d="M 106.64 45.38 
-L 110.35 153.2 
-L 216.91 187.24 
+    <path d="M 101.16 49.34 
+L 105.18 157.62 
+L 212.19 192.11 
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
-    <path d="M 120.64 35.28 
-L 123.55 141.9 
-L 228.94 174.83 
+    <path d="M 112.44 41.2 
+L 115.81 148.52 
+L 221.89 182.11 
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
-    <path d="M 134.16 25.51 
-L 136.33 130.95 
-L 240.58 162.83 
+    <path d="M 123.41 33.28 
+L 126.17 139.65 
+L 231.33 172.37 
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
-    <path d="M 147.25 16.07 
-L 148.72 120.35 
-L 251.84 151.22 
+    <path d="M 134.1 25.56 
+L 136.27 131.01 
+L 240.52 162.89 
+" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
+    <path d="M 144.5 18.05 
+L 146.12 122.57 
+L 249.48 153.66 
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
    </g>
   </g>
   <g id="grid3d_3" class="plot3d-grid">
    <g class="plot3d">
-    <path d="M 258.09 137.7 
-L 155.18 107.56 
-L 91.41 161.57 
+    <path d="M 257.94 141.35 
+L 155.22 111.11 
+L 91.57 165.3 
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
-    <path d="M 258.99 116.62 
-L 154.96 87.1 
-L 90.45 140.02 
+    <path d="M 258.64 124.74 
+L 155.05 94.98 
+L 90.82 148.32 
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
-    <path d="M 259.9 95.08 
-L 154.74 66.21 
-L 89.47 117.98 
+    <path d="M 259.36 107.85 
+L 154.87 78.59 
+L 90.05 131.05 
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
-    <path d="M 260.84 73.05 
-L 154.51 44.87 
-L 88.47 95.43 
+    <path d="M 260.09 90.66 
+L 154.69 61.93 
+L 89.27 113.46 
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
-    <path d="M 261.79 50.53 
-L 154.28 23.08 
-L 87.44 72.35 
+    <path d="M 260.83 73.16 
+L 154.51 44.98 
+L 88.47 95.55 
+" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
+    <path d="M 261.59 55.36 
+L 154.33 27.75 
+L 87.66 77.3 
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6"/>
    </g>
   </g>
@@ -155,13 +167,13 @@ L 199.91 204.77
 " clip-path="url(#pb56c93ba56)" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
     </g>
     <g id="line2d_3">
-     <path d="M 99.81 171.13 
-L 98.17 172.55 
+     <path d="M 96.1 169.91 
+L 94.46 171.33 
 " style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
     </g>
     <g id="text_1" class="text">
      <!-- $\mathdefault{−3}$ -->
-     <g style="fill:var(--axis-color)" transform="translate(86.533821 200.117774) scale(0.105 -0.105)">
+     <g style="fill:var(--axis-color)" transform="translate(82.828242 198.862428) scale(0.105 -0.105)">
       <defs>
        <path id="EBGaramond-Regular-b26" d="M 410 1421 
 Q 378 1421 349 1446 
@@ -244,13 +256,13 @@ z
 " clip-path="url(#pb56c93ba56)" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
     </g>
     <g id="line2d_5">
-     <path d="M 121.2 178.17 
-L 119.58 179.62 
+     <path d="M 112.96 175.46 
+L 111.34 176.9 
 " style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
     </g>
     <g id="text_2" class="text">
      <!-- $\mathdefault{−2}$ -->
-     <g style="fill:var(--axis-color)" transform="translate(107.929445 207.366009) scale(0.105 -0.105)">
+     <g style="fill:var(--axis-color)" transform="translate(99.693146 204.575783) scale(0.105 -0.105)">
       <defs>
        <path id="EBGaramond-Regular-8cf" d="M 2681 -19 
 Q 2617 -19 2473 -9 
@@ -315,13 +327,13 @@ z
 " clip-path="url(#pb56c93ba56)" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
     </g>
     <g id="line2d_7">
-     <path d="M 143.01 185.35 
-L 141.42 186.83 
+     <path d="M 130.09 181.1 
+L 128.48 182.56 
 " style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
     </g>
     <g id="text_3" class="text">
      <!-- $\mathdefault{−1}$ -->
-     <g style="fill:var(--axis-color)" transform="translate(129.748106 214.757558) scale(0.105 -0.105)">
+     <g style="fill:var(--axis-color)" transform="translate(116.820792 210.378148) scale(0.105 -0.105)">
       <defs>
        <path id="EBGaramond-Regular-8ce" d="M 685 -19 
 Q 589 -19 589 58 
@@ -368,13 +380,13 @@ z
 " clip-path="url(#pb56c93ba56)" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
     </g>
     <g id="line2d_9">
-     <path d="M 165.26 192.68 
-L 163.7 194.19 
+     <path d="M 147.48 186.83 
+L 145.9 188.31 
 " style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
     </g>
     <g id="text_4" class="text">
      <!-- $\mathdefault{0}$ -->
-     <g style="fill:var(--axis-color)" transform="translate(155.152476 222.296712) scale(0.105 -0.105)">
+     <g style="fill:var(--axis-color)" transform="translate(137.36737 216.271618) scale(0.105 -0.105)">
       <defs>
        <path id="EBGaramond-Regular-8cd" d="M 1568 -90 
 Q 1242 -90 1002 89 
@@ -422,18 +434,35 @@ z
 " clip-path="url(#pb56c93ba56)" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
     </g>
     <g id="line2d_11">
-     <path d="M 187.95 200.15 
-L 186.42 201.69 
+     <path d="M 165.14 192.64 
+L 163.59 194.15 
 " style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
     </g>
     <g id="text_5" class="text">
      <!-- $\mathdefault{1}$ -->
-     <g style="fill:var(--axis-color)" transform="translate(177.855739 229.987938) scale(0.105 -0.105)">
+     <g style="fill:var(--axis-color)" transform="translate(155.039262 222.258358) scale(0.105 -0.105)">
       <use xlink:href="#EBGaramond-Regular-8ce" transform="translate(0 0.296875)"/>
      </g>
     </g>
    </g>
-   <g id="text_6" class="text">
+   <g class="tick xtick">
+    <g id="line2d_12">
+     <path d="M 176.17 104.29 
+" clip-path="url(#pb56c93ba56)" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
+    </g>
+    <g id="line2d_13">
+     <path d="M 183.09 198.55 
+L 181.56 200.08 
+" style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
+    </g>
+    <g id="text_6" class="text">
+     <!-- $\mathdefault{2}$ -->
+     <g style="fill:var(--axis-color)" transform="translate(172.993058 228.340599) scale(0.105 -0.105)">
+      <use xlink:href="#EBGaramond-Regular-8cf"/>
+     </g>
+    </g>
+   </g>
+   <g id="text_7" class="text">
     <!-- $\beta_x(t)$ -->
     <g style="fill:var(--axis-color)" transform="translate(119.927954 227.124232) rotate(-341.762949) scale(0.1 -0.1)">
      <defs>
@@ -689,28 +718,10 @@ z
    </g>
   </g>
   <g id="axis3d_2">
-   <g id="line2d_12">
+   <g id="line2d_14">
     <path d="M 257.78 145.1 
 L 199.91 204.77 
 " style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
-   </g>
-   <g class="tick xtick">
-    <g id="line2d_13">
-     <path d="M 176.17 104.29 
-" clip-path="url(#pb56c93ba56)" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
-    </g>
-    <g id="line2d_14">
-     <path d="M 203.55 199.79 
-L 206.26 200.68 
-" style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
-    </g>
-    <g id="text_7" class="text">
-     <!-- $\mathdefault{−3}$ -->
-     <g style="fill:var(--axis-color)" transform="translate(211.002266 226.359477) scale(0.105 -0.105)">
-      <use xlink:href="#EBGaramond-Regular-b26"/>
-      <use xlink:href="#EBGaramond-Regular-8d0" transform="translate(59.999939 0)"/>
-     </g>
-    </g>
    </g>
    <g class="tick xtick">
     <g id="line2d_15">
@@ -718,15 +729,15 @@ L 206.26 200.68
 " clip-path="url(#pb56c93ba56)" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
     </g>
     <g id="line2d_16">
-     <path d="M 216.01 186.96 
-L 218.7 187.82 
+     <path d="M 201.32 202.09 
+L 204.04 202.98 
 " style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
     </g>
     <g id="text_8" class="text">
-     <!-- $\mathdefault{−2}$ -->
-     <g style="fill:var(--axis-color)" transform="translate(223.238538 213.257787) scale(0.105 -0.105)">
+     <!-- $\mathdefault{−3}$ -->
+     <g style="fill:var(--axis-color)" transform="translate(208.814713 228.701746) scale(0.105 -0.105)">
       <use xlink:href="#EBGaramond-Regular-b26"/>
-      <use xlink:href="#EBGaramond-Regular-8cf" transform="translate(59.999939 0)"/>
+      <use xlink:href="#EBGaramond-Regular-8d0" transform="translate(59.999939 0)"/>
      </g>
     </g>
    </g>
@@ -736,15 +747,15 @@ L 218.7 187.82
 " clip-path="url(#pb56c93ba56)" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
     </g>
     <g id="line2d_18">
-     <path d="M 228.06 174.56 
-L 230.71 175.38 
+     <path d="M 211.29 191.82 
+L 213.99 192.69 
 " style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
     </g>
     <g id="text_9" class="text">
-     <!-- $\mathdefault{−1}$ -->
-     <g style="fill:var(--axis-color)" transform="translate(235.063622 200.596366) scale(0.105 -0.105)">
-      <use xlink:href="#EBGaramond-Regular-b26" transform="translate(0 0.296875)"/>
-      <use xlink:href="#EBGaramond-Regular-8ce" transform="translate(59.999939 0.296875)"/>
+     <!-- $\mathdefault{−2}$ -->
+     <g style="fill:var(--axis-color)" transform="translate(218.606068 218.217891) scale(0.105 -0.105)">
+      <use xlink:href="#EBGaramond-Regular-b26"/>
+      <use xlink:href="#EBGaramond-Regular-8cf" transform="translate(59.999939 0)"/>
      </g>
     </g>
    </g>
@@ -754,14 +765,15 @@ L 230.71 175.38
 " clip-path="url(#pb56c93ba56)" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
     </g>
     <g id="line2d_20">
-     <path d="M 239.71 162.56 
-L 242.33 163.36 
+     <path d="M 221 181.82 
+L 223.67 182.67 
 " style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
     </g>
     <g id="text_10" class="text">
-     <!-- $\mathdefault{0}$ -->
-     <g style="fill:var(--axis-color)" transform="translate(249.647901 188.35339) scale(0.105 -0.105)">
-      <use xlink:href="#EBGaramond-Regular-8cd"/>
+     <!-- $\mathdefault{−1}$ -->
+     <g style="fill:var(--axis-color)" transform="translate(228.134043 208.016044) scale(0.105 -0.105)">
+      <use xlink:href="#EBGaramond-Regular-b26" transform="translate(0 0.296875)"/>
+      <use xlink:href="#EBGaramond-Regular-8ce" transform="translate(59.999939 0.296875)"/>
      </g>
     </g>
    </g>
@@ -771,18 +783,52 @@ L 242.33 163.36
 " clip-path="url(#pb56c93ba56)" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
     </g>
     <g id="line2d_22">
-     <path d="M 250.98 150.96 
-L 253.57 151.74 
+     <path d="M 230.45 172.1 
+L 233.1 172.92 
 " style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
     </g>
     <g id="text_11" class="text">
+     <!-- $\mathdefault{0}$ -->
+     <g style="fill:var(--axis-color)" transform="translate(240.559125 198.084975) scale(0.105 -0.105)">
+      <use xlink:href="#EBGaramond-Regular-8cd"/>
+     </g>
+    </g>
+   </g>
+   <g class="tick xtick">
+    <g id="line2d_23">
+     <path d="M 176.17 104.29 
+" clip-path="url(#pb56c93ba56)" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
+    </g>
+    <g id="line2d_24">
+     <path d="M 239.65 162.62 
+L 242.27 163.42 
+" style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
+    </g>
+    <g id="text_12" class="text">
      <!-- $\mathdefault{1}$ -->
-     <g style="fill:var(--axis-color)" transform="translate(260.710434 176.508452) scale(0.105 -0.105)">
+     <g style="fill:var(--axis-color)" transform="translate(249.591251 188.414047) scale(0.105 -0.105)">
       <use xlink:href="#EBGaramond-Regular-8ce" transform="translate(0 0.296875)"/>
      </g>
     </g>
    </g>
-   <g id="text_12" class="text">
+   <g class="tick xtick">
+    <g id="line2d_25">
+     <path d="M 176.17 104.29 
+" clip-path="url(#pb56c93ba56)" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
+    </g>
+    <g id="line2d_26">
+     <path d="M 248.62 153.4 
+L 251.21 154.18 
+" style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
+    </g>
+    <g id="text_13" class="text">
+     <!-- $\mathdefault{2}$ -->
+     <g style="fill:var(--axis-color)" transform="translate(258.389842 178.993169) scale(0.105 -0.105)">
+      <use xlink:href="#EBGaramond-Regular-8cf"/>
+     </g>
+    </g>
+   </g>
+   <g id="text_14" class="text">
     <!-- $\beta_y(t)$ -->
     <g style="fill:var(--axis-color)" transform="translate(252.061751 214.962401) rotate(-45.880104) scale(0.1 -0.1)">
      <defs>
@@ -841,46 +887,10 @@ z
    </g>
   </g>
   <g id="axis3d_3">
-   <g id="line2d_23">
+   <g id="line2d_27">
     <path d="M 257.78 145.1 
 L 262.32 38.14 
 " style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
-   </g>
-   <g class="tick xtick">
-    <g id="line2d_24">
-     <path d="M 176.17 104.29 
-" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
-    </g>
-    <g id="line2d_25">
-     <path d="M 257.23 137.45 
-L 259.82 138.21 
-" style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
-    </g>
-    <g id="text_13" class="text">
-     <!-- $\mathdefault{−3}$ -->
-     <g style="fill:var(--axis-color)" transform="translate(270.0397 145.751327) scale(0.105 -0.105)">
-      <use xlink:href="#EBGaramond-Regular-b26"/>
-      <use xlink:href="#EBGaramond-Regular-8d0" transform="translate(59.999939 0)"/>
-     </g>
-    </g>
-   </g>
-   <g class="tick xtick">
-    <g id="line2d_26">
-     <path d="M 176.17 104.29 
-" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
-    </g>
-    <g id="line2d_27">
-     <path d="M 258.12 116.37 
-L 260.73 117.12 
-" style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
-    </g>
-    <g id="text_14" class="text">
-     <!-- $\mathdefault{−2}$ -->
-     <g style="fill:var(--axis-color)" transform="translate(271.121664 124.722489) scale(0.105 -0.105)">
-      <use xlink:href="#EBGaramond-Regular-b26"/>
-      <use xlink:href="#EBGaramond-Regular-8cf" transform="translate(59.999939 0)"/>
-     </g>
-    </g>
    </g>
    <g class="tick xtick">
     <g id="line2d_28">
@@ -888,15 +898,15 @@ L 260.73 117.12
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
     </g>
     <g id="line2d_29">
-     <path d="M 259.02 94.83 
-L 261.66 95.56 
+     <path d="M 257.08 141.09 
+L 259.66 141.85 
 " style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
     </g>
     <g id="text_15" class="text">
-     <!-- $\mathdefault{−1}$ -->
-     <g style="fill:var(--axis-color)" transform="translate(272.227407 103.231472) scale(0.105 -0.105)">
-      <use xlink:href="#EBGaramond-Regular-b26" transform="translate(0 0.296875)"/>
-      <use xlink:href="#EBGaramond-Regular-8ce" transform="translate(59.999939 0.296875)"/>
+     <!-- $\mathdefault{−3}$ -->
+     <g style="fill:var(--axis-color)" transform="translate(269.852546 149.388815) scale(0.105 -0.105)">
+      <use xlink:href="#EBGaramond-Regular-b26"/>
+      <use xlink:href="#EBGaramond-Regular-8d0" transform="translate(59.999939 0)"/>
      </g>
     </g>
    </g>
@@ -906,14 +916,15 @@ L 261.66 95.56
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
     </g>
     <g id="line2d_31">
-     <path d="M 259.94 72.82 
-L 262.62 73.52 
+     <path d="M 257.78 124.49 
+L 260.38 125.24 
 " style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
     </g>
     <g id="text_16" class="text">
-     <!-- $\mathdefault{0}$ -->
-     <g style="fill:var(--axis-color)" transform="translate(276.507723 81.262871) scale(0.105 -0.105)">
-      <use xlink:href="#EBGaramond-Regular-8cd"/>
+     <!-- $\mathdefault{−2}$ -->
+     <g style="fill:var(--axis-color)" transform="translate(270.704885 132.822918) scale(0.105 -0.105)">
+      <use xlink:href="#EBGaramond-Regular-b26"/>
+      <use xlink:href="#EBGaramond-Regular-8cf" transform="translate(59.999939 0)"/>
      </g>
     </g>
    </g>
@@ -923,18 +934,70 @@ L 262.62 73.52
 " style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
     </g>
     <g id="line2d_33">
-     <path d="M 260.89 50.3 
-L 263.59 50.99 
+     <path d="M 258.49 107.6 
+L 261.11 108.34 
 " style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
     </g>
     <g id="text_17" class="text">
+     <!-- $\mathdefault{−1}$ -->
+     <g style="fill:var(--axis-color)" transform="translate(271.571975 115.970324) scale(0.105 -0.105)">
+      <use xlink:href="#EBGaramond-Regular-b26" transform="translate(0 0.296875)"/>
+      <use xlink:href="#EBGaramond-Regular-8ce" transform="translate(59.999939 0.296875)"/>
+     </g>
+    </g>
+   </g>
+   <g class="tick xtick">
+    <g id="line2d_34">
+     <path d="M 176.17 104.29 
+" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
+    </g>
+    <g id="line2d_35">
+     <path d="M 259.21 90.42 
+L 261.86 91.14 
+" style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
+    </g>
+    <g id="text_18" class="text">
+     <!-- $\mathdefault{0}$ -->
+     <g style="fill:var(--axis-color)" transform="translate(275.604202 98.823527) scale(0.105 -0.105)">
+      <use xlink:href="#EBGaramond-Regular-8cd"/>
+     </g>
+    </g>
+   </g>
+   <g class="tick xtick">
+    <g id="line2d_36">
+     <path d="M 176.17 104.29 
+" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
+    </g>
+    <g id="line2d_37">
+     <path d="M 259.94 72.93 
+L 262.61 73.64 
+" style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
+    </g>
+    <g id="text_19" class="text">
      <!-- $\mathdefault{1}$ -->
-     <g style="fill:var(--axis-color)" transform="translate(277.66344 58.800587) scale(0.105 -0.105)">
+     <g style="fill:var(--axis-color)" transform="translate(276.501967 81.374755) scale(0.105 -0.105)">
       <use xlink:href="#EBGaramond-Regular-8ce" transform="translate(0 0.296875)"/>
      </g>
     </g>
    </g>
-   <g id="text_18" class="text">
+   <g class="tick xtick">
+    <g id="line2d_38">
+     <path d="M 176.17 104.29 
+" style="fill: none; stroke:var(--grid-color); stroke-width: 0.6; stroke-linecap: round"/>
+    </g>
+    <g id="line2d_39">
+     <path d="M 260.69 55.13 
+L 263.38 55.82 
+" style="fill: none; stroke:var(--axis-color); stroke-width: 0.7; stroke-linecap: round"/>
+    </g>
+    <g id="text_20" class="text">
+     <!-- $\mathdefault{2}$ -->
+     <g style="fill:var(--axis-color)" transform="translate(277.415682 63.615959) scale(0.105 -0.105)">
+      <use xlink:href="#EBGaramond-Regular-8cf"/>
+     </g>
+    </g>
+   </g>
+   <g id="text_21" class="text">
     <!-- $\beta_z(t)$ -->
     <g style="fill:var(--axis-color)" transform="translate(302.031277 96.448139) rotate(-87.572045) scale(0.1 -0.1)">
      <defs>
@@ -1011,628 +1074,621 @@ z
    </g>
   </g>
   <g id="axes_1">
-   <g id="line2d_34">
-    <path d="M 207.9 79.92 
-L 210.15 79.97 
-L 209.18 80.06 
-L 210.32 85.21 
-L 209.28 88.04 
-L 204.28 86.11 
-L 205.14 86.54 
-L 204.09 91.35 
-L 204.05 92.72 
-L 199.47 96.02 
-L 201.51 96.52 
-L 199.73 90.82 
-L 198.95 95.12 
-L 199.19 95.17 
-L 200.72 100.21 
-L 205.17 104.35 
-L 204.29 102.7 
-L 204.88 102.33 
-L 205.48 102.18 
-L 203.13 101.33 
-L 202.22 101.59 
-L 203.58 102.07 
-L 201.17 106.06 
-L 202.19 107.52 
-L 201.29 112.75 
-L 198.83 114.55 
-L 199.18 112.53 
-L 202.09 114 
-L 196.4 117.09 
-L 195.25 116.95 
-L 195.23 120.37 
-L 192.79 121.63 
-L 191.08 121.83 
-L 189.18 119.64 
-L 187.35 123.44 
-L 190.66 117.58 
-L 187.98 115.14 
-L 186.39 114.9 
-L 189.29 115.94 
-L 190.11 117.26 
-L 195.83 116.8 
-L 197.53 118.12 
-L 198.61 119.53 
-L 194.54 122.53 
-L 196.1 121.58 
-L 198.74 115.5 
-L 198.25 112.93 
-L 197.58 108.63 
-L 200.52 103.68 
-L 200.45 100.86 
-L 200.07 100.26 
-L 197.27 101.19 
-L 197.53 99.84 
-L 198.86 98.13 
-L 199.55 99.53 
-L 201.39 102.55 
-L 199.57 101.4 
-L 197.46 101.19 
-L 197.24 102.22 
-L 198.11 101.1 
-L 199.8 96.9 
-L 197.97 100.28 
-L 198.88 102.11 
-L 198.31 103 
-L 198.6 106.13 
-L 200.76 106.58 
-L 205.02 108.82 
-L 204.52 107.07 
-L 202.15 113.24 
-L 201.54 113.16 
-L 203.24 112.64 
-L 203.05 106.69 
-L 198.92 107.91 
-L 202.16 107.37 
-L 203.13 108.22 
-L 198.42 109.19 
-L 198.37 111.71 
-L 198.62 115.06 
-L 201.09 115.48 
-L 199.75 118.95 
-L 198.64 117.86 
-L 196.55 116.58 
-L 196.64 118.19 
-L 192.51 118.25 
-L 191.11 117.45 
-L 188.82 114.52 
-L 190.69 114.46 
-L 194.36 114.71 
-L 195.08 113.51 
-L 198.62 112.4 
-L 193.88 116.1 
-L 189.07 109.66 
-L 189.6 110.58 
-L 186.56 109.17 
-L 187.11 109.3 
-L 186.19 115.11 
-L 185.05 113.33 
-L 187.38 114.63 
-L 185.15 114.43 
-L 183.71 111.89 
-L 180.86 108.34 
-L 179.07 110.73 
-L 176.08 114.29 
-L 174.26 111.54 
-L 172.25 113.05 
-L 175.78 111.1 
-L 178.87 115.28 
-L 178.4 115.04 
-L 174.83 118.78 
-L 173.76 122.7 
-L 177.79 122.02 
-L 178.34 122.89 
-L 179.28 121.72 
-L 175.91 119.77 
-L 178.47 119.31 
-L 177.57 118.26 
-L 177.43 120.25 
-L 177.13 116.34 
-L 176.78 117.62 
-L 176.75 125.06 
-L 173.86 128.2 
-L 173.58 129.75 
-L 170.8 128.65 
-L 171.08 127.29 
-L 180.69 124.57 
-L 180.99 124.86 
-L 181.7 120.85 
-L 176.09 119.29 
-L 173.55 116.41 
-L 175.99 116.37 
-L 173.35 114.44 
-L 175.49 112.78 
-L 174.86 108.54 
-L 176.35 109.49 
-L 176.09 107.45 
-L 174.12 109.5 
-L 178.74 104.44 
-L 178.52 103.65 
-L 177.49 105.05 
-L 178.32 103.43 
-L 179.04 109.99 
-L 175.47 110.63 
-L 177.04 114.3 
-L 178.27 114.6 
-L 181.27 115.98 
-L 180.39 114.94 
-L 176.63 116.42 
-L 173.77 115.34 
-L 175.97 107.83 
-L 175.31 107.86 
-L 178.66 106.69 
-L 179.85 106.79 
-L 177.82 104.88 
-L 181.34 107.87 
-L 180.92 106.38 
-L 178.33 103.41 
-L 179.23 106.4 
-L 180.58 108.38 
-L 178.53 113.68 
-L 178.76 112.75 
-L 182.69 110.26 
-L 185.97 112.34 
-L 188.57 112.3 
-L 189.75 111.45 
-L 191.78 112.31 
-L 191.87 112.86 
-L 192.43 111.11 
-L 193.05 111.06 
-L 192.92 114.39 
-L 194.81 116.43 
-L 196.28 117.76 
-L 196.63 117.72 
-L 199.4 121.02 
-L 198.85 121.87 
-L 198.06 126.51 
-L 197.97 128.63 
-L 199.38 128.14 
-L 200.51 126.55 
-L 196.19 122.67 
-L 196.86 122.07 
-L 198.78 124.92 
-L 199.67 122.4 
-L 200.24 123.67 
-L 200.2 125.72 
-L 201.66 127.25 
-L 203 128.42 
-L 200.48 127.2 
-L 201.03 128.72 
-L 198.25 128.21 
-L 196.58 128.07 
-L 192.88 126.23 
-L 192.7 122.21 
-L 189.15 120.36 
-L 193.34 119.62 
-L 193.8 120.6 
-L 194.31 117.59 
-L 190.59 118 
-L 185.5 114.91 
-L 183.05 112.91 
-L 179.49 109.58 
-L 180.01 111.88 
-L 179.51 113.13 
-L 178.33 112.67 
-L 180.73 110.03 
-L 180.39 112.41 
-L 177.4 111.96 
-L 180.76 110.39 
-L 177.87 110.48 
-L 177.26 108.99 
-L 178.56 110.64 
-L 180.09 107.95 
-L 183.01 109.21 
-L 185.99 111.62 
-L 185.99 113.2 
-L 180.89 114.18 
-L 180.11 112.31 
-L 178.23 112.51 
-L 180.34 112.29 
-L 177.53 116.26 
-L 172.96 115.81 
-L 176.35 115.88 
-L 170.06 117.42 
-L 172.78 115.12 
-L 174.13 116.44 
-L 168.66 115.4 
-L 171.81 117.2 
-L 169.39 120.99 
-L 162.17 123.06 
-L 161.84 123.38 
-L 162.22 125.07 
-L 162.17 125.78 
-L 161.29 125.88 
-L 160.78 127.21 
-L 163.41 128.99 
-L 160.37 125.59 
-L 163.72 123.93 
-L 162.57 123.54 
-L 161.96 125.51 
-L 161.43 124.65 
-L 161.37 123.68 
-L 164.37 125.77 
-L 162.56 122.97 
-L 163.12 119.63 
-L 161.57 121.29 
-L 163.8 121.25 
-L 167.05 121.58 
-L 166.3 124.95 
-L 164.64 126.25 
-L 165.13 126.3 
-L 165.54 125.1 
-L 165.8 120.1 
-L 164.66 121.59 
-L 162.29 120.71 
-L 164.75 123.73 
-L 157.45 129.41 
-L 159.22 135.52 
-L 154.83 133.77 
-L 159.46 137.65 
-L 153.96 136.29 
-L 154.79 137.85 
-L 153.22 143.14 
-L 149.28 139.6 
-L 149.94 139.94 
-L 154.53 140.38 
-L 156.4 142.45 
-L 150.76 141.86 
-L 147.76 139.8 
-L 148.7 136.91 
-L 148.35 138.93 
-L 146.75 139.06 
-L 152.7 133.7 
-L 151.18 129.81 
-L 148.83 128.71 
-L 148.97 129.12 
-L 148.45 130.05 
-L 144.22 132.3 
-L 143.24 134.7 
-L 140.44 136.31 
-L 143.46 132.08 
-L 143.27 131.01 
-L 137.14 128.93 
-L 137.82 127.14 
-L 137.84 127.43 
-L 141.01 128.77 
-L 140.02 126.24 
-L 134.62 125.58 
-L 132.59 125.1 
-L 130.92 124.4 
-L 130.2 123.18 
-L 126.3 122.8 
-L 125.45 124.07 
-L 123.86 126.05 
-L 126.53 128.4 
-L 129.34 128.93 
-L 133.22 128.48 
-L 131.13 129.22 
-L 134.04 127.64 
-L 133.07 132.17 
-L 136.05 132.63 
-L 135.05 133.14 
-L 133.23 130.12 
-L 130.45 129.31 
-L 128.7 126.55 
-L 128.87 127.34 
-L 131.03 125.44 
-L 134.03 127.15 
-L 131.33 127.68 
-L 132.5 128.75 
-L 133.59 127.9 
-L 134.57 129.35 
-L 130.3 128 
-L 137.83 129.07 
-L 141.49 131.82 
-L 138.69 135.03 
-L 140.23 136.46 
-L 136.85 138.12 
-L 135.07 137.57 
-L 132.88 142.24 
-L 134.15 142.94 
-L 133.22 147.09 
-L 133.22 148.1 
-L 134.91 148.1 
-L 137.61 147.74 
-L 133.51 147.96 
-L 137.44 151.66 
-L 136.06 150.29 
-L 136.7 148.53 
-L 135.09 151.75 
-L 135.05 146.43 
-L 136.34 147.43 
-L 132.79 145.03 
-L 131.3 150.52 
-L 129.8 150.51 
-L 134.29 149.67 
-L 136.26 152.25 
-L 137.27 150.41 
-L 137.48 151.1 
-L 140.75 144.56 
-L 146.25 141.16 
-L 147.17 137.98 
-L 145.77 138.54 
-L 145.64 139.6 
-L 145.12 139.81 
-L 144.57 138.7 
-L 145.39 136.9 
-L 144.11 138.76 
-L 146.41 138.87 
-L 149.56 136.81 
-L 149.64 135.73 
-L 156.19 134.83 
-L 162.13 133.21 
-L 159.07 131.17 
-L 160.48 131.02 
-L 158.51 130.81 
-L 157.6 132.7 
-L 158.69 139 
-L 162.25 141.55 
-L 163.11 136.16 
-L 163.04 130.98 
-L 162.9 131.23 
-L 162.24 133.41 
-L 163.89 136.04 
-L 160.88 142.13 
-L 161.74 141.45 
-L 164.73 141.19 
-L 163.44 143.02 
-L 164.2 143.64 
-L 162.28 142.73 
-L 163.04 147.09 
-L 157.79 143.87 
-L 158.18 139.97 
-L 163.36 139.83 
-L 167.29 137.33 
-L 161.87 135.16 
-L 164.48 132.27 
-L 165.49 129.17 
-L 170.28 127.58 
-L 167.43 128.59 
-L 161.06 126.07 
-L 162.83 124.24 
-L 162.08 122.42 
-L 161.83 125.94 
-L 159.64 123.37 
-L 161.45 126.77 
-L 158.8 125.6 
-L 156.95 121.06 
-L 155.48 119.06 
-L 154.57 121.39 
-L 154.43 122.76 
-L 157.07 124.47 
-L 156.16 124.57 
-L 155.55 121 
-L 151.75 120.97 
-L 152.56 124.95 
-L 154.77 122.81 
-L 151.57 121.97 
-L 151.87 121.18 
-L 149.43 118.61 
-L 155.92 114.6 
-L 155.19 111.91 
-L 151.63 110.95 
-L 152.28 110.3 
-L 156.01 113.83 
-L 153.12 117.65 
-L 153.44 116.83 
-L 158.85 116.48 
-L 163.66 118.42 
-L 164.13 118.01 
-L 171.37 118.34 
-L 170.18 116.76 
-L 169.15 119.7 
-L 172.13 121.17 
-L 169.41 126.92 
-L 168.13 123.21 
-L 167.27 123.51 
-L 168.62 125.79 
-L 174.35 129.49 
-L 177.53 129.35 
-L 182.08 126.67 
-L 177 125.86 
-L 175.96 124.56 
-L 173.86 122.49 
-L 174.28 118.53 
-L 172.53 115.73 
-L 170.44 115.23 
-L 173.02 118.49 
-L 171.18 115.55 
-L 169.8 118.39 
-L 166.28 119.68 
-L 167.16 119.51 
-L 168.57 122.14 
-L 169.95 124.41 
-L 166.04 122.66 
-L 168.84 122.91 
-L 168.25 123.87 
-L 166.84 131.17 
-L 166.33 128.52 
-L 163.64 128.08 
-L 163.09 125.65 
-L 164.86 127.84 
-L 161.68 125.07 
-L 166.18 120.23 
-L 168.25 115.48 
-L 168.76 110.64 
-L 164.34 108.49 
-L 164.64 109.86 
-L 162.31 109.18 
-L 159.87 116.58 
-L 159.99 120.54 
-L 158.58 120.68 
-L 155.6 117.86 
-L 160.84 119.4 
-L 165.13 121.59 
-L 163.56 123.82 
-L 162.5 121.93 
-L 166.99 116.92 
-L 166.54 119.38 
-L 165.03 119.27 
-L 168.27 117.74 
-L 170.49 115.41 
-L 170.42 117.91 
-L 169.33 115.87 
-L 171.46 114.31 
-L 170.81 113.79 
-L 169.77 110.92 
-L 167.97 110.19 
-L 164.08 109.64 
-L 168.09 111.43 
-L 165.68 109.89 
-L 165.19 107.48 
-L 163.09 108.5 
-L 162.55 104.27 
-L 164.69 106.61 
-L 163.88 109.14 
-L 168.27 110.86 
-L 170.03 110.33 
-L 172.82 110.84 
-L 172.16 106.74 
-L 170.57 107.43 
-L 170.93 108.35 
-L 169.04 106.25 
-L 168.23 105.74 
-L 173.54 102.73 
-L 169.61 99.48 
-L 166.22 100.7 
-L 170.01 102.77 
-L 170.41 102.67 
-L 170.48 103.97 
-L 174.64 100.71 
-L 172.29 102.39 
-L 169.76 102.97 
-L 173.88 102.89 
-L 174.48 102.6 
-L 172.71 105.82 
-L 171.23 105.08 
-L 172.59 105 
-L 169.29 102.64 
-L 166.18 98.07 
-L 166.59 99.2 
-L 167.55 103.88 
-L 163.26 104.56 
-L 166.25 103.78 
-L 169.14 107.24 
-L 168.99 105.19 
-L 172.93 109.09 
-L 171.73 110.23 
-L 167.96 111.13 
-L 169.53 110.6 
-L 168.49 108.94 
-L 170.85 112.32 
-L 167.67 116.05 
-L 167.56 119.84 
-L 166.99 122.19 
-L 168.85 121.31 
-L 170.65 124.2 
-L 174.45 124.27 
-L 168.09 120.97 
-L 168.24 120.89 
-L 167.36 122.8 
-L 166.14 123.19 
-L 163.88 121.25 
-L 167.45 122.98 
-L 167.08 119.31 
-L 169.54 119.24 
-L 169.62 116.7 
-L 171.55 116.97 
-L 170.52 116.95 
-L 173.85 115.43 
-L 173.76 112.91 
-L 177.1 111.1 
-L 178.03 113.87 
-L 175.67 112.56 
-L 178.01 111.43 
-L 179.1 112.82 
-L 179.79 115.51 
-L 184.97 118.17 
-L 189.54 118.73 
-L 190.49 118.11 
-L 187.04 114.39 
-L 184.78 110.13 
-L 185.09 108.23 
-L 188.32 106.15 
-L 192.75 105.3 
-L 188.62 106.59 
-L 192.58 105.51 
-L 193.88 104.3 
-L 193.19 105.14 
-L 195.66 98.43 
-L 193.28 99.71 
-L 192.28 98.2 
-L 189.97 99.53 
-L 188.55 100.49 
-L 189.8 103.34 
-L 190.78 103.7 
-L 192.26 103.73 
-L 191.26 102.19 
-L 190.27 104.02 
-L 188.16 103.18 
-L 186.1 104.45 
-L 184.36 104.6 
-L 185.29 105.09 
-L 185.93 106.42 
-L 184.5 106.08 
-L 178.52 109.81 
-L 181.95 109.62 
-L 184.62 111.67 
-L 185.9 113.03 
-L 184.18 117.26 
-L 181.02 117.21 
-L 182.5 117.98 
-L 182.07 116.15 
-L 182.63 116.6 
-L 189.04 116.45 
-L 189.16 111.49 
-L 188.85 112.07 
-L 188.41 110.75 
-L 189.38 109.94 
-L 190.45 110.66 
-L 188.5 109.19 
-L 190.76 109.9 
-L 189.52 109.79 
-L 193.29 108.63 
-L 194.21 106.36 
-L 192.65 105.22 
-L 195.15 103.61 
-L 195.12 102.62 
-L 196.52 101.48 
-L 195.85 99.34 
-L 191.34 97.38 
-L 191.08 99.68 
-L 192.17 95.03 
-L 192.88 94.5 
-L 194.39 93.93 
-L 195.3 97.58 
-L 194.97 96.96 
-L 193.21 98.19 
-L 197.55 102.78 
-L 194.33 101.12 
-L 191.34 102.25 
-L 188.59 101.55 
-L 186.58 102.44 
-L 182.2 103.31 
-L 183.33 104.76 
-L 186.11 105.11 
-L 182.3 106.77 
-L 182.54 108.88 
-L 181.14 109.35 
-L 181.25 109.27 
-L 183.39 112.72 
-L 185.83 114.05 
-L 182.77 114.46 
-L 184 118.15 
-L 183.36 118.83 
-L 172.92 117.76 
-L 171.8 116.35 
-L 174.99 119.37 
-L 176.2 121.06 
-L 174.92 122.92 
-L 176.44 125.07 
-L 179.17 122.71 
-L 178.78 123.18 
+   <g id="line2d_40">
+    <path d="M 180 101.35 
+L 179.03 100.78 
+L 181.1 102.42 
+L 179.3 101.07 
+L 177.72 101.9 
+L 176.73 100.56 
+L 177.15 102.67 
+L 177 101.23 
+L 177.45 102.3 
+L 184.65 99.84 
+L 184.09 99.67 
+L 185.83 98.4 
+L 184.44 99.33 
+L 187.14 102.28 
+L 187.8 99.93 
+L 188.01 100.36 
+L 185.74 101.13 
+L 187.57 102.36 
+L 188.03 100.25 
+L 188.33 101.88 
+L 189.61 103.93 
+L 193.24 105.49 
+L 191.07 104.24 
+L 190.42 101.72 
+L 190.98 102.69 
+L 190.97 101.93 
+L 192.61 101.51 
+L 192.79 99.64 
+L 191.57 99.36 
+L 189.9 95.87 
+L 189.95 96.97 
+L 187.04 97.26 
+L 188.92 99.42 
+L 187.61 100.95 
+L 189.87 99.78 
+L 188.04 103.06 
+L 188.84 102.63 
+L 189.34 104.12 
+L 192.68 100.97 
+L 194.13 99.99 
+L 193.09 100.52 
+L 194.99 102.28 
+L 194.38 101.81 
+L 195.73 101.92 
+L 193.97 101.26 
+L 193.02 103.22 
+L 194.12 107.81 
+L 197.33 110.8 
+L 197.5 110.18 
+L 197.32 108.73 
+L 196.51 107.05 
+L 194.89 106.18 
+L 197.85 103.93 
+L 194.85 104.77 
+L 197.54 102.63 
+L 198.92 103.8 
+L 199.68 106.41 
+L 199.87 101.16 
+L 202.23 101.99 
+L 197.86 101.99 
+L 198.27 103.9 
+L 198.54 106.65 
+L 197.78 106.73 
+L 198.6 105.83 
+L 197.97 105.8 
+L 195.03 104.83 
+L 195.62 102.23 
+L 194.48 102.62 
+L 193.51 103.86 
+L 193.31 106.24 
+L 196.62 104.46 
+L 200.34 100.73 
+L 203.34 99.84 
+L 204.76 101.58 
+L 203.41 99.67 
+L 203.03 99.58 
+L 204.84 104.08 
+L 203.47 104.41 
+L 206.16 104.37 
+L 206.28 104.92 
+L 209.36 107.61 
+L 212.42 106.99 
+L 211.93 106.32 
+L 214.59 104.56 
+L 216.28 106.81 
+L 218.44 104.42 
+L 217.97 105.83 
+L 219.6 108.08 
+L 218.79 110.79 
+L 219.54 111.66 
+L 220.86 115.94 
+L 225.14 119.46 
+L 225.34 117.71 
+L 225.11 118.06 
+L 224.52 114.46 
+L 218.87 116.24 
+L 219.81 117.15 
+L 219.15 114.58 
+L 221.66 115.44 
+L 219.48 115.85 
+L 221 112.61 
+L 223.75 113.49 
+L 220.39 116.2 
+L 220.87 117.27 
+L 221.24 115.74 
+L 222.67 114.71 
+L 222.44 113.88 
+L 220.75 113.63 
+L 218.48 116.14 
+L 220.8 115.88 
+L 219.52 117.42 
+L 223.14 118.13 
+L 220.45 122.47 
+L 221.24 123.21 
+L 220.55 125.06 
+L 224.36 123.82 
+L 220.78 123.94 
+L 219.72 118.64 
+L 221.21 122.06 
+L 222.03 123.16 
+L 219.67 125.52 
+L 219.43 123.08 
+L 219.66 120.79 
+L 222.4 119.95 
+L 220.32 117.34 
+L 218.5 118.43 
+L 216.76 116.62 
+L 218.86 118.71 
+L 216.8 117.01 
+L 214.91 120.83 
+L 215.38 118.98 
+L 214.45 118.33 
+L 211.62 117.44 
+L 214.13 116.96 
+L 215.25 114.45 
+L 211.46 114.75 
+L 208.93 113.58 
+L 208.39 116.48 
+L 209.96 118.85 
+L 209.87 118.36 
+L 207.35 119.03 
+L 209.55 119.01 
+L 209.33 117.87 
+L 208.78 117.71 
+L 208.61 118.44 
+L 207.78 117.31 
+L 208.93 121.98 
+L 204.24 124.17 
+L 202.39 124.85 
+L 200.98 123.45 
+L 201.9 123.42 
+L 199.58 124.78 
+L 198.33 125.78 
+L 197.5 127.24 
+L 195.54 125.52 
+L 195.41 125.63 
+L 194.67 126.77 
+L 192.75 127.57 
+L 190.09 127.04 
+L 191.8 122.77 
+L 194.55 123.66 
+L 193.82 124.46 
+L 193.6 124.16 
+L 193.66 123.76 
+L 192.47 120.95 
+L 193.64 118.69 
+L 197.05 118.39 
+L 195.59 120.99 
+L 194.06 121.87 
+L 192.59 116.77 
+L 191.69 118.09 
+L 190.27 120.38 
+L 189.07 115.55 
+L 185.64 115.79 
+L 187 113.2 
+L 185.7 110.79 
+L 187.26 110.47 
+L 186.94 114.48 
+L 185.9 114.4 
+L 184.36 111.33 
+L 183.74 110.36 
+L 179.75 113.55 
+L 179.54 110.31 
+L 182.54 112.51 
+L 184.7 111.74 
+L 183.06 110.3 
+L 185.25 110.51 
+L 183.74 112.69 
+L 181.69 116.27 
+L 183.84 114.56 
+L 184.29 114.95 
+L 184.31 111.92 
+L 182.98 108.63 
+L 179.88 106.82 
+L 179.48 105.86 
+L 178.07 105.02 
+L 178.36 103.78 
+L 180.44 103.56 
+L 182.85 101.51 
+L 184.3 102.05 
+L 182.85 102.31 
+L 179.26 101.29 
+L 178.18 102.77 
+L 176.39 102.63 
+L 177.56 102.97 
+L 180.97 99.22 
+L 182.62 100.77 
+L 182.38 100.31 
+L 182.24 98.46 
+L 182.04 97.6 
+L 183.48 98.91 
+L 181.73 96.27 
+L 181.12 98.35 
+L 181.21 96.36 
+L 182.85 98.35 
+L 181.72 96.4 
+L 183.89 99.4 
+L 181.83 95.16 
+L 179.58 97.02 
+L 178.91 97.89 
+L 182.38 96.83 
+L 185.11 94.54 
+L 185.67 97.78 
+L 183.67 99.47 
+L 184.94 95.97 
+L 182.26 97.02 
+L 182.15 95.58 
+L 183.22 95.73 
+L 185.03 98.61 
+L 183.59 93.55 
+L 184.64 96.67 
+L 184.08 98.11 
+L 182.69 97.76 
+L 180.65 96 
+L 179.73 96.6 
+L 177.79 95.31 
+L 175.35 93.54 
+L 174.67 95.53 
+L 176.44 96.46 
+L 177.41 92.22 
+L 177.05 91.29 
+L 176.31 90.35 
+L 172.94 92.01 
+L 173.77 92.41 
+L 169.72 89.44 
+L 168.7 90.51 
+L 168.67 88.79 
+L 174.11 90.38 
+L 177.86 89.52 
+L 175.99 89.86 
+L 174.57 90.49 
+L 175.92 90.83 
+L 173.07 94.27 
+L 174.11 95.68 
+L 173.32 100.54 
+L 172.37 102.02 
+L 169.74 102.77 
+L 170.63 102.86 
+L 169.58 103.56 
+L 167.56 103.44 
+L 169.51 105.89 
+L 172.14 107.95 
+L 171.88 110.44 
+L 170.83 108.86 
+L 172.52 108.91 
+L 172.15 108.45 
+L 168.03 107.41 
+L 168.63 104.93 
+L 165.91 102.41 
+L 167.3 100.55 
+L 165.32 101.09 
+L 168.25 100.82 
+L 169.33 102.05 
+L 169.66 100.8 
+L 172.77 97.58 
+L 176.65 98.27 
+L 176.55 94.72 
+L 175.78 94.27 
+L 177.44 95.31 
+L 176.86 95.18 
+L 176.43 94.34 
+L 169.18 96.49 
+L 172.41 98.53 
+L 172.6 95.41 
+L 174.32 97.03 
+L 171.53 96.1 
+L 172.9 94.09 
+L 171.08 97.4 
+L 168.2 95.22 
+L 169.64 96.27 
+L 167.77 95.79 
+L 168.54 95.4 
+L 168.06 93.81 
+L 170.4 91.95 
+L 169.4 93.66 
+L 169.75 93.71 
+L 170.49 94.54 
+L 171.81 95.23 
+L 170.87 95.43 
+L 172.37 94.05 
+L 169.48 90.74 
+L 168.68 91.45 
+L 164.91 91.61 
+L 164.14 88.43 
+L 161.41 89.82 
+L 164.78 87.38 
+L 165.2 90.73 
+L 163.7 86 
+L 167.53 85.82 
+L 166.83 86.74 
+L 164.72 89.11 
+L 161.71 86.67 
+L 161.39 87.45 
+L 164.98 91.23 
+L 163.98 92.75 
+L 163.69 90.74 
+L 164.27 92.13 
+L 165.1 89.98 
+L 163.61 87.94 
+L 160.36 91.12 
+L 159.48 90.27 
+L 154.93 87.98 
+L 151.63 84.31 
+L 150.18 83.31 
+L 148.51 87.31 
+L 149.1 87.27 
+L 149.53 86.5 
+L 152.37 88.03 
+L 152.09 88.42 
+L 152.79 89.56 
+L 156.13 84.81 
+L 155.83 82.5 
+L 154.09 86.07 
+L 150.1 85.4 
+L 151.64 82.51 
+L 152.29 83 
+L 154.2 82.78 
+L 157.6 87.74 
+L 157.01 85.82 
+L 156.54 85.92 
+L 157.24 80.76 
+L 156.93 76.2 
+L 161.09 78.61 
+L 157.94 81.3 
+L 154.66 82.71 
+L 150.19 78.18 
+L 151.24 77.53 
+L 151.79 79.26 
+L 150.32 76.72 
+L 150.72 76.86 
+L 154.49 78.91 
+L 154.08 78.64 
+L 154.09 80.81 
+L 155.14 80.49 
+L 156 80.99 
+L 158.44 81.73 
+L 158.8 78.33 
+L 157.97 80.2 
+L 155.07 77.14 
+L 155.54 80.23 
+L 156.95 76.91 
+L 154.98 77.66 
+L 155.71 76.78 
+L 158.57 76.88 
+L 155.84 77.75 
+L 154.02 78.94 
+L 154.53 79.59 
+L 151.54 78.13 
+L 153.51 80.82 
+L 155.66 81.14 
+L 157.29 80.56 
+L 156.34 79.98 
+L 155.33 78.81 
+L 156.55 78.87 
+L 160.7 82.08 
+L 159.92 78.87 
+L 161.16 78.52 
+L 163.72 82.68 
+L 165.53 79.57 
+L 167.74 81.94 
+L 166.98 79.29 
+L 165.56 81.78 
+L 165.63 80.12 
+L 164.5 81.2 
+L 167.28 80.7 
+L 168.65 82.08 
+L 171.07 82.34 
+L 169.01 83.2 
+L 171.58 85.88 
+L 171.15 85.77 
+L 171.4 84.46 
+L 169.93 85.26 
+L 171.72 85.34 
+L 173.22 86.86 
+L 173.76 83.39 
+L 174.43 83.74 
+L 174.82 83.26 
+L 176.23 78.65 
+L 177.32 77.44 
+L 177.04 79.13 
+L 175.04 78.76 
+L 173.62 79.51 
+L 176.11 84.27 
+L 172.99 81.93 
+L 171.76 82.89 
+L 170.98 83.73 
+L 171.22 84.59 
+L 171.47 86.55 
+L 169.45 85.73 
+L 173.11 89.56 
+L 175.93 91.94 
+L 175.91 93.09 
+L 175.76 91.32 
+L 174.08 96.63 
+L 174.89 92.69 
+L 174.01 93.24 
+L 175.69 96.79 
+L 173.09 98.63 
+L 173.27 96.38 
+L 176.58 96.19 
+L 178.08 93.41 
+L 178.96 94.94 
+L 179.64 94.59 
+L 182.31 93.49 
+L 182.37 98.27 
+L 182.79 100 
+L 182.45 100.13 
+L 184.47 99.98 
+L 184.04 99.98 
+L 184.25 101.81 
+L 186.63 104.5 
+L 186.56 102.3 
+L 182.19 101.97 
+L 182.56 101.7 
+L 188.37 101 
+L 188.47 103.43 
+L 187.12 101.24 
+L 187.23 101.94 
+L 189.21 103.37 
+L 190.97 100.61 
+L 191.72 103.83 
+L 191.63 103.81 
+L 193.38 104.22 
+L 192.24 102.53 
+L 192.68 101.39 
+L 193.28 103.09 
+L 193.49 106.8 
+L 195.67 107.76 
+L 196.15 109.78 
+L 193.94 114.71 
+L 194.41 114.96 
+L 195.03 118.68 
+L 194.24 119.08 
+L 193.03 117.38 
+L 193.39 116.82 
+L 194.73 117.27 
+L 197 117.12 
+L 196 115.39 
+L 196.1 116.43 
+L 198.04 117.57 
+L 197.73 115.32 
+L 203.26 115.61 
+L 202.41 113.81 
+L 199.54 114.19 
+L 199.41 113.91 
+L 198.53 116.39 
+L 198.72 118.02 
+L 200.67 117.03 
+L 200.68 118.61 
+L 202.38 119.36 
+L 199.63 121.83 
+L 195.69 120.11 
+L 195.09 118.26 
+L 195.43 116 
+L 196.83 118.15 
+L 194 115.57 
+L 194.25 115.53 
+L 196.68 114.37 
+L 196.99 115.78 
+L 195.52 113.74 
+L 196.14 116.8 
+L 193.45 117.79 
+L 194.13 117.76 
+L 196.76 117.74 
+L 197.2 121.23 
+L 198.75 123.58 
+L 195.66 126.81 
+L 196.51 127.89 
+L 195.91 128.39 
+L 195.87 128.94 
+L 197.1 124.56 
+L 198.34 121.38 
+L 199.72 124.9 
+L 199.34 127.87 
+L 199.23 124.39 
+L 201.1 125.4 
+L 202.93 123.11 
+L 205.91 122.03 
+L 208.93 119.91 
+L 209.51 121.12 
+L 208.68 119.27 
+L 206.62 117.94 
+L 210.34 118.51 
+L 212.47 119.77 
+L 212.23 118.6 
+L 212.99 119.91 
+L 212.88 116.5 
+L 210.76 115.4 
+L 212.58 115.1 
+L 212.5 111.85 
+L 212.79 111.53 
+L 215.67 110.87 
+L 213.88 112.59 
+L 214.74 116.66 
+L 216.22 114.55 
+L 217.21 114.91 
+L 216.97 120.47 
+L 216.2 119.47 
+L 213.59 120.53 
+L 214.62 124.45 
+L 214.86 123.81 
+L 213.69 127.58 
+L 212.81 128.5 
+L 212.42 127.2 
+L 212.09 128.79 
+L 213.95 131.12 
+L 211.33 129.99 
+L 209.07 128.1 
+L 209.17 127.26 
+L 208.8 125.75 
+L 209.7 127.43 
+L 209.9 129.95 
+L 211.99 131.34 
+L 213.62 134.03 
+L 215.86 133.93 
+L 214.54 131.33 
+L 210.76 127.51 
+L 212.81 127.28 
+L 212.76 125.81 
+L 215.36 129.56 
+L 215.68 131.31 
+L 213.87 131.84 
+L 212.67 134.73 
+L 211.69 133.77 
+L 211.85 133.28 
+L 210.62 134.98 
+L 208 136.1 
+L 208.87 137.71 
+L 209.55 135.26 
+L 208.22 136.93 
+L 209.01 135.43 
+L 206.14 135.09 
+L 206.73 138.01 
+L 207.4 136.51 
+L 205.11 138.36 
+L 205.45 139.62 
+L 208.34 138.89 
+L 211.46 139.02 
+L 210.64 138.88 
+L 210.43 140.36 
+L 210.05 141.48 
+L 212.06 142.46 
+L 208.6 140.18 
+L 209.04 139.63 
+L 207.49 142.22 
+L 204.63 141.51 
+L 205.25 136.15 
+L 209.93 137.48 
+L 210.58 139.58 
+L 208.78 137.82 
+L 206.27 134.82 
+L 207.12 135.85 
+L 205.44 136.41 
+L 203.94 135.03 
+L 202.13 135.7 
+L 200.98 135.26 
+L 201.81 133.24 
+L 200.17 135.01 
+L 197.68 137.22 
+L 199.95 138.65 
+L 200.28 137.45 
+L 200.59 140.05 
+L 201.2 139.28 
+L 201.44 138.61 
+L 198.9 137.28 
+L 201.49 141.49 
+L 198.59 145.26 
+L 200.15 143.56 
+L 203.15 144.11 
+L 199.94 140.54 
+L 203.42 139.11 
+L 203.31 138.66 
+L 202.26 140.25 
+L 204.12 139.59 
+L 205.75 136.37 
+L 204.6 134.91 
+L 204.23 132.22 
+L 203.34 133.5 
+L 202.14 133.93 
+L 204.76 132.97 
+L 201.35 131.55 
+L 202.63 128.43 
+L 200.46 128.8 
+L 199.09 128.5 
+L 201.99 123.74 
+L 203.84 126.24 
+L 207.72 125.91 
+L 205.92 125.67 
+L 207.76 123.23 
+L 207.56 119.77 
+L 208.02 121 
+L 208.32 120.42 
+L 208.48 122.23 
+L 208.48 122.23 
 " clip-path="url(#pb56c93ba56)" style="fill: none; stroke:var(--c8); stroke-width: 2; stroke-linecap: round"/>
    </g>
   </g>

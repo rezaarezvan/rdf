@@ -1,0 +1,186 @@
+\begin{tikzpicture}[
+  node distance=4mm and 6mm,
+  >={Triangle[open, length=1.8mm, width=1.8mm]},
+  box/.style={draw=black, rounded corners=2.5pt, line width=0.8pt, minimum height=7mm, minimum width=12mm, font=\small},
+  unit/.style={circle, draw=black, fill=white, line width=0.6pt, minimum size=2.2mm, inner sep=0pt},
+  flow/.style={->, line width=0.8pt},
+]
+\begin{scope}[local bounding box=img]
+% BEGIN mnist
+\fill[black, fill opacity=0.06] (0,0) rectangle (1.540,-1.540);
+\fill[black, fill opacity=0.20] (0.660,-0.220) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.52] (0.715,-0.220) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.84] (0.770,-0.220) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.825,-0.220) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=1.00] (0.880,-0.220) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.935,-0.220) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.80] (0.990,-0.220) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.64] (1.045,-0.220) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.16] (1.100,-0.220) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.40] (0.440,-0.275) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.56] (0.495,-0.275) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.80] (0.550,-0.275) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.80] (0.605,-0.275) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.660,-0.275) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.715,-0.275) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.770,-0.275) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.825,-0.275) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.59] (0.880,-0.275) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.27] (0.935,-0.275) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=1.00] (0.440,-0.330) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.495,-0.330) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.96] (0.550,-0.330) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.80] (0.605,-0.330) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.56] (0.660,-0.330) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.40] (0.715,-0.330) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.32] (0.770,-0.330) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.67] (0.440,-0.385) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.495,-0.385) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.80] (0.550,-0.385) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.08] (0.440,-0.440) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.87] (0.495,-0.440) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.92] (0.550,-0.440) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.12] (0.605,-0.440) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.48] (0.495,-0.495) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.550,-0.495) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.20] (0.605,-0.495) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.48] (0.495,-0.550) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=1.00] (0.550,-0.550) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.36] (0.605,-0.550) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.20] (0.660,-0.550) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.20] (0.715,-0.550) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.20] (0.770,-0.550) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.08] (0.440,-0.605) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.87] (0.495,-0.605) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.550,-0.605) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.605,-0.605) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.660,-0.605) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.715,-0.605) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.770,-0.605) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.67] (0.825,-0.605) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.32] (0.880,-0.605) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.08] (0.385,-0.660) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.84] (0.440,-0.660) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.495,-0.660) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.80] (0.550,-0.660) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.64] (0.605,-0.660) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.40] (0.660,-0.660) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.40] (0.715,-0.660) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.80] (0.770,-0.660) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.87] (0.825,-0.660) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=1.00] (0.880,-0.660) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.935,-0.660) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.20] (0.990,-0.660) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.24] (0.385,-0.715) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.440,-0.715) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.67] (0.495,-0.715) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.08] (0.825,-0.715) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.44] (0.880,-0.715) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.75] (0.935,-0.715) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.990,-0.715) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.83] (1.045,-0.715) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.16] (1.100,-0.715) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.40] (0.990,-0.770) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.80] (1.045,-0.770) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.92] (1.100,-0.770) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.20] (1.155,-0.770) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.08] (1.045,-0.825) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.84] (1.100,-0.825) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.91] (1.155,-0.825) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.32] (1.210,-0.825) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.24] (1.100,-0.880) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.80] (1.155,-0.880) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.92] (1.210,-0.880) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.44] (1.265,-0.880) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.08] (1.155,-0.935) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.84] (1.210,-0.935) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (1.265,-0.935) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.60] (1.210,-0.990) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (1.265,-0.990) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.16] (1.155,-1.045) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.91] (1.210,-1.045) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.83] (1.265,-1.045) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.44] (0.440,-1.100) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.36] (0.495,-1.100) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.12] (1.100,-1.100) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.68] (1.155,-1.100) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.96] (1.210,-1.100) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.16] (1.265,-1.100) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.32] (0.385,-1.155) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.440,-1.155) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.59] (0.495,-1.155) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.08] (0.880,-1.155) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.40] (0.935,-1.155) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.40] (0.990,-1.155) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.72] (1.045,-1.155) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.91] (1.100,-1.155) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.83] (1.155,-1.155) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.32] (1.210,-1.155) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.32] (0.385,-1.210) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=1.00] (0.440,-1.210) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.495,-1.210) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.92] (0.550,-1.210) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.60] (0.605,-1.210) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.60] (0.660,-1.210) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.76] (0.715,-1.210) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.68] (0.770,-1.210) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.825,-1.210) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=1.00] (0.880,-1.210) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.935,-1.210) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=1.00] (0.990,-1.210) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.84] (1.045,-1.210) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.56] (1.100,-1.210) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.08] (1.155,-1.210) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.28] (0.440,-1.265) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.59] (0.495,-1.265) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.59] (0.550,-1.265) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.91] (0.605,-1.265) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.99] (0.660,-1.265) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.83] (0.715,-1.265) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.75] (0.770,-1.265) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.59] (0.825,-1.265) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.51] (0.880,-1.265) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.20] (0.935,-1.265) rectangle ++(0.059,-0.059);
+\fill[black, fill opacity=0.20] (0.990,-1.265) rectangle ++(0.059,-0.059);
+% END mnist
+\end{scope}
+\node[below=0.5mm of img, font=\small] {$\mathbf x$};
+
+\newcommand{\net}[3]{%
+  \begin{scope}[shift={#1}]
+    \fill[white] (-0.25,-0.75) rectangle (1.85,0.75);
+    \draw[rounded corners=2.5pt, line width=0.8pt] (-0.25,-0.75) rectangle (1.85,0.75);
+    \foreach \a in {-0.4,0,0.4} \foreach \b [count=\k] in {-0.54,-0.18,0.18,0.54} {
+      \pgfmathsetmacro{\w}{0.2 + 1.1*abs(sin(#3*\k + 90*\a))}
+      \draw[c1, line width=\w pt] (0.15,\a) -- (0.8,\b);
+    }
+    \foreach \a [count=\k] in {-0.54,-0.18,0.18,0.54} \foreach \b in {-0.25,0.25} {
+      \pgfmathsetmacro{\w}{0.2 + 1.1*abs(sin(#3*\k + 120*\b))}
+      \draw[c1, line width=\w pt] (0.8,\a) -- (1.45,\b);
+    }
+    \foreach \y in {-0.4,0,0.4} \node[unit] at (0.15,\y) {};
+    \foreach \y in {-0.54,-0.18,0.18,0.54} \node[unit] at (0.8,\y) {};
+    \foreach \y in {-0.25,0.25} \node[unit] at (1.45,\y) {};
+  \end{scope}
+}
+\coordinate (n0) at ($(img.east)+(8mm,0)$);
+\foreach \d/\o in {0.3/0.35, 0.15/0.6}
+  \draw[rounded corners=2.5pt, line width=0.8pt, fill=white, draw opacity=\o] ($(n0)+(\d,\d)+(-0.25,-0.75)$) rectangle ++(2.1,1.5);
+\net{(n0)}{1}{13}
+\coordinate (netE) at ($(n0)+(2.15,0.15)$);
+\node[font=\small, text=c1] (lab) at ($(n0)+(1.0,1.55)$) {$\mathbf W + \sigma \mathbf N^{(i)}$};
+\draw[flow] (img) -- ($(n0)+(-0.25,0)$);
+
+\begin{scope}[local bounding box=hist, shift={($(netE)+(8mm,-4.5mm)$)}]
+  \foreach \k/\h in {0/0.2, 1/0.95, 2/0.3, 3/0.1, 4/0.14}
+    \fill[c8] (0.22*\k, 0) rectangle ++(0.17, \h);
+  \draw[line width=0.6pt] (-0.05, 0) -- (1.1, 0);
+\end{scope}
+\node[below=0.5mm of hist, font=\small] {$\hat y_\sigma^{(i)}$};
+\draw[flow] (netE) -- (netE -| hist.west);
+
+\node[box, right=of hist] (ent) {$H_\sigma(\mathbf x)$};
+\node[box, right=of ent] (met) {$\pi_\sigma, \psi_\sigma$};
+\draw[flow] (hist.east |- ent) -- (ent);
+\draw[flow] (ent) -- (met);
+\end{tikzpicture}

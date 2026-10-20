@@ -1,0 +1,37 @@
+\begin{tikzpicture}[
+  node distance=3mm and 6mm,
+  >={Triangle[open, length=1.8mm, width=1.8mm]},
+  cell/.style={minimum size=4mm, inner sep=0pt, draw=none},
+  o/.style={cell, fill=black, fill opacity=0.5},
+  m/.style={cell, fill=black, fill opacity=0.08},
+  g/.style={cell, fill=c2, fill opacity=0.65},
+  data/.style={matrix of nodes, nodes in empty cells, ampersand replacement=\&, column sep=0.6mm, row sep=0.6mm, nodes={cell}},
+  region/.style={draw=#1, line width=1pt, rounded corners=1.5pt, inner sep=0.8mm},
+  title/.style={font=\small, anchor=base, text height=1.8ex, text depth=0.5ex},
+]
+\newcommand{\rows}{%
+  |[o]| \& |[o]| \& |[m]| \& |[o]| \& |[o]| \& |[o]| \\
+  |[o]| \& |[m]| \& |[m]| \& |[o]| \& |[o]| \& |[m]| \\
+  |[o]| \& |[o]| \& |[o]| \& |[o]| \& |[o]| \& |[m]| \\
+  |[m]| \& |[o]| \& |[o]| \& |[o]| \& |[o]| \& |[o]| \\
+  |[m]| \& |[o]| \& |[m]| \& |[m]| \& |[o]| \& |[o]| \\
+  |[o]| \& |[o]| \& |[o]| \& |[o]| \& |[o]| \& |[o]| \\
+}
+
+\matrix (d) [data] {\rows};
+\node[title] at ([yshift=2mm]d.north) {Training data};
+
+\matrix (a) [data, right=12mm of d] {\rows};
+\node[region=c1, fit=(a-1-1)(a-6-6)] {};
+\node[title, text=c1] at ([yshift=2mm]a.north) {Aliasing};
+
+\matrix (b) [data, right=of a] {\rows};
+\node[region=c8, fit=(b-6-1)(b-6-6)] {};
+\node[title, text=c8] at ([yshift=2mm]b.north) {Filtering};
+
+\matrix (c) [data, right=of b, m/.style={g}] {\rows};
+\node[region=c2, fit=(c-1-1)(c-6-6)] {};
+\node[title, text=c2] at ([yshift=2mm]c.north) {Restoration};
+
+\draw[->, line width=0.8pt] ([xshift=2mm]d.east) -- ([xshift=-3mm]a.west);
+\end{tikzpicture}

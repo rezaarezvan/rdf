@@ -42,7 +42,7 @@ python -m rdf build path/to/figures/
 Embedded SVGs reference these CSS variables.
 Define them in your site, override per theme:
 
-The default palette is Okabe–Ito (colorblind-safe), with the yellow slot darkened for light surfaces, `c7` reserved as the neutral gray, and a lightness-retargeted dark variant.
+The default palette is [Okabe-Ito](https://jfly.uni-koeln.de/color/), which is colorblind-safe and print-friendly.
 ```css
 :root {
   /* axis furniture: text, spines, ticks; and the gridlines */
@@ -51,14 +51,12 @@ The default palette is Okabe–Ito (colorblind-safe), with the yellow slot darke
 
   /* indexed slots — color_map["c1"]..["c8"] in plot code map to these */
   --c1: #D55E00;  --c2: #009E73;  --c3: #56B4E9;  --c4: #CC79A7;
-  --c5: #E69F00;  --c6: #C7B42E;  --c7: #999999;  --c8: #0072B2;
+  --c5: #E69F00;  --c6: #F0E442;  --c7: #999999;  --c8: #0072B2;
 }
 
 [data-theme="dark"] {
   --axis-color: #e6dfd2;
   --grid-color: rgba(230, 223, 210, 0.16);
-  --c1: #E36A1C;  --c2: #23AB7F;  --c3: #3F9FD3;  --c4: #C673A1;
-  --c5: #C38819;  --c6: #847500;  --c7: #929292;  --c8: #1F81C2;
 }
 ```
 

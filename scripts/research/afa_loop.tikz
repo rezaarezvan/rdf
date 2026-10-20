@@ -1,0 +1,20 @@
+\begin{tikzpicture}[
+  node distance=4mm and 7mm,
+  >={Triangle[open, length=1.8mm, width=1.8mm]},
+  box/.style={draw=black, rounded corners=2.5pt, line width=0.8pt, minimum height=7mm, inner xsep=2.5mm, font=\small},
+  flow/.style={->, line width=0.8pt},
+  lab/.style={font=\footnotesize},
+]
+\node[box] (state) {State $(x_{\mathcal S}, \mathcal S)$};
+\node[box, draw=c8, right=of state] (pol) {Policy $\pi$};
+\node[diamond, aspect=1.6, draw=black, line width=0.8pt, inner sep=0.6mm, font=\small, right=of pol] (dec) {Acquire?};
+\node[box, anchor=west] (obs) at ($(dec.east)+(9mm,9mm)$) {Observe $x_a$};
+\node[box, anchor=west] (pred) at ($(dec.east)+(9mm,-9mm)$) {Predict $\hat y = f(x_{\mathcal S}, \mathcal S)$};
+
+\draw[flow] (state) -- (pol);
+\draw[flow] (pol) -- (dec);
+\draw[flow] (dec.north) |- node[lab, pos=0.75, above] {Yes} (obs.west);
+\draw[flow] (dec.south) |- node[lab, pos=0.75, below] {No} (pred.west);
+\node[lab, text=c1, right=1mm of obs] {cost $c_a$};
+\draw[flow] (obs.north) -- ++(0, 5mm) -| node[lab, pos=0.25, above] {$\mathcal S \leftarrow \mathcal S \cup \{a\}$} (state.north);
+\end{tikzpicture}

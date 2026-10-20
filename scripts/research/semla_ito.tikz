@@ -1,0 +1,186 @@
+\begin{tikzpicture}[
+  node distance=4mm and 7mm,
+  >={Triangle[open, length=1.8mm, width=1.8mm]},
+  box/.style={draw=black, rounded corners=2.5pt, line width=0.8pt, minimum height=8mm, inner xsep=2.5mm, font=\small},
+  flow/.style={->, line width=0.8pt},
+  bond/.style={line width=1.4pt, draw=black, line cap=round},
+  atomline/.style={line width=0.4pt, draw=black},
+  lab/.style={font=\small},
+]
+% BEGIN molecules
+\newcommand{\molxt}{%
+\fill[c1] (0.233,0.253) circle (0.117); \draw[atomline] (0.233,0.253) circle (0.117);
+\fill[white] (1.017,0.298) circle (0.069); \draw[atomline] (1.017,0.298) circle (0.069);
+\fill[white] (-0.011,-0.711) circle (0.069); \draw[atomline] (-0.011,-0.711) circle (0.069);
+\fill[white] (-0.931,0.444) circle (0.069); \draw[atomline] (-0.931,0.444) circle (0.069);
+\draw[bond] (0.296,0.072) -- (0.233,0.253);
+\draw[bond] (0.978,0.353) -- (1.017,0.298);
+\draw[bond] (-0.981,0.321) -- (-0.931,0.444);
+\draw[bond] (0.052,-0.676) -- (-0.011,-0.711);
+\fill[white] (-0.516,-0.300) circle (0.069); \draw[atomline] (-0.516,-0.300) circle (0.069);
+\draw[bond] (-0.407,-0.117) -- (-0.516,-0.300);
+\draw[bond] (-0.981,0.321) -- (-1.177,0.065);
+\fill[c7] (0.296,0.072) circle (0.119); \draw[atomline] (0.296,0.072) circle (0.119);
+\draw[bond] (0.052,-0.676) -- (0.377,-0.699);
+\fill[white] (-1.177,0.065) circle (0.070); \draw[atomline] (-1.177,0.065) circle (0.070);
+\draw[bond] (0.978,0.353) -- (0.873,0.658);
+\draw[bond] (-0.002,-0.223) -- (0.296,0.072);
+\draw[bond] (0.296,0.072) -- (0.655,0.083);
+\fill[c7] (-0.981,0.321) circle (0.120); \draw[atomline] (-0.981,0.321) circle (0.120);
+\fill[c7] (0.978,0.353) circle (0.120); \draw[atomline] (0.978,0.353) circle (0.120);
+\fill[c7] (0.052,-0.676) circle (0.120); \draw[atomline] (0.052,-0.676) circle (0.120);
+\fill[c8] (-0.407,-0.117) circle (0.120); \draw[atomline] (-0.407,-0.117) circle (0.120);
+\draw[bond] (-0.002,-0.223) -- (0.052,-0.676);
+\draw[bond] (-0.407,-0.117) -- (-0.002,-0.223);
+\draw[bond] (0.655,0.083) -- (0.978,0.353);
+\fill[white] (0.377,-0.699) circle (0.070); \draw[atomline] (0.377,-0.699) circle (0.070);
+\draw[bond] (0.978,0.353) -- (1.252,0.292);
+\draw[bond] (-0.981,0.321) -- (-0.589,0.198);
+\draw[bond] (-0.589,0.198) -- (-0.407,-0.117);
+\draw[bond] (0.052,-0.676) -- (-0.138,-0.881);
+\draw[bond] (-1.149,0.514) -- (-0.981,0.321);
+\fill[white] (0.873,0.658) circle (0.070); \draw[atomline] (0.873,0.658) circle (0.070);
+\fill[c7] (-0.002,-0.223) circle (0.121); \draw[atomline] (-0.002,-0.223) circle (0.121);
+\fill[c8] (0.655,0.083) circle (0.121); \draw[atomline] (0.655,0.083) circle (0.121);
+\fill[white] (1.252,0.292) circle (0.071); \draw[atomline] (1.252,0.292) circle (0.071);
+\fill[c7] (-0.589,0.198) circle (0.121); \draw[atomline] (-0.589,0.198) circle (0.121);
+\fill[white] (-0.138,-0.881) circle (0.071); \draw[atomline] (-0.138,-0.881) circle (0.071);
+\fill[white] (-1.149,0.514) circle (0.071); \draw[atomline] (-1.149,0.514) circle (0.071);
+\draw[bond] (0.655,0.083) -- (0.661,-0.091);
+\draw[bond] (-0.002,-0.223) -- (-0.004,-0.232);
+\draw[bond] (-0.589,0.198) -- (-0.488,0.378);
+\fill[white] (0.661,-0.091) circle (0.071); \draw[atomline] (0.661,-0.091) circle (0.071);
+\fill[white] (-0.004,-0.232) circle (0.072); \draw[atomline] (-0.004,-0.232) circle (0.072);
+\fill[c1] (-0.488,0.378) circle (0.123); \draw[atomline] (-0.488,0.378) circle (0.123);
+}
+\newcommand{\molxttau}{%
+\fill[white] (-0.114,-0.171) circle (0.067); \draw[atomline] (-0.114,-0.171) circle (0.067);
+\draw[bond] (-0.145,-0.396) -- (-0.114,-0.171);
+\draw[bond] (-0.145,-0.396) -- (0.058,-0.649);
+\fill[white] (0.058,-0.649) circle (0.067); \draw[atomline] (0.058,-0.649) circle (0.067);
+\draw[bond] (-0.145,-0.396) -- (-0.452,-0.500);
+\fill[c7] (-0.145,-0.396) circle (0.116); \draw[atomline] (-0.145,-0.396) circle (0.116);
+\fill[white] (-0.452,-0.500) circle (0.068); \draw[atomline] (-0.452,-0.500) circle (0.068);
+\draw[bond] (-0.109,-0.193) -- (-0.145,-0.396);
+\fill[white] (-0.533,0.226) circle (0.068); \draw[atomline] (-0.533,0.226) circle (0.068);
+\fill[white] (0.255,0.514) circle (0.069); \draw[atomline] (0.255,0.514) circle (0.069);
+\draw[bond] (-0.428,0.115) -- (-0.533,0.226);
+\draw[bond] (0.430,0.334) -- (0.255,0.514);
+\fill[white] (1.060,0.380) circle (0.069); \draw[atomline] (1.060,0.380) circle (0.069);
+\draw[bond] (0.828,0.519) -- (1.060,0.380);
+\draw[bond] (-0.428,0.115) -- (-0.109,-0.193);
+\draw[bond] (0.828,0.519) -- (0.829,0.832);
+\fill[white] (0.829,0.832) circle (0.069); \draw[atomline] (0.829,0.832) circle (0.069);
+\draw[bond] (-0.109,-0.193) -- (0.324,-0.046);
+\draw[bond] (0.324,-0.046) -- (0.430,0.334);
+\draw[bond] (0.430,0.334) -- (0.828,0.519);
+\fill[white] (-0.836,0.725) circle (0.069); \draw[atomline] (-0.836,0.725) circle (0.069);
+\fill[c7] (-0.109,-0.193) circle (0.119); \draw[atomline] (-0.109,-0.193) circle (0.119);
+\fill[c8] (0.430,0.334) circle (0.119); \draw[atomline] (0.430,0.334) circle (0.119);
+\fill[c8] (-0.428,0.115) circle (0.119); \draw[atomline] (-0.428,0.115) circle (0.119);
+\fill[c7] (0.324,-0.046) circle (0.119); \draw[atomline] (0.324,-0.046) circle (0.119);
+\draw[bond] (-0.109,-0.193) -- (-0.158,-0.395);
+\fill[c7] (0.828,0.519) circle (0.119); \draw[atomline] (0.828,0.519) circle (0.119);
+\draw[bond] (0.324,-0.046) -- (0.591,-0.270);
+\draw[bond] (-0.836,0.725) -- (-0.784,0.685);
+\draw[bond] (-0.536,0.308) -- (-0.428,0.115);
+\draw[bond] (0.828,0.519) -- (0.911,0.564);
+\fill[c1] (0.591,-0.270) circle (0.120); \draw[atomline] (0.591,-0.270) circle (0.120);
+\fill[white] (-0.158,-0.395) circle (0.070); \draw[atomline] (-0.158,-0.395) circle (0.070);
+\draw[bond] (-0.784,0.685) -- (-0.536,0.308);
+\fill[c7] (-0.784,0.685) circle (0.121); \draw[atomline] (-0.784,0.685) circle (0.121);
+\draw[bond] (-0.784,0.685) -- (-0.648,0.948);
+\draw[bond] (-0.784,0.685) -- (-1.057,0.642);
+\fill[c7] (-0.536,0.308) circle (0.121); \draw[atomline] (-0.536,0.308) circle (0.121);
+\fill[white] (0.911,0.564) circle (0.071); \draw[atomline] (0.911,0.564) circle (0.071);
+\fill[white] (-0.648,0.948) circle (0.071); \draw[atomline] (-0.648,0.948) circle (0.071);
+\draw[bond] (-0.536,0.308) -- (-0.424,0.232);
+\fill[white] (-1.057,0.642) circle (0.071); \draw[atomline] (-1.057,0.642) circle (0.071);
+\fill[c1] (-0.424,0.232) circle (0.124); \draw[atomline] (-0.424,0.232) circle (0.124);
+}
+\newcommand{\molxhat}{%
+\fill[white] (-0.053,-0.514) circle (0.067); \draw[atomline] (-0.053,-0.514) circle (0.067);
+\draw[bond] (-0.008,-0.614) -- (-0.053,-0.514);
+\fill[white] (0.304,0.312) circle (0.068); \draw[atomline] (0.304,0.312) circle (0.068);
+\fill[white] (1.044,0.237) circle (0.068); \draw[atomline] (1.044,0.237) circle (0.068);
+\fill[white] (-0.466,-0.011) circle (0.068); \draw[atomline] (-0.466,-0.011) circle (0.068);
+\draw[bond] (0.849,0.421) -- (1.044,0.237);
+\draw[bond] (0.453,0.260) -- (0.304,0.312);
+\fill[white] (0.817,0.733) circle (0.068); \draw[atomline] (0.817,0.733) circle (0.068);
+\draw[bond] (0.849,0.421) -- (0.817,0.733);
+\draw[bond] (-0.008,-0.614) -- (0.296,-0.728);
+\draw[bond] (-0.389,0.006) -- (-0.466,-0.011);
+\fill[white] (-0.761,0.724) circle (0.069); \draw[atomline] (-0.761,0.724) circle (0.069);
+\fill[white] (0.296,-0.728) circle (0.069); \draw[atomline] (0.296,-0.728) circle (0.069);
+\draw[bond] (-0.008,-0.614) -- (-0.227,-0.838);
+\fill[c7] (-0.008,-0.614) circle (0.118); \draw[atomline] (-0.008,-0.614) circle (0.118);
+\draw[bond] (0.453,0.260) -- (0.849,0.421);
+\fill[c7] (0.849,0.421) circle (0.118); \draw[atomline] (0.849,0.421) circle (0.118);
+\draw[bond] (-0.881,0.544) -- (-0.761,0.724);
+\fill[c8] (0.453,0.260) circle (0.118); \draw[atomline] (0.453,0.260) circle (0.118);
+\fill[white] (-0.227,-0.838) circle (0.069); \draw[atomline] (-0.227,-0.838) circle (0.069);
+\draw[bond] (-0.054,-0.242) -- (-0.008,-0.614);
+\fill[white] (-1.124,0.357) circle (0.069); \draw[atomline] (-1.124,0.357) circle (0.069);
+\draw[bond] (-1.124,0.357) -- (-0.881,0.544);
+\draw[bond] (0.849,0.421) -- (0.983,0.430);
+\fill[c8] (-0.389,0.006) circle (0.119); \draw[atomline] (-0.389,0.006) circle (0.119);
+\draw[bond] (0.335,-0.001) -- (0.453,0.260);
+\draw[bond] (-0.389,0.006) -- (-0.054,-0.242);
+\draw[bond] (-0.564,0.279) -- (-0.389,0.006);
+\fill[c7] (-0.881,0.544) circle (0.119); \draw[atomline] (-0.881,0.544) circle (0.119);
+\draw[bond] (-0.881,0.544) -- (-0.564,0.279);
+\draw[bond] (-0.054,-0.242) -- (0.335,-0.001);
+\fill[c7] (-0.054,-0.242) circle (0.120); \draw[atomline] (-0.054,-0.242) circle (0.120);
+\draw[bond] (-0.881,0.544) -- (-0.969,0.745);
+\fill[white] (0.983,0.430) circle (0.070); \draw[atomline] (0.983,0.430) circle (0.070);
+\fill[c7] (0.335,-0.001) circle (0.120); \draw[atomline] (0.335,-0.001) circle (0.120);
+\fill[c7] (-0.564,0.279) circle (0.120); \draw[atomline] (-0.564,0.279) circle (0.120);
+\draw[bond] (-0.054,-0.242) -- (-0.171,-0.356);
+\fill[white] (-0.969,0.745) circle (0.071); \draw[atomline] (-0.969,0.745) circle (0.071);
+\draw[bond] (0.335,-0.001) -- (0.513,-0.030);
+\draw[bond] (-0.564,0.279) -- (-0.468,0.304);
+\fill[white] (-0.171,-0.356) circle (0.071); \draw[atomline] (-0.171,-0.356) circle (0.071);
+\fill[c1] (0.513,-0.030) circle (0.123); \draw[atomline] (0.513,-0.030) circle (0.123);
+\fill[c1] (-0.468,0.304) circle (0.123); \draw[atomline] (-0.468,0.304) circle (0.123);
+}
+\newcommand{\molnoise}{%
+\fill[c7] (-1.116,-0.105) circle (0.116); \draw[atomline] (-1.116,-0.105) circle (0.116);
+\fill[c7] (0.434,0.045) circle (0.117); \draw[atomline] (0.434,0.045) circle (0.117);
+\fill[white] (0.626,0.455) circle (0.069); \draw[atomline] (0.626,0.455) circle (0.069);
+\fill[white] (0.334,-0.568) circle (0.069); \draw[atomline] (0.334,-0.568) circle (0.069);
+\fill[c1] (-0.351,-0.261) circle (0.119); \draw[atomline] (-0.351,-0.261) circle (0.119);
+\fill[white] (-0.238,0.158) circle (0.069); \draw[atomline] (-0.238,0.158) circle (0.069);
+\fill[c7] (-0.485,-0.100) circle (0.119); \draw[atomline] (-0.485,-0.100) circle (0.119);
+\fill[c8] (0.198,0.500) circle (0.120); \draw[atomline] (0.198,0.500) circle (0.120);
+\fill[white] (-0.607,-0.299) circle (0.070); \draw[atomline] (-0.607,-0.299) circle (0.070);
+\fill[white] (-0.442,-0.220) circle (0.070); \draw[atomline] (-0.442,-0.220) circle (0.070);
+\fill[c7] (0.646,0.375) circle (0.121); \draw[atomline] (0.646,0.375) circle (0.121);
+\fill[white] (0.656,-0.319) circle (0.071); \draw[atomline] (0.656,-0.319) circle (0.071);
+\fill[white] (0.260,0.103) circle (0.071); \draw[atomline] (0.260,0.103) circle (0.071);
+\fill[c8] (0.865,0.631) circle (0.121); \draw[atomline] (0.865,0.631) circle (0.121);
+\fill[c7] (0.050,-0.257) circle (0.121); \draw[atomline] (0.050,-0.257) circle (0.121);
+\fill[c7] (-0.618,0.190) circle (0.121); \draw[atomline] (-0.618,0.190) circle (0.121);
+\fill[white] (0.060,-0.063) circle (0.071); \draw[atomline] (0.060,-0.063) circle (0.071);
+\fill[white] (-0.580,-0.002) circle (0.071); \draw[atomline] (-0.580,-0.002) circle (0.071);
+\fill[white] (-0.314,-0.062) circle (0.072); \draw[atomline] (-0.314,-0.062) circle (0.072);
+\fill[white] (0.717,-0.604) circle (0.073); \draw[atomline] (0.717,-0.604) circle (0.073);
+\fill[white] (-0.209,-0.562) circle (0.074); \draw[atomline] (-0.209,-0.562) circle (0.074);
+\fill[c1] (-0.151,0.700) circle (0.127); \draw[atomline] (-0.151,0.700) circle (0.127);
+}
+% END molecules
+\begin{scope}[local bounding box=m0] \molxt \end{scope}
+\begin{scope}[shift={($(m0.east)+(3.6,0)$)}, local bounding box=m1] \molxttau \end{scope}
+\node[lab, below=1mm of m0] {$\mathbf x_{\mathfrak t}$};
+\node[lab] at (m0.south -| m1) [below=1mm] {$\mathbf x_{\mathfrak t + \tau}$};
+\draw[flow] ([xshift=2mm]m0.east) -- node[lab, above] {$\tau$} ([xshift=-2mm]m0.east -| m1.west);
+
+\begin{scope}[shift={($(m0.south)+(0,-2.6)$)}, local bounding box=noise] \molnoise \end{scope}
+\node[lab, below=1mm of noise] {$\mathcal N(0, \mathbf I)$};
+\node[box, right=7mm of noise] (v) {$\mathbf v_\theta(\mathbf x_t \mid \mathbf x_{\mathfrak t}, t, \tau)$};
+\node[lab, above=0mm of v, font=\footnotesize] {Semla};
+\begin{scope}[shift={($(v.east)+(2.2,0)$)}, local bounding box=m2] \molxhat \end{scope}
+\node[lab, below=1mm of m2] {$\hat{\mathbf x}_{\mathfrak t + \tau}$};
+\draw[flow] (noise) -- (v);
+\draw[flow] (v) -- (m2);
+\draw[flow, dashed, draw=c7] (m0.south east) to[out=-40, in=140] (v.north west);
+\end{tikzpicture}
